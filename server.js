@@ -62,7 +62,7 @@ function sendMessage(senderId, message) {
 
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: "EAAGrFnck27kBAB2nvwLY374ZAHvZC5JFDNXKStfMefmWdGWsbUELrSwOb7Q91WksP4ZAQD9VUI36pbIrKNug1hHpWUZCvmqy4DVZBcv0lpHgkFXZBFOZCuxneNuy6rXip2rfyW3AlDDcTaZA5LDvZAn6XZC2uyHfnX1eFpnzvDsNnBQQZDZD"},
+        qs: {access_token: "EAAGrFnck27kBANiCkii4lZB6uo467bNGjGP0VNzUscH7eMKDyX5VWsM13hQ76CRZCID6Dnl3Tgflqfcy0odlF6h1yqYSllIKYVCZA0YpIbYLJfeoVZCaHB89NrmTX7WN4ZBlZA7W3JJp1IEGZBmZASgZCOsYaLFsZCZCXZCckUGy2bcZCOQZDZD"},
         method: 'POST',
         json: {
             recipient: {id: sender},
@@ -80,7 +80,7 @@ function sendMessage(senderId, message) {
  
 }
 
-var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAB2nvwLY374ZAHvZC5JFDNXKStfMefmWdGWsbUELrSwOb7Q91WksP4ZAQD9VUI36pbIrKNug1hHpWUZCvmqy4DVZBcv0lpHgkFXZBFOZCuxneNuy6rXip2rfyW3AlDDcTaZA5LDvZAn6XZC2uyHfnX1eFpnzvDsNnBQQZDZD" //replace with your page token
+var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBANiCkii4lZB6uo467bNGjGP0VNzUscH7eMKDyX5VWsM13hQ76CRZCID6Dnl3Tgflqfcy0odlF6h1yqYSllIKYVCZA0YpIbYLJfeoVZCaHB89NrmTX7WN4ZBlZA7W3JJp1IEGZBmZASgZCOsYaLFsZCZCXZCckUGy2bcZCOQZDZD" //replace with your page token
 
 function sendHelp(id) {
   var options = {
@@ -149,14 +149,17 @@ function wikibot(query, userid) {
             title: "View in browser"
           }]
         };
+        
         myelement.title = pages[i].title;
         myelement.subtitle = pages[i].extract.substr(0, 80).trim();
         myelement.buttons[1].url = "https://en.wikipedia.org/?curid=" + pages[i].pageid;
+        
         if (pages[i].extract != "") {
-        myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
+            myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
         }
         myTemplate.message.attachment.payload.elements.push(myelement);
       }
+      
       options.body = myTemplate;
     }
     catch (err) {
