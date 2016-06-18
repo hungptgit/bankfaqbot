@@ -39,12 +39,15 @@ app.post('/webhook', function(req, res) {
         if (message.message.text) {
           var text = event.message.text.toLowerCase().trim();
             console.log(text);
+            sendMessage(senderId, "Tui là bot đây: " + text);
+            /*
             if (text.toLowerCase().substr(0,4) == 'wiki') {
                 wikibot(text.replace("wiki ", ""),senderId)
             }
             else {
                 sendHelp(senderId);
             }
+            */
         }
       }
     }   
