@@ -37,9 +37,14 @@ app.post('/webhook', function(req, res) {
       if (message.message) {
         // If user send text
         if (message.message.text) {
-          var text = message.message.text;
-          console.log(text); // In tin nhắn người dùng
-          sendMessage(senderId, "Tui là bot đây: " + text);
+          var text = event.message.text.toLowerCase().trim();
+            console.log(text);
+            if (text.toLowerCase().substr(0,4) == 'wiki') {
+                wikibot(text.replace("wiki ", ""),senderId)
+            }
+            else {
+                sendHelp(senderId);
+            }
         }
       }
     }   
@@ -51,21 +56,139 @@ app.post('/webhook', function(req, res) {
 
 // Gửi thông tin tới REST API để trả lời
 function sendMessage(senderId, message) {
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {
-      access_token: "EAAGrFnck27kBAB2nvwLY374ZAHvZC5JFDNXKStfMefmWdGWsbUELrSwOb7Q91WksP4ZAQD9VUI36pbIrKNug1hHpWUZCvmqy4DVZBcv0lpHgkFXZBFOZCuxneNuy6rXip2rfyW3AlDDcTaZA5LDvZAn6XZC2uyHfnX1eFpnzvDsNnBQQZDZD",
-    },
+  var messageData = {
+        text: message
+    };
+
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: "EAAGrFnck27kBAB2nvwLY374ZAHvZC5JFDNXKStfMefmWdGWsbUELrSwOb7Q91WksP4ZAQD9VUI36pbIrKNug1hHpWUZCvmqy4DVZBcv0lpHgkFXZBFOZCuxneNuy6rXip2rfyW3AlDDcTaZA5LDvZAn6XZC2uyHfnX1eFpnzvDsNnBQQZDZD"},
+        method: 'POST',
+        json: {
+            recipient: {id: sender},
+            message: messageData
+        }
+    }, function (error, response) {
+
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+
+    });  
+ 
+}
+
+var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAB2nvwLY374ZAHvZC5JFDNXKStfMefmWdGWsbUELrSwOb7Q91WksP4ZAQD9VUI36pbIrKNug1hHpWUZCvmqy4DVZBcv0lpHgkFXZBFOZCuxneNuy6rXip2rfyW3AlDDcTaZA5LDvZAn6XZC2uyHfnX1eFpnzvDsNnBQQZDZD" //replace with your page token
+
+function sendHelp(id) {
+  var options = {
+    uri: url,
     method: 'POST',
     json: {
-      recipient: {
-        id: senderId
+      "recipient": {
+        "id": id
       },
-      message: {
-        text: message
-      },
+      "message": {
+        "text": "Send wiki space 'Your query' to search wikipedia"
+      }
+    }
+  }
+  
+  request(options, function(error, response, body) {
+    if (error) {
+      console.log(error.message);
     }
   });
+};
+
+
+function wikibot(query, userid) {
+  var queryUrl = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=extracts&exintro&explaintext&exsentences=5&exlimit=max&gsrsearch=" + query;
+  var myTemplate = {
+    recipient: {
+      id: userid
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: []
+        }
+      }
+    }
+  };
+  
+  var options = {
+    url: url,
+    method: 'POST',
+    body: myTemplate,
+    json: true
+  }
+  
+  request(queryUrl, function(error, response, body) {
+    if (error) {
+      console.log(error);
+    }
+    try {
+      body = JSON.parse(body);
+      var pages = body.query.pages;
+      for (var i = 0 in pages) {
+        var myelement = {
+          title: "",
+          subtitle: "",
+          buttons: [{
+            type: "postback",
+            title: "Read more",
+            payload: "Nothing here, Please view in browser"
+          }, {
+            type: "web_url",
+            url: "",
+            title: "View in browser"
+          }]
+        };
+        myelement.title = pages[i].title;
+        myelement.subtitle = pages[i].extract.substr(0, 80).trim();
+        myelement.buttons[1].url = "https://en.wikipedia.org/?curid=" + pages[i].pageid;
+        if (pages[i].extract != "") {
+        myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
+        }
+        myTemplate.message.attachment.payload.elements.push(myelement);
+      }
+      options.body = myTemplate;
+    }
+    catch (err) {
+      console.log("error : " + err.message);
+      options = {
+        uri: url,
+        method: 'POST',
+        json: {
+          "recipient": {
+            "id": userid
+          },
+          "message": {
+            "text": "Something went wrong, please try again."
+          }
+        }
+      }
+    }
+    request(options, function(error, response, body) {
+      if (error) {
+        console.log(error.message);
+      }
+      console.log(body);
+    });
+  })
+};
+
+function formatmsg(msg){
+    msg = msg.substr(0,320);
+    if(msg.lastIndexOf(".") == -1) {
+        return msg;
+    }
+    return msg.substr(0,msg.lastIndexOf(".")+1);
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
