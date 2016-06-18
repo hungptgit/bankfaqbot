@@ -65,7 +65,7 @@ function sendMessage(senderId, message) {
 
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: "EAAGrFnck27kBACA8PStioYfTGTYbJOH9F2phnhtDQNCkimPBliRgr2hjXxvaTAnT2sjsEJFWTlSg6ANYZAmkeEQesW1MvshQZCbqyl1Ve7OWC93cMS3ZC1FLSZCL5ZCGfGPinZCVUGU4UwD99lRznwxDhgX2BAZAcweutmbUIKDQwZDZD"},
+        qs: {access_token: "EAAGrFnck27kBAM2nKym5IXmPqvtWKg1cZBcxvqZCZAiMQp7GPZCKsmiwdu92D1MZC1BCOz5qsMZBR9PipdH0VCJlXqvBZC9WIcNdHxn5FjuaNQXWVeuihuZA505HypzedqqZAtIWXQbRijMRIs0ayCaTQIL5ZCoX1zj4cnJez3AVgkVQZDZD"},
         method: 'POST',
         json: {
             recipient: {id: sender},
@@ -83,7 +83,7 @@ function sendMessage(senderId, message) {
  
 }
 
-var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBACA8PStioYfTGTYbJOH9F2phnhtDQNCkimPBliRgr2hjXxvaTAnT2sjsEJFWTlSg6ANYZAmkeEQesW1MvshQZCbqyl1Ve7OWC93cMS3ZC1FLSZCL5ZCGfGPinZCVUGU4UwD99lRznwxDhgX2BAZAcweutmbUIKDQwZDZD" //replace with your page token
+var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAM2nKym5IXmPqvtWKg1cZBcxvqZCZAiMQp7GPZCKsmiwdu92D1MZC1BCOz5qsMZBR9PipdH0VCJlXqvBZC9WIcNdHxn5FjuaNQXWVeuihuZA505HypzedqqZAtIWXQbRijMRIs0ayCaTQIL5ZCoX1zj4cnJez3AVgkVQZDZD" //replace with your page token
 
 function sendHelp(id) {
   var options = {
