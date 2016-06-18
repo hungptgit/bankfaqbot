@@ -56,7 +56,7 @@ app.post('/webhook', function(req, res) {
   res.status(200).send("OK");
 });
 
-var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAM2nKym5IXmPqvtWKg1cZBcxvqZCZAiMQp7GPZCKsmiwdu92D1MZC1BCOz5qsMZBR9PipdH0VCJlXqvBZC9WIcNdHxn5FjuaNQXWVeuihuZA505HypzedqqZAtIWXQbRijMRIs0ayCaTQIL5ZCoX1zj4cnJez3AVgkVQZDZD"; //replace with your page token
+var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBALVvuSPDfOBZCfv0MBiyGJBD6IkDdkJ5eZCWRXrTZBIbVGz7vRcDRN9aIC9kxFBvZCH64bUEMalxbe6uPHPU8XuYclqY4iUBNtIVYXVHpiTOK6x4Pn1dVwgsG2U1ZANtHYPVaqzchiBTZBT9wpEU6ZBTJ0EhNwV4QZDZD"; //replace with your page token
 
 // Gửi thông tin tới REST API để trả lời
 function sendMessage(senderId, message) {
