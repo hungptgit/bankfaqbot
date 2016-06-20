@@ -19,8 +19,6 @@ app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 */
-app.set('port', process.env.PORT || 3002 || 8080);
-app.set('ip', process.env.IP || "127.0.0.1");
 
 //For avoidong Heroku $PORT error
 app.get('/', function(request, response) {
@@ -79,8 +77,15 @@ function sendMessage(senderId, message) {
   });
 }
 
+app.set('port', process.env.PORT || 3002 || 8080);
+app.set('ip', process.env.IP || "127.0.0.1");
 
+server.listen(app.get('port'), function () {
+  console.log('Express server listening on %d, in %s mode', app.get('port'), app.get('env'));
+});
 
+/*
 server.listen(app.get('port'), app.get('ip'), function() {
   console.log("v1 Chat bot server listening at %s:%d ", app.get('ip'), app.get('port'));
 });
+*/
