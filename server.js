@@ -296,7 +296,7 @@ function efastMessage(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "iPay",
+                    "title": "eFast",
                     "subtitle": "Dịch vụ VietinBank eFast Mobile",
                     "image_url": imageUrl ,
                     "buttons": [{
@@ -305,8 +305,8 @@ function efastMessage(recipientId, text) {
                         "title": "Đăng ký ngay"
                         }, {
                         "type": "postback",
-                        "title": "Tôi thích iPay",
-                        "payload": "User " + recipientId + " likes efast Mobile" + imageUrl,
+                        "title": "Tôi thích eFast",
+                        "payload": "User " + recipientId + " likes eFast Mobile" + imageUrl,
                     }]
                 }]
             }
