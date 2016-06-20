@@ -99,6 +99,9 @@ app.post('/webhook', function(req, res) {
             else if (text.toLowerCase().substr(0,4) == 'ipay') {
                 ipayMessage(senderId, text);
             }
+            else if (text.toLowerCase().substr(0,4) == 'efast') {
+                efastMessage(senderId, text);
+            }
             else {
                 sendHelp(senderId);
             }
@@ -148,7 +151,7 @@ function sendHelp(id) {
         "id": id
       },
       "message": {
-        "text": "Send wiki space 'Your query' to search wikipedia"
+        "text": "Chúng tôi đã ghi nhận yêu cầu và sẽ phản hồi lại bạn sớm. Chúc bạn một ngày may mắn."
       }
     }
   }
@@ -248,7 +251,7 @@ function wikibot(query, userid) {
 // send rich message with kitten
 function ipayMessage(recipientId, text) {
     var imageUrl = "http://imgs.vietnamnet.vn/Images/2016/06/09/14/20160609140338-banner-vietinbank-ipay-app.jpg";
-
+    var regUrl = "https://ebanking.vietinbank.vn/register";
     var message = {
         "attachment": {
             "type": "template",
@@ -256,15 +259,15 @@ function ipayMessage(recipientId, text) {
                 "template_type": "generic",
                 "elements": [{
                     "title": "iPay",
-                    "subtitle": "Dich vu VietinBank iPay Mobile",
+                    "subtitle": "Dịch vụ VietinBank iPay Mobile",
                     "image_url": imageUrl ,
                     "buttons": [{
                         "type": "web_url",
-                        "url": imageUrl,
-                        "title": "Dang ky ngay"
+                        "url": regUrl,
+                        "title": "Đăng ký ngay"
                         }, {
                         "type": "postback",
-                        "title": "I like this",
+                        "title": "Tôi thích iPay",
                         "payload": "User " + recipientId + " likes iPay Mobile" + imageUrl,
                     }]
                 }]
@@ -275,6 +278,36 @@ function ipayMessage(recipientId, text) {
     sendImgMessage(recipientId, message);
 };
 
+
+// send rich message with kitten
+function efastMessage(recipientId, text) {
+    var imageUrl = "https://www.vietinbank.vn/web/export/sites/default/vn/news/16/06/images/e-fast-mobile-H.jpg";
+    var regUrl = "http://www.vietinbank.vn/web/export/sites/default/vn/product/ebank/leftblock/download/VBH2.0/GDK_su_dung_eFAST.pdf";
+    var message = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "iPay",
+                    "subtitle": "Dịch vụ VietinBank eFast Mobile",
+                    "image_url": imageUrl ,
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": regUrl,
+                        "title": "Đăng ký ngay"
+                        }, {
+                        "type": "postback",
+                        "title": "Tôi thích iPay",
+                        "payload": "User " + recipientId + " likes efast Mobile" + imageUrl,
+                    }]
+                }]
+            }
+        }
+    };
+
+    sendImgMessage(recipientId, message);
+};
 
 // generic function sending messages
 function sendImgMessage(recipientId, message) {
