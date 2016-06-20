@@ -137,7 +137,7 @@ function sendMessage(senderId, message) {
         uri: url,
         method: 'POST',
         json: {
-            recipient: {id: sender},
+            recipient: {id: senderId},
             message: messageData
         }
     }, function (error, response) {
