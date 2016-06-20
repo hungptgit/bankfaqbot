@@ -89,7 +89,7 @@ app.post('/webhook', function(req, res) {
       if (message.message) {
         // If user send text
         if (message.message.text) {
-          var text = event.message.text.toLowerCase().trim();
+          var text = message.message.text.toLowerCase().trim();
             console.log(text);
             //sendMessage(senderId, "Tui là bot đây: " + text);
             
