@@ -109,10 +109,10 @@ app.post('/webhook', function(req, res) {
         else if (message.postback) {
            console.log('Received postback: ', JSON.stringify(message.postback));
           // These are for chosing availibility
-          setMessage(senderId, "Cảm ơn bạn nhiều :)");
+          sendMessage(senderId, "Cảm ơn bạn nhiều :)");
           /*
           if (JSON.stringify(message.postback) == '{"payload":"postback"}') {
-            setTextMessage(senderId, "Cảm ơn bạn nhiều :)");
+            sendMessage(senderId, "Cảm ơn bạn nhiều :)");
           }
           */
         }
