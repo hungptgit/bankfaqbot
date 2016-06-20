@@ -92,19 +92,24 @@ app.post('/webhook', function(req, res) {
           var text = message.message.text.toLowerCase().trim();
             console.log(text);
             //sendMessage(senderId, "Tui là bot đây: " + text);
-            
-            if (text.toLowerCase().substr(0,4) == 'wiki') {
+            text.indexOf('wiki') > -1
+            if (text.indexOf('wiki') > -1) {
                 wikibot(text.replace("wiki ", ""),senderId);
             }
-            else if (text.toLowerCase().substr(0,4) == 'ipay') {
+            else if (text.indexOf('ipay') > -1 ) {
                 ipayMessage(senderId, text);
             }
-            else if (text.toLowerCase().substr(0,4) == 'efast') {
+            else if (text.indexOf('efast') > -1) {
                 efastMessage(senderId, text);
             }
             else {
                 sendHelp(senderId);
             }
+        }
+        if (message.postback) {
+          let text = JSON.stringify(message.postback);
+          sendMessage(senderId, "Postback received: " + text.substring(0, 200));
+          continue;
         }
       }
     }   
