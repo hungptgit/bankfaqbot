@@ -86,9 +86,9 @@ app.post('/webhook', function(req, res) {
     var messaging = entry.messaging;
     for (var message of messaging) {
       var senderId = message.sender.id;
-      if (message.message) {
+      
         // If user send text
-        if (message.message.text) {
+        if (message.message && message.message.text) {
           var text = message.message.text.toLowerCase().trim();
             console.log(text);
             //sendMessage(senderId, "Tui là bot đây: " + text);
@@ -106,12 +106,13 @@ app.post('/webhook', function(req, res) {
                 sendHelp(senderId);
             }
         }
-        if (message.postback) {
-          var text = JSON.stringify(message.postback);
-          sendMessage(senderId, "Postback received: " + text.substring(0, 200));
-          continue;
+        else if (message.postback) {
+          // These are for chosing availibility
+          if (JSON.stringify(message.postback) == '{"payload":"postback"}') {
+            setTextMessage(senderId, "Cảm ơn bạn nhiều :)");
+          }
         }
-      }
+      
     }   
   }
 
