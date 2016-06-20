@@ -94,12 +94,14 @@ app.post('/webhook', function(req, res) {
             //sendMessage(senderId, "Tui là bot đây: " + text);
             
             if (text.toLowerCase().substr(0,4) == 'wiki') {
-                wikibot(text.replace("wiki ", ""),senderId)
+                wikibot(text.replace("wiki ", ""),senderId);
+            }
+            else if (text.toLowerCase().substr(0,4) == 'ipay') {
+                ipayMessage(senderId, text);
             }
             else {
                 sendHelp(senderId);
             }
-            
         }
       }
     }   
@@ -184,11 +186,13 @@ function wikibot(query, userid) {
   }
   
   request(queryUrl, function(error, response, body) {
+    console.log('wiki query: ', queryUrl);  
     if (error) {
       console.log(error);
     }
     try {
       body = JSON.parse(body);
+      //console.log('wiki response: ', body);  
       var pages = body.query.pages;
       for (var i = 0 in pages) {
         var myelement = {
@@ -239,6 +243,55 @@ function wikibot(query, userid) {
       console.log(body);
     });
   })
+};
+
+// send rich message with kitten
+function ipayMessage(recipientId, text) {
+    var imageUrl = "http://imgs.vietnamnet.vn/Images/2016/06/09/14/20160609140338-banner-vietinbank-ipay-app.jpg";
+
+    var message = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "iPay",
+                    "subtitle": "Dich vu VietinBank iPay Mobile",
+                    "image_url": imageUrl ,
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": imageUrl,
+                        "title": "Dang ky ngay"
+                        }, {
+                        "type": "postback",
+                        "title": "I like this",
+                        "payload": "User " + recipientId + " likes iPay Mobile" + imageUrl,
+                    }]
+                }]
+            }
+        }
+    };
+
+    sendImgMessage(recipientId, message);
+};
+
+
+// generic function sending messages
+function sendImgMessage(recipientId, message) {
+    request({
+        uri: url,
+        method: 'POST',
+        json: {
+            recipient: {id: recipientId},
+            message: message,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
 };
 
 app.set('port', process.env.PORT || 3002 || 8080);
