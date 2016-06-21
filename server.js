@@ -103,6 +103,9 @@ app.post('/webhook', function(req, res) {
             else if (text.indexOf('efast') > -1) {
                 efastMessage(senderId, text);
             }
+            else if (text.indexOf('imdb') > -1) {
+                crawlerImdb(text, senderId);
+            }
             else {
                 sendHelp(senderId);
             }
@@ -259,88 +262,48 @@ function wikibot(query, userid) {
   })
 };
 
-function crawler(query, userid) {
+function crawlerImdb(query, userid) {
   var queryUrl = 'http://www.imdb.com/title/tt1229340/';
-  var myTemplate = {
-    recipient: {
-      id: userid
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: []
-        }
-      }
-    }
-  };
   
-  var options = {
-    url: url,
-    method: 'POST',
-    body: myTemplate,
-    json: true
-  }
   
-  request(queryUrl, function(error, response, body) {
-    console.log('wiki query: ', queryUrl);  
-    if (error) {
-      console.log(error);
-    }
-    try {
-      body = JSON.parse(body);
-      //console.log('wiki response: ', body);  
-      var pages = body.query.pages;
-      for (var i = 0 in pages) {
-        var myelement = {
-          title: "",
-          subtitle: "",
-          buttons: [{
-            type: "postback",
-            title: "Read more",
-            payload: "Nothing here, Please view in browser"
-          }, {
-            type: "web_url",
-            url: "",
-            title: "View in browser"
-          }]
-        };
-        
-        myelement.title = pages[i].title;
-        myelement.subtitle = pages[i].extract.substr(0, 80).trim();
-        myelement.buttons[1].url = "https://en.wikipedia.org/?curid=" + pages[i].pageid;
-        
-        if (pages[i].extract != "") {
-            myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
+  request(queryUrl, function(error, response, html){
+        if(!error){
+            var $ = cheerio.load(html);
+
+            var title, release, rating;
+            var json = { title : "", release : "", rating : ""};
+
+            // We'll use the unique header class as a starting point.
+
+            $('.header').filter(function(){
+                // Let's store the data we filter into a variable so we can easily see what's going on.
+                var data = $(this);
+
+               // In examining the DOM we notice that the title rests within the first child element of the header tag. 
+               // Utilizing jQuery we can easily navigate and get the text by writing the following code:
+                title = data.children().first().text();
+                release = data.children().last().children().text();
+
+               // Once we have our title, we'll store it to the our json object.
+                json.title = title;
+                json.release = release;
+            })
+            
+            // Since the rating is in a different section of the DOM, we'll have to write a new jQuery filter to extract this information.
+
+            $('.star-box-giga-star').filter(function(){
+                var data = $(this);
+
+                // The .star-box-giga-star class was exactly where we wanted it to be.
+                // To get the rating, we can simply just get the .text(), no need to traverse the DOM any further
+                rating = data.text();
+                json.rating = rating;
+            })
+            
+            console.log("get imdb:" + JSON.stringify(json, null, 4));
         }
-        myTemplate.message.attachment.payload.elements.push(myelement);
-      }
-      
-      options.body = myTemplate;
-    }
-    catch (err) {
-      console.log("error : " + err.message);
-      options = {
-        uri: url,
-        method: 'POST',
-        json: {
-          "recipient": {
-            "id": userid
-          },
-          "message": {
-            "text": "Something went wrong, please try again."
-          }
-        }
-      }
-    }
-    request(options, function(error, response, body) {
-      if (error) {
-        console.log(error.message);
-      }
-      console.log(body);
-    });
-  })
+    })
+
 };
 
 // send rich message with kitten
