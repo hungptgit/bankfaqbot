@@ -264,8 +264,6 @@ function wikibot(query, userid) {
 
 function crawlerImdb(query, userid) {
   var queryUrl = 'http://www.imdb.com/title/tt1229340/';
-  
-  
   request(queryUrl, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
@@ -290,7 +288,6 @@ function crawlerImdb(query, userid) {
             })
             
             // Since the rating is in a different section of the DOM, we'll have to write a new jQuery filter to extract this information.
-
             $('.star-box-giga-star').filter(function(){
                 var data = $(this);
 
@@ -299,11 +296,9 @@ function crawlerImdb(query, userid) {
                 rating = data.text();
                 json.rating = rating;
             })
-            
             console.log("get imdb:" + JSON.stringify(json, null, 4));
         }
     })
-
 };
 
 // send rich message with kitten
@@ -384,6 +379,56 @@ function sendImgMessage(recipientId, message) {
         }
     });
 };
+
+
+function sendGenericMessage(sender) {
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "First card",
+                    "subtitle": "Element #1 of an hscroll",
+                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.messenger.com",
+                        "title": "web url"
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for first element in a generic bubble",
+                    }],
+                }, {
+                    "title": "Second card",
+                    "subtitle": "Element #2 of an hscroll",
+                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
 
 app.set('port', process.env.PORT || 3002 || 8080);
 app.set('ip', process.env.IP || "127.0.0.1");
