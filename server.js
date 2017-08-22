@@ -175,7 +175,7 @@ function sendHelp(id) {
       console.log(error.message);
     }
   });
-};
+}
 
 
 function wikibot(query, userid) {
@@ -230,7 +230,7 @@ function wikibot(query, userid) {
         myelement.subtitle = pages[i].extract.substr(0, 80).trim();
         myelement.buttons[1].url = "https://en.wikipedia.org/?curid=" + pages[i].pageid;
         
-        if (pages[i].extract != "") {
+        if (pages[i].extract !== "") {
             myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
         }
         myTemplate.message.attachment.payload.elements.push(myelement);
@@ -260,7 +260,7 @@ function wikibot(query, userid) {
       console.log(body);
     });
   })
-};
+}
 
 function crawlerImdb(query, userid) {
   var queryUrl = 'http://www.imdb.com/title/tt1229340/';
@@ -299,7 +299,7 @@ function crawlerImdb(query, userid) {
             console.log("get imdb:" + JSON.stringify(json, null, 4));
         }
     })
-};
+}
 
 // send rich message with kitten
 function ipayMessage(recipientId, text) {
@@ -329,7 +329,7 @@ function ipayMessage(recipientId, text) {
     };
 
     sendImgMessage(recipientId, message);
-};
+}
 
 
 // send rich message with kitten
@@ -360,7 +360,7 @@ function efastMessage(recipientId, text) {
     };
 
     sendImgMessage(recipientId, message);
-};
+}
 
 // generic function sending messages
 function sendImgMessage(recipientId, message) {
@@ -378,9 +378,9 @@ function sendImgMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-};
+}
 
-
+/*
 function sendGenericMessage(sender) {
     let messageData = {
         "attachment": {
@@ -429,6 +429,7 @@ function sendGenericMessage(sender) {
         }
     })
 }
+*/
 
 app.set('port', process.env.PORT || 3002 || 8080);
 app.set('ip', process.env.IP || "127.0.0.1");
