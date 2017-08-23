@@ -4,7 +4,6 @@ var logger = require('morgan');
 var http = require('http');
 var bodyParser = require('body-parser');
 var express = require('express');
-var cheerio = require('cheerio');
 var router = express();
 
 var app = express();
@@ -26,7 +25,7 @@ app.get('/', function(request, response) {
     var result = 'App is running';
     response.send(result);
 }).listen(app.get('port'), function() {
-    console.log('App is running :), server is listening on port ', app.get('port'));
+    console.log('App is running, server is listening on port ', app.get('port'));
 });
 
 // Đây là đoạn code để tạo Webhook
@@ -103,9 +102,6 @@ app.post('/webhook', function(req, res) {
             else if (text.indexOf('efast') > -1) {
                 efastMessage(senderId, text);
             }
-            else if (text.indexOf('imdb') > -1) {
-                crawlerImdb(text, senderId);
-            }
             else {
                 sendHelp(senderId);
             }
@@ -175,7 +171,7 @@ function sendHelp(id) {
       console.log(error.message);
     }
   });
-}
+};
 
 
 function wikibot(query, userid) {
@@ -230,7 +226,7 @@ function wikibot(query, userid) {
         myelement.subtitle = pages[i].extract.substr(0, 80).trim();
         myelement.buttons[1].url = "https://en.wikipedia.org/?curid=" + pages[i].pageid;
         
-        if (pages[i].extract !== "") {
+        if (pages[i].extract != "") {
             myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
         }
         myTemplate.message.attachment.payload.elements.push(myelement);
@@ -260,46 +256,7 @@ function wikibot(query, userid) {
       console.log(body);
     });
   })
-}
-
-function crawlerImdb(query, userid) {
-  var queryUrl = 'http://www.imdb.com/title/tt1229340/';
-  request(queryUrl, function(error, response, html){
-        if(!error){
-            var $ = cheerio.load(html);
-
-            var title, release, rating;
-            var json = { title : "", release : "", rating : ""};
-
-            // We'll use the unique header class as a starting point.
-
-            $('.header').filter(function(){
-                // Let's store the data we filter into a variable so we can easily see what's going on.
-                var data = $(this);
-
-               // In examining the DOM we notice that the title rests within the first child element of the header tag. 
-               // Utilizing jQuery we can easily navigate and get the text by writing the following code:
-                title = data.children().first().text();
-                release = data.children().last().children().text();
-
-               // Once we have our title, we'll store it to the our json object.
-                json.title = title;
-                json.release = release;
-            })
-            
-            // Since the rating is in a different section of the DOM, we'll have to write a new jQuery filter to extract this information.
-            $('.star-box-giga-star').filter(function(){
-                var data = $(this);
-
-                // The .star-box-giga-star class was exactly where we wanted it to be.
-                // To get the rating, we can simply just get the .text(), no need to traverse the DOM any further
-                rating = data.text();
-                json.rating = rating;
-            })
-            console.log("get imdb:" + JSON.stringify(json, null, 4));
-        }
-    })
-}
+};
 
 // send rich message with kitten
 function ipayMessage(recipientId, text) {
@@ -329,7 +286,7 @@ function ipayMessage(recipientId, text) {
     };
 
     sendImgMessage(recipientId, message);
-}
+};
 
 
 // send rich message with kitten
@@ -360,7 +317,7 @@ function efastMessage(recipientId, text) {
     };
 
     sendImgMessage(recipientId, message);
-}
+};
 
 // generic function sending messages
 function sendImgMessage(recipientId, message) {
@@ -378,58 +335,7 @@ function sendImgMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-}
-
-/*
-function sendGenericMessage(sender) {
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "First card",
-                    "subtitle": "Element #1 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.messenger.com",
-                        "title": "web url"
-                    }, {
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for first element in a generic bubble",
-                    }],
-                }, {
-                    "title": "Second card",
-                    "subtitle": "Element #2 of an hscroll",
-                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "Postback",
-                        "payload": "Payload for second element in a generic bubble",
-                    }],
-                }]
-            }
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-}
-*/
+};
 
 app.set('port', process.env.PORT || 3002 || 8080);
 app.set('ip', process.env.IP || "127.0.0.1");
