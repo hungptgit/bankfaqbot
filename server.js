@@ -30,6 +30,7 @@ app.get('/', function(request, response) {
 
 // Đây là đoạn code để tạo Webhook
 app.get('/webhook', function(req, res) {
+  console.log('Into /webhook');
   if (req.query['hub.verify_token'] === 'ma_xac_minh_cua_ban') {
     res.send(req.query['hub.challenge']);
   }
@@ -81,6 +82,7 @@ function sendMessage(senderId, message) {
 
 // Xử lý khi có người nhắn tin cho bot
 app.post('/webhook', function(req, res) {
+  console.log('into /webhook post' + req);
   var entries = req.body.entry;
   for (var entry of entries) {
     var messaging = entry.messaging;
