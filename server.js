@@ -46,7 +46,7 @@ app.post('/webhook', function(req, res) {
     for (var message of messaging) {
       var senderId = message.sender.id;
         
-        kipalog(msg);
+        kipalog(message);
         
         // If user send text
       /*  
