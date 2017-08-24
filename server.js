@@ -38,49 +38,6 @@ app.get('/webhook', function(req, res) {
 });
 
 // Xử lý khi có người nhắn tin cho bot
-/*
-app.post('/webhook', function(req, res) {
-  var entries = req.body.entry;
-  for (var entry of entries) {
-    var messaging = entry.messaging;
-    for (var message of messaging) {
-      var senderId = message.sender.id;
-      if (message.message) {
-        // If user send text
-        if (message.message.text) {
-          var text = message.message.text;
-          console.log(text); // In tin nhắn người dùng
-          sendMessage(senderId, "Tui là bot đây: " + text);
-        }
-      }
-    }
-  }
-
-  res.status(200).send("OK");
-});
-
-
-// Gửi thông tin tới REST API để trả lời
-function sendMessage(senderId, message) {
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {
-      access_token: "EAAGrFnck27kBACCjDl3HLMmq46twu0EEWumVGDu5khhVjaG7sI02Yar8egpP2cWezRq7jhcKd0aMabZBJNohlTs4zXZCLT36OrlJ2Uq7uw5f6ksySmHvdQb6N4RbH8XYBJZBil9aaJsxANs1Crf2glEUtmghfgZCKKDxJderFwZDZD",
-    },
-    method: 'POST',
-    json: {
-      recipient: {
-        id: senderId
-      },
-      message: {
-        text: message
-      },
-    }
-  });
-}
-*/
-
-// Xử lý khi có người nhắn tin cho bot
 app.post('/webhook', function(req, res) {
   console.log('into /webhook post' + req);
   var entries = req.body.entry;
@@ -88,9 +45,12 @@ app.post('/webhook', function(req, res) {
     var messaging = entry.messaging;
     for (var message of messaging) {
       var senderId = message.sender.id;
-      
+        
+        kipalog(msg);
+        
         // If user send text
-        if (message.message && message.message.text) {
+      /*  
+      if (message.message && message.message.text) {
           var text = message.message.text.toLowerCase().trim();
             console.log(text);
             //sendMessage(senderId, "Tui là bot đây: " + text);
@@ -112,18 +72,18 @@ app.post('/webhook', function(req, res) {
            console.log('Received postback: ', JSON.stringify(message.postback));
           // These are for chosing availibility
           sendMessage(senderId, "Cảm ơn bạn nhiều :)");
-          /*
-          if (JSON.stringify(message.postback) == '{"payload":"postback"}') {
-            sendMessage(senderId, "Cảm ơn bạn nhiều :)");
-          }
-          */
+          
         }
-      
-    }   
+        */
+    } 
+    
   }
 
   res.status(200).send("OK");
 });
+
+
+
 //EAAGrFnck27kBAC3pENR4OdGjPfePdIL6GIlpEpPOKL4H0KaJcX5RFbbDJOQxuGEPztSDdrghVjcMLQBUoRrsyarm1Ktp7gykjl5LK96w7As6ixCNh5Co0vU0Af38fzZCP00hU3bGklC2EOFg87hxrMofseZAdZBMZAgfdLZAdvAZDZD
 //var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBACCjDl3HLMmq46twu0EEWumVGDu5khhVjaG7sI02Yar8egpP2cWezRq7jhcKd0aMabZBJNohlTs4zXZCLT36OrlJ2Uq7uw5f6ksySmHvdQb6N4RbH8XYBJZBil9aaJsxANs1Crf2glEUtmghfgZCKKDxJderFwZDZD"; //replace with your page token
 var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAC3pENR4OdGjPfePdIL6GIlpEpPOKL4H0KaJcX5RFbbDJOQxuGEPztSDdrghVjcMLQBUoRrsyarm1Ktp7gykjl5LK96w7As6ixCNh5Co0vU0Af38fzZCP00hU3bGklC2EOFg87hxrMofseZAdZBMZAgfdLZAdvAZDZD"; //replace with your page token
@@ -339,6 +299,207 @@ function sendImgMessage(recipientId, message) {
         }
     });
 };
+
+
+function kipalog(msg) {
+
+  var reqId = msg.sender.id;
+  var defaultRes = {
+    text: 'Chào mừng bạn đã đến với Demo Bot của mềnh, nhắn tin cho mình một trong các nội dung sau (text, generic, button, quick_reply) để lấy mẫu demo nhé, hoặc là click vào nút bên dưới:',
+    quick_replies: [{
+      "content_type": "text",
+      "title": "Text",
+      "payload": "QR_PICK_TEXT"
+    }, {
+      "content_type": "text",
+      "title": "Generic",
+      "payload": "QR_PICK_GENERIC"
+    }, {
+      "content_type": "text",
+      "title": "Button",
+      "payload": "QR_PICK_BTN"
+    }, {
+      "content_type": "text",
+      "title": "Quick reply",
+      "payload": "QR_PICK_QUICKREPLY"
+    }]
+  }
+
+  var defaultText = {
+    text: "Đây là 1 đoạn tin nhắn"
+  }
+  var defaultGeneric = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [{
+          title: "Kipalog",
+          image_url: "http://railsgirls.com/images/kipalog.png",
+          subtitle: "Hello mọi người",
+          buttons: [{
+            type: "web_url",
+            url: "http://kipalog.com/",
+            title: "Kipalog site"
+          }, {
+            type: "postback",
+            title: "Bắt đầu lại",
+            payload: "HELP"
+          }]
+        }]
+      }
+    }
+  }
+  var defaultBtn = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: "Đây chỉ là dòng chữ và button phía dưới",
+        buttons: [{
+          type: "web_url",
+          url: "http://kipalog.com/",
+          title: "Kipalog site"
+        }, {
+          type: "postback",
+          title: "Bắt đầu lại",
+          payload: "HELP"
+        }]
+      }
+    }
+  }
+  var defaultQR = {
+    text: "Pick a color:",
+    quick_replies: [{
+      content_type: "text",
+      title: "Red",
+      payload: "QR_PICK_RED"
+    }, {
+      content_type: "text",
+      title: "Green",
+      payload: "QR_PICK_GREEN"
+    }]
+  }
+
+
+  if (msg.optin) {
+
+    var ref = msg.optin.ref;
+    if (ref) {
+      switch (ref) {
+        case 'FB_MAIN_WEB_BTN':
+          bot.sendMsg(reqId, defaultRes);
+          break;
+        default:
+          bot.sendMsg(reqId, defaultRes);
+      }
+    }
+
+  } else if (msg.message) {
+    var msgText = msg.message.text;
+    if (typeof msgText === 'string') msgText = msgText.trim().toLowerCase();
+    if (msg.message.hasOwnProperty('is_echo')) return;
+
+    //Xử lý Quick Reply
+    if (msg.message.quick_reply) {
+      if (msg.message.quick_reply.hasOwnProperty('payload')) {
+        var payload = msg.message.quick_reply.payload;
+        var reg = /QR_PICK_(.*)/i;
+
+        var regex = null;
+        if (regex = reg.exec(payload)) {
+          switch (regex[1]) {
+            case 'RED':
+              bot.sendMsg(reqId, {
+                text: "Bạn đã chọn màu đỏ"
+              });
+              setTimeout(() => {
+                bot.sendMsg(reqId, defaultRes)
+              }, 700);
+              break;
+            case 'GREEN':
+              bot.sendMsg(reqId, {
+                text: "Bạn đã chọn màu xanh lá"
+              });
+              setTimeout(() => {
+                bot.sendMsg(reqId, defaultRes)
+              }, 700);
+              break;
+            case 'TEXT':
+              bot.sendMsg(reqId, defaultText);
+              break;
+            case 'BTN':
+              bot.sendMsg(reqId, defaultBtn);
+              break;
+            case 'GENERIC':
+              bot.sendMsg(reqId, defaultGeneric);
+              break;
+            case 'QUICKREPLY':
+              bot.sendMsg(reqId, defaultQR);
+              break;
+            default:
+              setTimeout(() => {
+                bot.sendMsg(reqId, defaultRes)
+              }, 700);
+          }
+        }
+
+      }
+      return;
+    }
+    //Xử lý text
+    switch (msgText) {
+      case 'text':
+        bot.sendMsg(reqId, defaultText);
+        break;
+      case 'generic':
+        bot.sendMsg(reqId, defaultGeneric);
+        break;
+      case 'button':
+        bot.sendMsg(reqId, defaultBtn);
+        break;
+      case 'quick_reply':
+        bot.sendMsg(reqId, defaultQR);
+        break;
+      case 'quick reply':
+        bot.sendMsg(reqId, defaultQR);
+        break;
+      default:
+        bot.sendMsg(reqId, defaultRes);
+    }
+
+    return;
+
+  } else if (msg.delivery) {
+
+    console.log('deli');
+
+  }
+  // Xử lý payload
+  else if (msg.postback) {
+    var msgPayload = msg.postback.payload;
+
+    switch (msgPayload) {
+      case 'GET_STARTED_BUTTON':
+        bot.sendMsg(reqId, defaultRes);
+        break;
+      case 'HELP':
+        bot.sendMsg(reqId, defaultRes);
+        break;
+      default:
+        bot.sendMsg(reqId, defaultRes);
+    }
+
+
+  } else if (msg.read) {
+
+    console.log('read');
+
+  } else {
+    console.log("Webhook received unknown messagingEvent: ", msg);
+  }
+
+}
 
 app.set('port', process.env.PORT || 3002 || 8080);
 app.set('ip', process.env.IP || "127.0.0.1");
