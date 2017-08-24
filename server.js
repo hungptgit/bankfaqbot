@@ -124,8 +124,9 @@ app.post('/webhook', function(req, res) {
 
   res.status(200).send("OK");
 });
-
-var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBACCjDl3HLMmq46twu0EEWumVGDu5khhVjaG7sI02Yar8egpP2cWezRq7jhcKd0aMabZBJNohlTs4zXZCLT36OrlJ2Uq7uw5f6ksySmHvdQb6N4RbH8XYBJZBil9aaJsxANs1Crf2glEUtmghfgZCKKDxJderFwZDZD"; //replace with your page token
+//EAAGrFnck27kBAC3pENR4OdGjPfePdIL6GIlpEpPOKL4H0KaJcX5RFbbDJOQxuGEPztSDdrghVjcMLQBUoRrsyarm1Ktp7gykjl5LK96w7As6ixCNh5Co0vU0Af38fzZCP00hU3bGklC2EOFg87hxrMofseZAdZBMZAgfdLZAdvAZDZD
+//var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBACCjDl3HLMmq46twu0EEWumVGDu5khhVjaG7sI02Yar8egpP2cWezRq7jhcKd0aMabZBJNohlTs4zXZCLT36OrlJ2Uq7uw5f6ksySmHvdQb6N4RbH8XYBJZBil9aaJsxANs1Crf2glEUtmghfgZCKKDxJderFwZDZD"; //replace with your page token
+var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAC3pENR4OdGjPfePdIL6GIlpEpPOKL4H0KaJcX5RFbbDJOQxuGEPztSDdrghVjcMLQBUoRrsyarm1Ktp7gykjl5LK96w7As6ixCNh5Co0vU0Af38fzZCP00hU3bGklC2EOFg87hxrMofseZAdZBMZAgfdLZAdvAZDZD"; //replace with your page token
 
 // Gửi thông tin tới REST API để trả lời
 function sendMessage(senderId, message) {
