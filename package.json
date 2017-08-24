@@ -17,5 +17,8 @@
     "config": "^1.21.0",
     "request": "^2.73.0"
     "cheerio": "latest"
+  },
+   "engines": {
+    "node": "4.1.1"
   }
 }
