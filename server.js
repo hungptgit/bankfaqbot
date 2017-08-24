@@ -38,13 +38,14 @@ app.get('/webhook', function(req, res) {
 
 // Xử lý khi có người nhắn tin cho bot
 app.post('/webhook', function(req, res) {
-  console.log('into /webhook post' + req);
+  
   var entries = req.body.entry;
+  
   for (var entry of entries) {
     var messaging = entry.messaging;
     for (var message of messaging) {
       var senderId = message.sender.id;
-        
+        console.log('into /webhook post message: ' + message);
         kipalog(message);
         
         // If user send text
