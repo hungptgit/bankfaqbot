@@ -2,11 +2,12 @@
   "name": "VTB-fbchatbot",
   "version": "1.0.0",
   "description": "VietinBank FB messenger chat bot.",
-  "main": "server.js",
+  "main": "app.js",
   "repository": "",
   "author": "PTHung <phantranhung@gmail.com>",
   "scripts": {
-    "start": "node server.js"
+    "build": "node first-start.js",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.15.1",

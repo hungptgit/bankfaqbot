@@ -18,13 +18,6 @@ app.use(bodyParser.urlencoded({
 }));
 var server = http.createServer(app);
 var request = require("request");
-/*
-app.get('/', (req, res) => {
-  res.send("Home page. Server running okay.");
-});
-*/
-
-
 
 //For avoidong Heroku $PORT error
 app.get('/', function(request, response) {
