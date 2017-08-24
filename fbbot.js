@@ -70,10 +70,12 @@ class fbbot {
     var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27kBAC3pENR4OdGjPfePdIL6GIlpEpPOKL4H0KaJcX5RFbbDJOQxuGEPztSDdrghVjcMLQBUoRrsyarm1Ktp7gykjl5LK96w7As6ixCNh5Co0vU0Af38fzZCP00hU3bGklC2EOFg87hxrMofseZAdZBMZAgfdLZAdvAZDZD"; //replace with your page token
 
     request({
-      uri: reqUrl,
+      uri: url,
+      /*
       qs: {
         access_token: "EAAGrFnck27kBAC3pENR4OdGjPfePdIL6GIlpEpPOKL4H0KaJcX5RFbbDJOQxuGEPztSDdrghVjcMLQBUoRrsyarm1Ktp7gykjl5LK96w7As6ixCNh5Co0vU0Af38fzZCP00hU3bGklC2EOFg87hxrMofseZAdZBMZAgfdLZAdvAZDZD"//this.config.pageAccessToken
       },
+      */
       method: method,
       json: messageData
     }, (error, response, body) => {
