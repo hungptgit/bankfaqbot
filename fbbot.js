@@ -59,8 +59,11 @@ class fbbot {
 
   /* SEND */
 
-  callSendAPI(messageData, type = 'generic', setting = false, method = 'POST') {
-
+  callSendAPI(messageData, type , setting, method) {
+    type = 'generic';
+    setting = false;
+    method = 'POST';
+    
     var reqUrl = this.msgApi;
     if (setting) reqUrl = this.settingApi;
 
