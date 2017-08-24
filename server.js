@@ -92,7 +92,7 @@ var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27k
 function sendMessage(senderId, message) {
   var messageData = {
         recipient: {
-        id: id
+        id: senderId
       },
       message: message
     };
