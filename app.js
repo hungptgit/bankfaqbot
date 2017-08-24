@@ -77,7 +77,7 @@ http.createServer(
     res.end();
   }
 ).listen(process.env.PORT);
-console.log('Ứng dụng đang chạy tại: '+process.env.IP+':'+process.env.PORT);
+console.log('Ứng dụng đang chạy tại: ' + process.env.IP + ':' + process.env.PORT);
 
 function kipalog(msg) {
 
@@ -185,7 +185,7 @@ function kipalog(msg) {
         var reg = /QR_PICK_(.*)/i;
 
         var regex = null;
-        if (regex = reg.exec(payload)) {
+        if (regex == reg.exec(payload)) {
           switch (regex[1]) {
             case 'RED':
               bot.sendMsg(reqId, {

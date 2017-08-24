@@ -60,10 +60,11 @@ class fbbot {
   /* SEND */
 
   callSendAPI(messageData, type , setting, method) {
+    /*
     type = 'generic';
     setting = false;
     method = 'POST';
-    
+    */
     var reqUrl = this.msgApi;
     if (setting) reqUrl = this.settingApi;
 
@@ -83,10 +84,8 @@ class fbbot {
         else {
           var recipientId = body.recipient_id;
           var messageId = body.message_id;
+          console.log(reportStr, type, messageId, recipientId);
         }
-
-        console.log(reportStr, type, messageId, recipientId);
-
       } else {
 
         console.error("Unable to send message.");
