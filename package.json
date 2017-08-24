@@ -7,7 +7,7 @@
   "author": "PTHung <phantranhung@gmail.com>",
   "scripts": {
     "build": "node first-start.js",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.15.1",
