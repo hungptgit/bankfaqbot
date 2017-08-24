@@ -45,7 +45,7 @@ app.post('/webhook', function(req, res) {
     var messaging = entry.messaging;
     for (var message of messaging) {
       var senderId = message.sender.id;
-        console.log('into /webhook post message: ' + message);
+        console.log('into /webhook post message: ' + message.message.text);
         kipalog(message);
         
         // If user send text
@@ -399,9 +399,10 @@ function kipalog(msg) {
     var msgText = msg.message.text;
     if (typeof msgText === 'string') msgText = msgText.trim().toLowerCase();
     if (msg.message.hasOwnProperty('is_echo')) return;
-
+    console.log('msgText:'+msgText);
     //Xử lý Quick Reply
     if (msg.message.quick_reply) {
+      console.log('quick_reply:');
       if (msg.message.quick_reply.hasOwnProperty('payload')) {
         var payload = msg.message.quick_reply.payload;
         var reg = /QR_PICK_(.*)/i;
@@ -475,6 +476,7 @@ function kipalog(msg) {
   }
   // Xử lý payload
   else if (msg.postback) {
+    console.log('postback:');
     var msgPayload = msg.postback.payload;
 
     switch (msgPayload) {
