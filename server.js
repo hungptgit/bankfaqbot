@@ -6,6 +6,10 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var router = express();
 
+var fbbot = require('./fbbot.js').fbbot;
+var bot = new fbbot();
+bot.createGetStartedBtn('GET_STARTED_BUTTON');
+
 var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -19,6 +23,8 @@ app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 */
+
+
 
 //For avoidong Heroku $PORT error
 app.get('/', function(request, response) {
