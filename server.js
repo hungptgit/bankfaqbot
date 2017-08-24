@@ -99,10 +99,13 @@ function sendMessage(senderId, message) {
         //qs: {access_token: "EAAGrFnck27kBAM2nKym5IXmPqvtWKg1cZBcxvqZCZAiMQp7GPZCKsmiwdu92D1MZC1BCOz5qsMZBR9PipdH0VCJlXqvBZC9WIcNdHxn5FjuaNQXWVeuihuZA505HypzedqqZAtIWXQbRijMRIs0ayCaTQIL5ZCoX1zj4cnJez3AVgkVQZDZD"},
         uri: url,
         method: 'POST',
+        json: messageData
+        /*
         json: {
             recipient: {id: senderId},
             message: messageData
         }
+        */
     }, function (error, response) {
 
         if (error) {
