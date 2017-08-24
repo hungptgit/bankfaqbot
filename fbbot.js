@@ -1,3 +1,4 @@
+"use strict";
 
 const request = require('request');
 
@@ -15,7 +16,7 @@ class fbbot {
 
   }
 
-  sendMsg(id, json, type = 'TEXT') {
+  sendMsg(id, json, type ) {
     var msgData = {
       recipient: {
         id: id
@@ -23,7 +24,7 @@ class fbbot {
       message: json
     }
 
-    this.callSendAPI(msgData, type);
+    this.callSendAPI(msgData, 'TEXT');
   }
 
   /*SETTING*/
