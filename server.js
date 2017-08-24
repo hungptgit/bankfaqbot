@@ -406,7 +406,7 @@ function kipalog(msg) {
         var reg = /QR_PICK_(.*)/i;
 
         var regex = null;
-        if (regex = reg.exec(payload)) {
+        if (regex == reg.exec(payload)) {
           switch (regex[1]) {
             case 'RED':
               bot.sendMsg(reqId, {
@@ -507,8 +507,3 @@ server.listen(app.get('port'), function () {
   console.log('Express server listening on %d, in %s mode', app.get('port'), app.get('env'));
 });
 
-/*
-server.listen(app.get('port'), app.get('ip'), function() {
-  console.log("v1 Chat bot server listening at %s:%d ", app.get('ip'), app.get('port'));
-});
-*/
