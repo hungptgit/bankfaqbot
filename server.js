@@ -410,7 +410,7 @@ function kipalog(msg) {
         if (regex == reg.exec(payload)) {
           switch (regex[1]) {
             case 'RED':
-              bot.sendMsg(reqId, {
+              sendMsg(reqId, {
                 text: "Bạn đã chọn màu đỏ"
               });
               setTimeout(() => {
@@ -418,7 +418,7 @@ function kipalog(msg) {
               }, 700);
               break;
             case 'GREEN':
-              bot.sendMsg(reqId, {
+              sendMsg(reqId, {
                 text: "Bạn đã chọn màu xanh lá"
               });
               setTimeout(() => {
@@ -426,16 +426,16 @@ function kipalog(msg) {
               }, 700);
               break;
             case 'TEXT':
-              bot.sendMsg(reqId, defaultText);
+              sendMsg(reqId, defaultText);
               break;
             case 'BTN':
-              bot.sendMsg(reqId, defaultBtn);
+              sendMsg(reqId, defaultBtn);
               break;
             case 'GENERIC':
-              bot.sendMsg(reqId, defaultGeneric);
+              sendMsg(reqId, defaultGeneric);
               break;
             case 'QUICKREPLY':
-              bot.sendMsg(reqId, defaultQR);
+              sendMsg(reqId, defaultQR);
               break;
             default:
               setTimeout(() => {
@@ -450,22 +450,20 @@ function kipalog(msg) {
     //Xử lý text
     switch (msgText) {
       case 'text':
-        bot.sendMsg(reqId, defaultText);
+        sendMsg(reqId, defaultText);
         break;
       case 'generic':
-        bot.sendMsg(reqId, defaultGeneric);
+        sendMsg(reqId, defaultGeneric);
         break;
       case 'button':
-        bot.sendMsg(reqId, defaultBtn);
+        sendMsg(reqId, defaultBtn);
         break;
       case 'quick_reply':
-        bot.sendMsg(reqId, defaultQR);
+        sendMsg(reqId, defaultQR);
         break;
-      case 'quick reply':
-        bot.sendMsg(reqId, defaultQR);
-        break;
+ 
       default:
-        bot.sendMsg(reqId, defaultRes);
+        sendMsg(reqId, defaultRes);
     }
 
     return;
@@ -481,13 +479,13 @@ function kipalog(msg) {
 
     switch (msgPayload) {
       case 'GET_STARTED_BUTTON':
-        bot.sendMsg(reqId, defaultRes);
+        sendMsg(reqId, defaultRes);
         break;
       case 'HELP':
-        bot.sendMsg(reqId, defaultRes);
+        sendMsg(reqId, defaultRes);
         break;
       default:
-        bot.sendMsg(reqId, defaultRes);
+        sendMsg(reqId, defaultRes);
     }
 
 
