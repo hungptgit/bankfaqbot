@@ -91,9 +91,12 @@ var url = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGrFnck27k
 // Gửi thông tin tới REST API để trả lời
 function sendMessage(senderId, message) {
   var messageData = {
-        text: message
+        recipient: {
+        id: id
+      },
+      message: message
     };
-
+    
     request({
         //url: 'https://graph.facebook.com/v2.6/me/messages',
         //qs: {access_token: "EAAGrFnck27kBAM2nKym5IXmPqvtWKg1cZBcxvqZCZAiMQp7GPZCKsmiwdu92D1MZC1BCOz5qsMZBR9PipdH0VCJlXqvBZC9WIcNdHxn5FjuaNQXWVeuihuZA505HypzedqqZAtIWXQbRijMRIs0ayCaTQIL5ZCoX1zj4cnJez3AVgkVQZDZD"},
