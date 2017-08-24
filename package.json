@@ -13,9 +13,9 @@
     "body-parser": "^1.15.1",
     "express": "~3.2.4",
     "morgan": "^1.7.0",
+    "request": "^2.72.0",
     "apiai":"^3.0.3",
     "config": "^1.21.0",
-    "request": "^2.73.0"
     "cheerio": "latest"
   },
    "engines": {
