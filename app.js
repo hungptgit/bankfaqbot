@@ -35,7 +35,7 @@ http.createServer(
 
           body = Buffer.concat(body).toString();
           body = JSON.parse(body);
-
+          console.log('into /webhook post' + body);
           // Xử lý req từ đây.
           if (body.object === 'page') {
 
