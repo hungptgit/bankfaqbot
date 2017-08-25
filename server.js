@@ -546,8 +546,10 @@ function kipalog(msg) {
 
 }
 
-app.set('port', process.env.PORT || 3002 || 8080);
-app.set('ip', process.env.IP || "127.0.0.1");
+//app.set('port', process.env.PORT || 3002 || 8080);
+app.set('port', 0);
+//app.set('ip', "process.env.IP" || "127.0.0.1");
+app.set('ip', "localhost");
 
 server.listen(app.get('port'), function () {
   console.log('Express server listening on %d, in %s mode', app.get('port'), app.get('env'));
