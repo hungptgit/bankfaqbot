@@ -1,5 +1,6 @@
 // # SimpleServer
 // A simple chat bot server
+'use strict';
 
 var logger = require('morgan');
 var http = require('http');
