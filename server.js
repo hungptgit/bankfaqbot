@@ -181,7 +181,8 @@ function wikibot(query, userid) {
       body = JSON.parse(body);
       //console.log('wiki response: ', body);  
       var pages = body.query.pages;
-      for (var i = 0 in pages) {
+      var i = 0;
+      for (i in pages) {
         var myelement = {
           title: "",
           subtitle: "",
@@ -200,7 +201,7 @@ function wikibot(query, userid) {
         myelement.subtitle = pages[i].extract.substr(0, 80).trim();
         myelement.buttons[1].url = "https://en.wikipedia.org/?curid=" + pages[i].pageid;
         
-        if (pages[i].extract != "") {
+        if (pages[i].extract !== "") {
             myelement.buttons[0].payload = pages[i].extract.substr(0, 1000).trim();
         }
         myTemplate.message.attachment.payload.elements.push(myelement);
@@ -230,7 +231,7 @@ function wikibot(query, userid) {
       console.log(body);
     });
   })
-};
+}
 
 // send rich message with kitten
 function ipayMessage(recipientId, text) {
@@ -260,7 +261,7 @@ function ipayMessage(recipientId, text) {
     };
 
     sendImgMessage(recipientId, message);
-};
+}
 
 
 // send rich message with kitten
@@ -291,7 +292,7 @@ function efastMessage(recipientId, text) {
     };
 
     sendImgMessage(recipientId, message);
-};
+}
 
 // generic function sending messages
 function sendImgMessage(recipientId, message) {
@@ -309,7 +310,7 @@ function sendImgMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-};
+}
 
 
 function kipalog(msg) {
