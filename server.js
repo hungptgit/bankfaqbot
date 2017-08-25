@@ -546,8 +546,7 @@ function kipalog(msg) {
 
 }
 
-app.set('port', 21279);
-//app.set('port', process.env.PORT || 3002 || 8080);
+app.set('port', process.env.PORT || 3002 || 8080);
 app.set('ip', process.env.IP || "127.0.0.1");
 
 server.listen(app.get('port'), function () {
