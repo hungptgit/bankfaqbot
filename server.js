@@ -10,7 +10,8 @@ var router = express();
 
 const matcher = require('./matcher');
 const weather = require('./weather');
-const {currentWeather, forecastWeather} = require('./parser');
+const currentWeather = require('./parser');
+const forecastWeather = require('./parser');
 
 
 var app = express();
@@ -53,31 +54,31 @@ app.post('/webhook', function(req, res) {
         kipalog(message);
         
         // If user send text
-      /*  
-      if (message.message && message.message.text) {
-          var text = message.message.text.toLowerCase().trim();
-            console.log(text);
-            //sendMessage(senderId, "Tui là bot đây: " + text);
-            text.indexOf('wiki') > -1
-            if (text.indexOf('wiki') > -1) {
-                wikibot(text.replace("wiki ", ""),senderId);
-            }
-            else if (text.indexOf('ipay') > -1 ) {
-                ipayMessage(senderId, text);
-            }
-            else if (text.indexOf('efast') > -1) {
-                efastMessage(senderId, text);
-            }
-            else {
-                sendHelp(senderId);
-            }
-        }
-        else if (message.postback) {
-           console.log('Received postback: ', JSON.stringify(message.postback));
-          // These are for chosing availibility
-          sendMessage(senderId, "Cảm ơn bạn nhiều :)");
-          
-        }
+        /*  
+        if (message.message && message.message.text) {
+            var text = message.message.text.toLowerCase().trim();
+              console.log(text);
+              //sendMessage(senderId, "Tui là bot đây: " + text);
+              text.indexOf('wiki') > -1
+              if (text.indexOf('wiki') > -1) {
+                  wikibot(text.replace("wiki ", ""),senderId);
+              }
+              else if (text.indexOf('ipay') > -1 ) {
+                  ipayMessage(senderId, text);
+              }
+              else if (text.indexOf('efast') > -1) {
+                  efastMessage(senderId, text);
+              }
+              else {
+                  sendHelp(senderId);
+              }
+          }
+          else if (message.postback) {
+             console.log('Received postback: ', JSON.stringify(message.postback));
+            // These are for chosing availibility
+            sendMessage(senderId, "Cảm ơn bạn nhiều :)");
+
+          }
         */
     } 
     
