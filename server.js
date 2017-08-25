@@ -1,5 +1,3 @@
-// # SimpleServer
-// A simple chat bot server
 'use strict';
 
 var logger = require('morgan');
@@ -145,7 +143,7 @@ function sendHelp(id) {
       console.log(error.message);
     }
   });
-};
+}
 
 
 function wikibot(query, userid) {
@@ -181,7 +179,8 @@ function wikibot(query, userid) {
       body = JSON.parse(body);
       //console.log('wiki response: ', body);  
       var pages = body.query.pages;
-      for (var i = 0 in pages) {
+      var i = 0;
+      for (i in pages) {
         var myelement = {
           title: "",
           subtitle: "",
