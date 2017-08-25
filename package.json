@@ -13,9 +13,11 @@
     "express": "~3.2.4",
     "morgan": "^1.7.0",
     "request": "^2.72.0",
-    "apiai":"^3.0.3",
     "config": "^1.21.0",
-    "cheerio": "latest"
+    "yql": "1.0.2",
+    "colors": "1.1.2",
+    "moment": "2.13.0",
+    "xregexp": "3.1.1"
   },
    "engines": {
     "node": "4.1.1"

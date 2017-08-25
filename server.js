@@ -1,14 +1,16 @@
 // # SimpleServer
 // A simple chat bot server
+
 var logger = require('morgan');
 var http = require('http');
 var bodyParser = require('body-parser');
 var express = require('express');
 var router = express();
 
-var fbbot = require('./fbbot.js').fbbot;
-var bot = new fbbot();
-bot.createGetStartedBtn('GET_STARTED_BUTTON');
+const matcher = require('./matcher');
+const weather = require('./weather');
+const {currentWeather, forecastWeather} = require('./parser');
+
 
 var app = express();
 app.use(logger('dev'));
@@ -16,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
 var server = http.createServer(app);
 var request = require("request");
 
@@ -394,10 +397,10 @@ function kipalog(msg) {
     if (ref) {
       switch (ref) {
         case 'FB_MAIN_WEB_BTN':
-          bot.sendMessage(reqId, defaultRes);
+          sendMessage(reqId, defaultRes);
           break;
         default:
-          bot.sendMessage(reqId, defaultRes);
+          sendMessage(reqId, defaultRes);
       }
     }
 
@@ -446,7 +449,7 @@ function kipalog(msg) {
               break;
             default:
               setTimeout(() => {
-                bot.sendMessage(reqId, defaultRes)
+                sendMessage(reqId, defaultRes)
               }, 700);
           }
         }
@@ -457,6 +460,43 @@ function kipalog(msg) {
     //Xử lý text
     switch (msgText) {
       case 'text':
+        matcher(msgText, data => {
+            switch(data.intent) {
+              case 'Hello':
+                console.log(`${data.entities.greeting} to you too!`);
+                break;
+              case 'Exit':
+                console.log("Have a great day!");
+                break;
+              case 'CurrentWeather':
+                console.log("Let me check...");
+                // get weather data from an API
+                weather(data.entities.city, 'current')
+                  .then(response => {
+                    let parseResult = currentWeather(response);
+                    console.log(parseResult);
+                  })
+                  .catch(error => {
+                    console.log("There seems to be a problem connecting to the Weather service!");
+                  });
+                break;
+              case 'WeatherForecast':
+                console.log("Let me check...");
+                // get weather data from an API
+                weather(data.entities.city)
+                  .then(response => {
+                    let parseResult = forecastWeather(response, data.entities);
+                    console.log(parseResult);
+                  })
+                  .catch(error => {
+                    console.log("There seems to be a problem connecting to the Weather service!");
+                  });
+                break;
+              default: {
+                console.log("I don't know what you mean :(");
+              }
+            }
+          });
         sendMessage(reqId, defaultText);
         break;
       case 'generic':
@@ -468,15 +508,13 @@ function kipalog(msg) {
       case 'quick_reply':
         sendMessage(reqId, defaultQR);
         break;
- 
-      default:
-        sendMessage(reqId, defaultRes);
+      //
+      default: 
+        console.log("I don't know what you mean :(");
     }
-
+    
     return;
-
   } else if (msg.delivery) {
-
     console.log('deli');
 
   }
