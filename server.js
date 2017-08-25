@@ -181,8 +181,7 @@ function wikibot(query, userid) {
       body = JSON.parse(body);
       //console.log('wiki response: ', body);  
       var pages = body.query.pages;
-      var i = 0;
-      for (i in pages) {
+      for (var i = 0 in pages) {
         var myelement = {
           title: "",
           subtitle: "",
@@ -548,7 +547,8 @@ function kipalog(msg) {
 
 }
 
-app.set('port', process.env.PORT || 3002 || 8080);
+app.set('port', 21279);
+//app.set('port', process.env.PORT || 3002 || 8080);
 app.set('ip', process.env.IP || "127.0.0.1");
 
 server.listen(app.get('port'), function () {
