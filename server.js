@@ -24,12 +24,14 @@ const {currentWeather, forecastWeather} = require('./parser');
 
 // Register the webhooks
 server.get('/', (req, res, next) => {
+	console.log("receive get:" );
 	f.registerHook(req, res);
 	return next();
 });
 
 // Receive all incoming messages
 server.post('/', (req, res, next) => {
+	console.log("receive post:" );
 	f.incoming(req, res, msg => {
 		// Process messages
 		f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
