@@ -60,6 +60,7 @@ class FBeamer {
 						timeOfMessage: msgEvent.timestamp,
 						message: msgEvent.message
 					}
+					console.log("incomming:" + msgEvent.message);
 					cb(messageObj);
 				});
 			});
