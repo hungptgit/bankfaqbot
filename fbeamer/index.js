@@ -9,6 +9,8 @@ class FBeamer {
 			} else {
 				this.PAGE_ACCESS_TOKEN = config.PAGE_ACCESS_TOKEN;
 				this.VERIFY_TOKEN = config.VERIFY_TOKEN;
+				console.log(this.PAGE_ACCESS_TOKEN);
+				console.log(this.VERIFY_TOKEN);
 			}
 		} catch(e) {
 			console.log(e);
