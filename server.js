@@ -32,8 +32,8 @@ server.get('/', (req, res, next) => {
 server.post('/', (req, res, next) => {
 	f.incoming(req, res, msg => {
 		// Process messages
-		// f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
-		// f.img(msg.sender, "http://www.stickees.com/files/food/sweet/3543-icecream-cone-sticker.png");
+		f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
+		f.img(msg.sender, "http://www.stickees.com/files/food/sweet/3543-icecream-cone-sticker.png");
 		if(msg.message.text) {
 			// If a text message is received
 			matcher(msg.message.text, data => {
