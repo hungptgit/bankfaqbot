@@ -18,7 +18,7 @@ class FBeamer {
 	}
 
 	registerHook(req, res) {
-		console.log("Registering webhook...");
+		//console.log("Registering webhook...");
 		// If req.query.hub.mode is 'subscribe'
 		// and if req.query.hub.verify_token is the same as this.VERIFY_TOKEN
 		// then send back an HTTP status 200 and req.query.hub.challenge
@@ -50,7 +50,7 @@ class FBeamer {
 	}
 
 	incoming(req, res, cb) {
-		console.log("Incomming message...");
+		//console.log("Incomming message...");
 		// Extract the body of the POST request
 		let data = req.body;
 		if(data.object === 'page') {

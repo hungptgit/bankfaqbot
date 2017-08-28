@@ -31,11 +31,11 @@ server.get('/', (req, res, next) => {
 
 // Receive all incoming messages
 server.post('/', (req, res, next) => {
-	console.log("receive post:" );
+	//console.log("receive post:" );
 	f.incoming(req, res, msg => {
 		// Process messages
-		f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
-		f.img(msg.sender, "http://www.stickees.com/files/food/sweet/3543-icecream-cone-sticker.png");
+		//f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
+		//f.img(msg.sender, "http://www.stickees.com/files/food/sweet/3543-icecream-cone-sticker.png");
 		if(msg.message.text) {
 			// If a text message is received
 			matcher(msg.message.text, data => {
