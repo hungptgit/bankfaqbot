@@ -85,7 +85,7 @@ class FBeamer {
 						timeOfMessage: msgEvent.timestamp,
 						message: msgEvent.message
 					}
-					console.log("incomming:" + msgEvent.message);
+					console.log("incomming:" + JSON.stringify(req.body));
 					cb(messageObj);
 				});
 			});
