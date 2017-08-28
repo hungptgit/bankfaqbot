@@ -9,8 +9,8 @@ class FBeamer {
 			} else {
 				this.PAGE_ACCESS_TOKEN = config.PAGE_ACCESS_TOKEN;
 				this.VERIFY_TOKEN = config.VERIFY_TOKEN;
-				console.log(this.PAGE_ACCESS_TOKEN);
-				console.log(this.VERIFY_TOKEN);
+				//console.log(this.PAGE_ACCESS_TOKEN);
+				//console.log(this.VERIFY_TOKEN);
 			}
 		} catch(e) {
 			console.log(e);
@@ -18,6 +18,7 @@ class FBeamer {
 	}
 
 	registerHook(req, res) {
+		console.log("Registering webhook...");
 		// If req.query.hub.mode is 'subscribe'
 		// and if req.query.hub.verify_token is the same as this.VERIFY_TOKEN
 		// then send back an HTTP status 200 and req.query.hub.challenge
@@ -49,6 +50,7 @@ class FBeamer {
 	}
 
 	incoming(req, res, cb) {
+		console.log("Incomming message...");
 		// Extract the body of the POST request
 		let data = req.body;
 		if(data.object === 'page') {
