@@ -5,11 +5,12 @@ const crypto = require('crypto');
 class FBeamer {
 	constructor(config) {
 		try {
-			if(!config || config.PAGE_ACCESS_TOKEN === undefined || config.VERIFY_TOKEN === undefined) {
+			if(!config || config.PAGE_ACCESS_TOKEN === undefined || config.VERIFY_TOKEN === undefined || config.APP_SECRET === undefined) {
 				throw new Error("Unable to access tokens!");
 			} else {
 				this.PAGE_ACCESS_TOKEN = config.PAGE_ACCESS_TOKEN;
 				this.VERIFY_TOKEN = config.VERIFY_TOKEN;
+				this.APP_SECRET = config.APP_SECRET;
 				//console.log(this.PAGE_ACCESS_TOKEN);
 				//console.log(this.VERIFY_TOKEN);
 			}
