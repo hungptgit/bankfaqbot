@@ -8,13 +8,14 @@ const PORT = process.env.PORT || 3000;
 
 server.use(Restify.jsonp());
 server.use(Restify.bodyParser());
+server.use((req, res, next) => f.verifySignature(req, res, next));
 
 // Tokens
 const config = require('./config');
 
 // FBeamer
 const FBeamer = require('./fbeamer');
-const f = new FBeamer(config);
+const f = new FBeamer(config.FB);
 
 // Vanilla
 const matcher = require('./matcher');
@@ -24,7 +25,7 @@ const {currentWeather, forecastWeather} = require('./parser');
 
 // Register the webhooks
 server.get('/', (req, res, next) => {
-	console.log("receive get:" );
+	//console.log("receive get:" );
 	f.registerHook(req, res);
 	return next();
 });
@@ -78,4 +79,4 @@ server.post('/', (req, res, next) => {
 // Subscribe
 f.subscribe();
 
-server.listen(PORT, () => console.log(`Vanilla running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Chi running on port ${PORT}`));

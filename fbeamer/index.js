@@ -1,5 +1,6 @@
 'use strict';
 const request = require('request');
+const crypto = require('crypto');
 
 class FBeamer {
 	constructor(config) {
@@ -33,6 +34,26 @@ class FBeamer {
 		}
 	}
 
+	verifySignature(req, res, next) {
+		if(req.method === 'POST') {
+			let signature = req.headers['x-hub-signature'];
+			try {
+				if(!signature) {
+					throw new Error("Signature missing!");
+				} else {
+					let hash = crypto.createHmac('sha1', this.APP_SECRET).update(JSON.stringify(req.body)).digest('hex');
+					if(hash !== signature.split("=")[1]) {
+						throw new Error("Invalid signature");
+					}
+				}
+			} catch(e) {
+				res.send(500, e);
+			}
+		}
+
+		return next();
+	}
+	
 	subscribe() {
 		request({
 			uri: 'https://graph.facebook.com/v2.6/me/subscribed_apps',
