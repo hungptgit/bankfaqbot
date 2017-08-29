@@ -17,6 +17,12 @@ const config = require('./config');
 const FBeamer = require('./fbeamer');
 const f = new FBeamer(config.FB);
 
+// Wit.ai
+const Wit = require('node-wit').Wit;
+const wit = new Wit({
+	accessToken: config.WIT_ACCESS_TOKEN
+});
+
 // Vanilla
 const matcher = require('./matcher');
 const weather = require('./weather');
@@ -34,9 +40,32 @@ server.get('/', (req, res, next) => {
 server.post('/', (req, res, next) => {
 	//console.log("receive post:" );
 	f.incoming(req, res, msg => {
+		
+		// Process messages
+		const {
+			message,
+			sender
+		} = msg;
+
+		if(message.text) {
+			// If a text message is received
+			// f.txt(sender, `You just said ${message.text}`);
+
+			// Wit's Message API
+			wit.message(message.text, {})
+				
+				.then(response => console.log(response.entities))
+				.catch(error => {
+					console.log(error);
+					f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
+				});
+		}
+		
 		// Process messages
 		//f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
 		//f.img(msg.sender, "http://www.stickees.com/files/food/sweet/3543-icecream-cone-sticker.png");
+		
+		/*
 		if(msg.message.text) {
 			// If a text message is received
 			matcher(msg.message.text, data => {
@@ -72,6 +101,7 @@ server.post('/', (req, res, next) => {
 				}
 			});
 		}
+		*/
 	});
 	return next();
 });
