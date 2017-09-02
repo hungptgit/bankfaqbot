@@ -5,6 +5,9 @@ const server = Restify.createServer({
 	name: 'VTBMessenger'
 });
 const PORT = process.env.PORT || 3000;
+// FBeamer
+const FBeamer = require('./fbeamer');
+const f = new FBeamer(config.FB);
 
 server.use(Restify.jsonp());
 server.use(Restify.bodyParser());
@@ -19,9 +22,6 @@ const config = require('./config');
 // WIT Actions
 //const actions = require('./actions')(session, f, agenda);
 
-// FBeamer
-const FBeamer = require('./fbeamer');
-const f = new FBeamer(config.FB);
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -103,7 +103,7 @@ agenda.on('ready', () => {
 				//let sessionId = session.init(sender);
 				//let {context} = session.get(sessionId);
 				let messageTxt = postback ? postback.payload.split(":")[1] : message.text;
-				
+			
 				
 				// Wit's Message API
 				wit.message(messageTxt).then(({entities}) => {
@@ -144,7 +144,6 @@ f.showPersistent([
 		payload: "menu:Show my reminders"
 	}
 ]);
-
 
 // Subscribe
 f.subscribe();
