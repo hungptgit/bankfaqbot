@@ -143,7 +143,17 @@ f.showPersistent([
 		type: "postback",
 		title: "My Reminders",
 		payload: "menu:Show my reminders"
-	}
+	},
+	{
+      "type":"postback",
+      "title":"Xem so du",
+      "payload":"menu:Xem so du hien tai"
+    },
+    {
+      "type":"web_url",
+      "title":"Dich vu khac",
+      "url":"http://vietinbank.vn/"
+    }
 ]);
 
 // Subscribe
