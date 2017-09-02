@@ -114,7 +114,7 @@ agenda.on('ready', () => {
 
 				console.log('messageTxt:' + messageTxt);
 				// Wit's Message API
-				wit.message(messageTxt, {})
+				wit.message(messageTxt)
 					.then(({
 						entities
 					}) => {
