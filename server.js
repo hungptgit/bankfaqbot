@@ -107,30 +107,35 @@ agenda.on('ready', () => {
 			
 				console.log(messageTxt);
 				// Wit's Message API
-				wit.message(messageTxt).then(({entities}) => {
-					const intent = firstEntity(entities, 'intent');
-					if (!intent) {
-						// use app data, or a previous context to decide how to 
-						console.log('Not found intent');
-						f.txt('Yeu cau cua ban da duoc ghi nhan. Thanks');
-						return;
-					}
-					
-					switch (intent.value) {
-						case 'appt_make':
-							console.log('🤖 > Okay, making an appointment');
-							break;
-						case 'appt_show':
-							console.log('🤖 > Okay, showing appointments');
-							break;
-						case 'truyvantaikhoan':
-							f.txt('Okey! Tai khoan cua ban co 100000 VND');
-							break;	
-						default:
-							console.log(`🤖  ${intent.value}`);
-							f.txt('Okey! Ban muon thuc hien ${intent.value}');
-							break;
-					}
+				wit.message(messageTxt, {})
+					.then(({entities}) => {
+						const intent = firstEntity(entities, 'intent');
+						if (!intent) {
+							// use app data, or a previous context to decide how to 
+							console.log('Not found intent');
+							f.txt(sender,'Yeu cau cua ban da duoc ghi nhan. Thanks');
+							return;
+						}
+						
+						switch (intent.value) {
+							case 'appt_make':
+								console.log('🤖 > Okay, making an appointment');
+								break;
+							case 'appt_show':
+								console.log('🤖 > Okay, showing appointments');
+								break;
+							case 'truyvantaikhoan':
+								f.txt(sender,'Okey! Tai khoan cua ban co 100000 VND');
+								break;	
+							default:
+								console.log(`🤖  ${intent.value}`);
+								f.txt(sender,'Okey! Ban muon thuc hien ${intent.value}');
+								break;
+						}
+				})
+				.catch(error => {
+					console.log(error);
+					f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
 				});
 				
 				
