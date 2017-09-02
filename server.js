@@ -105,14 +105,17 @@ agenda.on('ready', () => {
 				//let {context} = session.get(sessionId);
 				let messageTxt = postback ? postback.payload.split(":")[1] : message.text;
 			
-				
+				console.log(messageTxt);
 				// Wit's Message API
 				wit.message(messageTxt).then(({entities}) => {
 					const intent = firstEntity(entities, 'intent');
 					if (!intent) {
-						// use app data, or a previous context to decide how to fallback
+						// use app data, or a previous context to decide how to 
+						console.log('Not found intent');
+						f.txt('Yeu cau cua ban da duoc ghi nhan. Thanks');
 						return;
 					}
+					
 					switch (intent.value) {
 						case 'appt_make':
 							console.log('🤖 > Okay, making an appointment');
@@ -148,6 +151,11 @@ f.showPersistent([
       "type":"postback",
       "title":"Xem so du",
       "payload":"menu:Xem so du hien tai"
+    },
+	{
+      "type":"postback",
+      "title":"Chuyen khoan",
+      "payload":"menu:Chuyen khoan trong he thong"
     },
     {
       "type":"web_url",
