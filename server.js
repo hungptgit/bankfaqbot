@@ -34,7 +34,7 @@ const wit = new Wit({
 const intents = require('./intents');
 
 const {
-  firstEntity,
+	firstEntity,
 } = require('./utils');
 
 
@@ -86,38 +86,47 @@ agenda.on('ready', () => {
 				message
 			} = msg;
 
-			if(postback && !postback.payload.includes("menu")) {
-					const {
-						schedule,
-						fbid,
-						id
-					} = JSON.parse(postback.payload);
+			
+			if (postback && !postback.payload.includes("menu")) {
+				console.log(postback.payload);
+				f.txt(sender, 'Da nhan duoc Yeu cau: ' + postback.payload);
+				
+				/*
+				const {
+					schedule,
+					fbid,
+					id
+				} = JSON.parse(postback.payload);
 
-					agenda.now(schedule, {
-						fbid,
-						id
-					});
+				agenda.now(schedule, {
+					fbid,
+					id
+				});
+				*/
 			}
+			
 
-			if((message && message.text) || (postback && postback.payload.includes("menu"))) {
+			if ((message && message.text) || (postback && postback.payload.includes("menu"))) {
 				// Process the message here
 				//let sessionId = session.init(sender);
 				//let {context} = session.get(sessionId);
 				let messageTxt = postback ? postback.payload.split(":")[1] : message.text;
-			
-				console.log(messageTxt);
+
+				console.log('messageTxt:' + messageTxt);
 				// Wit's Message API
 				wit.message(messageTxt, {})
-					.then(({entities}) => {
-					  console.log('WIT resp:' + entities);
+					.then(({
+						entities
+					}) => {
+						console.log('WIT resp:' + entities);
 						const intent = firstEntity(entities, 'intent');
 						if (!intent) {
 							// use app data, or a previous context to decide how to 
 							console.log('Not found intent');
-							f.txt(sender,'Yeu cau cua ban da duoc ghi nhan. Thanks');
+							f.txt(sender, 'Yeu cau cua ban da duoc ghi nhan. Thanks');
 							return;
 						}
-						
+
 						switch (intent.value) {
 							case 'appt_make':
 								console.log('🤖 > Okay, making an appointment');
@@ -126,20 +135,20 @@ agenda.on('ready', () => {
 								console.log('🤖 > Okay, showing appointments');
 								break;
 							case 'truyvantaikhoan':
-								f.txt(sender,'Okey! Tai khoan cua ban co 100000 VND');
-								break;	
+								f.txt(sender, 'Okey! Tai khoan cua ban co 100000 VND');
+								break;
 							default:
 								console.log(`🤖  ${intent.value}`);
-								f.txt(sender,'Okey! Ban muon thuc hien ${intent.value}');
+								f.txt(sender, 'Okey! Ban muon thuc hien ${intent.value}');
 								break;
 						}
-				})
-				.catch(error => {
-					console.log(error);
-					f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
-				});
-				
-				
+					})
+					.catch(error => {
+						console.log(error);
+						f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
+					});
+
+
 			}
 
 		});
@@ -151,22 +160,35 @@ agenda.on('ready', () => {
 });
 
 // Persistent Menu
-f.showPersistent([
+f.showPersistent([{
+		"type": "postback",
+		"title": "Xem so du",
+		"payload": "menu:Xem so du hien tai"
+	},
 	{
-      "type":"postback",
-      "title":"Xem so du",
-      "payload":"menu:Xem so du hien tai"
-    },
+		"type": "postback",
+		"title": "Chuyen khoan",
+		"payload": "menu:Chuyen khoan trong he thong"
+	},
 	{
-      "type":"postback",
-      "title":"Chuyen khoan",
-      "payload":"menu:Chuyen khoan trong he thong"
-    },
-    {
-      "type":"web_url",
-      "title":"Dich vu khac",
-      "url":"http://vietinbank.vn/"
-    }
+		"title": "Dich vu khac",
+		"type": "nested",
+		"call_to_actions": [{
+				"title": "Gui tiet kiem",
+				"type": "postback",
+				"payload": "HELP_PAYLOAD"
+			},
+			{
+				"title": "Thanh toan hoa don",
+				"type": "postback",
+				"payload": "CONTACT_INFO_PAYLOAD"
+			}
+		]
+	}, {
+		"type": "web_url",
+		"title": "Ve Vietinbank",
+		"url": "http://vietinbank.vn/"
+	}
 ]);
 
 // Subscribe
