@@ -70,7 +70,25 @@ class FBeamer {
 			}
 		});
 	}
-
+	
+	getProfile(id) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: `https://graph.facebook.com/v2.7/${id}`,
+				qs: {
+					access_token: this.PAGE_ACCESS_TOKEN
+				},
+				method: 'GET'
+			}, (error, response, body) => {
+				if(!error && response.statusCode === 200) {
+					resolve(JSON.parse(body));
+				} else {
+					reject(error);
+				}
+			});
+		});
+	}
+	
 	incoming(req, res, cb) {
 		//console.log("Incomming message...");
 		// Extract the body of the POST request
@@ -115,6 +133,28 @@ class FBeamer {
 		});
 	}
 
+	// Show Persistent Menu
+	showPersistent(payload) {
+		let obj = {
+			setting_type: "call_to_actions",
+			thread_state: "existing_thread",
+			call_to_actions: payload
+		}
+
+		request({
+			uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+			qs: {
+				access_token: this.PAGE_ACCESS_TOKEN
+			},
+			method: 'POST',
+			json: obj
+		}, (error, response) => {
+			if(error) {
+				console.log(error);
+			}
+		});
+	}
+	
 	// Send a text message
 	txt(id, text) {
 		let obj = {
@@ -143,6 +183,44 @@ class FBeamer {
 						url
 					}
 				}
+			}
+		}
+
+		this.sendMessage(obj)
+			.catch(error => console.log(error));
+	}
+	
+	// A button
+	btn(id, data) {
+		let obj = {
+			recipient: {
+				id
+			},
+			message: {
+				attachment: {
+					type: 'template',
+					payload: {
+						template_type: 'button',
+						text: data.text,
+						buttons: data.buttons
+					}
+				}
+			}
+		}
+
+		this.sendMessage(obj)
+			.catch(error => console.log(error));
+	}
+
+	// Quick Replies
+	quick(id, data) {
+		let obj = {
+			recipient: {
+				id
+			},
+			message: {
+				text: data.text,
+				quick_replies: data.buttons
 			}
 		}
 

@@ -5,6 +5,6 @@
   "VERIFY_TOKEN": "ma_xac_minh_cua_ban",
    "APP_SECRET": "d941eb0f3fd80a11d121d23702998378" 
 	},
-	"OMDB_API_KEY": "omdb-api-key"
+	"MONGO_URI": "mongodb://admin:Ab123456@ds119044.mlab.com:19044/vtbbot"
 }
 

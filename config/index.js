@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'production') {
 			VERIFY_TOKEN: process.env.VERIFY_TOKEN,
 			APP_SECRET: process.env.APP_SECRET
 		},
-		OMDB_API_KEY: process.env.OMDB_API_KEY
+		MONGO_URI: process.env.MONGOURI
 	}
 } else {
 	module.exports = require('./development.json');

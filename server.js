@@ -2,7 +2,7 @@
 // create an API server
 const Restify = require('restify');
 const server = Restify.createServer({
-	name: 'VanillaMessenger'
+	name: 'VTBMessenger'
 });
 const PORT = process.env.PORT || 3000;
 
@@ -10,8 +10,14 @@ server.use(Restify.jsonp());
 server.use(Restify.bodyParser());
 server.use((req, res, next) => f.verifySignature(req, res, next));
 
+// Agenda
+const agenda = require('./agenda')(f);
 // Tokens
 const config = require('./config');
+// Session
+//const session = require('./session');
+// WIT Actions
+//const actions = require('./actions')(session, f, agenda);
 
 // FBeamer
 const FBeamer = require('./fbeamer');
@@ -23,10 +29,12 @@ const wit = new Wit({
 	accessToken: config.WIT_ACCESS_TOKEN
 });
 
-// Vanilla
-const matcher = require('./matcher');
-const weather = require('./weather');
-const {currentWeather, forecastWeather} = require('./parser');
+// OMDB
+const intents = require('./intents');
+
+const {
+  firstEntity,
+} = require('./utils');
 
 
 // Register the webhooks
@@ -37,6 +45,7 @@ server.get('/', (req, res, next) => {
 });
 
 // Receive all incoming messages
+/*
 server.post('/', (req, res, next) => {
 	//console.log("receive post:" );
 	f.incoming(req, res, msg => {
@@ -61,50 +70,81 @@ server.post('/', (req, res, next) => {
 				});
 		}
 		
-		// Process messages
-		//f.txt(msg.sender, `Hey, you just said ${msg.message.text}`);
-		//f.img(msg.sender, "http://www.stickees.com/files/food/sweet/3543-icecream-cone-sticker.png");
 		
-		/*
-		if(msg.message.text) {
-			// If a text message is received
-			matcher(msg.message.text, data => {
-				switch(data.intent) {
-					case 'Hello':
-						f.txt(msg.sender, `${data.entities.greeting} to you too!`);
-						break;
-					case 'CurrentWeather':
-						weather(data.entities.city, 'current')
-							.then(response => {
-								let parseResult = currentWeather(response);
-								f.txt(msg.sender, parseResult);
-							})
-							.catch(error => {
-								console.log("There seems to be a problem connecting to the weather service");
-								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
-							});
-						break;
-					case 'WeatherForecast':
-						weather(data.entities.city)
-							.then(response => {
-								let parseResult = forecastWeather(response, data.entities);
-								f.txt(msg.sender, parseResult);
-							})
-							.catch(error => {
-								console.log("There seems to be a problem connecting to the weather service");
-								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
-							});
-						break;
-					default: {
-						f.txt(msg.sender, "Gosh! I don't know what you mean :(");
-					}
-				}
-			});
-		}
-		*/
 	});
 	return next();
 });
+*/
+agenda.on('ready', () => {
+	// Handle incoming
+	server.post('/', (req, res, next) => {
+		f.incoming(req, res, msg => {
+			const {
+				sender,
+				postback,
+				message
+			} = msg;
+
+			if(postback && !postback.payload.includes("menu")) {
+					const {
+						schedule,
+						fbid,
+						id
+					} = JSON.parse(postback.payload);
+
+					agenda.now(schedule, {
+						fbid,
+						id
+					});
+			}
+
+			if((message && message.text) || (postback && postback.payload.includes("menu"))) {
+				// Process the message here
+				//let sessionId = session.init(sender);
+				//let {context} = session.get(sessionId);
+				let messageTxt = postback ? postback.payload.split(":")[1] : message.text;
+				
+				
+				// Wit's Message API
+				wit.message(messageTxt).then(({entities}) => {
+					const intent = firstEntity(entities, 'intent');
+					if (!intent) {
+						// use app data, or a previous context to decide how to fallback
+						return;
+					}
+					switch (intent.value) {
+						case 'appt_make':
+							console.log('🤖 > Okay, making an appointment');
+							break;
+						case 'appt_show':
+							console.log('🤖 > Okay, showing appointments');
+							break;
+						default:
+							console.log(`🤖  ${intent.value}`);
+							break;
+					}
+				});
+				
+				
+			}
+
+		});
+
+		return next();
+	});
+
+	agenda.start();
+});
+
+// Persistent Menu
+f.showPersistent([
+	{
+		type: "postback",
+		title: "My Reminders",
+		payload: "menu:Show my reminders"
+	}
+]);
+
 
 // Subscribe
 f.subscribe();
