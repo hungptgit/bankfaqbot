@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'production') {
 			VERIFY_TOKEN: process.env.VERIFY_TOKEN,
 			APP_SECRET: process.env.APP_SECRET
 		},
-		MONGO_URI: process.env.MONGOURI
+		MONGO_URI: process.env.MONGO_URI
 	}
 } else {
 	module.exports = require('./development.json');
