@@ -109,6 +109,7 @@ agenda.on('ready', () => {
 				// Wit's Message API
 				wit.message(messageTxt, {})
 					.then(({entities}) => {
+					  console.log('WIT resp:' + entities);
 						const intent = firstEntity(entities, 'intent');
 						if (!intent) {
 							// use app data, or a previous context to decide how to 
@@ -151,11 +152,6 @@ agenda.on('ready', () => {
 
 // Persistent Menu
 f.showPersistent([
-	{
-		type: "postback",
-		title: "My Reminders",
-		payload: "menu:Show my reminders"
-	},
 	{
       "type":"postback",
       "title":"Xem so du",
