@@ -118,7 +118,7 @@ agenda.on('ready', () => {
 					.then(({
 						entities
 					}) => {
-						console.log('WIT resp:' + entities);
+						console.log('WIT resp:' + JSON.stringify(entities));
 						const intent = firstEntity(entities, 'intent');
 						if (!intent) {
 							// use app data, or a previous context to decide how to 
