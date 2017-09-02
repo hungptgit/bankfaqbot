@@ -1,5 +1,6 @@
 'use strict';
 // create an API server
+const config = require('./config');
 const Restify = require('restify');
 const server = Restify.createServer({
 	name: 'VTBMessenger'
@@ -16,7 +17,7 @@ server.use((req, res, next) => f.verifySignature(req, res, next));
 // Agenda
 const agenda = require('./agenda')(f);
 // Tokens
-const config = require('./config');
+
 // Session
 //const session = require('./session');
 // WIT Actions
