@@ -84,7 +84,7 @@ agenda.on('ready', () => {
 						if (!intent) {
 							// use app data, or a previous context to decide how to 
 							console.log('Not found intent');
-							f.txt(sender, 'Yeu cau cua ban da duoc ghi nhan. Thanks');
+							//f.txt(sender, 'Yeu cau cua ban da duoc ghi nhan. Thanks');
 							return;
 						}
 
