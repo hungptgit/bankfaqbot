@@ -50,7 +50,7 @@ agenda.on('ready', () => {
 			} = msg;
 
 			//console.log(postback.payload);
-			if (postback) {
+			if (postback && !postback.payload.includes("menu")) {
 				console.log('postback: ' + JSON.stringify(postback.payload));
 				f.txt(sender, 'Da nhan duoc Yeu cau: ' + postback.payload);
 				
