@@ -16,13 +16,6 @@ server.use((req, res, next) => f.verifySignature(req, res, next));
 
 // Agenda
 const agenda = require('./agenda')(f);
-// Tokens
-
-// Session
-//const session = require('./session');
-// WIT Actions
-//const actions = require('./actions')(session, f, agenda);
-
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -45,37 +38,7 @@ server.get('/', (req, res, next) => {
 	return next();
 });
 
-// Receive all incoming messages
-/*
-server.post('/', (req, res, next) => {
-	//console.log("receive post:" );
-	f.incoming(req, res, msg => {
-		
-		// Process messages
-		const {
-			message,
-			sender
-		} = msg;
 
-		if(message.text) {
-			// If a text message is received
-			// f.txt(sender, `You just said ${message.text}`);
-
-			// Wit's Message API
-			wit.message(message.text, {})
-				
-				.then(response => console.log(response.entities))
-				.catch(error => {
-					console.log(error);
-					f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
-				});
-		}
-		
-		
-	});
-	return next();
-});
-*/
 agenda.on('ready', () => {
 	// Handle incoming
 	server.post('/', (req, res, next) => {
@@ -86,9 +49,9 @@ agenda.on('ready', () => {
 				message
 			} = msg;
 
-			
-			if (postback && !postback.payload.includes("menu")) {
-				console.log(postback.payload);
+			//console.log(postback.payload);
+			if (postback) {
+				console.log('postback: ' + JSON.stringify(postback.payload));
 				f.txt(sender, 'Da nhan duoc Yeu cau: ' + postback.payload);
 				
 				/*
@@ -108,8 +71,6 @@ agenda.on('ready', () => {
 
 			if ((message && message.text) || (postback && postback.payload.includes("menu"))) {
 				// Process the message here
-				//let sessionId = session.init(sender);
-				//let {context} = session.get(sessionId);
 				let messageTxt = postback ? postback.payload.split(":")[1] : message.text;
 
 				console.log('messageTxt:' + messageTxt);
@@ -147,10 +108,7 @@ agenda.on('ready', () => {
 						console.log(error);
 						f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
 					});
-
-
 			}
-
 		});
 
 		return next();
@@ -162,31 +120,32 @@ agenda.on('ready', () => {
 // Persistent Menu
 f.showPersistent([{
 		"type": "postback",
-		"title": "Xem so du",
-		"payload": "menu:Xem so du hien tai"
+		"title": "Xem số dư",
+		"payload": "menu:INQ_BALANCE_PAYLOAD"
 	},
 	{
 		"type": "postback",
-		"title": "Chuyen khoan",
-		"payload": "menu:Chuyen khoan trong he thong"
+		"title": "Chuyển khoản",
+		"payload": "menu:XFER_PAYLOAD"
 	},
 	{
-		"title": "Dich vu khac",
 		"type": "nested",
+		"title": "Dịch vụ khác",
 		"call_to_actions": [{
-				"title": "Gui tiet kiem",
+				"title": "Thanh toán hoá đơn",
 				"type": "postback",
-				"payload": "HELP_PAYLOAD"
+				"payload": "menu:PAYMENT_PAYLOAD"
 			},
 			{
-				"title": "Thanh toan hoa don",
+				"title": "Gửi tiết kiệm",
 				"type": "postback",
-				"payload": "CONTACT_INFO_PAYLOAD"
+				"payload": "menu:SAVING_PAYLOAD"
 			}
 		]
-	}, {
+	}, 
+	{
 		"type": "web_url",
-		"title": "Ve Vietinbank",
+		"title": "Về VietinBank",
 		"url": "http://vietinbank.vn/"
 	}
 ]);
