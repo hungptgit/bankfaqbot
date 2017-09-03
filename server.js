@@ -95,12 +95,15 @@ agenda.on('ready', () => {
 							case 'appt_show':
 								console.log('🤖 > Okay, showing appointments');
 								break;
+							/*
 							case 'truyvantaikhoan':
 								f.txt(sender, 'Okey! Tai khoan cua ban co 100000 VND');
 								break;
+							*/	
 							default:
 								console.log(`🤖  ${intent.value}`);
-								f.txt(sender, 'Okey! Ban muon thuc hien ${intent.value}');
+								f.txt(sender, 'Okey! Ban muon thuc hien '+ intent.value);
+								f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(entities));
 								break;
 						}
 					})
