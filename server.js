@@ -134,44 +134,95 @@ agenda.on('ready', () => {
 	agenda.start();
 });
 
-
+/*
+json:{
+"persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled":true,
+      "call_to_actions":[
+        {
+          "title":"My Account",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"Pay Bill",
+              "type":"postback",
+              "payload":"PAYBILL_PAYLOAD"
+            },
+            {
+              "title":"History",
+              "type":"postback",
+              "payload":"HISTORY_PAYLOAD"
+            },
+            {
+              "title":"Contact Info",
+              "type":"postback",
+              "payload":"CONTACT_INFO_PAYLOAD"
+            }
+          ]
+        },
+        {
+          "type":"web_url",
+          "title":"Latest News",
+          "url":"http://foxnews.com",
+          "webview_height_ratio":"full"
+        }
+      ]
+    },
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false
+    }
+    ]
+    }
+*/
 // Persistent Menu
 f.showPersistent([{
-		"type": "postback",
-		"title": "Xem số dư",
-		"payload": "PB_INQ_BALANCE_PAYLOAD"
-	},
-	{
-		"type": "postback",
-		"title": "Chuyển khoản",
-		"payload": "PB_XFER_PAYLOAD"
-	},
-	{
-		"type": "web_url",
-		"title": "Đăng ký dịch vụ",
-		"payload": "http://vietinbank.vn/"
-	},								
-	{
-		"type": "postback",
-		"title": "Thanh toán hoá đơn",
-		"payload": "PB_PAYMENT_PAYLOAD"
-	},
-	{
-		"type": "postback",
-		"title": "Gửi tiết kiệm",
-		"payload": "PB_SAVING_PAYLOAD"
-	},								
-	{
-		"type": "web_url",
-		"title": "Tỷ giá, lãi xuất",
-		"url": "http://vietinbank.vn/"
-	},								
-	{
-		"type": "web_url",
-		"title": "Khảo sát nhanh",
-		"url": "http://vietinbank.vn/"
-	}								
-]);
+	"locale":"default",
+  "composer_input_disabled":true,
+  "call_to_actions":[
+			{
+				"type": "postback",
+				"title": "Xem số dư",
+				"payload": "PB_INQ_BALANCE_PAYLOAD"
+			},
+			{
+				"type": "postback",
+				"title": "Chuyển khoản",
+				"payload": "PB_XFER_PAYLOAD"
+			},
+			{
+				"type": "web_url",
+				"title": "Đăng ký dịch vụ",
+				"payload": "http://vietinbank.vn/"
+			},								
+			{
+				"type": "postback",
+				"title": "Thanh toán hoá đơn",
+				"payload": "PB_PAYMENT_PAYLOAD"
+			},
+			{
+				"type": "postback",
+				"title": "Gửi tiết kiệm",
+				"payload": "PB_SAVING_PAYLOAD"
+			},								
+			{
+				"type": "web_url",
+				"title": "Tỷ giá, lãi xuất",
+				"url": "http://vietinbank.vn/"
+			},								
+			{
+				"type": "web_url",
+				"title": "Khảo sát nhanh",
+				"url": "http://vietinbank.vn/"
+			}								
+		]},
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false
+    }
+  ]);
 
 // Subscribe
 f.subscribe();

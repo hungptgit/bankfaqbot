@@ -145,12 +145,12 @@ class FBeamer {
 		console.log('showPersistent: ' + JSON.stringify(payload));
 		
 		request({
-			uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
 			qs: {
 				access_token: this.PAGE_ACCESS_TOKEN
 			},
 			method: 'POST',
-			json: obj
+			json: {"persistent_menu":obj}
 		}, (error, response) => {
 			if(error) {
 				console.log(error);
