@@ -50,9 +50,26 @@ agenda.on('ready', () => {
 			} = msg;
 
 			//console.log(postback.payload);
-			if (postback && !postback.payload.includes("menu")) {
-				console.log('postback: ' + JSON.stringify(postback.payload));
-				f.txt(sender, 'Da nhan duoc Yeu cau: ' + postback.payload);
+			if (postback && postback.payload) {
+				// Process the message here
+				let messageTxt = postback.payload;
+				switch(messageTxt) {
+					case 'PB_INQ_BALANCE_PAYLOAD':
+						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						break;	
+					case 'PB_XFER_PAYLOAD':
+						f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
+						break;
+					case 'PB_PAYMENT_PAYLOAD':
+						f.txt(sender, 'Ban muon thanh toan cho');
+						break;
+					case 'PB_SAVING_PAYLOAD':
+						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+						break;		
+					default:
+						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
+						break;	
+				}
 				
 				/*
 				const {
@@ -69,9 +86,9 @@ agenda.on('ready', () => {
 			}
 			
 
-			if ((message && message.text) || (postback && postback.payload.includes("menu"))) {
+			if (message && message.text) {
 				// Process the message here
-				let messageTxt = postback ? postback.payload.split(":")[1] : message.text;
+				let messageTxt = message.text;
 
 				console.log('messageTxt:' + messageTxt);
 				// Wit's Message API
@@ -89,17 +106,14 @@ agenda.on('ready', () => {
 						}
 
 						switch (intent.value) {
-							case 'appt_make':
-								console.log('🤖 > Okay, making an appointment');
-								break;
-							case 'appt_show':
-								console.log('🤖 > Okay, showing appointments');
-								break;
-							/*
+							
 							case 'truyvantaikhoan':
-								f.txt(sender, 'Okey! Tai khoan cua ban co 100000 VND');
+								f.txt(sender, 'Dang kiem tra thong tin tai khoan cua ban...');
+								f.txt(sender, 'Tai khoan 1010xxxxx3485 cua ban hien co so du kha dung 23,300,000 VND, trang thai tai khoan Active');
 								break;
-							*/	
+							case 'chuyenkhoan':
+								f.txt(sender, 'Chuyen ban toi trang nhap thong tin chuyen khoan...');
+								break;	
 							default:
 								console.log(`🤖  ${intent.value}`);
 								f.txt(sender, 'Okey! Ban muon thuc hien '+ intent.value);
@@ -125,23 +139,38 @@ agenda.on('ready', () => {
 f.showPersistent([{
 		"type": "postback",
 		"title": "Xem số dư",
-		"payload": "menu:INQ_BALANCE_PAYLOAD"
+		"payload": "PB_INQ_BALANCE_PAYLOAD"
 	},
 	{
 		"type": "postback",
 		"title": "Chuyển khoản",
-		"payload": "menu:XFER_PAYLOAD"
+		"payload": "PB_XFER_PAYLOAD"
 	},
+	{
+		"type": "web_url",
+		"title": "Đăng ký dịch vụ",
+		"payload": "http://vietinbank.vn/"
+	},								
 	{
 		"type": "postback",
 		"title": "Thanh toán hoá đơn",
-		"payload": "menu:PAYMENT_PAYLOAD"
+		"payload": "PB_PAYMENT_PAYLOAD"
+	},
+	{
+		"type": "postback",
+		"title": "Gửi tiết kiệm",
+		"payload": "PB_SAVING_PAYLOAD"
 	},								
 	{
 		"type": "web_url",
-		"title": "Về VietinBank",
+		"title": "Tỷ giá, lãi xuất",
 		"url": "http://vietinbank.vn/"
-	}
+	},								
+	{
+		"type": "web_url",
+		"title": "Khảo sát nhanh",
+		"url": "http://vietinbank.vn/"
+	}								
 ]);
 
 // Subscribe
