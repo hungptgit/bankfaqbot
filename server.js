@@ -120,6 +120,7 @@ agenda.on('ready', () => {
 	agenda.start();
 });
 
+
 // Persistent Menu
 f.showPersistent([{
 		"type": "postback",
@@ -132,20 +133,10 @@ f.showPersistent([{
 		"payload": "menu:XFER_PAYLOAD"
 	},
 	{
-		"type": "nested",
-		"title": "Dịch vụ khác",
-		"call_to_actions": [{
-				"title": "Thanh toán hoá đơn",
-				"type": "postback",
-				"payload": "menu:PAYMENT_PAYLOAD"
-			},
-			{
-				"title": "Gửi tiết kiệm",
-				"type": "postback",
-				"payload": "menu:SAVING_PAYLOAD"
-			}
-		]
-	}, 
+		"type": "postback",
+		"title": "Thanh toán hoá đơn",
+		"payload": "menu:PAYMENT_PAYLOAD"
+	},								
 	{
 		"type": "web_url",
 		"title": "Về VietinBank",
