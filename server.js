@@ -206,17 +206,33 @@ f.showPersistent([{
 				"type": "postback",
 				"title": "Gửi tiết kiệm",
 				"payload": "PB_SAVING_PAYLOAD"
-			},								
+			},
+			{
+				"title":"Dịch vụ khác",
+        "type":"nested",
+        "call_to_actions":[
+            {
+              "title":"Tính lãi vay",
+              "type":"postback",
+              "payload":"PB_CALC_LOAN_PAYLOAD"
+            },
+            {
+              "title":"Lấy xem mã dự thươngr",
+              "type":"postback",
+              "payload":"PB_PROMO_PAYLOAD"
+            }
+          ]
+			},	
 			{
 				"type": "web_url",
 				"title": "Tỷ giá, lãi xuất",
 				"url": "http://vietinbank.vn/"
-			},								
+			},	
 			{
 				"type": "web_url",
 				"title": "Khảo sát nhanh",
 				"url": "http://vietinbank.vn/"
-			}								
+			}	
 		]},
     {
       "locale":"zh_CN",
