@@ -90,7 +90,6 @@ class FBeamer {
 	}
 	
 	incoming(req, res, cb) {
-		//console.log("Incomming message...");
 		// Extract the body of the POST request
 		let data = req.body;
 		if(data.object === 'page') {
@@ -101,15 +100,18 @@ class FBeamer {
 					let messageObj = {
 						sender: msgEvent.sender.id,
 						timeOfMessage: msgEvent.timestamp,
-						message: msgEvent.message
+						message: msgEvent.message || undefined,
+						postback: msgEvent.postback || undefined
 					}
 					console.log("incomming:" + JSON.stringify(req.body));
+					
 					cb(messageObj);
 				});
 			});
 		}
 		res.send(200);
 	}
+
 
 	sendMessage(payload) {
 		return new Promise((resolve, reject) => {
