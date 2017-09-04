@@ -142,7 +142,8 @@ class FBeamer {
 			thread_state: "existing_thread",
 			call_to_actions: payload
 		}
-
+		console.log('showPersistent: ' + JSON.stringify(payload));
+		
 		request({
 			uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
 			qs: {
