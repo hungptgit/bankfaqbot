@@ -191,11 +191,6 @@ f.showPersistent([{
 				"type": "postback",
 				"title": "Chuyển khoản",
 				"payload": "PB_XFER_PAYLOAD"
-			},
-			{
-				"type": "web_url",
-				"title": "Đăng ký dịch vụ",
-				"payload": "http://vietinbank.vn/"
 			},								
 			{
 				"type": "postback",
@@ -220,7 +215,12 @@ f.showPersistent([{
               "title":"Lấy xem mã dự thươngr",
               "type":"postback",
               "payload":"PB_PROMO_PAYLOAD"
-            }
+            },
+						{
+							"type": "web_url",
+							"title": "Đăng ký dịch vụ",
+							"payload": "http://vietinbank.vn/"
+						}
           ]
 			},	
 			{
