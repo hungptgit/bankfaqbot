@@ -235,7 +235,7 @@ f.showPersistent([{
 			}	
 		]},
     {
-      "locale":"zh_CN",
+      "locale":"vi_VN",
       "composer_input_disabled":false
     }
   ]);
