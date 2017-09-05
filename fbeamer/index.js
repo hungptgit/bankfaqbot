@@ -104,12 +104,13 @@ class FBeamer {
 						postback: msgEvent.postback || undefined,
 						delivery: msgEvent.delivery || undefined
 					}
-					console.log("incomming:" + JSON.stringify(req.body));
+					//console.log("incomming:" + JSON.stringify(req.body));
 					
 					cb(messageObj);
 				});
 			});
 		}
+		console.log('incoming send res 200');
 		res.send(200);
 	}
 
