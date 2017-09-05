@@ -96,7 +96,7 @@ class FBeamer {
 			// Iterate through the page entry Array
 			data.entry.forEach(pageObj => {
 				// Iterate through the messaging Array
-				if(pageObj.messaging[0].message) {
+				if(!pageObj.messaging[0].message) {
 					pageObj.messaging.forEach(msgEvent => {
 						let messageObj = {
 							sender: msgEvent.sender.id,
@@ -111,7 +111,7 @@ class FBeamer {
 					});
 				}
 				else {
-					console.log("pageObj.messaging[0]:" + pageObj.messaging[0]);
+					console.log("pageObj.messaging[0]:" + JSON.stringify(pageObj.messaging[0]));
 				}
 			});
 		}
