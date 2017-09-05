@@ -71,12 +71,10 @@ server.get('/', (req, res, next) => {
 						vtb(messageTxt, 'current')
 							.then(response => {
 								f.txt(sender, response);
-								res.sendStatus(200);
 							})
 							.catch(error => {
 								console.log("There seems to be a problem connecting to the acct inq service");
 								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
-								res.sendStatus(200);
 							});
 						break;	
 					case 'menu:XFER_PAYLOAD':
