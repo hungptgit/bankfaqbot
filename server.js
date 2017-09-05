@@ -52,6 +52,7 @@ server.get('/', (req, res, next) => {
 			} = msg;
 			
 			if (delivery) {
+				console.log('delivery received...............:' + JSON.stringify(msg));
 				return;
 			}
 			
