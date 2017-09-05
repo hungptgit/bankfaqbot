@@ -150,7 +150,7 @@ class FBeamer {
 				access_token: this.PAGE_ACCESS_TOKEN
 			},
 			method: 'POST',
-			json: {"persistent_menu":obj}
+			json: {"persistent_menu":payload}
 		}, (error, response) => {
 			if(error) {
 				console.log(error);

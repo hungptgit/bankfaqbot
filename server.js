@@ -65,6 +65,9 @@ agenda.on('ready', () => {
 						break;
 					case 'PB_SAVING_PAYLOAD':
 						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+						break;
+					case 'GET_STARTED_PAYLOAD':
+						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
 						break;		
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
