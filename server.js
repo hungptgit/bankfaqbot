@@ -16,6 +16,7 @@ server.use((req, res, next) => f.verifySignature(req, res, next));
 
 // Agenda
 const agenda = require('./agenda')(f);
+const vtb = require('./vtb');
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -39,7 +40,7 @@ server.get('/', (req, res, next) => {
 });
 
 
-agenda.on('ready', () => {
+//agenda.on('ready', () => {
 	// Handle incoming
 	server.post('/', (req, res, next) => {
 		f.incoming(req, res, msg => {
@@ -50,7 +51,7 @@ agenda.on('ready', () => {
 			} = msg;
 
 			//console.log(postback.payload);
-			if (postback && postback.payload) {
+			if (msg.postback && postback.payload) {
 				// Process the message here
 				let messageTxt = postback.payload;
 				console.log('postback.payload :' + messageTxt);
@@ -60,7 +61,15 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
-						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						//f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						vtb(messageTxt, 'current')
+							.then(response => {
+								f.txt(sender, response);
+							})
+							.catch(error => {
+								console.log("There seems to be a problem connecting to the acct inq service");
+								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
+							});
 						break;	
 					case 'menu:XFER_PAYLOAD':
 						f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
@@ -75,21 +84,9 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
 						break;
 				}
-				
-				/*
-				const {
-					schedule,
-					fbid,
-					id
-				} = JSON.parse(postback.payload);
-
-				agenda.now(schedule, {
-					fbid,
-					id
-				});
-				*/
 			}
-			else if (message && message.text) {
+			
+			if (message && message.text) {
 				// Process the message here
 				let messageTxt = message.text;
 
@@ -109,7 +106,6 @@ agenda.on('ready', () => {
 						}
 
 						switch (intent.value) {
-							
 							case 'truyvantaikhoan':
 								f.txt(sender, 'Dang kiem tra thong tin tai khoan cua ban...');
 								f.txt(sender, 'Tai khoan 1010xxxxx3485 cua ban hien co so du kha dung 23,300,000 VND, trang thai tai khoan Active');
@@ -134,8 +130,8 @@ agenda.on('ready', () => {
 		return next();
 	});
 
-	agenda.start();
-});
+//	agenda.start();
+//});
 
 // Persistent Menu
 f.showPersistent(
