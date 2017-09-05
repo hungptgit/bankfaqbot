@@ -2,7 +2,7 @@
 
 let inquiryBalance = (msgText, type = 'current') => {
 	return new Promise((resolve, reject) => {
-		let query = 'OK';
+		let query = 'NOK';
 		if(query === 'OK') {
 			  resolve('So tai khoan cua ban la xxx type: ' + type + ' , msgText: ' + msgText) ;
 			} else {
