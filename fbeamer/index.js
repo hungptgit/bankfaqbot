@@ -91,26 +91,26 @@ class FBeamer {
 	
 	incoming(req, res, cb) {
 		// Extract the body of the POST request
-		console.log("incomming:" + JSON.stringify(req.body));
 		let data = req.body;
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
-				data.entry.forEach(pageObj => {
-					// Iterate through the messaging Array
-						pageObj.messaging.forEach(msgEvent => {
-							let messageObj = {
-								sender: msgEvent.sender.id,
-								timeOfMessage: msgEvent.timestamp,
-								message: msgEvent.message || undefined,
-								postback: msgEvent.postback || undefined,
-								delivery: msgEvent.delivery || undefined
-							}
-							cb(messageObj);
-						});
-
+			data.entry.forEach(pageObj => {
+				// Iterate through the messaging Array
+				pageObj.messaging.forEach(msgEvent => {
+					let messageObj = {
+						sender: msgEvent.sender.id,
+						timeOfMessage: msgEvent.timestamp,
+						message: msgEvent.message || undefined,
+						postback: msgEvent.postback || undefined,
+						delivery: msgEvent.delivery || undefined
+					}
+					//console.log("incomming:" + JSON.stringify(req.body));
+					
+					cb(messageObj);
 				});
+			});
 		}
-		//console.log('incoming send res 200');
+		console.log('incoming send res 200');
 		res.send(200);
 	}
 

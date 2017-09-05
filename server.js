@@ -3,7 +3,7 @@
 const config = require('./config');
 const Restify = require('restify');
 const server = Restify.createServer({
-	name: 'VietinBankerBot'
+	name: 'VTBMessenger'
 });
 const PORT = process.env.PORT || 3000;
 // FBeamer
@@ -15,7 +15,7 @@ server.use(Restify.bodyParser());
 server.use((req, res, next) => f.verifySignature(req, res, next));
 
 // Agenda
-//const agenda = require('./agenda')(f);
+const agenda = require('./agenda')(f);
 const vtb = require('./vtb');
 
 // Wit.ai
@@ -25,7 +25,7 @@ const wit = new Wit({
 });
 
 // OMDB
-//const intents = require('./intents');
+const intents = require('./intents');
 
 const {
 	firstEntity,
@@ -47,11 +47,17 @@ server.get('/', (req, res, next) => {
 			const {
 				sender,
 				postback,
+				delivery,
 				message
 			} = msg;
 			
+			if (delivery) {
+				console.log('delivery received...............:' + JSON.stringify(msg));
+				return;
+			}
+			
 			//console.log(postback.payload);
-			if (postback && postback.payload.includes("menu")) {
+			if (postback && postback.payload) {
 				// Process the message here
 				let messageTxt = postback.payload;
 				console.log('postback.payload :' + messageTxt);
@@ -67,6 +73,7 @@ server.get('/', (req, res, next) => {
 								f.txt(sender, response);
 							})
 							.catch(error => {
+								console.log("There seems to be a problem connecting to the acct inq service");
 								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
 							});
 						break;	
@@ -85,7 +92,7 @@ server.get('/', (req, res, next) => {
 				}
 			}
 			
-			if ((message && message.text) || (postback && !postback.payload.includes("menu"))) {
+			if (message && message.text) {
 				// Process the message here
 				let messageTxt = message.text;
 
@@ -121,7 +128,7 @@ server.get('/', (req, res, next) => {
 					})
 					.catch(error => {
 						console.log(error);
-						f.txt(sender, "Loi he thong :" + JSON.stringify(error));
+						f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
 					});
 			}
 		});
@@ -133,7 +140,6 @@ server.get('/', (req, res, next) => {
 //});
 
 // Persistent Menu
-/*
 f.showPersistent(
 	{"persistent_menu":
 	[{
@@ -177,43 +183,7 @@ f.showPersistent(
       "composer_input_disabled":false
     }
   ]});
-*/
 
-f.showPersistent(
-	[
-			{
-				"type": "postback",
-				"title": "Xem số dư",
-				"payload": "menu:INQ_BALANCE_PAYLOAD"
-			},
-			{
-				"type": "postback",
-				"title": "Chuyển khoản",
-				"payload": "menu:XFER_PAYLOAD"
-			},								
-			{
-				"title":"Dịch vụ khác",
-        "type":"nested",
-        "call_to_actions":[
-            {
-              "title":"Thanh toán",
-              "type":"postback",
-              "payload":"menu:PAYMENT_PAYLOAD"
-            },
-            {
-              "title":"Gửi tiết kiệm",
-              "type":"postback",
-              "payload":"menu:SAVING_PAYLOAD"
-            },
-						{
-							"type": "web_url",
-							"title": "Đăng ký dịch vụ",
-							"payload": "http://vietinbank.vn/"
-						}
-          ]
-			}
-		]
-);
 // Subscribe
 f.subscribe();
 
