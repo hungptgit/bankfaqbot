@@ -96,6 +96,7 @@ class FBeamer {
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
 			if(!data.entry[0].messaging[0].message) {
+				console.log("data.entry[0].messaging[0].message:" + JSON.stringify(data.entry[0].messaging[0].message));
 				data.entry.forEach(pageObj => {
 					// Iterate through the messaging Array
 						pageObj.messaging.forEach(msgEvent => {
@@ -111,7 +112,7 @@ class FBeamer {
 
 				});
 			}else {
-				
+				console.log("data.entry[0].messaging[0]:" + JSON.stringify(data.entry[0].messaging[0]));
 			}
 		}
 		//console.log('incoming send res 200');
