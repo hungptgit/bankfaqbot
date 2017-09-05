@@ -52,7 +52,7 @@ server.get('/', (req, res, next) => {
 			} = msg;
 			
 			if (delivery) {
-				console.log('delivery received...............:' + JSON.stringify(msg));
+				console.log('delivery received:' + JSON.stringify(msg));
 				return;
 			}
 			
@@ -73,7 +73,6 @@ server.get('/', (req, res, next) => {
 								f.txt(sender, response);
 							})
 							.catch(error => {
-								console.log("There seems to be a problem connecting to the acct inq service");
 								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
 							});
 						break;	
@@ -140,6 +139,7 @@ server.get('/', (req, res, next) => {
 //});
 
 // Persistent Menu
+/*
 f.showPersistent(
 	{"persistent_menu":
 	[{
@@ -183,7 +183,43 @@ f.showPersistent(
       "composer_input_disabled":false
     }
   ]});
+*/
 
+f.showPersistent(
+	[
+			{
+				"type": "postback",
+				"title": "Xem số dư",
+				"payload": "menu:INQ_BALANCE_PAYLOAD"
+			},
+			{
+				"type": "postback",
+				"title": "Chuyển khoản",
+				"payload": "menu:XFER_PAYLOAD"
+			},								
+			{
+				"title":"Dịch vụ khác",
+        "type":"nested",
+        "call_to_actions":[
+            {
+              "title":"Thanh toán",
+              "type":"postback",
+              "payload":"menu:PAYMENT_PAYLOAD"
+            },
+            {
+              "title":"Gửi tiết kiệm",
+              "type":"postback",
+              "payload":"menu:SAVING_PAYLOAD"
+            },
+						{
+							"type": "web_url",
+							"title": "Đăng ký dịch vụ",
+							"payload": "http://vietinbank.vn/"
+						}
+          ]
+			}
+		]
+);
 // Subscribe
 f.subscribe();
 
