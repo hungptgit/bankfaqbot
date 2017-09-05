@@ -96,18 +96,23 @@ class FBeamer {
 			// Iterate through the page entry Array
 			data.entry.forEach(pageObj => {
 				// Iterate through the messaging Array
-				pageObj.messaging.forEach(msgEvent => {
-					let messageObj = {
-						sender: msgEvent.sender.id,
-						timeOfMessage: msgEvent.timestamp,
-						message: msgEvent.message || undefined,
-						postback: msgEvent.postback || undefined,
-						delivery: msgEvent.delivery || undefined
-					}
-					console.log("incomming:" + JSON.stringify(req.body));
-					
-					cb(messageObj);
-				});
+				if(pageObj.messaging[0].message) {
+					pageObj.messaging.forEach(msgEvent => {
+						let messageObj = {
+							sender: msgEvent.sender.id,
+							timeOfMessage: msgEvent.timestamp,
+							message: msgEvent.message || undefined,
+							postback: msgEvent.postback || undefined,
+							delivery: msgEvent.delivery || undefined
+						}
+						//console.log("incomming:" + JSON.stringify(req.body));
+
+						cb(messageObj);
+					});
+				}
+				else {
+					console.log("pageObj.messaging[0]:" + pageObj.messaging[0]);
+				}
 			});
 		}
 		//console.log('incoming send res 200');
