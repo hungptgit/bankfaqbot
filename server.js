@@ -3,7 +3,7 @@
 const config = require('./config');
 const Restify = require('restify');
 const server = Restify.createServer({
-	name: 'VTBMessenger'
+	name: 'VietinBankerBot'
 });
 const PORT = process.env.PORT || 3000;
 // FBeamer
@@ -15,7 +15,7 @@ server.use(Restify.bodyParser());
 server.use((req, res, next) => f.verifySignature(req, res, next));
 
 // Agenda
-const agenda = require('./agenda')(f);
+//const agenda = require('./agenda')(f);
 const vtb = require('./vtb');
 
 // Wit.ai
@@ -25,7 +25,7 @@ const wit = new Wit({
 });
 
 // OMDB
-const intents = require('./intents');
+//const intents = require('./intents');
 
 const {
 	firstEntity,
@@ -47,17 +47,11 @@ server.get('/', (req, res, next) => {
 			const {
 				sender,
 				postback,
-				delivery,
 				message
 			} = msg;
 			
-			if (delivery) {
-				console.log('delivery received:' + JSON.stringify(msg));
-				return;
-			}
-			
 			//console.log(postback.payload);
-			if (postback && postback.payload) {
+			if (postback && postback.payload.includes("menu")) {
 				// Process the message here
 				let messageTxt = postback.payload;
 				console.log('postback.payload :' + messageTxt);
@@ -91,7 +85,7 @@ server.get('/', (req, res, next) => {
 				}
 			}
 			
-			if (message && message.text) {
+			if ((message && message.text) || (postback && !postback.payload.includes("menu"))) {
 				// Process the message here
 				let messageTxt = message.text;
 
@@ -127,7 +121,7 @@ server.get('/', (req, res, next) => {
 					})
 					.catch(error => {
 						console.log(error);
-						f.txt(sender, "Loi he thong:" + JSON.stringify(error));
+						f.txt(sender, "Loi he thong :" + JSON.stringify(error));
 					});
 			}
 		});
