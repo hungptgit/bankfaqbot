@@ -53,7 +53,12 @@ agenda.on('ready', () => {
 			if (postback && postback.payload) {
 				// Process the message here
 				let messageTxt = postback.payload;
+				console.log('postback.payload :' + messageTxt);
+				
 				switch(messageTxt) {
+					case 'GET_STARTED_PAYLOAD':
+						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+						break;
 					case 'PB_INQ_BALANCE_PAYLOAD':
 						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
 						break;	
@@ -66,12 +71,9 @@ agenda.on('ready', () => {
 					case 'PB_SAVING_PAYLOAD':
 						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
-					case 'GET_STARTED_PAYLOAD':
-						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
-						break;		
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
-						break;	
+						break;
 				}
 				
 				/*
@@ -87,9 +89,7 @@ agenda.on('ready', () => {
 				});
 				*/
 			}
-			
-
-			if (message && message.text) {
+			else if (message && message.text) {
 				// Process the message here
 				let messageTxt = message.text;
 
@@ -118,7 +118,7 @@ agenda.on('ready', () => {
 								f.txt(sender, 'Chuyen ban toi trang nhap thong tin chuyen khoan...');
 								break;	
 							default:
-								console.log(`🤖  ${intent.value}`);
+								console.log(`?  ${intent.value}`);
 								f.txt(sender, 'Okey! Ban muon thuc hien '+ intent.value);
 								f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(entities));
 								break;
