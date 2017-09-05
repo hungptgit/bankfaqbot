@@ -47,11 +47,16 @@ server.get('/', (req, res, next) => {
 			const {
 				sender,
 				postback,
+				delivery,
 				message
 			} = msg;
-
+			
+			if (delivery) {
+				return;
+			}
+			
 			//console.log(postback.payload);
-			if (msg.postback && postback.payload) {
+			if (postback && postback.payload) {
 				// Process the message here
 				let messageTxt = postback.payload;
 				console.log('postback.payload :' + messageTxt);

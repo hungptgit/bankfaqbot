@@ -101,7 +101,8 @@ class FBeamer {
 						sender: msgEvent.sender.id,
 						timeOfMessage: msgEvent.timestamp,
 						message: msgEvent.message || undefined,
-						postback: msgEvent.postback || undefined
+						postback: msgEvent.postback || undefined,
+						delivery: msgEvent.delivery || undefined
 					}
 					console.log("incomming:" + JSON.stringify(req.body));
 					
@@ -111,7 +112,6 @@ class FBeamer {
 		}
 		res.send(200);
 	}
-
 
 	sendMessage(payload) {
 		return new Promise((resolve, reject) => {
