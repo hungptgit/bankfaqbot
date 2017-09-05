@@ -181,7 +181,9 @@ json:{
     }
 */
 // Persistent Menu
-f.showPersistent([{
+f.showPersistent(
+	{"persistent_menu":
+	[{
 	"locale":"default",
   "composer_input_disabled":true,
   "call_to_actions":[
@@ -241,7 +243,7 @@ f.showPersistent([{
       "locale":"vi_VN",
       "composer_input_disabled":false
     }
-  ]);
+  ]});
 
 // Subscribe
 f.subscribe();

@@ -137,11 +137,13 @@ class FBeamer {
 
 	// Show Persistent Menu
 	showPersistent(payload) {
+		/*
 		let obj = {
 			setting_type: "call_to_actions",
 			thread_state: "existing_thread",
 			call_to_actions: payload
 		}
+		*/
 		console.log('showPersistent: ' + JSON.stringify(payload));
 		
 		request({
@@ -150,7 +152,7 @@ class FBeamer {
 				access_token: this.PAGE_ACCESS_TOKEN
 			},
 			method: 'POST',
-			json: {"persistent_menu":payload}
+			json: payload
 		}, (error, response) => {
 			if(error) {
 				console.log(error);
