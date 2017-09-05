@@ -92,6 +92,7 @@ class FBeamer {
 	incoming(req, res, cb) {
 		// Extract the body of the POST request
 		let data = req.body;
+		console.log("incomming:" + JSON.stringify(data));
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
 			data.entry.forEach(pageObj => {
@@ -104,13 +105,12 @@ class FBeamer {
 						postback: msgEvent.postback || undefined,
 						delivery: msgEvent.delivery || undefined
 					}
-					//console.log("incomming:" + JSON.stringify(req.body));
-					
+
 					cb(messageObj);
 				});
 			});
 		}
-		console.log('incoming send res 200');
+		//console.log('incoming send res 200');
 		res.send(200);
 	}
 
