@@ -41,7 +41,7 @@ server.post('/', (req, res, next) => {
 			message
 		} = msg;
 		
-		//console.log(postback.payload);
+		console.log('msg : ' + JSON.stringify(msg));
 		
 		if (message && message.text) {
 				// Process the message here
@@ -74,7 +74,7 @@ server.post('/', (req, res, next) => {
 
 
 // Persistent Menu
-/*
+
 f.showPersistent(
 	{"persistent_menu":
 	[{
@@ -118,7 +118,6 @@ f.showPersistent(
       "composer_input_disabled":false
     }
   ]});
-*/	
 // Subscribe
 f.subscribe();
 
