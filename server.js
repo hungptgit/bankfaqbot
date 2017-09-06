@@ -27,13 +27,13 @@ const omdb = require('./omdb');
 
 
 // Register the webhooks
-server.get('/webhook/', (req, res, next) => {
+server.get('/', (req, res, next) => {
 	f.registerHook(req, res);
 	return next();
 });
 
 // Handle incoming
-server.post('/webhook/', (req, res, next) => {
+server.post('/', (req, res, next) => {
 	f.incoming(req, res, msg => {
 		const {
 			sender,
