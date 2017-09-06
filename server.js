@@ -43,32 +43,32 @@ server.post('/', (req, res, next) => {
 		
 		//console.log(postback.payload);
 		
-			if (postback && postback.payload) {
-				// Process the message here
-				let messageTxt = postback.payload;
-				console.log('postback.payload :' + messageTxt);
-				
-				switch(messageTxt) {
-					case 'GET_STARTED_PAYLOAD':
-						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
-						break;
-					case 'menu:INQ_BALANCE_PAYLOAD':
-						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
-						break;	
-					case 'menu:XFER_PAYLOAD':
-						f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
-						break;
-					case 'menu:PAYMENT_PAYLOAD':
-						f.txt(sender, 'Ban muon thanh toan cho');
-						break;
-					case 'menu:SAVING_PAYLOAD':
-						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
-						break;
-					default:
-						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
-						break;
-				}
+		if (postback && postback.payload) {
+			// Process the message here
+			let messageTxt = postback.payload;
+			console.log('postback.payload :' + messageTxt);
+
+			switch(messageTxt) {
+				case 'GET_STARTED_PAYLOAD':
+					f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+					break;
+				case 'menu:INQ_BALANCE_PAYLOAD':
+					f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+					break;	
+				case 'menu:XFER_PAYLOAD':
+					f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
+					break;
+				case 'menu:PAYMENT_PAYLOAD':
+					f.txt(sender, 'Ban muon thanh toan cho');
+					break;
+				case 'menu:SAVING_PAYLOAD':
+					f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+					break;
+				default:
+					f.txt(sender, 'Ban hay lua chon tinh nang can dung');
+					break;
 			}
+		}
 		
 		
 		if (message && message.text) {
@@ -100,6 +100,51 @@ server.post('/', (req, res, next) => {
 	return next();
 });
 
+
+// Persistent Menu
+f.showPersistent(
+	{"persistent_menu":
+	[{
+	"locale":"default",
+  "composer_input_disabled":true,
+  "call_to_actions":[
+			{
+				"type": "postback",
+				"title": "Xem số dư",
+				"payload": "menu:INQ_BALANCE_PAYLOAD"
+			},
+			{
+				"type": "postback",
+				"title": "Chuyển khoản",
+				"payload": "menu:XFER_PAYLOAD"
+			},								
+			{
+				"title":"Dịch vụ khác",
+        "type":"nested",
+        "call_to_actions":[
+            {
+              "title":"Thanh toán",
+              "type":"postback",
+              "payload":"menu:PAYMENT_PAYLOAD"
+            },
+            {
+              "title":"Gửi tiết kiệm",
+              "type":"postback",
+              "payload":"menu:SAVING_PAYLOAD"
+            },
+						{
+							"type": "web_url",
+							"title": "Đăng ký dịch vụ",
+							"payload": "http://vietinbank.vn/"
+						}
+          ]
+			}
+		]},
+    {
+      "locale":"vi_VN",
+      "composer_input_disabled":false
+    }
+  ]});
 // Subscribe
 f.subscribe();
 
