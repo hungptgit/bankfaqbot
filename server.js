@@ -42,7 +42,7 @@ server.post('/', (req, res, next) => {
 		} = msg;
 		
 		//console.log(postback.payload);
-		/*
+		
 			if (postback && postback.payload) {
 				// Process the message here
 				let messageTxt = postback.payload;
@@ -69,7 +69,7 @@ server.post('/', (req, res, next) => {
 						break;
 				}
 			}
-		*/
+		
 		
 		if (message && message.text) {
 				// Process the message here
@@ -77,6 +77,8 @@ server.post('/', (req, res, next) => {
 
 				console.log('messageTxt:		' + messageTxt);
 				messageTxt = utils.KhongDau(messageTxt);
+				console.log('messageTxt KhongDau:		' + messageTxt);
+			
 				// Wit's Message API
 				wit.message(messageTxt)
 					.then(omdb)
