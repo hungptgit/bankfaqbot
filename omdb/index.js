@@ -1,6 +1,6 @@
 'use strict';
 const request = require('request');
-const createResponse = require('../utils');
+const createResponse = require('../vtb');
 const config = require('../config');
 const getInfo = data => {
   console.log('data: ' + JSON.stringify(data));
