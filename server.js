@@ -134,7 +134,7 @@ f.showPersistent(
             },
 						{
 							"type": "web_url",
-							"title": "Khởi tạo khoản vay",
+							"title": "Tạo khoản vay",
 							"url": "http://vietinbank.vn/"
 						}
           ]
