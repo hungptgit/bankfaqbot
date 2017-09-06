@@ -134,10 +134,15 @@ f.showPersistent(
             },
 						{
 							"type": "web_url",
-							"title": "Đăng ký dịch vụ",
+							"title": "Khởi tạo khoản vay",
 							"url": "http://vietinbank.vn/"
 						}
           ]
+			},
+			{
+				"type": "web_url",
+				"title": "Đăng ký dịch vụ",
+				"url": "http://vietinbank.vn/"
 			}
 		]},
     {
