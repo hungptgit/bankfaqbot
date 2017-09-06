@@ -27,13 +27,13 @@ const omdb = require('./omdb');
 
 
 // Register the webhooks
-server.get('/', (req, res, next) => {
+server.get('/webhook/', (req, res, next) => {
 	f.registerHook(req, res);
 	return next();
 });
 
 // Handle incoming
-server.post('/', (req, res, next) => {
+server.post('/webhook/', (req, res, next) => {
 	f.incoming(req, res, msg => {
 		const {
 			sender,
@@ -117,7 +117,7 @@ f.showPersistent(
 				"type": "postback",
 				"title": "Chuyển khoản",
 				"payload": "menu:XFER_PAYLOAD"
-			},								
+			},
 			{
 				"title":"Dịch vụ khác",
         "type":"nested",
@@ -134,20 +134,10 @@ f.showPersistent(
             },
 						{
 							"type": "web_url",
-							"title": "Tạo khoản vay",
+							"title": "Đăng ký dịch vụ",
 							"url": "http://vietinbank.vn/"
 						}
           ]
-			},
-			{
-				"type": "web_url",
-				"title": "Mua bảo hiểm",
-				"url": "http://vietinbank.vn/"
-			},
-			{
-				"type": "web_url",
-				"title": "Đăng ký dịch vụ",
-				"url": "http://vietinbank.vn/"
 			}
 		]},
     {
