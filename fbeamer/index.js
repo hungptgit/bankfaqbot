@@ -77,6 +77,7 @@ class FBeamer {
 	}
 
 	incoming(req, res, cb) {
+		res.send(200);
 		console.log('data:' + JSON.stringify(data));
 		// Extract the body of the POST request
 		let data = req.body;
@@ -96,7 +97,7 @@ class FBeamer {
 				});
 			});
 		}
-		res.send(200);
+		
 	}
 
 	sendMessage(payload) {
@@ -140,7 +141,10 @@ class FBeamer {
 			method: 'POST',
 			json: payload
 		}, (error, response) => {
-			if(error) {
+			if(!error && response.statusCode === 200) {
+				console.log('showPersistent result:' + JSON.stringify(response));
+			}
+			else {
 				console.log(error);
 			}
 		});
