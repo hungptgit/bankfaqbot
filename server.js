@@ -135,7 +135,7 @@ f.showPersistent(
 						{
 							"type": "web_url",
 							"title": "Đăng ký dịch vụ",
-							"payload": "http://vietinbank.vn/"
+							"url": "http://vietinbank.vn/"
 						}
           ]
 			}
