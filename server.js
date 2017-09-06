@@ -62,7 +62,7 @@ server.post('/', (req, res, next) => {
 					})
 					.catch(error => {
 						console.log(error);
-						f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
+						f.txt(sender, "My servers are acting weird today! Try asking me again after a while.");
 					});
 						
 			}
