@@ -25,7 +25,7 @@ const wit = new Wit({
 });
 
 // OMDB
-const intents = require('./intents');
+//const intents = require('./intents');
 
 const {
 	firstEntity,
@@ -52,7 +52,7 @@ server.get('/', (req, res, next) => {
 			} = msg;
 			
 			if (delivery) {
-				console.log('delivery received...............:' + JSON.stringify(msg));
+				//console.log('delivery received...............:' + JSON.stringify(msg));
 				return;
 			}
 			
@@ -74,7 +74,7 @@ server.get('/', (req, res, next) => {
 							})
 							.catch(error => {
 								console.log("There seems to be a problem connecting to the acct inq service");
-								f.txt(msg.sender, "Hmm, something's not right with my servers! Do check back in a while...Sorry :(");
+								f.txt(msg.sender, "Co van de khi ket noi den dich vu ngan hang :(");
 							});
 						break;	
 					case 'menu:XFER_PAYLOAD':
