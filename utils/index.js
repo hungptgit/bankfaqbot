@@ -1,21 +1,19 @@
 'use strict';
-const createResponse = (intent, movie) => {
-  if(movie.Response === 'True') {
-    let {
-      Title,
-      Year,
-      Plot,
-      Director,
-      Actors,
-      Poster
-    } = movie;
-
+const createResponse = (intent, data) => {
+  
     switch(intent) {
-      case 'movieInfo' : {
-        let str = 'Da tra ve thong tin phu hop';
+      case 'chuyenkhoan' : {
+        let str = 'Chuyen toi trang xac nhan thong tin chuyen khoan...';
         return {
           text: str,
-          image: Poster
+          image: null
+        }
+      }  
+      case 'truyvantaikhoan' : {
+        let str = 'Tai khoan 1010xxxxx3485 cua ban hien co so du kha dung 23,300,000 VND, trang thai tai khoan Active';
+        return {
+          text: str,
+          image: null
         }
       }
 
@@ -26,12 +24,7 @@ const createResponse = (intent, movie) => {
         }
       }
     }
-  } else {
-    return {
-      text: "I don't seem to understand your question!",
-      image: null
-    }
-  }
+  
 }
 
 module.exports = createResponse;

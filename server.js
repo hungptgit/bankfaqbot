@@ -74,7 +74,7 @@ server.post('/', (req, res, next) => {
 				// Process the message here
 				let messageTxt = message.text;
 
-				console.log('messageTxt:' + messageTxt);
+				console.log('messageTxt:		' + messageTxt);
 				// Wit's Message API
 				wit.message(messageTxt)
 					.then(omdb)
