@@ -22,6 +22,7 @@ const wit = new Wit({
 });
 
 // OMDB
+const utils = require('./utils');
 const omdb = require('./omdb');
 
 
@@ -75,6 +76,7 @@ server.post('/', (req, res, next) => {
 				let messageTxt = message.text;
 
 				console.log('messageTxt:		' + messageTxt);
+				messageTxt = utils.KhongDau(messageTxt);
 				// Wit's Message API
 				wit.message(messageTxt)
 					.then(omdb)

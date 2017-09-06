@@ -10,9 +10,8 @@ const getInfo = data => {
   return new Promise((resolve, reject) => {
     if(intent) {
       console.log('intent: ' + intent);
-      
       // Fetch data from DB
-      resolve(createResponse(intent, 'Du lieu de tao response'));
+      resolve(createResponse(intent, data.entities));
     } else {
       reject("Intent not found!");
     }
