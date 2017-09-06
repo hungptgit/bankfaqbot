@@ -77,7 +77,7 @@ class FBeamer {
 	}
 
 	incoming(req, res, cb) {
-		res.send(200);
+		console.log('data:' + JSON.stringify(data));
 		// Extract the body of the POST request
 		let data = req.body;
 		if(data.object === 'page') {
@@ -96,7 +96,7 @@ class FBeamer {
 				});
 			});
 		}
-		
+		res.send(200);
 	}
 
 	sendMessage(payload) {
