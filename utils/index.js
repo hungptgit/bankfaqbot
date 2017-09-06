@@ -1,38 +1,37 @@
 'use strict';
+const createResponse = (intent, movie) => {
+  if(movie.Response === 'True') {
+    let {
+      Title,
+      Year,
+      Plot,
+      Director,
+      Actors,
+      Poster
+    } = movie;
 
-const findById = (fbid, sessionStore) => {
-  for(let [key, value] of sessionStore) {
-    if(value.fbid === fbid) {
-      return key;
+    switch(intent) {
+      case 'movieInfo' : {
+        let str = 'Da tra ve thong tin phu hop';
+        return {
+          text: str,
+          image: Poster
+        }
+      }
+
+      default: {
+        return {
+          text: "Always at your service :)",
+          image: null
+        }
+      }
+    }
+  } else {
+    return {
+      text: "I don't seem to understand your question!",
+      image: null
     }
   }
 }
 
-const fetchEntity = (entities, entity) => {
-  const val = entities && entities[entity] &&
-    Array.isArray(entities[entity]) &&
-    entities[entity].length > 0 &&
-    entities[entity][0].value;
-
-    if(!val) {
-      return null;
-    } else {
-      return typeof val === 'object' ? val.value : val;
-    }
-}
-
-const firstEntity = (entities, name) => {
-  return entities &&
-    entities[name] &&
-    Array.isArray(entities[name]) &&
-    entities[name] &&
-    entities[name][0];
-}
-
-
-
-module.exports = {
-  findById,
-  fetchEntity,
-  firstEntity
-}
+module.exports = createResponse;
