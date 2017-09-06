@@ -9,7 +9,7 @@ const getInfo = data => {
   return new Promise((resolve, reject) => {
     if(intent) {
       // Fetch data from DB
-      resolve(createResponse(intent, JSON.parse('')));
+      resolve(createResponse(intent, 'Du lieu de tao response'));
     } else {
       reject("Intent not found!");
     }
