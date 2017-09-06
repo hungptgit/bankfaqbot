@@ -11,8 +11,6 @@ class FBeamer {
 				this.PAGE_ACCESS_TOKEN = config.PAGE_ACCESS_TOKEN;
 				this.VERIFY_TOKEN = config.VERIFY_TOKEN;
 				this.APP_SECRET = config.APP_SECRET;
-				//console.log(this.PAGE_ACCESS_TOKEN);
-				//console.log(this.VERIFY_TOKEN);
 			}
 		} catch(e) {
 			console.log(e);
@@ -20,14 +18,16 @@ class FBeamer {
 	}
 
 	registerHook(req, res) {
-		//console.log("Registering webhook...");
 		// If req.query.hub.mode is 'subscribe'
 		// and if req.query.hub.verify_token is the same as this.VERIFY_TOKEN
 		// then send back an HTTP status 200 and req.query.hub.challenge
-		let {mode, verify_token, challenge} = req.query.hub;
+		let {
+			mode, 
+			verify_token, 
+			challenge
+		} = req.query.hub;
 
 		if(mode === 'subscribe' && verify_token === this.VERIFY_TOKEN) {
-			console.log("Registed webhook!");
 			return res.end(challenge);
 		} else {
 			console.log("Could not register webhook!");
@@ -43,18 +43,23 @@ class FBeamer {
 					throw new Error("Signature missing!");
 				} else {
 					let hash = crypto.createHmac('sha1', this.APP_SECRET).update(JSON.stringify(req.body)).digest('hex');
-					if(hash !== signature.split("=")[1]) {
-						throw new Error("Invalid signature");
-					}
+					try {
+						if(hash !== signature.split("=")[1]) {
+							throw new Error("Invalid Signature");
+						} 
+					} catch(e) {
+							res.send(500, e);
+						}
 				}
 			} catch(e) {
 				res.send(500, e);
 			}
-		}
+		} 
 
 		return next();
+
 	}
-	
+
 	subscribe() {
 		request({
 			uri: 'https://graph.facebook.com/v2.6/me/subscribed_apps',
@@ -70,29 +75,10 @@ class FBeamer {
 			}
 		});
 	}
-	
-	getProfile(id) {
-		return new Promise((resolve, reject) => {
-			request({
-				uri: `https://graph.facebook.com/v2.7/${id}`,
-				qs: {
-					access_token: this.PAGE_ACCESS_TOKEN
-				},
-				method: 'GET'
-			}, (error, response, body) => {
-				if(!error && response.statusCode === 200) {
-					resolve(JSON.parse(body));
-				} else {
-					reject(error);
-				}
-			});
-		});
-	}
-	
+
 	incoming(req, res, cb) {
 		// Extract the body of the POST request
 		let data = req.body;
-		console.log("incomming:" + JSON.stringify(data));
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
 			data.entry.forEach(pageObj => {
@@ -102,15 +88,13 @@ class FBeamer {
 						sender: msgEvent.sender.id,
 						timeOfMessage: msgEvent.timestamp,
 						message: msgEvent.message || undefined,
-						postback: msgEvent.postback || undefined,
-						delivery: msgEvent.delivery || undefined
+						postback: msgEvent.postback || undefined 
 					}
-
+					
 					cb(messageObj);
 				});
 			});
 		}
-		//console.log('incoming send res 200');
 		res.send(200);
 	}
 
@@ -136,31 +120,6 @@ class FBeamer {
 		});
 	}
 
-	// Show Persistent Menu
-	showPersistent(payload) {
-		/*
-		let obj = {
-			setting_type: "call_to_actions",
-			thread_state: "existing_thread",
-			call_to_actions: payload
-		}
-		*/
-		console.log('showPersistent: ' + JSON.stringify(payload));
-		
-		request({
-			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
-			qs: {
-				access_token: this.PAGE_ACCESS_TOKEN
-			},
-			method: 'POST',
-			json: payload
-		}, (error, response) => {
-			if(error) {
-				console.log(error);
-			}
-		});
-	}
-	
 	// Send a text message
 	txt(id, text) {
 		let obj = {
@@ -195,44 +154,7 @@ class FBeamer {
 		this.sendMessage(obj)
 			.catch(error => console.log(error));
 	}
-	
-	// A button
-	btn(id, data) {
-		let obj = {
-			recipient: {
-				id
-			},
-			message: {
-				attachment: {
-					type: 'template',
-					payload: {
-						template_type: 'button',
-						text: data.text,
-						buttons: data.buttons
-					}
-				}
-			}
-		}
 
-		this.sendMessage(obj)
-			.catch(error => console.log(error));
-	}
-
-	// Quick Replies
-	quick(id, data) {
-		let obj = {
-			recipient: {
-				id
-			},
-			message: {
-				text: data.text,
-				quick_replies: data.buttons
-			}
-		}
-
-		this.sendMessage(obj)
-			.catch(error => console.log(error));
-	}
 }
 
 module.exports = FBeamer;
