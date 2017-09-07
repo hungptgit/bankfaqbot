@@ -56,8 +56,9 @@ server.get('/', (req, res, next) => {
 				
 				switch(postback.payload) {
 					case 'GET_STARTED_PAYLOAD':
-						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
-						res.send(200);
+						if(message.text) {
+							f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+						}
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
 						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
@@ -144,7 +145,7 @@ f.showPersistent(
 	{"persistent_menu":
 	[{
 	"locale":"default",
-  "composer_input_disabled":true,
+  "composer_input_disabled":false, // cho phep input text hay khong
   "call_to_actions":[
 			{
 				"type": "postback",
