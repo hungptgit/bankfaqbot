@@ -146,7 +146,7 @@ class FBeamer {
 				console.log('showPersistent result:' + JSON.stringify(response.body));
 			}
 			else {
-				console.log(error);
+				console.log('showPersistent error:' + error);
 			}
 		});
 	}
