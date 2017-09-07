@@ -47,7 +47,6 @@ server.get('/', (req, res, next) => {
 			let {
 				sender,
 				postback,
-				delivery,
 				message
 			} = msg;
 			
