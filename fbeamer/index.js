@@ -77,10 +77,11 @@ class FBeamer {
 	}
 
 	incoming(req, res, cb) {
-		res.send(200);
+		
+
+		// Extract the body of the POST request
 		let data = req.body;
 		console.log('data:' + JSON.stringify(data));
-		// Extract the body of the POST request
 		
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
@@ -98,7 +99,7 @@ class FBeamer {
 				});
 			});
 		}
-		
+		res.send(200);
 	}
 
 	sendMessage(payload) {
