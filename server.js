@@ -136,7 +136,7 @@ f.showPersistent(
 	{"persistent_menu":
 	[{
 	"locale":"default",
-  "composer_input_disabled":true, // cho phep input text hay khong
+  "composer_input_disabled":true,
   "call_to_actions":[
 			{
 				"type": "postback",
@@ -172,7 +172,7 @@ f.showPersistent(
 		]},
     {
       "locale":"vi_VN",
-      "composer_input_disabled":true
+      "composer_input_disabled":false
     }
   ]});
 
