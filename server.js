@@ -62,7 +62,8 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
-						//f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						/*
 						vtb(messageTxt, 'current')
 							.then(response => {
 								f.txt(sender, response);
@@ -71,6 +72,7 @@ server.get('/', (req, res, next) => {
 								console.log("There seems to be a problem connecting to the acct inq service");
 								f.txt(msg.sender, "Co van de khi ket noi den dich vu ngan hang :(");
 							});
+						*/	
 						break;	
 					case 'menu:XFER_PAYLOAD':
 						f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
@@ -136,7 +138,12 @@ server.get('/', (req, res, next) => {
 
 // Persistent Menu
 f.showPersistent(
-	[	{
+	{"persistent_menu":
+	[{
+	"locale":"default",
+  "composer_input_disabled":true,
+  "call_to_actions":[
+			{
 				"type": "postback",
 				"title": "Xem số dư",
 				"payload": "menu:INQ_BALANCE_PAYLOAD"
@@ -167,7 +174,12 @@ f.showPersistent(
 						}
           ]
 			}
-		]);
+		]},
+    {
+      "locale":"vi_VN",
+      "composer_input_disabled":false
+    }
+  ]});
 
 // Subscribe
 f.subscribe();
