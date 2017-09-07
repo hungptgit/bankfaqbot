@@ -125,21 +125,27 @@ class FBeamer {
 	
 	// Show Persistent Menu
 	showPersistent(payload) {
+		/*
 		let obj = {
 			setting_type: "call_to_actions",
 			thread_state: "existing_thread",
 			call_to_actions: payload
 		}
-
+		*/
+		console.log('showPersistent: ' + JSON.stringify(payload));
+		
 		request({
-			uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
 			qs: {
 				access_token: this.PAGE_ACCESS_TOKEN
 			},
 			method: 'POST',
-			json: obj
+			json: payload
 		}, (error, response) => {
-			if(error) {
+			if(!error && response.statusCode === 200) {
+				console.log('showPersistent result:' + JSON.stringify(response.body));
+			}
+			else {
 				console.log(error);
 			}
 		});
