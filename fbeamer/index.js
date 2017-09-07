@@ -78,9 +78,10 @@ class FBeamer {
 
 	incoming(req, res, cb) {
 		res.send(200);
+		let data = req.body;
 		console.log('data:' + JSON.stringify(data));
 		// Extract the body of the POST request
-		let data = req.body;
+		
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
 			data.entry.forEach(pageObj => {
@@ -142,7 +143,7 @@ class FBeamer {
 			json: payload
 		}, (error, response) => {
 			if(!error && response.statusCode === 200) {
-				console.log('showPersistent result:' + JSON.stringify(response));
+				console.log('showPersistent result:' + JSON.stringify(response.body));
 			}
 			else {
 				console.log(error);
