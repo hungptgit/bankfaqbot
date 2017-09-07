@@ -1,3 +1,35 @@
 'use strict';
+const findById = (fbid, sessionStore) => {
+  for(let [key, value] of sessionStore) {
+    if(value.fbid === fbid) {
+      return key;
+    }
+  }
+}
 
-module.exports = require('./khongdau');
+const fetchEntity = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value;
+
+    if(!val) {
+      return null;
+    } else {
+      return typeof val === 'object' ? val.value : val;
+    }
+}
+
+const firstEntity = (entities, name) => {
+  return entities &&
+    entities[name] &&
+    Array.isArray(entities[name]) &&
+    entities[name] &&
+    entities[name][0];
+}
+
+module.exports = {
+  findById,
+  fetchEntity,
+  firstEntity
+}
