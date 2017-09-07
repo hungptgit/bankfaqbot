@@ -52,16 +52,16 @@ server.get('/', (req, res, next) => {
 			
 			//console.log(postback.payload);
 			if (postback && postback.payload) {
-				// Process the message here
-				let messageTxt = postback.payload;
-				console.log('postback.payload :' + messageTxt);
+				console.log('postback.payload :' + postback.payload);
 				
-				switch(messageTxt) {
+				switch(postback.payload) {
 					case 'GET_STARTED_PAYLOAD':
 						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+						res.send(200);
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
 						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						res.send(200);
 						/*
 						vtb(messageTxt, 'current')
 							.then(response => {
@@ -75,15 +75,19 @@ server.get('/', (req, res, next) => {
 						break;	
 					case 'menu:XFER_PAYLOAD':
 						f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
+						res.send(200);
 						break;
 					case 'menu:PAYMENT_PAYLOAD':
 						f.txt(sender, 'Ban muon thanh toan cho');
+						res.send(200);
 						break;
 					case 'menu:SAVING_PAYLOAD':
 						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+						res.send(200);
 						break;
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
+						res.send(200);
 						break;
 				}
 			}
