@@ -48,7 +48,7 @@ server.get('/', (req, res, next) => {
 				message
 			} = msg;
 			
-			//console.log(postback.payload);
+			console.log('----> msg : ' + JSON.stringify(msg));
 			if (postback && postback.payload) {
 				console.log('postback.payload :' + postback.payload);
 				
