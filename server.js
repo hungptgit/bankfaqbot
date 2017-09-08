@@ -303,7 +303,7 @@ server.get('/', (req, res, next) => {
 				let quickReply = message.quick_reply;
 				console.log('quickReply: ' + JSON.stringify(message.quick_reply));
 				
-				switch(quickReply) {
+				switch(quickReply.payload) {
 					case 'SAVE_3M':
 						f.txt(sender, 'Lai suat tien gui tiet kiem 3 thang o VietinBank hien dang la 4,3%');
 						break;
