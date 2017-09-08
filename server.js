@@ -258,7 +258,7 @@ server.get('/', (req, res, next) => {
 											payload: 'REG_FINBOT'
 										}]
 									}
-
+								console.log('dangkydichvu button data: ' + JSON.stringify(data));
 								f.btn(sender, data);
 								
 								break;	
