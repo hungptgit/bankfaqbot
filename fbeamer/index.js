@@ -80,7 +80,8 @@ class FBeamer {
 		
 		// Extract the body of the POST request
 		let data = req.body;
-		console.log('>>>>> incoming: ' + JSON.stringify(req));
+		console.log('>>>>> req: ' + req);
+		console.log('>>>>> incoming: ' + JSON.stringify(data));
 		
 		if(data.object === 'page') {
 			// Iterate through the page entry Array
