@@ -45,7 +45,10 @@ class FBeamer {
 					let blob = JSON.stringify(req.body);  
 					let hmac = crypto.createHmac('sha1', this.APP_SECRET);
 					let ourSignature = `sha1=${hmac.update(blob).digest('hex')}`;
-
+					
+					console.log(' >>>>> ourSignature: ' + ourSignature);
+					console.log(' >>>>> signature: ' + signature);
+					
 					let bufferA = Buffer.from(ourSignature, 'utf8');
 					let bufferB = Buffer.from(signature, 'utf8');
 					
