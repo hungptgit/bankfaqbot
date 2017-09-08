@@ -217,7 +217,7 @@ server.get('/', (req, res, next) => {
 				}
 			}
 			
-			if (message && message.text) {
+			if (message && message.text && !message.quick_reply) {
 				// Process the message here
 				let messageTxt = message.text;
 
