@@ -48,10 +48,12 @@ class FBeamer {
 							throw new Error("Invalid Signature");
 						} 
 					} catch(e) {
+							console.log('verifySignature: ' + e);
 							res.send(500, e);
 						}
 				}
 			} catch(e) {
+				console.log('verifySignature 1: ' + e);
 				res.send(500, e);
 			}
 		} 
@@ -71,7 +73,7 @@ class FBeamer {
 			if(!error && JSON.parse(body).success) {
 				console.log("Subscribed to the page!");
 			} else {
-				console.log(error);
+				console.log('subscribe: ' + error);
 			}
 		});
 	}
@@ -80,7 +82,7 @@ class FBeamer {
 		
 		// Extract the body of the POST request
 		let data = req.body;
-		//console.log('>>>>> req: ' + req);
+		console.log('>>>>> req: ' + req);
 		console.log('>>>>> incoming: ' + JSON.stringify(data));
 		
 		if(data.object === 'page') {
