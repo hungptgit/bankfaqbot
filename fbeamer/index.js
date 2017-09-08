@@ -42,13 +42,25 @@ class FBeamer {
 				if(!signature) {
 					throw new Error("Signature missing!");
 				} else {
-					let hash = crypto.createHmac('sha1', this.APP_SECRET).update(JSON.stringify(req.body)).digest('hex');
+					let blob = JSON.stringify(req.body);  
+					let hmac = crypto.createHmac('sha1', this.APP_SECRET);
+					let ourSignature = `sha1=${hmac.update(blob).digest('hex')}`;
+
+					let theirSignature = req.get('x-hub-signature');
+
+					let bufferA = Buffer.from(ourSignature, 'utf8');
+					let bufferB = Buffer.from(theirSignature, 'utf8');
+					
+					//let hash = crypto.createHmac('sha1', this.APP_SECRET).update(JSON.stringify(req.body)).digest('hex');
 					try {
-						if(hash !== signature.split("=")[1]) {
+						//if(hash !== signature.split("=")[1]) {
+						if(bufferA !== bufferB) {
+							console.log(' >>>>> bufferA: ' + bufferA);
+							console.log(' >>>>> bufferA: ' + bufferB);
 							throw new Error("Invalid Signature");
 						}
 						else {
-							console.log(' >>>>> Valid Signature <<<<< ');
+							//console.log(' >>>>> Valid Signature <<<<< ');
 						}
 					} catch(e) {
 							console.log('verifySignature: ' + e);
