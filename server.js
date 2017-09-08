@@ -249,15 +249,12 @@ server.get('/', (req, res, next) => {
 										buttons: [{
 												type: 'web_url',
 												title: 'FinBot',
-												url: 'http://hungpt.handcraft.com/',
-												webview_height_ratio: 'compact'
+												url: 'http://hungpt.handcraft.com/'
 											},
 											{
 												type: 'web_url',
 												title: 'iPay',
-												url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html',
-												webview_height_ratio: 'full',
-												messenger_extensions: true
+												url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
 											},
 											{
 												type: 'postback',
