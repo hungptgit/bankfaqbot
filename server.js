@@ -249,7 +249,18 @@ server.get('/', (req, res, next) => {
 								f.txt(sender, 'Chuyen ban toi trang nhap thong tin gui tiet kiem...');
 								break;	
 							case 'dangkydichvu':
-								f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
+								//f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
+								let data = {
+										text: '',
+										buttons: [{
+											type: 'postback',
+											title: 'FinBot',
+											payload: 'REG_FINBOT'
+										}]
+									}
+
+								f.btn(sender, data);
+								
 								break;	
 							case 'xinchao':
 								let greetings = firstEntity(entities, 'greetings');
