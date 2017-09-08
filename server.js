@@ -124,7 +124,15 @@ server.get('/', (req, res, next) => {
 								f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
 								break;	
 							case 'xinchao':
-								f.txt(sender, intent.value);
+								let greetings = firstEntity(entities, 'greetings');
+								let bye = firstEntity(entities, 'bye');
+								if(greetings) {
+									f.txt(sender, greetings.value);
+								}
+								
+								if(bye) {
+									f.txt(sender, bye.value);
+								}
 								break;	
 							default:
 								console.log(`?  ${intent.value}`);
