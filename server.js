@@ -74,7 +74,7 @@ server.get('/', (req, res, next) => {
 						break;	
 					case 'menu:PAY_ELECTRIC':
 						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
-						let buttonEVNs = 
+						const buttonEVNs = 
 							[
 								{
 									content_type:"postback",
@@ -89,7 +89,7 @@ server.get('/', (req, res, next) => {
 									payload:"EVN_HN"
 								}
 							];
-						let textEVN = 'Ban muon thanh toan hoa don tien dien';
+						const textEVN = 'Ban muon thanh toan hoa don tien dien';
 						
 						f.btn(sender, {
 							textEVN,
@@ -102,7 +102,7 @@ server.get('/', (req, res, next) => {
 					case 'menu:PAY_AIR_TICKET':
 						//f.txt(sender, 'Ban muon thanh toan ve may bay');
 						
-						let buttonATs = 
+						const buttonATs = 
 							[
 								{
 									content_type:"text",
@@ -123,10 +123,10 @@ server.get('/', (req, res, next) => {
 									payload:"JESTAR"
 								}
 							];
-						let textATs = 'Ban muon thanh toan ve may bay';
+						const textATs = 'Ban muon thanh toan ve may bay';
 						
 						f.quick(sender, {
-							text,
+							textATs,
 							buttonATs
 						});
 						
@@ -145,7 +145,7 @@ server.get('/', (req, res, next) => {
           	});
 						*/
 						
-						let buttons = 
+						const buttons = 
 							[
 								{
 									content_type:"text",
@@ -166,10 +166,10 @@ server.get('/', (req, res, next) => {
 									payload:"SAVE_12M"
 								}
 							];
-						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						const textSave = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
 						f.quick(sender, {
-							text,
+							textSave,
 							buttons
 						});
 						
