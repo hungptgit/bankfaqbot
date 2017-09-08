@@ -117,6 +117,15 @@ server.get('/', (req, res, next) => {
 							case 'chuyenkhoan':
 								f.txt(sender, 'Chuyen ban toi trang nhap thong tin chuyen khoan...');
 								break;	
+							case 'guitietkiem':
+								f.txt(sender, 'Chuyen ban toi trang nhap thong tin gui tiet kiem...');
+								break;	
+							case 'dangkydichvu':
+								f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
+								break;	
+							case 'xinchao':
+								f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
+								break;	
 							default:
 								console.log(`?  ${intent.value}`);
 								f.txt(sender, 'Okey! Ban muon thuc hien '+ intent.value);
