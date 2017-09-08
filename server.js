@@ -149,7 +149,7 @@ server.get('/', (req, res, next) => {
 										.then(profile => {
 											const {first_name, timezone} = profile;
 											console.log('getProfile: ' + first_name);
-											f.txt(sender, bye.value + ' ' + first_name + ' ^_^ ');
+											f.txt(sender, bye.value + ' ' + first_name + ' ^_^ :) :D :( O:) :P o.O ;) :O -_- >:O :* 8-) (y) :v ');
 										})
 										.catch(error => {
 											console.log('getProfile err: ' +error);
