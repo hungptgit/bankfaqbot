@@ -197,6 +197,9 @@ server.get('/', (req, res, next) => {
 									title:"12 tháng",
 									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
 									payload:"SAVE_12M"
+								},
+								{
+									content_type:"location"
 								}
 							];
 						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
