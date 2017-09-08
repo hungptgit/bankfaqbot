@@ -201,7 +201,7 @@ class FBeamer {
 		}
 
 		this.sendMessage(obj)
-			.catch(error => console.log(error));
+			.catch(error => console.log('txt: ' + error));
 	}
 
 	// Send an image message
@@ -221,7 +221,7 @@ class FBeamer {
 		}
 
 		this.sendMessage(obj)
-			.catch(error => console.log(error));
+			.catch(error => console.log('img: ' + error));
 	}
 	
 	// A button
@@ -243,7 +243,7 @@ class FBeamer {
 		}
 
 		this.sendMessage(obj)
-			.catch(error => console.log(error));
+			.catch(error => console.log('btn: ' + error));
 	}
 
 	// Quick Replies
@@ -259,7 +259,7 @@ class FBeamer {
 		}
 
 		this.sendMessage(obj)
-			.catch(error => console.log(error));
+			.catch(error => console.log('quick: ' + error));
 	}
 
 }

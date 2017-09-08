@@ -84,7 +84,9 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
 						break;	
 					case 'menu:PAY_ELECTRIC':
-						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
+						f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
+						
+						/*
 						const buttonEVNs = 
 							[
 								{
@@ -98,19 +100,21 @@ server.get('/', (req, res, next) => {
 									payload:"EVN_HN"
 								}
 							];
+						
 						const textEVN = 'Ban muon thanh toan hoa don tien dien';
 						
 						f.btn(sender, {
 							textEVN,
 							buttonEVNs
 						});
+						*/
 						break;
 					case 'menu:PAY_WARTER':
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
 						break;
 					case 'menu:PAY_AIR_TICKET':
-						//f.txt(sender, 'Ban muon thanh toan ve may bay');
-						
+						f.txt(sender, 'Ban muon thanh toan ve may bay');
+						/*
 						const buttonATs = 
 							[
 								{
@@ -138,7 +142,7 @@ server.get('/', (req, res, next) => {
 							textATs,
 							buttonATs
 						});
-						
+						*/
 						break;
 					case 'menu:PAY_ISSURANCE':
 						f.txt(sender, 'Ban muon thanh toan bao hiem');
