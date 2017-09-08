@@ -113,7 +113,36 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
 						break;
 					case 'menu:PAY_AIR_TICKET':
-						f.txt(sender, 'Ban muon thanh toan ve may bay');
+						//f.txt(sender, 'Ban muon thanh toan ve may bay');
+						
+						const buttonsA = 
+							[
+								{
+									content_type:"text",
+									title:"JSP",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"JSP"
+								},
+								{
+									content_type:"text",
+									title:"VNA",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"VNA"
+								},
+								{
+									content_type:"text",
+									title:"VJA",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"VJ"
+								}
+							];
+						const textA = 'Ban muon thanh toan ve may bay?';
+						
+						f.quick(sender, {
+							textA,
+							buttonsA
+						});
+						
 						/*
 						const buttonATs = 
 							[
@@ -251,7 +280,7 @@ server.get('/', (req, res, next) => {
 								}
 								break;
 							case 'camon':
-								f.txt(sender, 'Cam on ban nhe');
+								f.txt(sender, 'Khong co chi, neu can them tro giup ban cho minh thong tin nhe');
 								break;	
 							default:
 								console.log(`?  ${intent.value}`);
