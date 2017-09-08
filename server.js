@@ -184,19 +184,19 @@ server.get('/', (req, res, next) => {
 								{
 									content_type:"text",
 									title:"3 tháng",
-									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
 									payload:"SAVE_3M"
 								},
 								{
 									content_type:"text",
 									title:"6 tháng",
-									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
 									payload:"SAVE_6M"
 								},
 								{
 									content_type:"text",
 									title:"12 tháng",
-									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
 									payload:"SAVE_12M"
 								},
 								{
@@ -205,7 +205,7 @@ server.get('/', (req, res, next) => {
 							];
 						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
-						f.quick(sender, {
+						f.btn(sender, {
 							text,
 							buttons
 						});
