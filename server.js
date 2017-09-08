@@ -135,14 +135,27 @@ server.get('/', (req, res, next) => {
 										.then(profile => {
 											const {first_name, timezone} = profile;
 											console.log('getProfile: ' + first_name);
+											f.txt(sender, greetings.value + ' ' + first_name + ' ❤️');
 										})
-										.catch(error => console.log('getProfile err: ' +error));
+										.catch(error => {
+											console.log('getProfile err: ' +error);
+											f.txt(sender, greetings.value  + ' ❤️');
+										});
 									
-									f.txt(sender, greetings.value);
 								}
 								
 								if(bye) {
-									f.txt(sender, bye.value);
+									f.getProfile(sender)
+										.then(profile => {
+											const {first_name, timezone} = profile;
+											console.log('getProfile: ' + first_name);
+											f.txt(sender, bye.value + ' ' + first_name + ' ❤️');
+										})
+										.catch(error => {
+											console.log('getProfile err: ' +error);
+											f.txt(sender, bye.value  + ' ❤️');
+										});
+									
 								}
 								break;
 							case 'camon':
