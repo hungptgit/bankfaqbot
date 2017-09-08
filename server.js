@@ -153,10 +153,10 @@ f.showPersistent(
         "type":"nested",
         "call_to_actions":[
             {
-              "title":"Thanh toán",
-              "type":"postback",
-              "payload":"menu:PAYMENT_PAYLOAD"
-            },
+							"type": "web_url",
+							"title": "Đăng ký dịch vụ",
+							"url": "http://vietinbank.vn/"
+						},
             {
               "title":"Gửi tiết kiệm",
               "type":"postback",
@@ -164,9 +164,35 @@ f.showPersistent(
             },
 						{
 							"type": "web_url",
-							"title": "Đăng ký dịch vụ",
-							"payload": "http://vietinbank.vn/"
-						}
+							"title": "Khởi tạo khoản vay",
+							"url": "http://vietinbank.vn/"
+						},
+						{
+							"title":"Thanh toán",
+							"type":"nested",
+							"call_to_actions":[
+									{
+										"title":"Tiền điện",
+										"type":"postback",
+										"payload":"menu:PAY_ELECTRIC"
+									},
+									{
+										"title":"Tiền nước",
+										"type":"postback",
+										"payload":"menu:PAY_WARTER"
+									},
+									{
+										"title":"Vé máy bay",
+										"type":"postback",
+										"payload":"menu:PAY_AIR_TICKET"
+									},
+									{
+										"title":"Bảo hiểm",
+										"type":"postback",
+										"payload":"menu:PAY_ISSURANCE"
+									},
+          ]
+			}
           ]
 			}
 		]},
