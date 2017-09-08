@@ -115,7 +115,7 @@ server.get('/', (req, res, next) => {
 					case 'menu:PAY_AIR_TICKET':
 						//f.txt(sender, 'Ban muon thanh toan ve may bay');
 						
-						const buttonsA = 
+						let buttonsA = 
 							[
 								{
 									content_type:"text",
@@ -136,7 +136,7 @@ server.get('/', (req, res, next) => {
 									payload:"VJ"
 								}
 							];
-						const textA = 'Ban muon thanh toan ve may bay?';
+						let textA = 'Ban muon thanh toan ve may bay?';
 						
 						f.quick(sender, {
 							textA,
@@ -178,7 +178,7 @@ server.get('/', (req, res, next) => {
 						break;	
 					case 'menu:SAVING_PAYLOAD':
 						
-						const buttons = 
+						let buttons = 
 							[
 								{
 									content_type:"text",
@@ -199,7 +199,7 @@ server.get('/', (req, res, next) => {
 									payload:"SAVE_12M"
 								}
 							];
-						const text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
 						f.quick(sender, {
 							text,
