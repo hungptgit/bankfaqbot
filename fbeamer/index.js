@@ -257,7 +257,9 @@ class FBeamer {
 				quick_replies: data.buttons
 			}
 		}
-
+		
+		console.log('quick obj: ' + obj);
+		
 		this.sendMessage(obj)
 			.catch(error => console.log('quick: ' + error));
 	}
