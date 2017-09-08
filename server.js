@@ -247,14 +247,17 @@ server.get('/', (req, res, next) => {
 								let data = {
 										text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
 										buttons: [{
-												type: 'postback',
+												type: 'web_url',
 												title: 'FinBot',
-												payload: 'REG_FINBOT'
+												url: 'http://hungpt.handcraft.com/',
+												webview_height_ratio: 'compact'
 											},
 											{
-												type: 'postback',
+												type: 'web_url',
 												title: 'iPay',
-												payload: 'REG_IPAY'
+												url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html',
+												webview_height_ratio: 'full',
+												messenger_extensions: true
 											},
 											{
 												type: 'postback',
