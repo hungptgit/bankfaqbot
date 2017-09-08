@@ -69,23 +69,26 @@ server.get('/', (req, res, next) => {
 							});
 						*/	
 						break;	
+					case 'menu:XFER_PAYLOAD':
+						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
+						break;	
 					case 'menu:PAY_ELECTRIC':
-						f.txt(sender, 'Ban muon chuyen khoan trong hay ngoai he thong');
+						f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
 						break;
 					case 'menu:PAY_WARTER':
-						f.txt(sender, 'Ban muon thanh toan cho');
+						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
 						break;
 					case 'menu:PAY_AIR_TICKET':
-						f.txt(sender, 'Ban muon thanh toan cho');
+						f.txt(sender, 'Ban muon thanh toan ve may bay');
 						break;
 					case 'menu:PAY_ISSURANCE':
-						f.txt(sender, 'Ban muon thanh toan cho');
+						f.txt(sender, 'Ban muon thanh toan bao hiem');
 						break;	
 					case 'menu:SAVING_PAYLOAD':
 						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
 					default:
-						f.txt(sender, 'Ban hay lua chon tinh nang can dung');
+						f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
 						break;
 				}
 			}
