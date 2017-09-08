@@ -325,7 +325,7 @@ server.get('/', (req, res, next) => {
 				let coord = message.attachments[0].payload.coordinates;
 				let locLat = coord.lat;
         let locLong = coord.long;
-				f.txt(sender, 'Ban dang o lat : ' + locLat + ' ,long : ' + locLong + ' : ' + locTitle + ', gan ban co cac phong giao dich sau cua VietinBank: [123 Xa Dan] [15 Nam Dong] [19 Tay Son]');
+				f.txt(sender, 'Bạn đang ở gần ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: [123 Xã Đàn] [15 Nam Đồng] [19 Tây Sơn]');
 			}
 		});
 		
