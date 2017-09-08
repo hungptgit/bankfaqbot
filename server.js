@@ -129,7 +129,15 @@ server.get('/', (req, res, next) => {
 							case 'xinchao':
 								let greetings = firstEntity(entities, 'greetings');
 								let bye = firstEntity(entities, 'bye');
+
 								if(greetings) {
+									f.getProfile(sender)
+										.then(profile => {
+											const {first_name, timezone} = profile;
+											console.log('getProfile: ' + first_name);
+										})
+										.catch(error => console.log('getProfile err: ' +error));
+									
 									f.txt(sender, greetings.value);
 								}
 								
