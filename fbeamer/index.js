@@ -191,13 +191,12 @@ class FBeamer {
 	
 	// Send a text message
 	txt(id, text) {
-		let robo_text = ':|] ' + text;
 		let obj = {
 			recipient: {
 				id
 			},
 			message: {
-				robo_text
+				text
 			}
 		}
 
