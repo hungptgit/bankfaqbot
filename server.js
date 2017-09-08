@@ -74,7 +74,7 @@ server.get('/', (req, res, next) => {
 						break;	
 					case 'menu:PAY_ELECTRIC':
 						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
-						let buttons = 
+						let buttonEVNs = 
 							[
 								{
 									content_type:"postback",
@@ -89,11 +89,11 @@ server.get('/', (req, res, next) => {
 									payload:"EVN_HN"
 								}
 							];
-						let text = 'Ban muon thanh toan hoa don tien dien';
+						let textEVN = 'Ban muon thanh toan hoa don tien dien';
 						
 						f.btn(sender, {
-							text,
-							buttons
+							textEVN,
+							buttonEVNs
 						});
 						break;
 					case 'menu:PAY_WARTER':
@@ -102,7 +102,7 @@ server.get('/', (req, res, next) => {
 					case 'menu:PAY_AIR_TICKET':
 						//f.txt(sender, 'Ban muon thanh toan ve may bay');
 						
-						let buttons = 
+						let buttonATs = 
 							[
 								{
 									content_type:"text",
@@ -123,11 +123,11 @@ server.get('/', (req, res, next) => {
 									payload:"JESTAR"
 								}
 							];
-						let text = 'Ban muon thanh toan ve may bay';
+						let textATs = 'Ban muon thanh toan ve may bay';
 						
 						f.quick(sender, {
 							text,
-							buttons
+							buttonATs
 						});
 						
 						break;
