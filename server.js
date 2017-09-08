@@ -133,6 +133,9 @@ server.get('/', (req, res, next) => {
 								if(bye) {
 									f.txt(sender, bye.value);
 								}
+								break;
+							case 'camon':
+								f.txt(sender, 'Cam on ban nhe');
 								break;	
 							default:
 								console.log(`?  ${intent.value}`);
