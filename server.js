@@ -205,7 +205,7 @@ server.get('/', (req, res, next) => {
 							];
 						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
-						f.btn(sender, {
+						f.quick(sender, {
 							text,
 							buttons
 						});
