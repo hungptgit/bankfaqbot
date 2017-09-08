@@ -73,13 +73,63 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
 						break;	
 					case 'menu:PAY_ELECTRIC':
-						f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
+						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
+						let buttons = 
+							[
+								{
+									content_type:"postback",
+									title:"EVN HN",
+									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"EVN_HNT"
+								},
+								{
+									content_type:"postback",
+									title:"EVN HCM",
+									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"EVN_HN"
+								}
+							];
+						let text = 'Ban muon thanh toan hoa don tien dien';
+						
+						f.btn(sender, {
+							text,
+							buttons
+						});
 						break;
 					case 'menu:PAY_WARTER':
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
 						break;
 					case 'menu:PAY_AIR_TICKET':
-						f.txt(sender, 'Ban muon thanh toan ve may bay');
+						//f.txt(sender, 'Ban muon thanh toan ve may bay');
+						
+						let buttons = 
+							[
+								{
+									content_type:"text",
+									title:"VietJet Air",
+									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"VIETJET"
+								},
+								{
+									content_type:"text",
+									title:"Vietname Airline",
+									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"VNA"
+								},
+								{
+									content_type:"text",
+									title:"Jestar Pacific",
+									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"JESTAR"
+								}
+							];
+						let text = 'Ban muon thanh toan ve may bay';
+						
+						f.quick(sender, {
+							text,
+							buttons
+						});
+						
 						break;
 					case 'menu:PAY_ISSURANCE':
 						f.txt(sender, 'Ban muon thanh toan bao hiem');
@@ -95,7 +145,7 @@ server.get('/', (req, res, next) => {
           	});
 						*/
 						
-						const buttons = 
+						let buttons = 
 							[
 								{
 									content_type:"text",
@@ -113,10 +163,10 @@ server.get('/', (req, res, next) => {
 									content_type:"text",
 									title:"12 tháng",
 									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
-									payload:"SAVE_6M"
+									payload:"SAVE_12M"
 								}
 							];
-						const text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
 						f.quick(sender, {
 							text,
