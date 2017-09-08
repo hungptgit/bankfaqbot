@@ -299,7 +299,7 @@ server.get('/', (req, res, next) => {
 			}
 			
 			if (message && message.quick_reply) {
-				let quickReply = message.quick_reply.value;
+				let quickReply = message.quick_reply;
 				switch(quickReply) {
 					case 'SAVE_3M':
 						f.txt(sender, 'Lai suat tien gui tiet kiem 3 thang o VietinBank hien dang la 4,3%');
@@ -311,7 +311,7 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Lai suat tien gui tiet kiem 12 thang o VietinBank hien dang la 6,8%');
 						break;
 					default:
-						f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(message.quick_reply));
+						f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(quickReply));
 						break;		
 				}
 			}
