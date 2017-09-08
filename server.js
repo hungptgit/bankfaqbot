@@ -85,7 +85,45 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Ban muon thanh toan bao hiem');
 						break;	
 					case 'menu:SAVING_PAYLOAD':
-						f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+						/*
+						let buttons = quickreplies.map(title => {
+							return {
+								title,
+								content_type: "text",
+								payload: "null"
+							}
+          	});
+						*/
+						
+						const buttons = 
+							[
+								{
+									content_type:"text",
+									title:"3 tháng",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"SAVE_3M"
+								},
+								{
+									content_type:"text",
+									title:"6 tháng",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"SAVE_6M"
+								},
+								{
+									content_type:"text",
+									title:"12 tháng",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									payload:"SAVE_6M"
+								}
+							];
+						const text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						
+						f.quick(sender, {
+							text,
+							buttons
+						});
+						
+						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
@@ -149,7 +187,7 @@ server.get('/', (req, res, next) => {
 										.then(profile => {
 											const {first_name, timezone} = profile;
 											console.log('getProfile: ' + first_name);
-											f.txt(sender, bye.value + ' ' + first_name + ' ^_^ :) :D :( O:) :P o.O ;) :O -_- >:O :* 8-) (y) :v ');
+											f.txt(sender, bye.value + ' ' + first_name + ' ^_^ :) :D :( O:) :P ;) :O -_- >:O :* 8-) (y) ');
 										})
 										.catch(error => {
 											console.log('getProfile err: ' +error);
