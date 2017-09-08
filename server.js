@@ -54,7 +54,18 @@ server.get('/', (req, res, next) => {
 				
 				switch(postback.payload) {
 					case 'GET_STARTED_PAYLOAD':
-						f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+						f.getProfile(sender)
+							.then(profile => {
+								const {first_name, timezone} = profile;
+								console.log('getProfile: ' + first_name);
+								f.txt(sender, 'Xin chao ' + first_name + ' ❤️ .Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+							})
+							.catch(error => {
+								console.log('getProfile err: ' +error);
+								f.txt(sender, 'Xin chao ❤️ .Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+							});
+						
+						//f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
 						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
@@ -79,13 +90,11 @@ server.get('/', (req, res, next) => {
 								{
 									content_type:"postback",
 									title:"EVN HN",
-									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
 									payload:"EVN_HNT"
 								},
 								{
 									content_type:"postback",
 									title:"EVN HCM",
-									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
 									payload:"EVN_HN"
 								}
 							];
@@ -107,19 +116,19 @@ server.get('/', (req, res, next) => {
 								{
 									content_type:"text",
 									title:"VietJet Air",
-									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
 									payload:"VIETJET"
 								},
 								{
 									content_type:"text",
 									title:"Vietname Airline",
-									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
 									payload:"VNA"
 								},
 								{
 									content_type:"text",
 									title:"Jestar Pacific",
-									//image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
+									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
 									payload:"JESTAR"
 								}
 							];
@@ -135,15 +144,6 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Ban muon thanh toan bao hiem');
 						break;	
 					case 'menu:SAVING_PAYLOAD':
-						/*
-						let buttons = quickreplies.map(title => {
-							return {
-								title,
-								content_type: "text",
-								payload: "null"
-							}
-          	});
-						*/
 						
 						const buttons = 
 							[
@@ -166,10 +166,10 @@ server.get('/', (req, res, next) => {
 									payload:"SAVE_12M"
 								}
 							];
-						const textSave = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						const text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
 						f.quick(sender, {
-							textSave,
+							text,
 							buttons
 						});
 						
