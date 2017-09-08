@@ -46,7 +46,10 @@ class FBeamer {
 					try {
 						if(hash !== signature.split("=")[1]) {
 							throw new Error("Invalid Signature");
-						} 
+						}
+						else {
+							console.log(' >>>>> Valid Signature <<<<< ');
+						}
 					} catch(e) {
 							console.log('verifySignature: ' + e);
 							res.send(500, e);
