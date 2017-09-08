@@ -114,35 +114,29 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
 						break;
 					case 'menu:PAY_AIR_TICKET':
-						//f.txt(sender, 'Ban muon thanh toan ve may bay');
+						//f.txt(sender, 'Ban muon thanh toan ve ma byay');
 						
-						let buttonsA = 
-							[
-								{
-									content_type:"text",
-									title:"JSP",
-									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
-									payload:"JSP"
-								},
-								{
-									content_type:"text",
-									title:"VNA",
-									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
-									payload:"VNA"
-								},
-								{
-									content_type:"text",
-									title:"VJA",
-									image_url:"http://www.vietinbank.vn/vtbresource/web/export/system/modules/com.vietinbank.cardtemplate/resources/img/logo.png",
-									payload:"VJ"
-								}
-							];
-						let textA = 'Ban muon thanh toan ve may bay?';
-						
-						f.quick(sender, {
-							textA,
-							buttonsA
-						});
+						let data = {
+										text: 'Ban muon thanh toan ve ma byay?',
+										buttons: [{
+												type: 'postback',
+												title: 'Jestar Pacific',
+												payload: 'PAY_AIR_TICKET_JSP'
+											},
+											{
+												type: 'postback',
+												title: 'VietNam Airline',
+												payload: 'PAY_AIR_TICKET_VNA'
+											},
+											{
+												type: 'postback',
+												title: 'VietJet Air',
+												payload: 'PAY_AIR_TICKET_VJ'
+											}				
+										]
+									}
+								console.log('dangkydichvu button data: ' + JSON.stringify(data));
+								f.btn(sender, data);
 						
 						/*
 						const buttonATs = 
