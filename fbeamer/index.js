@@ -258,7 +258,7 @@ class FBeamer {
 			}
 		}
 		
-		console.log('quick obj: ' + obj);
+		console.log('quick obj: ' + JSON.stringify(obj));
 		
 		this.sendMessage(obj)
 			.catch(error => console.log('quick: ' + error));
