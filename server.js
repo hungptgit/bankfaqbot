@@ -297,6 +297,32 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
 					});
 			}
+			
+			if (message && message.quick_reply) {
+				let quickReply = message.quick_reply.value;
+				switch(quickReply) {
+					case 'SAVE_3M':
+						f.txt(sender, 'Lai suat tien gui tiet kiem 3 thang o VietinBank hien dang la 4,3%');
+						break;
+					case 'SAVE_6M':
+						f.txt(sender, 'Lai suat tien gui tiet kiem 6 thang o VietinBank hien dang la 5,3%');
+						break;
+					case 'SAVE_12M':	
+						f.txt(sender, 'Lai suat tien gui tiet kiem 12 thang o VietinBank hien dang la 6,8%');
+						break;
+					default:
+						f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(message.quick_reply));
+						break;		
+				}
+			}
+			
+			if (message && message.attachments) {
+				let coord = message.payload.coordinates;
+				let lat = coord.lat;
+        let long = coord.long;
+				
+				f.txt(sender, 'Ban dang o lat : ' + lat + ' ,long : ' + long + ', gan ban co cac phong giao dich sau cua VietinBank');
+			}
 		});
 		
 		return next();
