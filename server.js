@@ -50,7 +50,7 @@ server.get('/', (req, res, next) => {
 			
 			//console.log(postback.payload);
 			if (postback && postback.payload) {
-				console.log('postback.payload :' + postback.payload);
+				console.log('postback.payload :' + JSON.stringify(postback.payload));
 				
 				switch(postback.payload) {
 					case 'GET_STARTED_PAYLOAD':
@@ -124,7 +124,7 @@ server.get('/', (req, res, next) => {
 								f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
 								break;	
 							case 'xinchao':
-								f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
+								f.txt(sender, intent.value);
 								break;	
 							default:
 								console.log(`?  ${intent.value}`);
