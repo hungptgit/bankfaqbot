@@ -50,7 +50,7 @@ server.get('/', (req, res, next) => {
 			
 			//console.log(postback.payload);
 			if (postback && postback.payload) {
-				console.log('postback.payload :' + JSON.stringify(postback.payload));
+				console.log('postback.payload :' + postback.payload);
 				
 				switch(postback.payload) {
 					case 'GET_STARTED_PAYLOAD':
