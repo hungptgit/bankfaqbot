@@ -251,12 +251,23 @@ server.get('/', (req, res, next) => {
 							case 'dangkydichvu':
 								//f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
 								let data = {
-										text: '',
+										text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
 										buttons: [{
-											type: 'postback',
-											title: 'FinBot',
-											payload: 'REG_FINBOT'
-										}]
+												type: 'postback',
+												title: 'FinBot',
+												payload: 'REG_FINBOT'
+											},
+											{
+												type: 'postback',
+												title: 'iPay',
+												payload: 'REG_IPAY'
+											},
+											{
+												type: 'postback',
+												title: 'eFAST',
+												payload: 'REG_EFAST'
+											}				
+										]
 									}
 								console.log('dangkydichvu button data: ' + JSON.stringify(data));
 								f.btn(sender, data);

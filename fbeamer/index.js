@@ -241,7 +241,8 @@ class FBeamer {
 				}
 			}
 		}
-
+		console.log('btn obj: ' + JSON.stringify(obj));
+		
 		this.sendMessage(obj)
 			.catch(error => console.log('btn: ' + error));
 	}
