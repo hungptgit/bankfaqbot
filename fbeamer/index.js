@@ -46,17 +46,15 @@ class FBeamer {
 					let hmac = crypto.createHmac('sha1', this.APP_SECRET);
 					let ourSignature = `sha1=${hmac.update(blob).digest('hex')}`;
 
-					let theirSignature = req.headers['x-hub-signature'];
-
 					let bufferA = Buffer.from(ourSignature, 'utf8');
-					let bufferB = Buffer.from(theirSignature, 'utf8');
+					let bufferB = Buffer.from(signature, 'utf8');
 					
 					//let hash = crypto.createHmac('sha1', this.APP_SECRET).update(JSON.stringify(req.body)).digest('hex');
 					try {
 						//if(hash !== signature.split("=")[1]) {
-						if(bufferA !== bufferB) {
+						if(!bufferA.equals(bufferB)) {
 							console.log(' >>>>> bufferA: ' + bufferA);
-							console.log(' >>>>> bufferA: ' + bufferB);
+							console.log(' >>>>> bufferB: ' + bufferB);
 							throw new Error("Invalid Signature");
 						}
 						else {
