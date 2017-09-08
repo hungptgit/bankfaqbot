@@ -321,10 +321,10 @@ server.get('/', (req, res, next) => {
 			
 			if (message && message.attachments) {
 				console.log('message.attachments: ' + JSON.stringify(message.attachments));
-				let coord = message.attachments.payload.coordinates;
+				let locTitle = message.attachments[0].title;
+				let coord = message.attachments[0].payload.coordinates;
 				let locLat = coord.lat;
         let locLong = coord.long;
-				let locTitle = message.attachments.title;
 				f.txt(sender, 'Ban dang o lat : ' + locLat + ' ,long : ' + locLong + ' : ' + locTitle + ', gan ban co cac phong giao dich sau cua VietinBank: [123 Xa Dan] [15 Nam Dong] [19 Tay Son]');
 			}
 		});
