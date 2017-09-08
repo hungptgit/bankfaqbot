@@ -300,6 +300,8 @@ server.get('/', (req, res, next) => {
 			
 			if (message && message.quick_reply) {
 				let quickReply = message.quick_reply;
+				console.log('quickReply: ' + JSON.stringify(message.quick_reply));
+				
 				switch(quickReply) {
 					case 'SAVE_3M':
 						f.txt(sender, 'Lai suat tien gui tiet kiem 3 thang o VietinBank hien dang la 4,3%');
@@ -317,11 +319,12 @@ server.get('/', (req, res, next) => {
 			}
 			
 			if (message && message.attachments) {
-				let coord = message.payload.coordinates;
-				let lat = coord.lat;
-        let long = coord.long;
-				
-				f.txt(sender, 'Ban dang o lat : ' + lat + ' ,long : ' + long + ', gan ban co cac phong giao dich sau cua VietinBank');
+				let coord = message.attachments.payload.coordinates;
+				let locLat = coord.lat;
+        let locLong = coord.long;
+				let locTitle = coord.title;
+				console.log('coord: ' + JSON.stringify(coord));
+				f.txt(sender, 'Ban dang o lat : ' + locLat + ' ,long : ' + locLong + ' : ' + locTitle + ', gan ban co cac phong giao dich sau cua VietinBank: [123 Xa Dan] [15 Nam Dong] [19 Tay Son]');
 			}
 		});
 		
