@@ -264,7 +264,7 @@ class FBeamer {
 						elements:[
 								 {
 									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
-									//image_url:"https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1",
+									image_url:"http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
 									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
 									default_action: {
 										type: "web_url",
@@ -289,11 +289,11 @@ class FBeamer {
 								,
 								{
 									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
-									//image_url:"https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1",
+									image_url:"http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
 									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
 									default_action: {
 										type: "web_url",
-										url: "https://peterssendreceiveapp.ngrok.io/view?item=103",
+										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
 										//messenger_extensions: true,
 										//webview_height_ratio: "tall",
 										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
