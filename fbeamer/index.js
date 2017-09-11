@@ -263,12 +263,12 @@ class FBeamer {
 						template_type: "generic",
 						elements:[
 								 {
-									title:"Welcome to Peter s Hats",
+									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
 									//image_url:"https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1",
-									subtitle:"We ve got the right hat for everyone.",
+									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
 									default_action: {
 										type: "web_url",
-										url: "https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1"
+										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html"
 										//messenger_extensions: true,
 										//webview_height_ratio: "tall",
 										//fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
@@ -276,21 +276,21 @@ class FBeamer {
 									buttons:[
 										{
 											type:"web_url",
-											url:"https://www.vietinbank.vn/sites/mediafile/VTB111754",
-											title:"View Website"
+											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+											title:"Xem chi tiết"
 										},{
 											type:"postback",
-											title:"Start Chatting",
-											payload:"DEVELOPER_DEFINED_PAYLOAD"
+											title:"Đăng ký nhận tin",
+											payload:"NEWS_BOT"
 										}              
 									]      
 								}
 								
 								,
 								{
-									title:"Welcome to Peter s Hats 1",
-									//image_url:"https://petersfancybrownhats.com/company_image.png",
-									subtitle:"We ve got the right hat for everyone.",
+									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
+									//image_url:"https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1",
+									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
 									default_action: {
 										type: "web_url",
 										url: "https://peterssendreceiveapp.ngrok.io/view?item=103",
@@ -301,14 +301,14 @@ class FBeamer {
 									buttons:[
 										{
 											type:"web_url",
-											url:"https://petersfancybrownhats.com",
-											title:"View Website"
+											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+											title:"Xem chi tiết"
 										},{
 											type:"postback",
-											title:"Start Chatting",
-											payload:"DEVELOPER_DEFINED_PAYLOAD1"
+											title:"Đăng ký nhận tin",
+											payload:"NEWS_BOT"
 										}              
-									]      
+									]    
 								}
 								
 							]
