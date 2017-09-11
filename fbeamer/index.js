@@ -370,6 +370,8 @@ class FBeamer {
 
 	// Quick Replies
 	quick(id, data) {
+		console.log('quick obj: ' + JSON.stringify(data));
+		
 		let obj = {
 			recipient: {
 				id

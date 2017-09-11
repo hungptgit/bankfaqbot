@@ -184,6 +184,8 @@ server.get('/', (req, res, next) => {
 							buttonClocks
 						};
 						
+						console.log('quickClock data:' + JSON.stringify(data));
+						
 						f.quick(sender, data);
 						
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
