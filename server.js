@@ -179,10 +179,12 @@ server.get('/', (req, res, next) => {
 							];
 						let text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
 						
-						f.quick(sender, {
+						let data = {
 							text,
 							buttons
-						});
+						};
+						
+						f.quick(sender, data);
 						
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;	
