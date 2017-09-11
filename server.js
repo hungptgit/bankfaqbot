@@ -38,7 +38,7 @@ server.get('/', (req, res, next) => {
 });
 
 
-//agenda.on('ready', () => {
+agenda.on('ready', () => {
 	// Handle incoming
 	server.post('/', (req, res, next) => {
 		f.incoming(req, res, msg => {
@@ -336,8 +336,8 @@ server.get('/', (req, res, next) => {
 		return next();
 	});
 
-//	agenda.start();
-//});
+	agenda.start();
+});
 
 // Persistent Menu
 f.showPersistent(
