@@ -224,6 +224,75 @@ class FBeamer {
 			.catch(error => console.log('img: ' + error));
 	}
 	
+	news(id, data) {
+  	//var queryUrl = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=extracts&exintro&explaintext&exsentences=5&exlimit=max&gsrsearch=" + query;
+		
+		let obj = {
+			recipient: {
+				id: id
+			},
+			message: {
+				attachment: {
+					type: "template",
+					payload: {
+						template_type: "generic",
+						elements:[
+								 {
+									title:"Welcome to Peter\'s Hats",
+									image_url:"https://petersfancybrownhats.com/company_image.png",
+									subtitle:"We\'ve got the right hat for everyone.",
+									default_action: {
+										"type": "web_url",
+										"url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
+										"messenger_extensions": true,
+										"webview_height_ratio": "tall",
+										"fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+									},
+									buttons:[
+										{
+											type:"web_url",
+											url:"https://petersfancybrownhats.com",
+											title:"View Website"
+										},{
+											type:"postback",
+											title:"Start Chatting",
+											payload:"DEVELOPER_DEFINED_PAYLOAD"
+										}              
+									]      
+								},
+								{
+									title:"Welcome to Peter\'s Hats 1",
+									image_url:"https://petersfancybrownhats.com/company_image.png",
+									subtitle:"We\'ve got the right hat for everyone.",
+									default_action: {
+										"type": "web_url",
+										"url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
+										"messenger_extensions": true,
+										"webview_height_ratio": "tall",
+										"fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+									},
+									buttons:[
+										{
+											type:"web_url",
+											url:"https://petersfancybrownhats.com",
+											title:"View Website"
+										},{
+											type:"postback",
+											title:"Start Chatting",
+											payload:"DEVELOPER_DEFINED_PAYLOAD1"
+										}              
+									]      
+								}
+							]
+						}
+					}
+				}
+			}
+		
+	this.sendMessage(obj)
+			.catch(error => console.log('news: ' + error));
+}
+	
 	// A button
 	btn(id, data) {
 		let obj = {
