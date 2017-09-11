@@ -264,14 +264,14 @@ class FBeamer {
 						elements:[
 								 {
 									title:"Welcome to Peter s Hats",
-									image_url:"https://www.vietinbank.vn/sites/mediafile/VTB111754",
+									//image_url:"https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1",
 									subtitle:"We ve got the right hat for everyone.",
 									default_action: {
 										type: "web_url",
-										url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin",
+										url: "https://www.vietinbank.vn/web/home/vn/news/16/11/lam-viec-qua-mang-xa-hoi-se-soan-ngoi-thu-dien-tu.html&p=1"
 										//messenger_extensions: true,
-										webview_height_ratio: "tall",
-										fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
+										//webview_height_ratio: "tall",
+										//fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
 									},
 									buttons:[
 										{
@@ -285,18 +285,18 @@ class FBeamer {
 										}              
 									]      
 								}
-								/*
+								
 								,
 								{
 									title:"Welcome to Peter s Hats 1",
-									image_url:"https://petersfancybrownhats.com/company_image.png",
+									//image_url:"https://petersfancybrownhats.com/company_image.png",
 									subtitle:"We ve got the right hat for everyone.",
 									default_action: {
 										type: "web_url",
 										url: "https://peterssendreceiveapp.ngrok.io/view?item=103",
-										messenger_extensions: true,
-										webview_height_ratio: "tall",
-										fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+										//messenger_extensions: true,
+										//webview_height_ratio: "tall",
+										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
 									},
 									buttons:[
 										{
@@ -310,7 +310,7 @@ class FBeamer {
 										}              
 									]      
 								}
-								*/
+								
 							]
 						}
 					}
