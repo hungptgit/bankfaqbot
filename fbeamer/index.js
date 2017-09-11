@@ -285,11 +285,10 @@ class FBeamer {
 										}              
 									]      
 								}
-								
 								,
 								{
 									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
-									image_url:"http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
+									image_url:"https://thebank.vn/uploads/2014/03/Vietinbank-tuyen-dung.jpg",
 									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
 									default_action: {
 										type: "web_url",
@@ -310,7 +309,30 @@ class FBeamer {
 										}              
 									]    
 								}
-								
+								,
+								{
+									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
+									image_url:"http://image.bnews.vn/MediaUpload/Medium/2017/05/04/090646-bo-nhan-dien-thuong-hieu-vietinbank-2017-1.jpg",
+									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
+									default_action: {
+										type: "web_url",
+										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+										//messenger_extensions: true,
+										//webview_height_ratio: "tall",
+										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+									},
+									buttons:[
+										{
+											type:"web_url",
+											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+											title:"Xem chi tiết"
+										},{
+											type:"postback",
+											title:"Đăng ký nhận tin",
+											payload:"NEWS_BOT"
+										}              
+									]    
+								}
 							]
 						}
 					}
