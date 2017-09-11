@@ -269,9 +269,9 @@ class FBeamer {
 									default_action: {
 										type: "web_url",
 										url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin",
-										messenger_extensions: true,
+										//messenger_extensions: true,
 										webview_height_ratio: "tall",
-										fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+										fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
 									},
 									buttons:[
 										{
