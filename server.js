@@ -156,7 +156,7 @@ server.get('/', (req, res, next) => {
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
 					case 'NEWS_BOT':
-						buttons = 
+						let buttons = 
 							[
 								{
 									content_type:"text",
@@ -177,7 +177,7 @@ server.get('/', (req, res, next) => {
 									payload:"NEWS_16h30"
 								}
 							];
-						text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
+						let text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
 						
 						f.quick(sender, {
 							text,
