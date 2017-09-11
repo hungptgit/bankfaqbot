@@ -91,6 +91,7 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
 						break;
 					case 'menu:REG_PAYLOAD':
+						
 						let data = {
 								text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
 								buttons: [{
