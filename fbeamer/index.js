@@ -155,6 +155,7 @@ class FBeamer {
 						messageId: body.message_id
 					});
 				} else {
+					console.log('>>>>>>>>>> sendMessage err: ' + error);
 					reject(error);
 				}
 			});
