@@ -263,9 +263,9 @@ class FBeamer {
 						template_type: "generic",
 						elements:[
 								 {
-									title:"Welcome to Peter\'s Hats",
+									title:"Welcome to Peter s Hats",
 									image_url:"https://petersfancybrownhats.com/company_image.png",
-									subtitle:"We\'ve got the right hat for everyone.",
+									subtitle:"We ve got the right hat for everyone.",
 									default_action: {
 										type: "web_url",
 										url: "https://peterssendreceiveapp.ngrok.io/view?item=103",
@@ -286,9 +286,9 @@ class FBeamer {
 									]      
 								},
 								{
-									title:"Welcome to Peter\'s Hats 1",
+									title:"Welcome to Peter s Hats 1",
 									image_url:"https://petersfancybrownhats.com/company_image.png",
-									subtitle:"We\'ve got the right hat for everyone.",
+									subtitle:"We ve got the right hat for everyone.",
 									default_action: {
 										type: "web_url",
 										url: "https://peterssendreceiveapp.ngrok.io/view?item=103",
