@@ -162,6 +162,30 @@ class FBeamer {
 		});
 	}
 	
+	sendNews(payload) {
+		return new Promise((resolve, reject) => {
+			// Create an HTTP POST request
+			request({
+				uri: 'https://graph.facebook.com/v2.6/me/messages',
+				qs: {
+					access_token: this.PAGE_ACCESS_TOKEN
+				},
+				method: 'POST',
+				json: true,
+				body: payload
+			}, (error, response, body) => {
+				if(!error && response.statusCode === 200) {
+					resolve({
+						messageId: body.message_id
+					});
+				} else {
+					console.log('>>>>>>>>>> sendNews err: ' + error);
+					reject(error);
+				}
+			});
+		});
+	}
+	
 	// Show Persistent Menu
 	showPersistent(payload) {
 		/*
@@ -292,7 +316,7 @@ class FBeamer {
 		
 	console.log('--> news data: ' + JSON.stringify(obj))	;
 							
-	this.sendMessage(obj)
+	this.sendNews(obj)
 			.catch(error => console.log('news: ' + error));
 }
 	
