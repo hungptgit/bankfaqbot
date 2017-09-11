@@ -74,7 +74,8 @@ agenda.on('ready', () => {
 						//f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
-						f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
+						f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
+						//f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
 						/*
 						vtb(messageTxt, 'current')
 							.then(response => {
@@ -234,7 +235,7 @@ agenda.on('ready', () => {
 										buttons: [{
 												type: 'web_url',
 												title: 'FinBot',
-												url: 'http://hungpt.handcraft.com/'
+												url: 'http://hungpt.handcraft.com/index.html?fbid='+sender
 											},
 											{
 												type: 'web_url',
@@ -314,9 +315,20 @@ agenda.on('ready', () => {
 					case 'SAVE_12M':	
 						f.txt(sender, 'Lai suat tien gui tiet kiem 12 thang o VietinBank hien dang la 6,8%');
 						break;
-					case 'NEWS_8h30' || 'NEWS_11h' || 'NEWS_16h30':
+					case 'NEWS_16h30':
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
 						break;	
+					case 'NEWS_11h':
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						break;	
+					case 'NEWS_8h30':
+						agenda.now('createReminder', {
+							sender,
+							datetime: context.datetime,
+							task: context.task
+						});
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						break;		
 					default:
 						f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(quickReply));
 						break;		

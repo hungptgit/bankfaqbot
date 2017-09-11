@@ -344,6 +344,74 @@ class FBeamer {
 	this.sendNews(obj)
 			.catch(error => console.log('news: ' + error));
 }
+
+acctInfo(id, data) {
+  	
+		let obj = {
+			recipient: {
+				id: id
+			},
+			message: {
+				attachment: {
+					type: "template",
+					payload: {
+						template_type: "generic",
+						elements:[
+								 {
+									title:"1010*****312323: TRAN SON TUNG",
+									image_url:"https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+									subtitle:"Trạng thái: Active, Số dư khả dụng: 3,123,567 đ",
+									buttons:[
+										{ type:"postback",
+											title:"Xem sao kê",
+											payload:"menu:MNSTMT_PAYLOAD"
+										},{
+											type:"postback",
+											title:"Chuyển khoản",
+											payload:"menu:XFER_PAYLOAD"
+										},{
+											type:"postback",
+											title:"Thanh toán",
+											payload:"menu:PAYMENT_PAYLOAD"
+										}               
+									]      
+								}
+								,
+								{
+									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
+									image_url:"http://image.bnews.vn/MediaUpload/Medium/2017/05/04/090646-bo-nhan-dien-thuong-hieu-vietinbank-2017-1.jpg",
+									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
+									default_action: {
+										type: "web_url",
+										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+										//messenger_extensions: true,
+										//webview_height_ratio: "tall",
+										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+									},
+									buttons:[
+										{
+											type:"web_url",
+											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+											title:"Xem chi tiết"
+										},{
+											type:"postback",
+											title:"Đăng ký nhận tin",
+											payload:"NEWS_BOT"
+										}              
+									]    
+								}
+							]
+						}
+					}
+				}
+			}
+		
+	console.log('--> news data: ' + JSON.stringify(obj))	;
+							
+	this.sendNews(obj)
+			.catch(error => console.log('news: ' + error));
+}
+		
 	
 	// A button
 	btn(id, data) {
