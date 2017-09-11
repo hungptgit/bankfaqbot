@@ -90,10 +90,8 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
 						break;	
 					case 'menu:PAY_ELECTRIC':
-						f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
-						
-						/*
-						const buttonEVNs = 
+						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
+						buttons = 
 							[
 								{
 									content_type:"postback",
@@ -107,13 +105,13 @@ server.get('/', (req, res, next) => {
 								}
 							];
 						
-						const textEVN = 'Ban muon thanh toan hoa don tien dien';
+						text = 'Ban muon thanh toan hoa don tien dien';
 						
 						f.btn(sender, {
-							textEVN,
-							buttonEVNs
+							text,
+							buttons
 						});
-						*/
+						
 						break;
 					case 'menu:PAY_WARTER':
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
@@ -188,8 +186,13 @@ server.get('/', (req, res, next) => {
 						break;	
 						
 					case 'REG_EFAST':
-						f.txt(sender, 'Ban muon dang ky dich vu Internet Banking cho KHDN');
-						break;	
+						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN');
+						break;
+					
+					case 'NEWS_8h30' || 'NEWS_11h' || 'NEWS_16h30':
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						break;		
+						
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
 						break;
