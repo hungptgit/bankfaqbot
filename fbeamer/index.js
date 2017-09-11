@@ -264,11 +264,11 @@ class FBeamer {
 						elements:[
 								 {
 									title:"Welcome to Peter s Hats",
-									image_url:"https://petersfancybrownhats.com/company_image.png",
+									image_url:"https://www.vietinbank.vn/sites/mediafile/VTB111754",
 									subtitle:"We ve got the right hat for everyone.",
 									default_action: {
 										type: "web_url",
-										url: "https://peterssendreceiveapp.ngrok.io/view?item=103",
+										url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin",
 										messenger_extensions: true,
 										webview_height_ratio: "tall",
 										fallback_url: "https://peterssendreceiveapp.ngrok.io/"
@@ -276,7 +276,7 @@ class FBeamer {
 									buttons:[
 										{
 											type:"web_url",
-											url:"https://petersfancybrownhats.com",
+											url:"https://www.vietinbank.vn/sites/mediafile/VTB111754",
 											title:"View Website"
 										},{
 											type:"postback",
@@ -284,7 +284,9 @@ class FBeamer {
 											payload:"DEVELOPER_DEFINED_PAYLOAD"
 										}              
 									]      
-								},
+								}
+								/*
+								,
 								{
 									title:"Welcome to Peter s Hats 1",
 									image_url:"https://petersfancybrownhats.com/company_image.png",
@@ -308,6 +310,7 @@ class FBeamer {
 										}              
 									]      
 								}
+								*/
 							]
 						}
 					}
