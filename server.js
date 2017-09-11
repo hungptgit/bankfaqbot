@@ -156,32 +156,32 @@ server.get('/', (req, res, next) => {
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
 					case 'NEWS_BOT':
-						let buttons = 
+						let buttonClocks = 
 							[
 								{
 									content_type:"text",
 									title:"08:30",
-									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+									image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
 									payload:"NEWS_8h30"
 								},
 								{
 									content_type:"text",
 									title:"11:00",
-									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+									image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
 									payload:"NEWS_11h"
 								},
 								{
 									content_type:"text",
 									title:"16:30",
-									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+									image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
 									payload:"NEWS_16h30"
 								}
 							];
-						let text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
+						let textNewsBot = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
 						
 						let data = {
-							text,
-							buttons
+							textNewsBot,
+							buttonClocks
 						};
 						
 						f.quick(sender, data);
