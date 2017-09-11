@@ -189,9 +189,7 @@ server.get('/', (req, res, next) => {
 						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN');
 						break;
 					
-					case 'NEWS_8h30' || 'NEWS_11h' || 'NEWS_16h30':
-						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
-						break;		
+						
 						
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
@@ -316,6 +314,9 @@ server.get('/', (req, res, next) => {
 					case 'SAVE_12M':	
 						f.txt(sender, 'Lai suat tien gui tiet kiem 12 thang o VietinBank hien dang la 6,8%');
 						break;
+					case 'NEWS_8h30' || 'NEWS_11h' || 'NEWS_16h30':
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						break;	
 					default:
 						f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(quickReply));
 						break;		
