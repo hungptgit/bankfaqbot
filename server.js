@@ -89,6 +89,9 @@ agenda.on('ready', () => {
 						break;	
 					case 'menu:XFER_PAYLOAD':
 						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
+						break;
+					case 'menu:REG_PAYLOAD':
+						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
 						break;	
 					case 'menu:PAY_ELECTRIC':
 						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
@@ -117,7 +120,7 @@ agenda.on('ready', () => {
 					case 'menu:PAY_WARTER':
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
 						break;
-					case 'menu:PAY_AIR_TICKET':
+					case 'menu:NEWS_PAYLOAD':
 						f.news(sender, 'Ban muon thanh toan ve ma bay');
 						
 						break;
@@ -145,9 +148,6 @@ agenda.on('ready', () => {
 									title:"12 tháng",
 									image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
 									payload:"SAVE_12M"
-								},
-								{
-									content_type:"location"
 								}
 							];
 						text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
@@ -156,6 +156,21 @@ agenda.on('ready', () => {
 						
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
+					case 'menu:LOCATION_PAYLOAD':
+						
+						 buttons = 
+							[
+							
+								{
+									content_type:"location"
+								}
+							];
+						text = 'Bạn muốn tìm các phòng giao dịch ở quanh khu vực nào';
+						
+						f.quick(sender, {text, buttons});
+						
+						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+						break;	
 					case 'NEWS_BOT':
 						buttons = 
 							[
@@ -373,9 +388,9 @@ f.showPersistent(
         "type":"nested",
         "call_to_actions":[
             {
-							"type": "web_url",
-							"title": "Đăng ký dịch vụ",
-							"url": "http://vietinbank.vn/"
+							"title":"Đăng ký dịch vụ",
+              "type":"postback",
+              "payload":"menu:REG_PAYLOAD"
 						},
             {
               "title":"Gửi tiết kiệm",
@@ -383,36 +398,36 @@ f.showPersistent(
               "payload":"menu:SAVING_PAYLOAD"
             },
 						{
-							"type": "web_url",
-							"title": "Khởi tạo khoản vay",
-							"url": "http://vietinbank.vn/"
+							"title":"Thanh toán",
+							"type":"postback",
+							"payload":"menu:PAY_ELECTRIC"
 						},
 						{
-							"title":"Thanh toán",
+							"title":"Thông tin",
 							"type":"nested",
 							"call_to_actions":[
 									{
-										"title":"Tiền điện",
+										"title":"Tin hot",
 										"type":"postback",
-										"payload":"menu:PAY_ELECTRIC"
+										"payload":"menu:NEWS_PAYLOAD"
 									},
 									{
-										"title":"Tiền nước",
+										"title":"Tìm quanh đây",
+										"type":"postback",
+										"payload":"menu:LOCATION_PAYLOAD"
+									},
+									{
+										"title":"Tỷ giá, lãi suất",
 										"type":"postback",
 										"payload":"menu:PAY_WARTER"
 									},
 									{
-										"title":"Vé máy bay",
-										"type":"postback",
-										"payload":"menu:PAY_AIR_TICKET"
-									},
-									{
-										"title":"Bảo hiểm",
-										"type":"postback",
-										"payload":"menu:PAY_ISSURANCE"
-									},
-          ]
-			}
+										"type": "web_url",
+										"title": "Hỗ trợ",
+										"url": "http://vietinbank.vn/"
+									}
+          			]
+							}
           ]
 			}
 		]},

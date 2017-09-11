@@ -358,9 +358,9 @@ acctInfo(id, data) {
 						template_type: "generic",
 						elements:[
 								 {
-									title:"1010*****312323: TRAN SON TUNG",
+									title:"DDA: 1010*****312323 TRAN SON TUNG",
 									image_url:"https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
-									subtitle:"Trạng thái: Active, Số dư khả dụng: 3,123,567 đ",
+									subtitle:"Trạng thái: Active,\n Số dư khả dụng: 3,123,567 đ, \n ",
 									buttons:[
 										{ type:"postback",
 											title:"Xem sao kê",
@@ -378,27 +378,15 @@ acctInfo(id, data) {
 								}
 								,
 								{
-									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
-									image_url:"http://image.bnews.vn/MediaUpload/Medium/2017/05/04/090646-bo-nhan-dien-thuong-hieu-vietinbank-2017-1.jpg",
-									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
-									default_action: {
-										type: "web_url",
-										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
-										//messenger_extensions: true,
-										//webview_height_ratio: "tall",
-										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
-									},
+									title:"DDA: 1010*****312556 TRAN SON TUNG",
+									image_url:"https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+									subtitle:"Trạng thái: Closed,\n Số dư khả dụng: 0 đ, \n ",
 									buttons:[
-										{
-											type:"web_url",
-											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
-											title:"Xem chi tiết"
-										},{
-											type:"postback",
-											title:"Đăng ký nhận tin",
-											payload:"NEWS_BOT"
+										{ type:"postback",
+											title:"Xem sao kê",
+											payload:"menu:MNSTMT_PAYLOAD"
 										}              
-									]    
+									]      
 								}
 							]
 						}
