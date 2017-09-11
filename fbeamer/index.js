@@ -287,12 +287,12 @@ class FBeamer {
 								}
 								,
 								{
-									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
+									title:"VietinBank tuyển dụng gần 300 nhân sự cho chi nhánh",
 									image_url:"https://thebank.vn/uploads/2014/03/Vietinbank-tuyen-dung.jpg",
-									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
+									subtitle:"Đáp ứng yêu cầu nhân sự cho chiến lược phát triển, Ngân hàng TMCP Công Thương Việt Nam (VietinBank) tuyển dụng gần 300 chỉ tiêu tại các vị trí nghiệp vụ và hỗ trợ tín dụng cho các chi nhánh trên toàn hệ thống...",
 									default_action: {
 										type: "web_url",
-										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+										url: "https://www.vietinbank.vn/vn/tin-tuc/VietinBank-tuyen-dung-gan-300-nhan-su-cho-chi-nhanh-20170807233640.html",
 										//messenger_extensions: true,
 										//webview_height_ratio: "tall",
 										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
@@ -300,7 +300,7 @@ class FBeamer {
 									buttons:[
 										{
 											type:"web_url",
-											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
+											url:"https://www.vietinbank.vn/vn/tin-tuc/VietinBank-tuyen-dung-gan-300-nhan-su-cho-chi-nhanh-20170807233640.html",
 											title:"Xem chi tiết"
 										},{
 											type:"postback",

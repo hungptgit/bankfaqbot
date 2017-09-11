@@ -48,6 +48,15 @@ server.get('/', (req, res, next) => {
 				message
 			} = msg;
 			
+			let buttons;
+			let text;
+			
+			let quickData = {
+							text,
+							buttons
+						};
+			
+			
 			console.log('----> msg : ' + JSON.stringify(msg));
 			
 			if (postback && postback.payload) {
@@ -122,7 +131,7 @@ server.get('/', (req, res, next) => {
 						break;	
 					case 'menu:SAVING_PAYLOAD':
 						
-						let buttons = 
+						 buttons = 
 							[
 								{
 									content_type:"text",
@@ -146,12 +155,9 @@ server.get('/', (req, res, next) => {
 									content_type:"location"
 								}
 							];
-						let text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						 text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
 						
-						f.quick(sender, {
-							text,
-							buttons
-						});
+						f.quick(sender, quickData);
 						
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
@@ -179,14 +185,8 @@ server.get('/', (req, res, next) => {
 							];
 						text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
 						
-						let data = {
-							text,
-							buttons
-						};
-						
-						console.log('quickClock data:' + JSON.stringify(data));
-						
-						f.quick(sender, data);
+						console.log('quickClock data:' + JSON.stringify(quickData));
+						f.quick(sender, quickData);
 						
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;	
