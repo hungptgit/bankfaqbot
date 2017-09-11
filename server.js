@@ -91,7 +91,28 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
 						break;
 					case 'menu:REG_PAYLOAD':
-						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
+						let data = {
+								text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
+								buttons: [{
+										type: 'web_url',
+										title: 'FinBot',
+										url: 'http://hungpt.handcraft.com/index.html?fbid='+sender
+									},
+									{
+										type: 'web_url',
+										title: 'iPay',
+										url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
+									},
+									{
+										type: 'postback',
+										title: 'eFAST',
+										payload: 'REG_EFAST'
+									}				
+								]
+							}
+						console.log('dangkydichvu button data: ' + JSON.stringify(data));
+						f.btn(sender, data);
+
 						break;	
 					case 'menu:PAY_ELECTRIC':
 						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
@@ -117,16 +138,12 @@ agenda.on('ready', () => {
 						});
 						
 						break;
-					case 'menu:PAY_WARTER':
-						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
-						break;
+					
 					case 'menu:NEWS_PAYLOAD':
-						f.news(sender, 'Ban muon thanh toan ve ma bay');
+						f.news(sender, 'News Feed service');
 						
 						break;
-					case 'menu:PAY_ISSURANCE':
-						f.txt(sender, 'Ban muon thanh toan bao hiem');
-						break;	
+					
 					case 'menu:SAVING_PAYLOAD':
 						
 						 buttons = 
@@ -150,26 +167,22 @@ agenda.on('ready', () => {
 									payload:"SAVE_12M"
 								}
 							];
-						text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
 						
 						f.quick(sender, {text, buttons});
 						
 						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
 						break;
 					case 'menu:LOCATION_PAYLOAD':
-						
 						 buttons = 
 							[
-							
 								{
 									content_type:"location"
 								}
 							];
-						text = 'Bạn muốn tìm các phòng giao dịch ở quanh khu vực nào';
-						
+						text = 'Hãy cùng tìm các phòng giao dịch VietinBank gần nhất nào. Cho tôi biết bạn đang ở đâu';
 						f.quick(sender, {text, buttons});
-						
-						//f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+				
 						break;	
 					case 'NEWS_BOT':
 						buttons = 
