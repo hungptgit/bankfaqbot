@@ -234,8 +234,19 @@ agenda.on('ready', () => {
 								f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
 								break;
 							case 'chuyenkhoan':
-								f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+								let bankCode = firstEntity(entities, 'bankCode');
+								let sotien = firstEntity(entities, 'number');
+								if(!sotien) {
+									f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+								}	
+								else
+								{
+									f.txt(sender, 'Bạn muốn chuyển ' + sotien +'  toi <So tai khoan> tai ' + bankCode + '. Đang chuyển bạn đến trang xác thực OTP...');
+								}	
 								break;
+							case 'thanhtoanhoadon':
+								f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
+								break;	
 							case 'timdiadiem':
 								buttons = 
 									[
@@ -312,7 +323,10 @@ agenda.on('ready', () => {
 								console.log('dangkydichvu button data: ' + JSON.stringify(data));
 								f.btn(sender, data);
 								
-								break;	
+								break;
+							case 'tracuu':
+								f.txt(sender, 'Danh sách bạn cần như sau');
+								break;
 							case 'xinchao':
 								let greetings = firstEntity(entities, 'greetings');
 								let bye = firstEntity(entities, 'bye');
