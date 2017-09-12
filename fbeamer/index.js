@@ -432,7 +432,7 @@ newsSP(id, data) {
 						elements:[
 								 {
 									title:"VietinBank là ngân hàng duy nhất phát hành thẻ Diners Club tại Việt Nam",
-									image_url:"http://www.vietinbank.vn/sites/mediafile/VTB117586",
+									image_url:"http://baochinhphu.vn/Uploaded/nguyenvanhuan/2017_09_12/119%20Vietin%20k%C3%BD%20DSC_1247.jpg",
 									subtitle:"Ngày 11/9/2017 tại Hà Nội, VietinBank tổ chức Lễ ký kết Hợp đồng hợp tác toàn diện với Tổ chức thẻ Diners Club International (DCI). Với thỏa thuận này, VietinBank sẽ là ngân hàng độc quyền trong việc phát hành dòng sản phẩm thẻ Diners Club tại thị trường Việt Nam...",
 									default_action: {
 										type: "web_url",
@@ -456,7 +456,7 @@ newsSP(id, data) {
 								,
 								{
 									title:"VietinBank thu hộ tiền vé máy bay cho Jetstar Pacific Airlines",
-									image_url:"http://image.bnews.vn/MediaUpload/Medium/2017/05/04/090646-bo-nhan-dien-thuong-hieu-vietinbank-2017-1.jpg",
+									image_url:"http://vemaybaygiarevietmy.com/image/data/hang-hang-khong/jetstar-pacific-airlines/bl-ve-may-bay-jetstar-pacific-gia-re01.png",
 									subtitle:"Từ ngày 21/8/2017, VietinBank cung cấp dịch vụ thu hộ tiền vé máy bay dành cho các Đại lý của Jetstar Pacific Airlines (JPA) và các khách hàng đã đặt chỗ thành công trên hệ thống JPA",
 									default_action: {
 										type: "web_url",
@@ -472,32 +472,8 @@ newsSP(id, data) {
 											title:"Xem chi tiết"
 										},{
 											type:"postback",
-											title:"Thanh toán vé máy bay",
+											title:"Mua vé máy bay",
 											payload:"menu:PAY_ELECTRIC"
-										}              
-									]    
-								}
-								,
-								{
-									title:"VietinBank SME Club: Sự đón nhận từ cộng đồng doanh nghiệp",
-									image_url:"http://image.bnews.vn/MediaUpload/Medium/2017/05/04/090646-bo-nhan-dien-thuong-hieu-vietinbank-2017-1.jpg",
-									subtitle:"Vừa ra mắt trong tháng 7/2017, VietinBank SME Club - Câu lạc bộ các thành viên là khách hàng doanh nghiệp vừa và nhỏ (SME) đã nhận được những lời ngợi khen từ khách hàng...",
-									default_action: {
-										type: "web_url",
-										url: "http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
-										//messenger_extensions: true,
-										//webview_height_ratio: "tall",
-										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
-									},
-									buttons:[
-										{
-											type:"web_url",
-											url:"http://www.vietinbank.vn/vn/tin-tuc/VietinBank-SME-Club-Su-don-nhan-tu-cong-dong-doanh-nghiep-20170909135227.html",
-											title:"Xem chi tiết"
-										},{
-											type:"postback",
-											title:"Đăng ký nhận tin",
-											payload:"NEWS_BOT"
 										}              
 									]    
 								}
