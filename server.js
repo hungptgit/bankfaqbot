@@ -325,7 +325,7 @@ agenda.on('ready', () => {
 										buttons: [{
 												type: 'web_url',
 												title: 'Xác thực',
-												url: 'http://hungpt.handcraft.com/xfer.html?fbid='+sender+'&amt='+sotientietkiem+'&period='+kyhan
+												url: 'http://hungpt.handcraft.com/saving.html?fbid='+sender+'&amt='+sotientietkiem+'&period='+kyhan
 											},
 											{
 												type: 'postback',
