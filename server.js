@@ -116,14 +116,14 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
 						break;
 					case 'menu:PAY_WARTER':
-						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
+						f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
 						break;
 					case 'menu:NEWS_PAYLOAD':
 						f.news(sender, 'News Feed service');
 						
 						break;
-					case 'menu:PAY_ISSURANCE':
-						f.txt(sender, 'Ban muon thanh toan bao hiem');
+					case 'menu:MNSTMT_PAYLOAD':
+						f.txt(sender, 'Danh sách 5 giao dịch gần nhất của tài khoản 1010*****312323 TRAN SON TUNG \n 03/05/17 22:01 +5,000,000 CHUYEN LUONG \n 03/05/17 22:01 -5,000,000 TIET KIEM \n 03/05/17 22:01 -3,242,000 CHUYEN VO \n 03/05/17 22:01 -15,034,000 THANH TOAN EVN');
 						break;	
 					case 'menu:SAVING_PAYLOAD':
 						 buttons = 
@@ -157,7 +157,6 @@ agenda.on('ready', () => {
 						
 						 buttons = 
 							[
-							
 								{
 									content_type:"location"
 								}
@@ -238,12 +237,12 @@ agenda.on('ready', () => {
 								let sotien = fetchEntity(entities, 'number');
 								console.log(' >>>>>> sotien: ' + JSON.stringify(sotien));
 								
-								if(!sotien) {
+								if(!sotien ) {
 									f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 								}	
 								else
 								{
-									f.txt(sender, 'Bạn muốn chuyển ' + sotien.value +'  toi <So tai khoan> tai ' + bankCode.value + '. Đang chuyển bạn đến trang xác thực OTP...');
+									f.txt(sender, 'Bạn muốn chuyển ' + sotien[0].value +'  tới ' + sotien[1].value + ' tại ' + bankCode.value + '. Đang chuyển bạn đến trang xác thực OTP...');
 								}	
 								break;
 							case 'thanhtoanhoadon':
@@ -252,7 +251,6 @@ agenda.on('ready', () => {
 							case 'timdiadiem':
 								buttons = 
 									[
-
 										{
 											content_type:"location"
 										}

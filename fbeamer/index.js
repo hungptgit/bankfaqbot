@@ -507,7 +507,7 @@ acctInfo(id, data) {
 									subtitle:"Trạng thái: Active,\n Số dư khả dụng: 3,123,567 đ, \n ",
 									buttons:[
 										{ type:"postback",
-											title:"Xem sao kê",
+											title:"Xem 5 GD gần nhất",
 											payload:"menu:MNSTMT_PAYLOAD"
 										},{
 											type:"postback",
@@ -516,7 +516,7 @@ acctInfo(id, data) {
 										},{
 											type:"postback",
 											title:"Thanh toán",
-											payload:"menu:PAYMENT_PAYLOAD"
+											payload:"menu:PAY_ELECTRIC"
 										}               
 									]      
 								}
@@ -527,7 +527,7 @@ acctInfo(id, data) {
 									subtitle:"Trạng thái: Closed,\n Số dư khả dụng: 0 đ, \n ",
 									buttons:[
 										{ type:"postback",
-											title:"Xem sao kê",
+											title:"Xem 5 GD gần nhất",
 											payload:"menu:MNSTMT_PAYLOAD"
 										}              
 									]      
