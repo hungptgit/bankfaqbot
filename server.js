@@ -234,8 +234,8 @@ agenda.on('ready', () => {
 								break;
 							case 'chuyenkhoan':
 								let bankCode = entities.bankCode ? entities.bankCode[0].value : 'VietinBank';
-								let sotien = entities.number[0].value ? entities.number[0].value : 'undefined';
-								let taikhoanthuhuong = entities.number[1].value ? entities.number[1].value : 'undefined';
+								let sotien = entities.number ? entities.number[0].value : 'undefined';
+								let taikhoanthuhuong = entities.number ? entities.number[1].value : 'undefined';
 								console.log(' >>>>>> bankCode: ' + bankCode);
 								console.log(' >>>>>> sotien: ' + sotien);
 								console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
@@ -291,30 +291,51 @@ agenda.on('ready', () => {
 								}		
 								break;	
 							case 'guitietkiem':
-								buttons = 
-									[
-										{
-											content_type:"text",
-											title:"3 tháng",
-											image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-											payload:"SAVE_3M"
-										},
-										{
-											content_type:"text",
-											title:"6 tháng",
-											image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-											payload:"SAVE_6M"
-										},
-										{
-											content_type:"text",
-											title:"12 tháng",
-											image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-											payload:"SAVE_12M"
-										}
-									];
-								text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
+								let kyhan = entities.number ? entities.number[0].value : 'undefined';
+								let sotientietkiem = entities.number ? entities.number[1].value : 'undefined';
+								if(!kyhan || !sotientietkiem ) {
+									buttons = 
+										[
+											{
+												content_type:"text",
+												title:"3 tháng",
+												image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+												payload:"SAVE_3M"
+											},
+											{
+												content_type:"text",
+												title:"6 tháng",
+												image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+												payload:"SAVE_6M"
+											},
+											{
+												content_type:"text",
+												title:"12 tháng",
+												image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+												payload:"SAVE_12M"
+											}
+										];
+									text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
 
-								f.quick(sender, {text, buttons});
+									f.quick(sender, {text, buttons});
+								}
+								else {
+									data = {
+										text: 'Bạn muốn gửi ' + sotientietkiem +'  kỳ hạn ' + kyhan + ' tháng. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP',
+										buttons: [{
+												type: 'web_url',
+												title: 'Xác thực',
+												url: 'http://hungpt.handcraft.com/xfer.html?fbid='+sender+'&amt='+sotientietkiem+'&benAc='+kyhan+'&benBank='
+											},
+											{
+												type: 'postback',
+												title: 'Gửi TK lại',
+												payload: 'menu:SAVING_PAYLOAD'
+											}				
+										]
+									}
+									f.btn(sender, data);
+								}
 								break;	
 							case 'dangkydichvu':
 								//f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
@@ -398,13 +419,13 @@ agenda.on('ready', () => {
 				
 				switch(quickReply.payload) {
 					case 'SAVE_3M':
-						f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%');
+						f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 3 tháng theo cú pháp: GTK3 <So tien> \n VD: gtk3 1000000');
 						break;
 					case 'SAVE_6M':
-						f.txt(sender, 'Lãi suất gửi tiết kiệm 6 tháng tại VietinBank hiện đang là 5,3%');
+						f.txt(sender, 'Lãi suất gửi tiết kiệm 6 tháng tại VietinBank hiện đang là 5,3%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 6 tháng theo cú pháp: GTK6 <So tien> \n VD: gtk3 1000000');
 						break;
 					case 'SAVE_12M':	
-						f.txt(sender, 'Lãi suất gửi tiết kiệm 12 tháng tại VietinBank hiện đang là 6,8%');
+						f.txt(sender, 'Lãi suất gửi tiết kiệm 12 tháng tại VietinBank hiện đang là 6,8%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 12 tháng theo cú pháp: GTK12 <So tien> \n VD: gtk3 1000000');
 						break;
 					case 'NEWS_16h30':
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
