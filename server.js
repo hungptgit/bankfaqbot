@@ -249,7 +249,18 @@ agenda.on('ready', () => {
 								f.quick(sender, {text, buttons});
 								break;
 							case 'tintucsukien':
-								f.news(sender, 'News Feed service');
+								let newsType = firstEntity(entities, 'newsType');
+								switch (true) {
+									case (newsType.value == 'san pham dich vu'):	
+										f.newsSP(sender, 'News Feed service');
+										break;
+									case (newsType.value == 'khuyen mai'):
+										f.newsKM(sender, 'News Feed service');
+										break;
+									default:
+										f.news(sender, 'News Feed service');
+										break;
+								}		
 								break;	
 							case 'guitietkiem':
 								buttons = 
