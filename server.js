@@ -161,7 +161,7 @@ agenda.on('ready', () => {
 									content_type:"location"
 								}
 							];
-						text = 'Bạn muốn tìm các phòng giao dịch ở quanh khu vực nào';
+						text = 'Bạn muốn tìm các địa điểm giao dịch của VietinBank ở quanh khu vực nào';
 						
 						f.quick(sender, {text, buttons});
 						
@@ -233,16 +233,19 @@ agenda.on('ready', () => {
 								f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
 								break;
 							case 'chuyenkhoan':
-								let bankCode = firstEntity(entities, 'bankCode');
-								let sotien = fetchEntity(entities, 'number');
-								console.log(' >>>>>> sotien: ' + JSON.stringify(sotien));
+								let bankCode = entities.bankCode.value ? 'VietinBank' : entities.bankCode.value;
+								let sotien = entities.number[0].value;
+								let taikhoanthuhuong = entities.number[0].value;
+								console.log(' >>>>>> bankCode: ' + bankCode);
+								console.log(' >>>>>> sotien: ' + sotien);
+								console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
 								
-								if(!sotien ) {
+								if(!sotien || !taikhoanthuhuong) {
 									f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 								}	
 								else
 								{
-									f.txt(sender, 'Bạn muốn chuyển ' + sotien[0].value +'  tới ' + sotien[1].value + ' tại ' + bankCode.value + '. Đang chuyển bạn đến trang xác thực OTP...');
+									f.txt(sender, 'Bạn muốn chuyển ' + sotien +'  tới ' + taikhoanthuhuong + ' tại ' + bankCode.value + '. Đang chuyển bạn đến trang xác thực OTP...');
 								}	
 								break;
 							case 'thanhtoanhoadon':
