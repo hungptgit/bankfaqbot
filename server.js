@@ -234,8 +234,8 @@ agenda.on('ready', () => {
 								break;
 							case 'chuyenkhoan':
 								let bankCode = entities.bankCode[0].value ? entities.bankCode[0].value : 'VietinBank';
-								let sotien = entities.number[0].value;
-								let taikhoanthuhuong = entities.number[1].value;
+								let sotien = entities.number[0].value ? entities.number[0].valu : 'undefined';
+								let taikhoanthuhuong = entities.number[1].value ? entities.number[1].value : 'undefined';
 								console.log(' >>>>>> bankCode: ' + bankCode);
 								console.log(' >>>>>> sotien: ' + sotien);
 								console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
