@@ -233,9 +233,9 @@ agenda.on('ready', () => {
 								f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
 								break;
 							case 'chuyenkhoan':
-								let bankCode = entities.bankCode[0].value ? 'VietinBank' : entities.bankCode[0].value;
+								let bankCode = entities.bankCode[0].value ? entities.bankCode[0].value : 'VietinBank';
 								let sotien = entities.number[0].value;
-								let taikhoanthuhuong = entities.number[0].value;
+								let taikhoanthuhuong = entities.number[1].value;
 								console.log(' >>>>>> bankCode: ' + bankCode);
 								console.log(' >>>>>> sotien: ' + sotien);
 								console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
