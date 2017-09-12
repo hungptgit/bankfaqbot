@@ -27,7 +27,7 @@ const wit = new Wit({
 // OMDB
 //const intents = require('./intents');
 
-const {firstEntity} = require('./utils');
+const {firstEntity, fetchEntity} = require('./utils');
 
 
 // Register the webhooks
@@ -235,13 +235,15 @@ agenda.on('ready', () => {
 								break;
 							case 'chuyenkhoan':
 								let bankCode = firstEntity(entities, 'bankCode');
-								let sotien = firstEntity(entities, 'number');
+								let sotien = fetchEntity(entities, 'number');
+								console.log(' >>>>>> sotien: ' + JSON.stringify(sotien));
+								
 								if(!sotien) {
 									f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 								}	
 								else
 								{
-									f.txt(sender, 'Bạn muốn chuyển ' + sotien +'  toi <So tai khoan> tai ' + bankCode + '. Đang chuyển bạn đến trang xác thực OTP...');
+									f.txt(sender, 'Bạn muốn chuyển ' + sotien.value +'  toi <So tai khoan> tai ' + bankCode.value + '. Đang chuyển bạn đến trang xác thực OTP...');
 								}	
 								break;
 							case 'thanhtoanhoadon':
