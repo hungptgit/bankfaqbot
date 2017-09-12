@@ -279,7 +279,7 @@ agenda.on('ready', () => {
 							case 'tintucsukien':
 								let newsType = firstEntity(entities, 'newsType');
 								switch (true) {
-									case (newsType.value == 'san pham dich vu'):	
+									case (newsType.value == 'san pham dich vu' || newsType.value == 'san pham' || newsType.value == 'dich vu'):	
 										f.newsSP(sender, 'News Feed service');
 										break;
 									case (newsType.value == 'khuyen mai'):
