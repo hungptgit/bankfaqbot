@@ -50,8 +50,7 @@ agenda.on('ready', () => {
 			
 			let buttons = '';
 			let text = '';
-			
-			
+			let data = '';
 			
 			console.log('----> msg : ' + JSON.stringify(msg));
 			
@@ -64,34 +63,33 @@ agenda.on('ready', () => {
 							.then(profile => {
 								const {first_name, timezone} = profile;
 								console.log('getProfile: ' + first_name);
-								f.txt(sender, 'Xin chao ' + first_name + ' ❤️ .Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+								f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \n Chúc bạn một ngày tốt lành. \n Hay lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
 							})
 							.catch(error => {
 								console.log('getProfile err: ' +error);
-								f.txt(sender, 'Xin chao ❤️ .Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+								f.txt(sender, 'Xin chào bạn ❤️ \n Chúc bạn một ngày tốt lành. \n Hay lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
 							});
 						
-						//f.txt(sender, 'Xin chao ban! Chuc ban mot ngay tot lanh. Hay lua chon cac tinh nang');
+							data = {
+										text: 'Nếu chưa đăng ký dịch vụ VietinBank FinBot bạn có thể bắt đầu',
+										buttons: [{
+												type: 'web_url',
+												title: 'Đăng ký FinBot',
+												url: 'http://hungpt.handcraft.com/index.html?fbid='+sender
+											}				
+										]
+									}
+								console.log('dangkydichvu button data: ' + JSON.stringify(data));
+								f.btn(sender, data);
 						break;
 					case 'menu:INQ_BALANCE_PAYLOAD':
 						f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
-						//f.txt(sender, 'Ban muon van tin so du tai khoan: Tien gui? Tien vay ?');
-						/*
-						vtb(messageTxt, 'current')
-							.then(response => {
-								f.txt(sender, response);
-							})
-							.catch(error => {
-								console.log("There seems to be a problem connecting to the acct inq service");
-								f.txt(msg.sender, "Co van de khi ket noi den dich vu ngan hang :(");
-							});
-						*/	
 						break;	
 					case 'menu:XFER_PAYLOAD':
-						f.txt(sender, 'Chuyen den trang xac thuc thong tin chuyen khoan');
+						f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen tien <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 						break;
 					case 'menu:REG_PAYLOAD':
-						let data = {
+						data = {
 								text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
 								buttons: [{
 										type: 'web_url',
@@ -171,7 +169,7 @@ agenda.on('ready', () => {
 									payload:"SAVE_12M"
 								}
 							];
-						text = 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao?';
+						text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
 						
 						f.quick(sender, {text, buttons});
 						
@@ -255,18 +253,40 @@ agenda.on('ready', () => {
 
 						switch (intent.value) {
 							case 'truyvantaikhoan':
-								f.txt(sender, 'Dang kiem tra thong tin tai khoan cua ban...');
-								f.txt(sender, 'Tai khoan 1010xxxxx3485 cua ban hien co so du kha dung 23,300,000 VND, trang thai tai khoan Active');
+								f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
 								break;
 							case 'chuyenkhoan':
-								f.txt(sender, 'Chuyen ban toi trang nhap thong tin chuyen khoan...');
+								f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen tien <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 								break;	
 							case 'guitietkiem':
-								f.txt(sender, 'Chuyen ban toi trang nhap thong tin gui tiet kiem...');
+								buttons = 
+									[
+										{
+											content_type:"text",
+											title:"3 tháng",
+											image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+											payload:"SAVE_3M"
+										},
+										{
+											content_type:"text",
+											title:"6 tháng",
+											image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+											payload:"SAVE_6M"
+										},
+										{
+											content_type:"text",
+											title:"12 tháng",
+											image_url:"http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+											payload:"SAVE_12M"
+										}
+									];
+								text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
+
+								f.quick(sender, {text, buttons});
 								break;	
 							case 'dangkydichvu':
 								//f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
-								let data = {
+								data = {
 										text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
 										buttons: [{
 												type: 'web_url',
@@ -312,7 +332,7 @@ agenda.on('ready', () => {
 										.then(profile => {
 											const {first_name, timezone} = profile;
 											console.log('getProfile: ' + first_name);
-											f.txt(sender, bye.value + ' ' + first_name + ' ^_^ :) :D :( O:) :P ;) :O -_- >:O :* 8-) (y) ');
+											f.txt(sender, bye.value + ' ' + first_name + ' :) :D :( O:) :P ;) :O -_- >:O :* 8-) (y) ');
 										})
 										.catch(error => {
 											console.log('getProfile err: ' +error);
@@ -322,12 +342,12 @@ agenda.on('ready', () => {
 								}
 								break;
 							case 'camon':
-								f.txt(sender, 'Khong co chi, neu can them tro giup ban cho minh thong tin nhe');
+								f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
 								break;	
 							default:
 								console.log(`?  ${intent.value}`);
 								f.txt(sender, 'Okey! Ban muon thuc hien '+ intent.value);
-								f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(entities));
+								f.txt(sender, 'Data collected: '+ JSON.stringify(entities));
 								break;
 						}
 					})
@@ -366,7 +386,7 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
 						break;		
 					default:
-						f.txt(sender, 'Du lieu thu thap: '+ JSON.stringify(quickReply));
+						f.txt(sender, 'Data collected: '+ JSON.stringify(quickReply));
 						break;		
 				}
 			}
@@ -377,7 +397,7 @@ agenda.on('ready', () => {
 				let coord = message.attachments[0].payload.coordinates;
 				let locLat = coord.lat;
         let locLong = coord.long;
-				f.txt(sender, 'Bạn đang ở gần ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: [123 Xã Đàn] [15 Nam Đồng] [19 Tây Sơn]');
+				f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: [123 Xã Đàn] [15 Nam Đồng] [19 Tây Sơn]');
 			}
 		});
 		
