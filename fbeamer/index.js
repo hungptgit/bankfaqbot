@@ -359,7 +359,7 @@ newsKM(id, data) {
 						template_type: "generic",
 						elements:[
 								 {
-									title:"Hoàn 15% cho chủ thẻ tín dụng quốc tế VietinBank tại Lotte Mart",
+									title:"Hoàn tiền cho chủ thẻ tín dụng quốc tế VietinBank tại Lotte Mart",
 									image_url:"http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
 									subtitle:"Chào mừng ngày lễ lớn của đất nước, VietinBank triển khai Chương trình Khuyến mãi tưng bừng - chào mừng Quốc khánh",
 									default_action: {
@@ -388,7 +388,7 @@ newsKM(id, data) {
 									subtitle:"Từ 1/9/2017 - 31/12/2017, VietinBank tổ chức chương trình khuyến mãi dịch vụ ABMT: “Western Union - Nhận tiền - Trúng thưởng”. Chương trình được tổ chức để tri ân khách hàng...",
 									default_action: {
 										type: "web_url",
-										url: "https://www.vietinbank.vn/vn/tin-tuc/VietinBank-tuyen-dung-gan-300-nhan-su-cho-chi-nhanh-20170807233640.html",
+										url: "https://www.vietinbank.vn/vn/tin-tuc/VietinBank-tuyen-dung-gan-300-nhan-su-cho-chi-nhanh-20170807233640.html"
 										//messenger_extensions: true,
 										//webview_height_ratio: "tall",
 										//fallback_url: "https://peterssendreceiveapp.ngrok.io/"
