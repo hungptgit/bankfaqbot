@@ -245,7 +245,21 @@ agenda.on('ready', () => {
 								}	
 								else
 								{
-									f.txt(sender, 'Bạn muốn chuyển ' + sotien +'  tới ' + taikhoanthuhuong + ' tại ' + bankCode.value + '. Đang chuyển bạn đến trang xác thực OTP...');
+									data = {
+										text: 'Bạn muốn chuyển ' + sotien +'  tới ' + taikhoanthuhuong + ' tại ' + bankCode + '. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP',
+										buttons: [{
+												type: 'web_url',
+												title: 'Xác thực',
+												url: 'http://hungpt.handcraft.com/xfer.html?fbid='+sender+'&amt='+sotien+'&benAc='+taikhoanthuhuong+'&benBank='+bankCode
+											},
+											{
+												type: 'postback',
+												title: 'Chuyển khoản lại',
+												payload: 'menu:XFER_PAYLOAD'
+											}				
+										]
+									}
+									f.btn(sender, data);
 								}	
 								break;
 							case 'thanhtoanhoadon':
