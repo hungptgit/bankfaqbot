@@ -63,11 +63,11 @@ agenda.on('ready', () => {
 							.then(profile => {
 								const {first_name, timezone} = profile;
 								console.log('getProfile: ' + first_name);
-								f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \n Chúc bạn một ngày tốt lành. \n Hay lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+								f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
 							})
 							.catch(error => {
 								console.log('getProfile err: ' +error);
-								f.txt(sender, 'Xin chào bạn ❤️ \n Chúc bạn một ngày tốt lành. \n Hay lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+								f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
 							});
 						
 							data = {
@@ -86,7 +86,7 @@ agenda.on('ready', () => {
 						f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
 						break;	
 					case 'menu:XFER_PAYLOAD':
-						f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen tien <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+						f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 						break;
 					case 'menu:REG_PAYLOAD':
 						data = {
@@ -256,7 +256,22 @@ agenda.on('ready', () => {
 								f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
 								break;
 							case 'chuyenkhoan':
-								f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen tien <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+								f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+								break;
+							case 'timdiadiem':
+								buttons = 
+									[
+
+										{
+											content_type:"location"
+										}
+									];
+								text = 'Bạn muốn tìm các phòng giao dịch ở quanh khu vực nào';
+
+								f.quick(sender, {text, buttons});
+								break;
+							case 'tintucsukien':
+								f.news(sender, 'News Feed service');
 								break;	
 							case 'guitietkiem':
 								buttons = 
@@ -363,13 +378,13 @@ agenda.on('ready', () => {
 				
 				switch(quickReply.payload) {
 					case 'SAVE_3M':
-						f.txt(sender, 'Lai suat tien gui tiet kiem 3 thang o VietinBank hien dang la 4,3%');
+						f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%');
 						break;
 					case 'SAVE_6M':
-						f.txt(sender, 'Lai suat tien gui tiet kiem 6 thang o VietinBank hien dang la 5,3%');
+						f.txt(sender, 'Lãi suất gửi tiết kiệm 6 tháng tại VietinBank hiện đang là 5,3%');
 						break;
 					case 'SAVE_12M':	
-						f.txt(sender, 'Lai suat tien gui tiet kiem 12 thang o VietinBank hien dang la 6,8%');
+						f.txt(sender, 'Lãi suất gửi tiết kiệm 12 tháng tại VietinBank hiện đang là 6,8%');
 						break;
 					case 'NEWS_16h30':
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
