@@ -113,28 +113,7 @@ agenda.on('ready', () => {
 
 						break;	
 					case 'menu:PAY_ELECTRIC':
-						//f.txt(sender, 'Ban muon thanh toan hoa don tien dien');
-						buttons = 
-							[
-								{
-									content_type:"postback",
-									title:"EVN HN",
-									payload:"EVN_HNT"
-								},
-								{
-									content_type:"postback",
-									title:"EVN HCM",
-									payload:"EVN_HN"
-								}
-							];
-						
-						text = 'Ban muon thanh toan hoa don tien dien';
-						
-						f.btn(sender, {
-							text,
-							buttons
-						});
-						
+						f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
 						break;
 					case 'menu:PAY_WARTER':
 						f.txt(sender, 'Ban muon thanh toan hoa don tien nuoc');
@@ -147,7 +126,6 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Ban muon thanh toan bao hiem');
 						break;	
 					case 'menu:SAVING_PAYLOAD':
-						
 						 buttons = 
 							[
 								{
