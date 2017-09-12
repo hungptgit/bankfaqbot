@@ -504,7 +504,7 @@ acctInfo(id, data) {
 								 {
 									title:"DDA: 1010*****312323 TRAN SON TUNG",
 									image_url:"https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
-									subtitle:"Trạng thái: Active,\n Số dư khả dụng: 3,123,567 đ, \n ",
+									subtitle:"Trạng thái: Active. \nSố dư khả dụng: 3,123,567 đ \n ",
 									buttons:[
 										{ type:"postback",
 											title:"Xem 5 GD gần nhất",
@@ -524,7 +524,7 @@ acctInfo(id, data) {
 								{
 									title:"DDA: 1010*****312556 TRAN SON TUNG",
 									image_url:"https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
-									subtitle:"Trạng thái: Closed,\n Số dư khả dụng: 0 đ, \n ",
+									subtitle:"Trạng thái: Closed. \nSố dư khả dụng: 0 đ \n ",
 									buttons:[
 										{ type:"postback",
 											title:"Xem 5 GD gần nhất",
