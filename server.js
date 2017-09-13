@@ -434,11 +434,13 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
 						break;	
 					case 'NEWS_8h30':
+						/*
 						agenda.now('createReminder', {
 							sender,
 							datetime: context.datetime,
 							task: context.task
 						});
+						*/
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
 						break;		
 					default:
