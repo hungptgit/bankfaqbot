@@ -277,7 +277,9 @@ agenda.on('ready', () => {
 								f.quick(sender, {text, buttons});
 								break;
 							case 'tintucsukien':
-								let newsType = firstEntity(entities, 'newsType');
+								//let newsType = firstEntity(entities, 'newsType');
+								let newsType = entities.newsType ? entities.newsType[0].value : 'undefined';
+								
 								switch (true) {
 									case (newsType.value == 'san pham dich vu' || newsType.value == 'san pham' || newsType.value == 'dich vu'):	
 										f.newsSP(sender, 'News Feed service');
