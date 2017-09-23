@@ -430,10 +430,10 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Lãi suất gửi tiết kiệm 12 tháng tại VietinBank hiện đang là 6,8%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 12 tháng theo cú pháp: GTK12 <So tien> \n VD: gtk12 1000000');
 						break;
 					case 'NEWS_16h30':
-						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ đượcc gửi đến bạn lúc 16h30 hàng ngày.');
 						break;	
 					case 'NEWS_11h':
-						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ đượcc gửi đến bạn lúc 11h hàng ngày.');
 						break;	
 					case 'NEWS_8h30':
 						/*
@@ -443,7 +443,7 @@ agenda.on('ready', () => {
 							task: context.task
 						});
 						*/
-						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công');
+						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ đượcc gửi đến bạn lúc 8h30 hàng ngày.');
 						break;		
 					default:
 						f.txt(sender, 'Data collected: '+ JSON.stringify(quickReply));
