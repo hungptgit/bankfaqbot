@@ -224,7 +224,7 @@ agenda.on('ready', () => {
 						if (!intent) {
 							// use app data, or a previous context to decide how to 
 							console.log('Not found intent');
-							//f.txt(sender, 'Yeu cau cua ban da duoc ghi nhan. Thanks');
+							f.txt(sender, 'Xin lỗi chúng tôi chưa hiểu yêu cầu của bạn. Chúng tôi sẽ ghi nhận và trả lời bạn sau.');
 							return;
 						}
 
@@ -466,6 +466,7 @@ agenda.on('ready', () => {
 });
 
 // Persistent Menu
+/*
 f.showPersistent(
 	{"persistent_menu":
 	[{
@@ -474,7 +475,7 @@ f.showPersistent(
   "call_to_actions":[
 			{
 				"type": "postback",
-				"title": "Xem số dư",
+				"title": "Tài khoản",
 				"payload": "menu:INQ_BALANCE_PAYLOAD"
 			},
 			{
@@ -535,7 +536,7 @@ f.showPersistent(
       "composer_input_disabled":false
     }
   ]});
-
+*/
 // Subscribe
 f.subscribe();
 
