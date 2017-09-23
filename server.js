@@ -240,7 +240,7 @@ agenda.on('ready', () => {
 								console.log(' >>>>>> sotien: ' + sotien);
 								console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
 								
-								if(!sotien || !taikhoanthuhuong) {
+								if(sotien == 'undefined' || taikhoanthuhuong == 'undefined') {
 									f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
 								}	
 								else
@@ -293,7 +293,7 @@ agenda.on('ready', () => {
 							case 'guitietkiem':
 								let kyhan = entities.number ? entities.number[0].value : 'undefined';
 								let sotientietkiem = entities.number ? entities.number[1].value : 'undefined';
-								if(!kyhan || !sotientietkiem ) {
+								if(kyhan =='undefined' || sotientietkiem =='undefined') {
 									buttons = 
 										[
 											{
