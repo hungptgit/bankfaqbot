@@ -452,6 +452,18 @@ agenda.on('ready', () => {
 				console.log('quickReply: ' + JSON.stringify(message.quick_reply));
 				
 				switch(quickReply.payload) {
+					case 'PAY_MOBILE':
+						f.txt(sender, 'Hiện đang có chương trình KM nạp thẻ Viettel giảm 3%.\nBạn hãy gõ Lệnh Topup Mobileg theo cú pháp: TOPUP <So tien> <So dien thoai> \n VD: topup 1000000 09878788788');
+						break;
+					case 'PAY_WT':
+						f.txt(sender, 'Bạn có thể thanh toán nước cho các nhà cung cấp Nước A, Nước B.\nBạn hãy gõ Lệnh Thanh toán Nước theo cú pháp: PW <So tien> <So HD> <Ma NCC> \n VD: PW 1500000 HD3784384 NCC1');
+						break;
+					case 'PAY_AT':	
+						f.txt(sender, 'Bạn có thể thanh toán nước cho các nhà cung cấp Nước A, Nước B.\nBạn hãy gõ Lệnh Thanh toán Nước theo cú pháp: PW <So tien> <So HD> <Ma NCC> \n VD: PW 1500000 HD3784384 NCC1');
+						break;
+					case 'PAY_ELEC':	
+						f.txt(sender, 'Bạn có thể thanh toán nước cho các nhà cung cấp Nước A, Nước B.\nBạn hãy gõ Lệnh Thanh toán Nước theo cú pháp: PW <So tien> <So HD> <Ma NCC> \n VD: PW 1500000 HD3784384 NCC1');
+						break;	
 					case 'SAVE_3M':
 						f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 3 tháng theo cú pháp: GTK3 <So tien> \n VD: gtk3 1000000');
 						break;
