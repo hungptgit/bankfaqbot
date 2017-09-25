@@ -459,10 +459,10 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Bạn có thể thanh toán nước cho các nhà cung cấp Nước A, Nước B.\nBạn hãy gõ Lệnh Thanh toán Nước theo cú pháp: PW <So tien> <So HD> <Ma NCC> \n VD: PW 1500000 HD3784384 NCC1');
 						break;
 					case 'PAY_AT':	
-						f.txt(sender, 'Bạn có thể thanh toán nước cho các nhà cung cấp Nước A, Nước B.\nBạn hãy gõ Lệnh Thanh toán Nước theo cú pháp: PW <So tien> <So HD> <Ma NCC> \n VD: PW 1500000 HD3784384 NCC1');
+						f.txt(sender, 'Bạn có thể thanh toán vé máy bay cho VietJET, VietnamAirline, Jestar.\nBạn hãy gõ Lệnh Thanh toán Vé máy bay theo cú pháp: PA <So tien> <So Vé> <Ma NCC> \n VD: PA 1500000 HD3784384 NCC1');
 						break;
 					case 'PAY_ELEC':	
-						f.txt(sender, 'Bạn có thể thanh toán nước cho các nhà cung cấp Nước A, Nước B.\nBạn hãy gõ Lệnh Thanh toán Nước theo cú pháp: PW <So tien> <So HD> <Ma NCC> \n VD: PW 1500000 HD3784384 NCC1');
+						f.txt(sender, 'Bạn có thể thanh toán tiền điện cho các nhà cung cấp A, B.\nBạn hãy gõ Lệnh Thanh toán Điện theo cú pháp: PE <So tien> <So HD> <Ma NCC> \n VD: PE 1500000 HD3784384 NCC1');
 						break;	
 					case 'SAVE_3M':
 						f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 3 tháng theo cú pháp: GTK3 <So tien> \n VD: gtk3 1000000');
