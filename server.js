@@ -113,8 +113,40 @@ agenda.on('ready', () => {
 
 						break;	
 					case 'menu:PAY_ELECTRIC':
-						f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
-						break;
+						buttons = 
+							[
+								{
+									content_type:"text",
+									title:"📱 Điện thoại",
+									//image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+									payload:"PAY_MOBILE"
+								},
+								{
+									content_type:"text",
+									title:"💧 Nước",
+									//image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+									payload:"PAY_WT"
+								},
+								{
+									content_type:"text",
+									title:"⚡ Điện",
+									//image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+									payload:"PAY_ELEC"
+								},
+								{
+									content_type:"text",
+									title:"✈ Vé máy bay",
+									//image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+									payload:"PAY_AT"
+								}
+							];
+						text = 'Bạn muốn thanh toán cho?';
+						
+						f.quick(sender, {text, buttons});
+						break;	
+						
+						//f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
+						//break;
 					case 'menu:PAY_WARTER':
 						f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
 						break;
@@ -198,7 +230,7 @@ agenda.on('ready', () => {
 						break;	
 						
 					case 'REG_EFAST':
-						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN ✈ ⚡ 💧 ');
+						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN');
 						break;
 					
 						
