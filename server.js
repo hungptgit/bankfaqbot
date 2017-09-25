@@ -198,7 +198,7 @@ agenda.on('ready', () => {
 						break;	
 						
 					case 'REG_EFAST':
-						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN');
+						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN ✈ ⚡ 💧 ');
 						break;
 					
 						
