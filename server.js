@@ -230,10 +230,8 @@ agenda.on('ready', () => {
 						break;	
 						
 					case 'REG_EFAST':
-						f.txt(sender, 'Bạn đã đăng ký dịch vụ cho KHDN');
+						f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
 						break;
-					
-						
 						
 					default:
 						f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
@@ -501,7 +499,7 @@ agenda.on('ready', () => {
 				let coord = message.attachments[0].payload.coordinates;
 				let locLat = coord.lat;
         let locLong = coord.long;
-				f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: [123 Xã Đàn] [15 Nam Đồng] [19 Tây Sơn]');
+				f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
 			}
 		});
 		
