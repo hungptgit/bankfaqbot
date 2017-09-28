@@ -395,8 +395,14 @@ agenda.on('ready', () => {
 								
 								break;
 							case 'tracuu':
-								f.txt(sender, 'Danh sách bạn cần như sau');
+								f.txt(sender, 'Bạn muốn tra cứu thông tin');
 								break;
+							case 'vay':
+								f.txt(sender, 'Bạn muốn tìm hiểu thông tin để vay vốn ngân hàng');
+								break;	
+							case 'tranovay':
+								f.txt(sender, 'Bạn muốn trả nợ khoản vay');
+								break;	
 							case 'xinchao':
 								let who = firstEntity(entities, 'who');
 								let greetings = firstEntity(entities, 'greetings');
