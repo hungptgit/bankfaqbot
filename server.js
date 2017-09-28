@@ -421,8 +421,7 @@ agenda.on('ready', () => {
 										});
 									
 								}
-								
-								if(bye) {
+								else if(bye) {
 									f.getProfile(sender)
 										.then(profile => {
 											const {first_name, timezone} = profile;
@@ -434,8 +433,7 @@ agenda.on('ready', () => {
 										});
 									
 								}
-								
-								if(who) {
+								else if(who) {
 									f.getProfile(sender)
 										.then(profile => {
 											const {first_name, timezone} = profile;
@@ -447,6 +445,9 @@ agenda.on('ready', () => {
 											f.txt(sender, 'Em là Chi, rất vui được phục vụ ❤️');
 										});
 									
+								}
+								else {
+									f.txt(sender, ' ^_^ ');
 								}
 								break;
 							case 'camthan':
