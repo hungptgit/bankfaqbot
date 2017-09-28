@@ -443,6 +443,34 @@ agenda.on('ready', () => {
 									
 								}
 								break;
+							case 'camthan':
+								let emoTerm = entities.emoTerm ? entities.emoTerm[0].metadata : 'undefined';
+								
+								if(emoTerm == 'undefined') {
+									f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
+								}else {
+									switch(emoTerm) {
+										case 'xinh':
+											f.txt(sender, 'Thật vậy ạ, hihi. Cảm ơn ạ 😝');
+											break;
+										
+										case 'thongminh':
+											f.txt(sender, 'Bạn quá khen rùi 😊 ');
+											break;	
+										case 'gioioi':
+											f.txt(sender, 'Xin lỗi vì đã làm bạn không vui 🤗');
+											break;
+										case 'toite':
+											f.txt(sender, '😔');
+											break;			
+										default:
+											f.txt(sender, ' ^_^ ');
+											break;		
+									}
+										
+								}
+								
+								break;	
 							case 'camon':
 								f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
 								break;	
