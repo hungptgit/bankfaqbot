@@ -398,6 +398,7 @@ agenda.on('ready', () => {
 								f.txt(sender, 'Danh sách bạn cần như sau');
 								break;
 							case 'xinchao':
+								let who = firstEntity(entities, 'who');
 								let greetings = firstEntity(entities, 'greetings');
 								let bye = firstEntity(entities, 'bye');
 
@@ -406,11 +407,11 @@ agenda.on('ready', () => {
 										.then(profile => {
 											const {first_name, timezone} = profile;
 											console.log('getProfile: ' + first_name);
-											f.txt(sender, greetings.value + ' ' + first_name + ' ❤️');
+											f.txt(sender, greetings.value + ' ' + first_name + '. Tôi có thể giúp gì được cho bạn?');
 										})
 										.catch(error => {
 											console.log('getProfile err: ' +error);
-											f.txt(sender, greetings.value  + ' ❤️');
+											f.txt(sender, greetings.value  + '. Tôi có thể giúp gì được cho bạn?');
 										});
 									
 								}
@@ -419,12 +420,24 @@ agenda.on('ready', () => {
 									f.getProfile(sender)
 										.then(profile => {
 											const {first_name, timezone} = profile;
-											console.log('getProfile: ' + first_name);
 											f.txt(sender, bye.value + ' ' + first_name + ' :) :D :( O:) :P ;) :O -_- >:O :* 8-) (y) ');
 										})
 										.catch(error => {
 											console.log('getProfile err: ' +error);
 											f.txt(sender, bye.value  + ' ❤️');
+										});
+									
+								}
+								
+								if(who) {
+									f.getProfile(sender)
+										.then(profile => {
+											const {first_name, timezone} = profile;
+											f.txt(sender, 'Mình là Chi, rất vui được phục vụ ' + ' ' + first_name + ' ❤️ ');
+										})
+										.catch(error => {
+											console.log('getProfile err: ' +error);
+											f.txt(sender, 'Mình là Chi, rất vui được phục vụ bạn ❤️');
 										});
 									
 								}
