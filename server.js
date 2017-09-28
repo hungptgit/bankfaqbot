@@ -458,7 +458,7 @@ agenda.on('ready', () => {
 											f.txt(sender, 'Bạn quá khen rùi 😊 ');
 											break;	
 										case 'gioioi':
-											f.txt(sender, 'Xin lỗi vì đã làm bạn không vui 🤔');
+											f.txt(sender, 'Xin lỗi vì đã làm bạn không vui 😇 ');
 											break;
 										case 'toite':
 											f.txt(sender, '😔');
