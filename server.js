@@ -439,12 +439,12 @@ agenda.on('ready', () => {
 									f.getProfile(sender)
 										.then(profile => {
 											const {first_name, timezone} = profile;
-											f.txt(sender, 'Mình là Chi, rất vui được phục vụ ' + ' ' + first_name + ' ❤️ ');
+											f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + first_name + ' ❤️ ');
 											f.img(sender,"https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/21764779_302680266875874_1375365853791689812_n.jpg?oh=20ba2f800f62397aab2b330a49be0600&oe=5A4A3F0C");
 										})
 										.catch(error => {
 											console.log('getProfile err: ' +error);
-											f.txt(sender, 'Mình là Chi, rất vui được phục vụ bạn ❤️');
+											f.txt(sender, 'Em là Chi, rất vui được phục vụ ❤️');
 										});
 									
 								}
