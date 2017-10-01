@@ -25,8 +25,8 @@ const wit = new Wit({
 	accessToken: config.WIT_ACCESS_TOKEN
 });
 
-const {firstEntity, fetchEntity} = require('./utils');
-var utils = require('./utils.js');
+//const {firstEntity, fetchEntity} = require('./utils');
+var utils = require('./utils');
 
 // Register the webhooks
 server.get('/', (req, res, next) => {
