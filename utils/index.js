@@ -1,10 +1,24 @@
 'use strict';
-const findById = (fbid, sessionStore) => {
-  for(let [key, value] of sessionStore) {
-    if(value.fbid === fbid) {
-      return key;
+var moment = require('moment');
+var https = require('https');
+
+function isvalidateInput(str) {
+    var pattern = /^\w+[a-z A-Z_]+?\@[0-9]{1,2}\:[0-9]{1,2}\w[to][0-9]{1,2}:[0-9]{1,2}$/;
+    if (str.match(pattern) == null) {
+        return false;
+    } else {
+        return true;
     }
-  }
+}
+
+function getFormattedTime(tsfrom, tsto) {
+    var timeString = moment.unix(tsfrom).format("HH:mm") + ' - ' + moment.unix(tsto).format("HH:mm")
+    return timeString;
+}
+
+function getFormattedDay(tsfrom) {
+    var dateString = moment.unix(tsfrom).format("MMM, DD");
+    return dateString;
 }
 
 const fetchEntity = (entities, entity) => {
@@ -29,7 +43,9 @@ const firstEntity = (entities, name) => {
 }
 
 module.exports = {
-  findById,
+  isvalidateInput,
+  getFormattedTime,
+  getFormattedDay,
   fetchEntity,
   firstEntity
 }

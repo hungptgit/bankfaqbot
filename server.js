@@ -16,7 +16,8 @@ server.use((req, res, next) => f.verifySignature(req, res, next));
 
 // Agenda
 const agenda = require('./agenda')(f);
-const vtb = require('./vtb');
+// Scenarios
+const vtb = require('./scenarios');
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -24,11 +25,8 @@ const wit = new Wit({
 	accessToken: config.WIT_ACCESS_TOKEN
 });
 
-// OMDB
-//const intents = require('./intents');
-
 const {firstEntity, fetchEntity} = require('./utils');
-
+var utils = require('./utils.js');
 
 // Register the webhooks
 server.get('/', (req, res, next) => {
@@ -47,13 +45,14 @@ agenda.on('ready', () => {
 				postback,
 				message
 			} = msg;
-			
+			/*
 			let buttons = '';
 			let text = '';
 			let data = '';
-			
+			*/
 			console.log('----> msg : ' + JSON.stringify(msg));
 			
+			/*
 			if (postback && postback.payload) {
 				console.log('postback.payload :' + postback.payload);
 				
@@ -62,7 +61,6 @@ agenda.on('ready', () => {
 						f.getProfile(sender)
 							.then(profile => {
 								const {first_name, timezone} = profile;
-								console.log('getProfile: ' + first_name);
 								f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
 							})
 							.catch(error => {
@@ -527,13 +525,7 @@ agenda.on('ready', () => {
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 11h hàng ngày.');
 						break;	
 					case 'NEWS_8h30':
-						/*
-						agenda.now('createReminder', {
-							sender,
-							datetime: context.datetime,
-							task: context.task
-						});
-						*/
+						
 						f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 8h30 hàng ngày.');
 						break;		
 					default:
@@ -549,6 +541,23 @@ agenda.on('ready', () => {
 				let locLat = coord.lat;
         let locLong = coord.long;
 				f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
+			}
+			*/
+			
+			if (postback && postback.payload) {
+				vtb.processMessage(sender, postback, f);
+			}
+			
+			if (message && message.text && !message.quick_reply){
+				vtb.processMessage(sender, message, f);
+			}
+			
+			if (message && message.quick_reply) {
+				vtb.processQuickreply(sender, message, f);
+			}
+			
+			if (message && message.attachments) {
+				vtb.processAttachment(sender, message, f);
 			}
 		});
 		
