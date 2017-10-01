@@ -51,7 +51,7 @@ class Scenario {
             */
             let first_name = f.getSenderName(sender);
             f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
-          
+
             register.showRegisterFinbot(sender, f);
             break;
           case 'menu:INQ_BALANCE_PAYLOAD':
@@ -181,21 +181,9 @@ class Scenario {
                 if (kyhan == 'undefined' || sotientietkiem == 'undefined') {
                   saving.showPeriod(sender, f);
                 } else {
-                  data = {
-                    text: 'Bạn muốn gửi ' + sotientietkiem + '  kỳ hạn ' + kyhan + ' tháng. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP',
-                    buttons: [{
-                        type: 'web_url',
-                        title: 'Xác thực',
-                        url: 'http://hungpt.handcraft.com/saving.html?fbid=' + sender + '&amt=' + sotientietkiem + '&period=' + kyhan
-                      },
-                      {
-                        type: 'postback',
-                        title: 'Gửi TK lại',
-                        payload: 'menu:SAVING_PAYLOAD'
-                      }
-                    ]
-                  }
-                  f.btn(sender, data);
+                  let confirmMsg = 'Bạn muốn gửi ' + sotientietkiem + '  kỳ hạn ' + kyhan + ' tháng. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP';
+                  let confirmUrl = 'http://hungpt.handcraft.com/saving.html?fbid=' + sender + '&amt=' + sotientietkiem + '&period=' + kyhan;
+                  saving.showConfim(sender, f, confirmMsg, confirmUrl);
                 }
                 break;
               case 'dangkydichvu':

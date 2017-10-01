@@ -120,6 +120,7 @@ class FBeamer {
 					first_name,
 					timezone
 				} = profile;
+			  console.log('getProfile: ' + JSON.stringify(profile));
 				return first_name;
 			})
 			.catch(error => {

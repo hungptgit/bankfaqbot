@@ -10,7 +10,7 @@ class Saving {
     let text = '';
     let data = '';
     console.log('showPeriod');
-    
+
     try {
       buttons = [{
           content_type: "text",
@@ -42,6 +42,32 @@ class Saving {
     }
   }
 
+  showConfirm(sender, f, confirmMsg, confirmUrl) {
+    let buttons = '';
+    let text = '';
+    let data = '';
+    console.log('showConfirm');
+
+    try {
+      data = {
+        text: confirmMsg,
+        buttons: [{
+            type: 'web_url',
+            title: 'Xác thực',
+            url: confirmUrl
+          },
+          {
+            type: 'postback',
+            title: 'Gửi TK lại',
+            payload: 'menu:SAVING_PAYLOAD'
+          }
+        ]
+      }
+      f.btn(sender, data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 
