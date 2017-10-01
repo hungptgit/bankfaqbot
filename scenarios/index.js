@@ -35,6 +35,7 @@ class Scenario {
 
         switch (postback.payload) {
           case 'GET_STARTED_PAYLOAD':
+            /*
             f.getProfile(sender)
               .then(profile => {
                 const {
@@ -47,7 +48,10 @@ class Scenario {
                 console.log('getProfile err: ' + error);
                 f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
               });
-
+            */
+            let first_name = f.getSenderName(sender);
+            f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+          
             register.showRegisterFinbot(sender, f);
             break;
           case 'menu:INQ_BALANCE_PAYLOAD':
@@ -66,7 +70,7 @@ class Scenario {
             f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
             break;
           case 'menu:NEWS_PAYLOAD':
-            f.news(sender, 'News Feed service');
+            news.news(sender, f);
             break;
           case 'menu:MNSTMT_PAYLOAD':
             account.miniStatement(sender, f);
@@ -78,7 +82,7 @@ class Scenario {
             loca.showLocation(sender, f);
             break;
           case 'NEWS_BOT':
-            register.showRegister(sender, f);
+            news.news(sender, f);
             break;
           case 'REG_EFAST':
             f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');

@@ -5,14 +5,14 @@ const crypto = require('crypto');
 class FBeamer {
 	constructor(config) {
 		try {
-			if(!config || config.PAGE_ACCESS_TOKEN === undefined || config.VERIFY_TOKEN === undefined || config.APP_SECRET === undefined) {
+			if (!config || config.PAGE_ACCESS_TOKEN === undefined || config.VERIFY_TOKEN === undefined || config.APP_SECRET === undefined) {
 				throw new Error("Unable to access tokens!");
 			} else {
 				this.PAGE_ACCESS_TOKEN = config.PAGE_ACCESS_TOKEN;
 				this.VERIFY_TOKEN = config.VERIFY_TOKEN;
 				this.APP_SECRET = config.APP_SECRET;
 			}
-		} catch(e) {
+		} catch (e) {
 			console.log(e);
 		}
 	}
@@ -22,12 +22,12 @@ class FBeamer {
 		// and if req.query.hub.verify_token is the same as this.VERIFY_TOKEN
 		// then send back an HTTP status 200 and req.query.hub.challenge
 		let {
-			mode, 
-			verify_token, 
+			mode,
+			verify_token,
 			challenge
 		} = req.query.hub;
 
-		if(mode === 'subscribe' && verify_token === this.VERIFY_TOKEN) {
+		if (mode === 'subscribe' && verify_token === this.VERIFY_TOKEN) {
 			return res.end(challenge);
 		} else {
 			console.log("Could not register webhook!");
@@ -36,21 +36,21 @@ class FBeamer {
 	}
 
 	verifySignature(req, res, next) {
-		if(req.method === 'POST') {
+		if (req.method === 'POST') {
 			let signature = req.headers['x-hub-signature'];
 			try {
-				if(!signature) {
+				if (!signature) {
 					throw new Error("Signature missing!");
 				} else {
 					let hmac = crypto.createHmac('sha1', this.APP_SECRET);
 					let ourSignature = `sha1=${hmac.update(JSON.stringify(req.body)).digest('hex')}`;
-					
+
 					console.log(' >>>>> ourSignature: ' + ourSignature);
 					console.log(' >>>>> signature: ' + signature);
-					
+
 					let bufferA = Buffer.from(ourSignature, 'utf8');
 					//let bufferB = Buffer.from(signature, 'utf8');
-					
+
 					//let hash = crypto.createHmac('sha1', this.APP_SECRET).update(JSON.stringify(req.body)).digest('hex');
 					try {
 						//if(hash !== signature.split("=")[1]) {
@@ -64,16 +64,16 @@ class FBeamer {
 						}
 						*/
 						let bufferB = Buffer.from(signature, 'utf8');
-					} catch(e) {
-							console.log('verifySignature: ' + e);
-							res.send(500, e);
+					} catch (e) {
+						console.log('verifySignature: ' + e);
+						res.send(500, e);
 					}
 				}
-			} catch(e) {
+			} catch (e) {
 				console.log('verifySignature 1: ' + e);
 				res.send(500, e);
 			}
-		} 
+		}
 
 		return next();
 
@@ -87,14 +87,14 @@ class FBeamer {
 			},
 			method: 'POST'
 		}, (error, response, body) => {
-			if(!error && JSON.parse(body).success) {
+			if (!error && JSON.parse(body).success) {
 				console.log("Subscribed to the page!");
 			} else {
 				console.log('subscribe: ' + error);
 			}
 		});
 	}
-	
+
 	getProfile(id) {
 		return new Promise((resolve, reject) => {
 			request({
@@ -104,7 +104,7 @@ class FBeamer {
 				},
 				method: 'GET'
 			}, (error, response, body) => {
-				if(!error && response.statusCode === 200) {
+				if (!error && response.statusCode === 200) {
 					resolve(JSON.parse(body));
 				} else {
 					reject(error);
@@ -112,15 +112,29 @@ class FBeamer {
 			});
 		});
 	}
-	
+
+	getSenderName(id) {
+		this.getProfile(id)
+			.then(profile => {
+				const {
+					first_name,
+					timezone
+				} = profile;
+				return first_name;
+			})
+			.catch(error => {
+				return '';
+			});
+	}
+
 	incoming(req, res, cb) {
-		
+
 		// Extract the body of the POST request
 		let data = req.body;
 		//console.log('>>>>> req: ' + req);
 		console.log('>>>>> incoming: ' + JSON.stringify(data));
-		
-		if(data.object === 'page') {
+
+		if (data.object === 'page') {
 			// Iterate through the page entry Array
 			data.entry.forEach(pageObj => {
 				// Iterate through the messaging Array
@@ -129,9 +143,9 @@ class FBeamer {
 						sender: msgEvent.sender.id,
 						timeOfMessage: msgEvent.timestamp,
 						message: msgEvent.message || undefined,
-						postback: msgEvent.postback || undefined 
+						postback: msgEvent.postback || undefined
 					}
-					
+
 					cb(messageObj);
 				});
 			});
@@ -150,7 +164,7 @@ class FBeamer {
 				method: 'POST',
 				json: payload
 			}, (error, response, body) => {
-				if(!error && response.statusCode === 200) {
+				if (!error && response.statusCode === 200) {
 					resolve({
 						messageId: body.message_id
 					});
@@ -161,7 +175,7 @@ class FBeamer {
 			});
 		});
 	}
-	
+
 	sendNews(payload) {
 		return new Promise((resolve, reject) => {
 			// Create an HTTP POST request
@@ -174,7 +188,7 @@ class FBeamer {
 				json: true,
 				body: payload
 			}, (error, response, body) => {
-				if(!error && response.statusCode === 200) {
+				if (!error && response.statusCode === 200) {
 					resolve({
 						messageId: body.message_id
 					});
@@ -185,7 +199,7 @@ class FBeamer {
 			});
 		});
 	}
-	
+
 	// Show Persistent Menu
 	showPersistent(payload) {
 		/*
@@ -196,7 +210,7 @@ class FBeamer {
 		}
 		*/
 		console.log('showPersistent: ' + JSON.stringify(payload));
-		
+
 		request({
 			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
 			qs: {
@@ -205,15 +219,14 @@ class FBeamer {
 			method: 'POST',
 			json: payload
 		}, (error, response) => {
-			if(!error && response.statusCode === 200) {
+			if (!error && response.statusCode === 200) {
 				console.log('showPersistent result:' + JSON.stringify(response.body));
-			}
-			else {
+			} else {
 				console.log('showPersistent error:' + JSON.stringify(response.body));
 			}
 		});
 	}
-	
+
 	// Send a text message
 	txt(id, text) {
 		let obj = {
@@ -248,12 +261,7 @@ class FBeamer {
 		this.sendMessage(obj)
 			.catch(error => console.log('img: ' + error));
 	}
-	
-	
 
-
-		
-	
 	// A button
 	btn(id, data) {
 		let obj = {
@@ -272,7 +280,7 @@ class FBeamer {
 			}
 		}
 		console.log('btn obj: ' + JSON.stringify(obj));
-		
+
 		this.sendMessage(obj)
 			.catch(error => console.log('btn: ' + error));
 	}
@@ -280,7 +288,7 @@ class FBeamer {
 	// Quick Replies
 	quick(id, data) {
 		console.log('quick obj: ' + JSON.stringify(data));
-		
+
 		let obj = {
 			recipient: {
 				id
@@ -290,9 +298,9 @@ class FBeamer {
 				quick_replies: data.buttons
 			}
 		}
-		
+
 		console.log('quick obj: ' + JSON.stringify(obj));
-		
+
 		this.sendMessage(obj)
 			.catch(error => console.log('quick: ' + error));
 	}
