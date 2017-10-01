@@ -10,32 +10,37 @@ class Saving {
     let buttons = '';
     let text = '';
     let data = '';
+    console.log('showPeriod');
     
-    buttons = [{
-        content_type: "text",
-        title: "3 tháng",
-        image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-        payload: "SAVE_3M"
-      },
-      {
-        content_type: "text",
-        title: "6 tháng",
-        image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-        payload: "SAVE_6M"
-      },
-      {
-        content_type: "text",
-        title: "12 tháng",
-        image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-        payload: "SAVE_12M"
-      }
-    ];
-    text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
+    try {
+      buttons = [{
+          content_type: "text",
+          title: "3 tháng",
+          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          payload: "SAVE_3M"
+        },
+        {
+          content_type: "text",
+          title: "6 tháng",
+          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          payload: "SAVE_6M"
+        },
+        {
+          content_type: "text",
+          title: "12 tháng",
+          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          payload: "SAVE_12M"
+        }
+      ];
+      text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
 
-    f.quick(sender, {
-      text,
-      buttons
-    });
+      f.quick(sender, {
+        text,
+        buttons
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 }
