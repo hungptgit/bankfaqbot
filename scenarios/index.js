@@ -2,198 +2,201 @@
 var utils = require('../utils');
 
 const processPostback = (sender, postback, f) => {
-  let buttons = '';
-  let text = '';
-  let data = '';
-  //
-  if (postback && postback.payload) {
-    console.log('postback.payload :' + postback.payload);
+  return new Promise((resolve, reject) => {
+    let buttons = '';
+    let text = '';
+    let data = '';
+    //
+    if (postback && postback.payload) {
+      console.log('postback.payload :' + postback.payload);
 
-    switch (postback.payload) {
-      case 'GET_STARTED_PAYLOAD':
-        f.getProfile(sender)
-          .then(profile => {
-            const {
-              first_name,
-              timezone
-            } = profile;
-            f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
-          })
-          .catch(error => {
-            console.log('getProfile err: ' + error);
-            f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+      switch (postback.payload) {
+        case 'GET_STARTED_PAYLOAD':
+          f.getProfile(sender)
+            .then(profile => {
+              const {
+                first_name,
+                timezone
+              } = profile;
+              f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+            })
+            .catch(error => {
+              console.log('getProfile err: ' + error);
+              f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+            });
+
+          data = {
+            text: 'Nếu chưa đăng ký dịch vụ VietinBank FinBot bạn có thể bắt đầu',
+            buttons: [{
+              type: 'web_url',
+              title: 'Đăng ký FinBot',
+              url: 'http://hungpt.handcraft.com/index.html?fbid=' + sender
+            }]
+          }
+          console.log('dangkydichvu button data: ' + JSON.stringify(data));
+          f.btn(sender, data);
+          break;
+        case 'menu:INQ_BALANCE_PAYLOAD':
+          f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
+          break;
+        case 'menu:XFER_PAYLOAD':
+          f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+          break;
+        case 'menu:REG_PAYLOAD':
+          data = {
+            text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
+            buttons: [{
+                type: 'web_url',
+                title: 'FinBot',
+                url: 'http://hungpt.handcraft.com/index.html?fbid=' + sender
+              },
+              {
+                type: 'web_url',
+                title: 'iPay',
+                url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
+              },
+              {
+                type: 'postback',
+                title: 'eFAST',
+                payload: 'REG_EFAST'
+              }
+            ]
+          }
+          console.log('dangkydichvu button data: ' + JSON.stringify(data));
+          f.btn(sender, data);
+
+          break;
+        case 'menu:PAY_ELECTRIC':
+          buttons = [{
+              content_type: "text",
+              title: "📱 Điện thoại",
+              //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "PAY_MOBILE"
+            },
+            {
+              content_type: "text",
+              title: "💧 Nước",
+              //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "PAY_WT"
+            },
+            {
+              content_type: "text",
+              title: "⚡ Điện",
+              //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "PAY_ELEC"
+            },
+            {
+              content_type: "text",
+              title: "✈ Vé máy bay",
+              //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "PAY_AT"
+            }
+          ];
+          text = 'Bạn muốn thanh toán cho?';
+
+          f.quick(sender, {
+            text,
+            buttons
+          });
+          break;
+
+          //f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
+          //break;
+        case 'menu:PAY_WARTER':
+          f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
+          break;
+        case 'menu:NEWS_PAYLOAD':
+          f.news(sender, 'News Feed service');
+
+          break;
+        case 'menu:MNSTMT_PAYLOAD':
+          f.txt(sender, 'Danh sách 5 giao dịch gần nhất của tài khoản 1010*****312323 TRAN SON TUNG \n 03/05/17 22:01 +5,000,000 CHUYEN LUONG \n 03/05/17 22:01 -5,000,000 TIET KIEM \n 03/05/17 22:01 -3,242,000 CHUYEN VO \n 03/05/17 22:01 -15,034,000 THANH TOAN EVN');
+          break;
+        case 'menu:SAVING_PAYLOAD':
+          buttons = [{
+              content_type: "text",
+              title: "3 tháng",
+              image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+              payload: "SAVE_3M"
+            },
+            {
+              content_type: "text",
+              title: "6 tháng",
+              image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+              payload: "SAVE_6M"
+            },
+            {
+              content_type: "text",
+              title: "12 tháng",
+              image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+              payload: "SAVE_12M"
+            }
+          ];
+          text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
+
+          f.quick(sender, {
+            text,
+            buttons
           });
 
-        data = {
-          text: 'Nếu chưa đăng ký dịch vụ VietinBank FinBot bạn có thể bắt đầu',
-          buttons: [{
-            type: 'web_url',
-            title: 'Đăng ký FinBot',
-            url: 'http://hungpt.handcraft.com/index.html?fbid=' + sender
-          }]
-        }
-        console.log('dangkydichvu button data: ' + JSON.stringify(data));
-        f.btn(sender, data);
-        break;
-      case 'menu:INQ_BALANCE_PAYLOAD':
-        f.acctInfo(sender, 'Ban muon van tin so du tai khoan');
-        break;
-      case 'menu:XFER_PAYLOAD':
-        f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
-        break;
-      case 'menu:REG_PAYLOAD':
-        data = {
-          text: 'Bạn muốn đăng ký dịch vụ nào của VietinBank?',
-          buttons: [{
-              type: 'web_url',
-              title: 'FinBot',
-              url: 'http://hungpt.handcraft.com/index.html?fbid=' + sender
+          //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+          break;
+        case 'menu:LOCATION_PAYLOAD':
+
+          buttons = [{
+            content_type: "location"
+          }];
+          text = 'Bạn muốn tìm các địa điểm giao dịch của VietinBank ở quanh khu vực nào';
+
+          f.quick(sender, {
+            text,
+            buttons
+          });
+
+          //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+          break;
+        case 'NEWS_BOT':
+          buttons = [{
+              content_type: "text",
+              title: "08:30",
+              image_url: "http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "NEWS_8h30"
             },
             {
-              type: 'web_url',
-              title: 'iPay',
-              url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
+              content_type: "text",
+              title: "11:00",
+              image_url: "http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "NEWS_11h"
             },
             {
-              type: 'postback',
-              title: 'eFAST',
-              payload: 'REG_EFAST'
+              content_type: "text",
+              title: "16:30",
+              image_url: "http://www.freeiconspng.com/uploads/alarm-icon-29.png",
+              payload: "NEWS_16h30"
             }
-          ]
-        }
-        console.log('dangkydichvu button data: ' + JSON.stringify(data));
-        f.btn(sender, data);
+          ];
+          text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
 
-        break;
-      case 'menu:PAY_ELECTRIC':
-        buttons = [{
-            content_type: "text",
-            title: "📱 Điện thoại",
-            //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "PAY_MOBILE"
-          },
-          {
-            content_type: "text",
-            title: "💧 Nước",
-            //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "PAY_WT"
-          },
-          {
-            content_type: "text",
-            title: "⚡ Điện",
-            //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "PAY_ELEC"
-          },
-          {
-            content_type: "text",
-            title: "✈ Vé máy bay",
-            //image_url:"http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "PAY_AT"
-          }
-        ];
-        text = 'Bạn muốn thanh toán cho?';
+          //console.log('quickClock data:' + JSON.stringify(quickData));
+          f.quick(sender, {
+            text,
+            buttons
+          });
 
-        f.quick(sender, {
-          text,
-          buttons
-        });
-        break;
+          //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+          break;
 
-        //f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
-        //break;
-      case 'menu:PAY_WARTER':
-        f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
-        break;
-      case 'menu:NEWS_PAYLOAD':
-        f.news(sender, 'News Feed service');
+        case 'REG_EFAST':
+          f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
+          break;
 
-        break;
-      case 'menu:MNSTMT_PAYLOAD':
-        f.txt(sender, 'Danh sách 5 giao dịch gần nhất của tài khoản 1010*****312323 TRAN SON TUNG \n 03/05/17 22:01 +5,000,000 CHUYEN LUONG \n 03/05/17 22:01 -5,000,000 TIET KIEM \n 03/05/17 22:01 -3,242,000 CHUYEN VO \n 03/05/17 22:01 -15,034,000 THANH TOAN EVN');
-        break;
-      case 'menu:SAVING_PAYLOAD':
-        buttons = [{
-            content_type: "text",
-            title: "3 tháng",
-            image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-            payload: "SAVE_3M"
-          },
-          {
-            content_type: "text",
-            title: "6 tháng",
-            image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-            payload: "SAVE_6M"
-          },
-          {
-            content_type: "text",
-            title: "12 tháng",
-            image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
-            payload: "SAVE_12M"
-          }
-        ];
-        text = 'Bạn dự định gửi tiết kiệm kỳ hạn nào?';
-
-        f.quick(sender, {
-          text,
-          buttons
-        });
-
-        //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
-        break;
-      case 'menu:LOCATION_PAYLOAD':
-
-        buttons = [{
-          content_type: "location"
-        }];
-        text = 'Bạn muốn tìm các địa điểm giao dịch của VietinBank ở quanh khu vực nào';
-
-        f.quick(sender, {
-          text,
-          buttons
-        });
-
-        //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
-        break;
-      case 'NEWS_BOT':
-        buttons = [{
-            content_type: "text",
-            title: "08:30",
-            image_url: "http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "NEWS_8h30"
-          },
-          {
-            content_type: "text",
-            title: "11:00",
-            image_url: "http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "NEWS_11h"
-          },
-          {
-            content_type: "text",
-            title: "16:30",
-            image_url: "http://www.freeiconspng.com/uploads/alarm-icon-29.png",
-            payload: "NEWS_16h30"
-          }
-        ];
-        text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
-
-        //console.log('quickClock data:' + JSON.stringify(quickData));
-        f.quick(sender, {
-          text,
-          buttons
-        });
-
-        //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
-        break;
-
-      case 'REG_EFAST':
-        f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
-        break;
-
-      default:
-        f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
-        break;
+        default:
+          f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
+          break;
+      }
     }
-  }
+    return resolve();
+  });
 }
 
 const processMessage = (sender, message, f, wit) => {
@@ -524,7 +527,7 @@ const processAttachment = (sender, message, f) => {
     let coord = message.attachments[0].payload.coordinates;
     let locLat = coord.lat;
     let locLong = coord.long;
-    
+
     f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
   }
 }
