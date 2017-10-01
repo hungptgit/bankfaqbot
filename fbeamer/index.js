@@ -124,8 +124,10 @@ class FBeamer {
 					id,
 					timezone
 				} = profile;
+			  
 			  console.log('getSenderName: ' + JSON.stringify(profile));
-				return profile.first_name;
+			  console.log('first_name: ' + first_name);
+				return first_name;
 			})
 			.catch(error => {
 				return '';

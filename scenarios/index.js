@@ -29,6 +29,7 @@ class Scenario {
       let buttons = '';
       let text = '';
       let data = '';
+      let first_name = f.getSenderName(sender);
       //
       if (postback && postback.payload) {
         console.log('postback.payload :' + postback.payload);
@@ -49,7 +50,7 @@ class Scenario {
                 f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
               });
             */
-            let first_name = f.getSenderName(sender);
+            
             f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
 
             register.showRegisterFinbot(sender, f);
