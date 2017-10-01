@@ -207,19 +207,17 @@ class Scenario {
   }
 
   processMessage(sender, message, f, wit) {
-    console.log('processMessage WIT resp :');
     return new Promise((resolve, reject) => {
       let buttons = '';
       let text = '';
       let data = '';
-      
-      console.log('processMessage WIT resp message:' + JSON.stringify(message));
       
       if (message && message.text && !message.quick_reply) {
         // Process the message here
         let messageTxt = message.text;
 
         console.log('messageTxt:' + messageTxt);
+        
         // Wit's Message API
         wit.message(messageTxt)
           .then(({

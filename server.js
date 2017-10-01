@@ -550,7 +550,7 @@ agenda.on('ready', () => {
 			}
 			
 			if (message && message.text && !message.quick_reply){
-				scen.processMessage(sender, message, f);
+				scen.processMessage(sender, message, f, wit);
 			}
 			
 			if (message && message.quick_reply) {
