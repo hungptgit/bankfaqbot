@@ -17,7 +17,8 @@ server.use((req, res, next) => f.verifySignature(req, res, next));
 // Agenda
 const agenda = require('./agenda')(f);
 // Scenarios
-const vtb = require('./scenarios');
+const Scenario = require('./scenarios');
+const scen = new Scenario(f);
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -545,19 +546,19 @@ agenda.on('ready', () => {
 			*/
 			
 			if (postback && postback.payload) {
-				vtb.processMessage(sender, postback, f);
+				scen.processMessage(sender, postback, f);
 			}
 			
 			if (message && message.text && !message.quick_reply){
-				vtb.processMessage(sender, message, f);
+				scen.processMessage(sender, message, f);
 			}
 			
 			if (message && message.quick_reply) {
-				vtb.processQuickreply(sender, message, f);
+				scen.processQuickreply(sender, message, f);
 			}
 			
 			if (message && message.attachments) {
-				vtb.processAttachment(sender, message, f);
+				scen.processAttachment(sender, message, f);
 			}
 		});
 		
