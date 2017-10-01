@@ -1,6 +1,6 @@
 'use strict';
 var utils = require('../utils');
-const saving = require('./saving');
+var saving = require('saving');
 
 class Scenario {
   constructor(f) {
