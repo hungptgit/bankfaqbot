@@ -1,14 +1,13 @@
 'use strict';
 var utils = require('../utils');
+const saving = require('./saving');
 
 class Scenario {
   constructor(f) {
-    console.log('constructor f');
+    console.log('Scenario starting...');
   }
 
   processPostback(sender, postback, f) {
-    console.log('postback.payload :' + postback.payload);
-
     return new Promise((resolve, reject) => {
       let buttons = '';
       let text = '';
@@ -40,7 +39,7 @@ class Scenario {
                 url: 'http://hungpt.handcraft.com/index.html?fbid=' + sender
               }]
             }
-            console.log('dangkydichvu button data: ' + JSON.stringify(data));
+           
             f.btn(sender, data);
             break;
           case 'menu:INQ_BALANCE_PAYLOAD':
@@ -106,9 +105,6 @@ class Scenario {
               buttons
             });
             break;
-
-            //f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
-            //break;
           case 'menu:PAY_WARTER':
             f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
             break;
@@ -120,6 +116,7 @@ class Scenario {
             f.txt(sender, 'Danh sách 5 giao dịch gần nhất của tài khoản 1010*****312323 TRAN SON TUNG \n 03/05/17 22:01 +5,000,000 CHUYEN LUONG \n 03/05/17 22:01 -5,000,000 TIET KIEM \n 03/05/17 22:01 -3,242,000 CHUYEN VO \n 03/05/17 22:01 -15,034,000 THANH TOAN EVN');
             break;
           case 'menu:SAVING_PAYLOAD':
+            /*
             buttons = [{
                 content_type: "text",
                 title: "3 tháng",
@@ -145,8 +142,8 @@ class Scenario {
               text,
               buttons
             });
-
-            //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
+            */
+            saving.showPeriod(sender,f);
             break;
           case 'menu:LOCATION_PAYLOAD':
 
@@ -160,7 +157,6 @@ class Scenario {
               buttons
             });
 
-            //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
             break;
           case 'NEWS_BOT':
             buttons = [{
@@ -184,15 +180,12 @@ class Scenario {
             ];
             text = 'Bạn đăng ký nhận tin mới từ VietinBank vào thời điểm?';
 
-            //console.log('quickClock data:' + JSON.stringify(quickData));
             f.quick(sender, {
               text,
               buttons
             });
 
-            //f.txt(sender, 'Ban tham khao bieu lai suat gui tiet kiem cho cac ky han tai website VietinBank. Ban muon gui tiet kiem ky han nao? 1 thang - 2 thang - 3 thang - 6 thang - 9 thang - 12 thang');
             break;
-
           case 'REG_EFAST':
             f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
             break;
