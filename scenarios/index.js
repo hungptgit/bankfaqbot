@@ -3,10 +3,11 @@ var utils = require('../utils');
 
 class Scenario {
   constructor(f) {
-
+    console.log('constructor f');
   }
 
   processPostback(sender, postback, f) {
+    console.log('postback.payload :' + postback.payload);
     let buttons = '';
     let text = '';
     let data = '';
@@ -203,6 +204,7 @@ class Scenario {
   }
 
   processMessage(sender, message, f, wit) {
+    console.log('processMessage WIT resp :');
     let buttons = '';
     let text = '';
     let data = '';
@@ -467,6 +469,7 @@ class Scenario {
   }
 
   processQuickreply(sender, message, f) {
+    console.log('processQuickreply WIT resp :');
     let buttons = '';
     let text = '';
     let data = '';
@@ -520,6 +523,7 @@ class Scenario {
   }
 
   processAttachment(sender, message, f) {
+    console.log('processAttachment ');
     let buttons = '';
     let text = '';
     let data = '';
