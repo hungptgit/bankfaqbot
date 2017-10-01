@@ -2,8 +2,8 @@
 var utils = require('../utils');
 
 class Saving {
-  construct(f) {
-
+  constructor() {
+    console.log('Saving starting...');
   }
 
   showPeriod(sender, f) {
