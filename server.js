@@ -546,7 +546,7 @@ agenda.on('ready', () => {
 			*/
 			
 			if (postback && postback.payload) {
-				scen.processMessage(sender, postback, f);
+				scen.processPostback(sender, postback, f);
 			}
 			
 			if (message && message.text && !message.quick_reply){
