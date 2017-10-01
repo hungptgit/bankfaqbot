@@ -1,10 +1,12 @@
 'use strict';
 var utils = require('../utils');
-var saving = require('saving');
+const Saving = require('./saving');
+const saving = new Saving();
 
 class Scenario {
   constructor(f) {
     console.log('Scenario starting...');
+    
   }
 
   processPostback(sender, postback, f) {

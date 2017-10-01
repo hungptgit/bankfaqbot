@@ -36,7 +36,6 @@ server.get('/', (req, res, next) => {
 	return next();
 });
 
-
 agenda.on('ready', () => {
 	// Handle incoming
 	server.post('/', (req, res, next) => {
