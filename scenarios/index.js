@@ -1,5 +1,5 @@
 'use strict';
-var utils = require('./utils.js');
+var utils = require('../utils');
 
 const processPostback = (sender, postback, f) => {
   let buttons = '';
