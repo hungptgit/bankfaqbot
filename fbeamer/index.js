@@ -118,10 +118,14 @@ class FBeamer {
 			.then(profile => {
 				const {
 					first_name,
+					last_name,
+					profile_pic,
+					gender,
+					id,
 					timezone
 				} = profile;
-			  console.log('getProfile: ' + JSON.stringify(profile));
-				return first_name;
+			  console.log('getSenderName: ' + JSON.stringify(profile));
+				return profile.first_name;
 			})
 			.catch(error => {
 				return '';

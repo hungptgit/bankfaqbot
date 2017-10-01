@@ -183,7 +183,7 @@ class Scenario {
                 } else {
                   let confirmMsg = 'Bạn muốn gửi ' + sotientietkiem + '  kỳ hạn ' + kyhan + ' tháng. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP';
                   let confirmUrl = 'http://hungpt.handcraft.com/saving.html?fbid=' + sender + '&amt=' + sotientietkiem + '&period=' + kyhan;
-                  saving.showConfim(sender, f, confirmMsg, confirmUrl);
+                  saving.showConfirm(sender, f, confirmMsg, confirmUrl);
                 }
                 break;
               case 'dangkydichvu':
