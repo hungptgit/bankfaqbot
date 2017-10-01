@@ -29,7 +29,7 @@ class Scenario {
       let buttons = '';
       let text = '';
       let data = '';
-      let first_name = f.getSenderName(sender);
+      const {first_name, timezone} = f.getProfile(sender);
       //
       if (postback && postback.payload) {
         console.log('postback.payload :' + postback.payload);
