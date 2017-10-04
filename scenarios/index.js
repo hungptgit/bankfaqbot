@@ -300,11 +300,11 @@ class Scenario {
                 f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               case 'phathanh':
-                let issueTerm = entities.issueTerm ? entities.issueTerm[0].value : 'undefined';
+                //let issueTerm = entities.issueTerm ? entities.issueTerm[0].value : 'undefined';
                 let issueFee = entities.issueFee ? entities.issueFee[0].value : 'undefined';
                 let issueType = entities.issueType ? entities.issueType[0].metadata : 'undefined';
 
-                if (issueTerm == 'undefined') {
+                //if (issueTerm == 'undefined') {
                   if (issueType == 'undefined') {
                     f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                   } else {
@@ -364,7 +364,7 @@ class Scenario {
 
                   }
 
-                }
+                //}
                 break;
               default:
                 console.log(`?  ${intent.value}`);
