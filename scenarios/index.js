@@ -299,70 +299,72 @@ class Scenario {
               case 'camon':
                 f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
-              case 'phathanh':
+              case 'the':
+                let issueTerm = entities.issueTerm ? entities.issueTerm[0].value : 'undefined';
                 let issueFee = entities.issueFee ? entities.issueFee[0].value : 'undefined';
                 let issueType = entities.issueType ? entities.issueType[0].metadata : 'undefined';
 
-                if (issueType == 'undefined') {
-                  f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
-                } else {
-                  if (issueFee == 'undefined') {
-                    switch (issueType) {
-                      case 'epartner':
-                        f.txt(sender, 'Vietinbank có nhiều loại thẻ ATM phù hợp với nhu cầu của anh/chị với những hạn mức khác nhau. Chỉ với 50 000 VND; anh/chị đã có thể phát hành thẻ một chiếc thẻ ATM với thời hạn sử dụng 20 năm với rất nhiều tiện ích');
-                        card.showQAEpartner(sender, f);
-                        break;
-                      case 'jcb':
-                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      case 'visa':
-                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      case 'master':
-                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      case 'tdqt':
-                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      default:
-                        f.txt(sender, ' ^_^ ');
-                        break;
-                    }
+                if (issueTerm == 'undefined') {
+                  if (issueType == 'undefined') {
+                    f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                   } else {
-                    switch (issueType) {
-                      case 'epartner':
-                        f.txt(sender, 'Anh/chị vui lòng mang theo CMTND đến bất kỳ CN/PGD của Vietinbank để được hỗ trợ phát hành thẻ ATM Epartner. Anh/chị sẽ nhận được thẻ sau 05-07 ngày làm việc ạ.');
-                        card.showQAEpartner(sender, f);
-                        break;
-                      case 'jcb':
-                        f.txt(sender, 'Để phát hành thẻ TDQT JCB tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      case 'visa':
-                        f.txt(sender, 'Để phát hành thẻ TDQT Visa tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      case 'master':
-                        f.txt(sender, 'Để phát hành thẻ TDQT Master Card tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      case 'tdqt':
-                        f.txt(sender, 'Để phát hành thẻ TDQT tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
-                        card.showQACreditCard(sender, f);
-                        break;
-                      default:
-                        f.txt(sender, ' ^_^ ');
-                        break;
+                    if (issueFee == 'undefined') {
+                      switch (issueType) {
+                        case 'epartner':
+                          f.txt(sender, 'Vietinbank có nhiều loại thẻ ATM phù hợp với nhu cầu của anh/chị với những hạn mức khác nhau. Chỉ với 50 000 VND; anh/chị đã có thể phát hành thẻ một chiếc thẻ ATM với thời hạn sử dụng 20 năm với rất nhiều tiện ích');
+                          card.showQAEpartner(sender, f);
+                          break;
+                        case 'jcb':
+                          f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        case 'visa':
+                          f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        case 'master':
+                          f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        case 'tdqt':
+                          f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        default:
+                          f.txt(sender, ' ^_^ ');
+                          break;
+                      }
+                    } else {
+                      switch (issueType) {
+                        case 'epartner':
+                          f.txt(sender, 'Anh/chị vui lòng mang theo CMTND đến bất kỳ CN/PGD của Vietinbank để được hỗ trợ phát hành thẻ ATM Epartner. Anh/chị sẽ nhận được thẻ sau 05-07 ngày làm việc ạ.');
+                          card.showQAEpartner(sender, f);
+                          break;
+                        case 'jcb':
+                          f.txt(sender, 'Để phát hành thẻ TDQT JCB tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        case 'visa':
+                          f.txt(sender, 'Để phát hành thẻ TDQT Visa tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        case 'master':
+                          f.txt(sender, 'Để phát hành thẻ TDQT Master Card tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        case 'tdqt':
+                          f.txt(sender, 'Để phát hành thẻ TDQT tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                          card.showQACreditCard(sender, f);
+                          break;
+                        default:
+                          f.txt(sender, ' ^_^ ');
+                          break;
+                      }
                     }
+
                   }
 
                 }
-
-                f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               default:
                 console.log(`?  ${intent.value}`);
