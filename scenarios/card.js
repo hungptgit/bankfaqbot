@@ -16,17 +16,17 @@ class Card {
         buttons: [
           {
             type: 'postback',
-            title: 'Quy trình mở mới thẻ ATM Epartner',
+            title: 'Quy trình mở mới',
             payload: 'QA_CARD_EPARTNER_ISSUE'
           },
           {
             type: 'postback',
-            title: 'Phí phát hành thẻ ATM Epartner ?',
+            title: 'Phí phát hành',
             payload: 'QA_CARD_EPARTNER_ISSUE_FEE'
           },
           {
             type: 'postback',
-            title: 'Các tiện ích của thẻ ATM Epartner',
+            title: 'Các tiện ích Thẻ',
             payload: 'QA_CARD_EPARTNER_UTILITY'
           }
         ]
@@ -49,17 +49,17 @@ class Card {
         buttons: [
           {
             type: 'postback',
-            title: 'Quy trình mở mới thẻ TDQT?',
+            title: 'Quy trình mở mới',
             payload: 'QA_CARD_CREDIT_ISSUE'
           },
           {
             type: 'postback',
-            title: 'Phí phát hành thẻ TDQT?',
+            title: 'Phí phát hành',
             payload: 'QA_CARD_CREDIT_ISSUE_FEE'
           },
           {
             type: 'postback',
-            title: 'Các tiện ích của thẻ TDQT',
+            title: 'Các tiện ích Thẻ',
             payload: 'QA_CARD_CREDIT_UTILITY'
           }
         ]
