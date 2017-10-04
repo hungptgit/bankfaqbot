@@ -2,7 +2,7 @@
 
 class Card {
   constructor() {
-    console.log('Loan starting...');
+    console.log('Card starting...');
   }
   
    showQAEpartner(sender, f) {
@@ -16,7 +16,7 @@ class Card {
         buttons: [
           {
             type: 'postback',
-            title: 'Tôi muốn mở mới thẻ ATM Epartner ?',
+            title: 'Quy trình mở mới thẻ ATM Epartner',
             payload: 'QA_CARD_EPARTNER_ISSUE'
           },
           {
@@ -49,17 +49,17 @@ class Card {
         buttons: [
           {
             type: 'postback',
-            title: 'Tôi muốn mở mới thẻ TDQT của VietinBank ?',
+            title: 'Quy trình mở mới thẻ TDQT?',
             payload: 'QA_CARD_CREDIT_ISSUE'
           },
           {
             type: 'postback',
-            title: 'Phí phát hành thẻ TDQT của VietinBank ?',
+            title: 'Phí phát hành thẻ TDQT?',
             payload: 'QA_CARD_CREDIT_ISSUE_FEE'
           },
           {
             type: 'postback',
-            title: 'Các tiện ích của thẻ TDQT của VietinBank',
+            title: 'Các tiện ích của thẻ TDQT',
             payload: 'QA_CARD_CREDIT_UTILITY'
           }
         ]

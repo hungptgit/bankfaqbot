@@ -300,7 +300,7 @@ class Scenario {
                 f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               case 'phathanh':
-                let issueFee = entities.issueFee ? entities.issueFee : 'undefined';
+                let issueFee = entities.issueFee ? entities.issueFee[0].value : 'undefined';
                 let issueType = entities.issueType ? entities.issueType[0].metadata : 'undefined';
 
                 if (issueType == 'undefined') {
