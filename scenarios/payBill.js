@@ -4,7 +4,9 @@ class PayBill {
   constructor() {
     console.log('PayBill starting...');
   }
-
+  showHelp(sender, f ) {
+    f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
+  }
   showPayType(sender, f) {
     let buttons = '';
     let text = '';

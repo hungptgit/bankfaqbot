@@ -6,6 +6,9 @@ const saving = new Saving();
 const PayBill = require('./payBill');
 const pay = new PayBill();
 
+const XFer = require('./xfer');
+const xfer = new XFer();
+
 const Account = require('./account');
 const account = new Account();
 
@@ -14,6 +17,9 @@ const register = new Register();
 
 const News = require('./news');
 const news = new News();
+
+const Card = require('./card');
+const card = new Card();
 
 const Location = require('./location');
 const loca = new Location();
@@ -29,14 +35,14 @@ class Scenario {
       let buttons = '';
       let text = '';
       let data = '';
-      const {first_name, timezone} = f.getProfile(sender);
+
       //
       if (postback && postback.payload) {
         console.log('postback.payload :' + postback.payload);
 
         switch (postback.payload) {
           case 'GET_STARTED_PAYLOAD':
-            /*
+
             f.getProfile(sender)
               .then(profile => {
                 const {
@@ -49,9 +55,7 @@ class Scenario {
                 console.log('getProfile err: ' + error);
                 f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
               });
-            */
-            
-            f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+
 
             register.showRegisterFinbot(sender, f);
             break;
@@ -87,6 +91,31 @@ class Scenario {
             break;
           case 'REG_EFAST':
             f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
+            break;
+
+          case 'QA_CARD_EPARTNER_ISSUE':
+            f.txt(sender, 'Anh/chị vui lòng mang theo CMTND đến bất kỳ CN/PGD của Vietinbank để được hỗ trợ phát hành thẻ ATM Epartner. Anh/chị sẽ nhận được thẻ sau 05-07 ngày làm việc ạ.');
+            card.showQAEpartner(sender, f);
+            break;
+          case 'QA_CARD_EPARTNER_ISSUE_FEE':
+            f.txt(sender, 'Vietinbank có nhiều loại thẻ ATM phù hợp với nhu cầu của anh/chị với những hạn mức khác nhau. Chỉ với 50 000 VND; anh/chị đã có thể phát hành thẻ một chiếc thẻ ATM với thời hạn sử dụng 20 năm với rất nhiều tiện ích');
+            card.showQAEpartner(sender, f);
+            break;
+          case 'QA_CARD_EPARTNER_UTILITY':
+            f.txt(sender, 'Sau khi sở hữu thẻ ATM Epartner, anh/chị có thể sử dụng rất nhiều các tiện ích đa dạng như thanh toán trực tuyến; nạp tiền điện thoại vntopup; trích nợ tự động thanh toán hóa đơn, rút tiền không dùng thẻ ạ');
+            card.showQAEpartner(sender, f);
+            break;
+          case 'QA_CARD_CREDIT_ISSUE':
+            f.txt(sender, 'Để phát hành thẻ TDQT tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+            card.showQACreditCard(sender, f);
+            break;
+          case 'QA_CARD_CREDIT_ISSUE_FEE':
+            f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+            card.showQACreditCard(sender, f);
+            break;
+          case 'QA_CARD_CREDIT_UTILITY':
+            f.txt(sender, 'Sau khi phát hành thẻ TDQT của Vietinbank anh/chị có cơ hội trải nghiệm rất nhiều tiện ích đa dạng và hữu ích như SMS TBBDGD; trả góp; thanh toán trực tuyến; chính sách bảo hiểm thẻ. Để có thông tin chi tiết về từng tiện ích, anh/chị vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ thông tin cụ thể');
+            card.showQACreditCard(sender, f);
             break;
           default:
             f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
@@ -136,27 +165,16 @@ class Scenario {
                 console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
 
                 if (sotien == 'undefined' || taikhoanthuhuong == 'undefined') {
-                  f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
+                  xfer.showHelp(sender, f);
                 } else {
-                  data = {
-                    text: 'Bạn muốn chuyển ' + sotien + '  tới ' + taikhoanthuhuong + ' tại ' + bankCode + '. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP',
-                    buttons: [{
-                        type: 'web_url',
-                        title: 'Xác thực',
-                        url: 'http://hungpt.handcraft.com/xfer.html?fbid=' + sender + '&amt=' + sotien + '&benAc=' + taikhoanthuhuong + '&benBank=' + bankCode
-                      },
-                      {
-                        type: 'postback',
-                        title: 'Chuyển khoản lại',
-                        payload: 'menu:XFER_PAYLOAD'
-                      }
-                    ]
-                  }
-                  f.btn(sender, data);
+                  let confirmMsg = 'Bạn muốn chuyển ' + sotien + '  tới ' + taikhoanthuhuong + ' tại ' + bankCode + '. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP';
+                  let confirmUrl = 'http://hungpt.handcraft.com/xfer.html?fbid=' + sender + '&amt=' + sotien + '&benAc=' + taikhoanthuhuong + '&benBank=' + bankCode;
+                  xfer.showConfirm(sender, f, confirmMsg, confirmUrl);
+
                 }
                 break;
               case 'thanhtoanhoadon':
-                f.txt(sender, 'Bạn hãy gõ Lệnh thanh toán theo cú pháp: Thanh toan <So tien> cho <Ma hoa don/Ma khach hang/So ve> dich vu <Ma dich vu> \n VD: TT 1000000 cho EVN3278947 dich vu EVN');
+                pay.showHelp(sender, f);
                 break;
               case 'timdiadiem':
                 loca.showLocation(sender, f);
@@ -188,7 +206,6 @@ class Scenario {
                 }
                 break;
               case 'dangkydichvu':
-                //f.txt(sender, 'Chuyen ban toi trang nhap thong tin dang ky dich vu...');
                 register.showRegister(sender, f);
                 break;
               case 'tracuu':
@@ -227,7 +244,7 @@ class Scenario {
                         first_name,
                         timezone
                       } = profile;
-                      f.txt(sender, bye.value + ' ' + first_name + ' :) :D :( O:) :P ;) :O -_- >:O :* 8-) (y) ');
+                      f.txt(sender, bye.value + ' ' + first_name + ' :) ');
                     })
                     .catch(error => {
                       console.log('getProfile err: ' + error);
@@ -245,7 +262,6 @@ class Scenario {
                       f.img(sender, "https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/21764779_302680266875874_1375365853791689812_n.jpg?oh=20ba2f800f62397aab2b330a49be0600&oe=5A4A3F0C");
                     })
                     .catch(error => {
-                      console.log('getProfile err: ' + error);
                       f.txt(sender, 'Em là Chi, rất vui được phục vụ ❤️');
                     });
 
@@ -283,22 +299,87 @@ class Scenario {
               case 'camon':
                 f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
+              case 'phathanh':
+                let issueFee = entities.issueFee ? entities.issueFee : 'undefined';
+                let issueType = entities.issueType ? entities.issueType[0].metadata : 'undefined';
+
+                if (issueType == 'undefined') {
+                  f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
+                } else {
+                  if (issueFee == 'undefined') {
+                    switch (issueType) {
+                      case 'epartner':
+                        f.txt(sender, 'Vietinbank có nhiều loại thẻ ATM phù hợp với nhu cầu của anh/chị với những hạn mức khác nhau. Chỉ với 50 000 VND; anh/chị đã có thể phát hành thẻ một chiếc thẻ ATM với thời hạn sử dụng 20 năm với rất nhiều tiện ích');
+                        card.showQAEpartner(sender, f);
+                        break;
+                      case 'jcb':
+                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      case 'visa':
+                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      case 'master':
+                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      case 'tdqt':
+                        f.txt(sender, 'Phí phát hành thẻ TDQT của Vietinbank tùy thuộc vào hạng thẻ của anh/chị khi được CN Vietinbank thẩm định và quyết định. Với mức phí thấp nhất chỉ là 50 000 VND với thẻ cứng và 75 000 VND với thẻ chip. Quý khách vui lòng liên hệ Contact Center Vietinbank theo số điện thoại 1900 55 8868 để được hỗ trợ cụ thể về phí từng loại thẻ');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      default:
+                        f.txt(sender, ' ^_^ ');
+                        break;
+                    }
+                  } else {
+                    switch (issueType) {
+                      case 'epartner':
+                        f.txt(sender, 'Anh/chị vui lòng mang theo CMTND đến bất kỳ CN/PGD của Vietinbank để được hỗ trợ phát hành thẻ ATM Epartner. Anh/chị sẽ nhận được thẻ sau 05-07 ngày làm việc ạ.');
+                        card.showQAEpartner(sender, f);
+                        break;
+                      case 'jcb':
+                        f.txt(sender, 'Để phát hành thẻ TDQT JCB tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      case 'visa':
+                        f.txt(sender, 'Để phát hành thẻ TDQT Visa tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      case 'master':
+                        f.txt(sender, 'Để phát hành thẻ TDQT Master Card tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      case 'tdqt':
+                        f.txt(sender, 'Để phát hành thẻ TDQT tại Vietinbank cần đáp ứng được một số điều kiện nhất định của ngân hàng. Anh/chị vui lòng liên hệ trực tiếp với CN Vietinbank gần nhất để được hỗ trợ ? Trước khi đến CN anh/chị có thể liên hệ Contact Center Vietinbank theo số điện thoại 19 00 55 8868 để được tư vấn chuẩn bị trước về hồ sơ và hình thức phát hành.');
+                        card.showQACreditCard(sender, f);
+                        break;
+                      default:
+                        f.txt(sender, ' ^_^ ');
+                        break;
+                    }
+                  }
+
+                }
+
+                f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
+                break;
               default:
                 console.log(`?  ${intent.value}`);
-                f.txt(sender, 'Okey! Ban muon thuc hien ' + intent.value);
+                f.txt(sender, 'Okey! intent matching: ' + intent.value);
                 f.txt(sender, 'Data collected: ' + JSON.stringify(entities));
                 break;
             }
           })
           .catch(error => {
             console.log(error);
-            f.txt(sender, "Hmm. My servers are acting weird today! Try asking me again after a while.");
+            f.txt(sender, "Hệ thống phản hồi chậm, xin bạn chờ trong giây lát.");
           });
       }
     });
   }
 
-  processQuickreply(sender, message, f) {
+  processQuickreply(sender, message, f, agenda) {
     console.log('processQuickreply WIT resp :');
     let buttons = '';
     let text = '';
@@ -336,13 +417,13 @@ class Scenario {
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 11h hàng ngày.');
           break;
         case 'NEWS_8h30':
-          /*
+          let task = 'NEWS_8h30';
           agenda.now('createReminder', {
-          	sender,
-          	datetime: context.datetime,
-          	task: context.task
+            sender,
+            datetime: context.datetime,
+            task: task
           });
-          */
+
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 8h30 hàng ngày.');
           break;
         default:
