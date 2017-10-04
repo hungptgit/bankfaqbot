@@ -305,7 +305,7 @@ class Scenario {
                 let issueType = entities.issueType ? entities.issueType[0].metadata : 'undefined';
 
                 //if (issueTerm == 'undefined') {
-                  if (issueType == 'undefined') {
+                  if (issueType != 'undefined') {
                     f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                   } else {
                     if (issueFee == 'undefined') {
