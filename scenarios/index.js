@@ -305,10 +305,10 @@ class Scenario {
                 let issueType = entities.issueType ? entities.issueType[0].metadata : 'undefined';
 
                 //if (issueTerm == 'undefined') {
-                  if (issueType != 'undefined') {
+                  if (issueType == 'undefined') {
                     f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                   } else {
-                    if (issueFee == 'undefined') {
+                    if (issueFee != 'undefined') {
                       switch (issueType) {
                         case 'epartner':
                           f.txt(sender, 'Vietinbank có nhiều loại thẻ ATM phù hợp với nhu cầu của anh/chị với những hạn mức khác nhau. Chỉ với 50 000 VND; anh/chị đã có thể phát hành thẻ một chiếc thẻ ATM với thời hạn sử dụng 20 năm với rất nhiều tiện ích');
