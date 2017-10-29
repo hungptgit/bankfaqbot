@@ -30,7 +30,7 @@ const model = new Model();
 class Scenario {
   constructor(f) {
     console.log('Scenario starting...');
-    model.findAll;
+    //model.findAll();
   }
 
   processPostback(sender, postback, f) {
