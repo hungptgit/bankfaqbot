@@ -27,7 +27,13 @@ const loca = new Location();
 class Scenario {
   constructor(f,db) {
     console.log('Scenario starting...');
-
+    db.collection("replicaset_mongo_client_collection").find({}, function(err, docs) {
+      docs.each(function(err, doc) {
+          if(doc) {
+            console.log(doc);
+          }
+        });
+    });
   }
 
   processPostback(sender, postback, f) {
