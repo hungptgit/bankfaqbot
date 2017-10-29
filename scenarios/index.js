@@ -25,7 +25,7 @@ const Location = require('./location');
 const loca = new Location();
 
 class Scenario {
-  constructor(f) {
+  constructor(f,db) {
     console.log('Scenario starting...');
 
   }

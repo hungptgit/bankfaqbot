@@ -1,6 +1,7 @@
 'use strict';
 // create an API server
 const config = require('./config');
+var utils = require('./utils');
 const Restify = require('restify');
 const server = Restify.createServer({
 	name: 'VTBMessenger'
@@ -14,11 +15,22 @@ server.use(Restify.jsonp());
 server.use(Restify.bodyParser());
 server.use((req, res, next) => f.verifySignature(req, res, next));
 
+const MongoClient = require('mongodb').MongoClient;
+var db;
+
+// Initialize connection once
+MongoClient.connect(config.MONGO_URI, function(err, database) {
+  if(err) throw err;
+
+  db = database;
+	console.log("Connected to MongoDB..." );
+});
+
 // Agenda
 const agenda = require('./agenda')(f);
 // Scenarios
 const Scenario = require('./scenarios');
-const scen = new Scenario(f);
+const scen = new Scenario(f,db);
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -27,7 +39,7 @@ const wit = new Wit({
 });
 
 //const {firstEntity, fetchEntity} = require('./utils');
-var utils = require('./utils');
+
 
 // Register the webhooks
 server.get('/', (req, res, next) => {
