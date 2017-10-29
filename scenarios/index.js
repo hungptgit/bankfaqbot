@@ -24,16 +24,13 @@ const card = new Card();
 const Location = require('./location');
 const loca = new Location();
 
+const Model = require('../model');
+const model = new Model();
+
 class Scenario {
-  constructor(f,db) {
+  constructor(f) {
     console.log('Scenario starting...');
-    db.collection("replicaset_mongo_client_collection").find({}, function(err, docs) {
-      docs.each(function(err, doc) {
-          if(doc) {
-            console.log(doc);
-          }
-        });
-    });
+    model.findAll;
   }
 
   processPostback(sender, postback, f) {
