@@ -1,5 +1,5 @@
 'use strict';
-const config = require('../config');
+//const config = require('../config');
 const MongoClient = require('mongodb').MongoClient;
 var db;
 
@@ -10,8 +10,16 @@ class Model {
     MongoClient.connect(config.MONGO_URI, function(err, database) {
       if (err) throw err;
 
-      db = database;
-      console.log("Connected to MongoDB...");
+      if (err) {
+        console.log('Unable to connect to the mongoDB server. Error:', err);
+        throw err;
+      } else {
+        //HURRAY!! We are connected. :)
+        console.log('Connection established to', config.MONGO_URI);
+
+        db = database;
+        console.log("Connected to MongoDB...");
+      }
     });
   }
 
