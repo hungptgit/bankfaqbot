@@ -1,5 +1,5 @@
 'use strict';
-//const config = require('../config');
+const config = require('../config');
 const MongoClient = require('mongodb').MongoClient;
 var db;
 
