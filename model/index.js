@@ -24,6 +24,7 @@ class Model {
   }
 
   findAll(id) {
+    
     db.collection("replicaset_mongo_client_collection").find({}, function(err, docs) {
       docs.each(function(err, doc) {
         if (doc) {
@@ -31,6 +32,22 @@ class Model {
         }
       });
     });
+  }
+  
+  add(id) {
+    var collection = db.collection('question');
+    //Create some document
+    var questionItem = {field: 'ipay', content: 'Ipay la gi', state: 'MA', tag: 'ipay,ib,internet banking'};
+ 
+    // Insert some users
+    collection.insert([questionItem], function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Inserted %d documents into the "question" collection. The documents inserted with "_id" are:', result.length, result);
+      }
+    });
+    
   }
 }
 

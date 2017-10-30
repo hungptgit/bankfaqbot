@@ -300,6 +300,7 @@ class Scenario {
 
                 break;
               case 'camon':
+                model.add('1');
                 f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               case 'the':
