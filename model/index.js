@@ -3,8 +3,8 @@ const config = require('../config');
 const MongoClient = require('mongodb').MongoClient;
 var db;
 
-const Question = require('question');
-const question = new Question(db);
+//const Question = require('question');
+//const question = new Question(db);
 
 class Model {
   constructor() {
