@@ -140,7 +140,7 @@ class Scenario {
         let messageTxt = message.text;
 
         console.log('messageTxt:' + messageTxt);
-
+        
         // Wit's Message API
         wit.message(messageTxt)
           .then(({
@@ -300,7 +300,7 @@ class Scenario {
 
                 break;
               case 'camon':
-                model.add('1');
+                model.question.add('2');
                 f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               case 'the':
