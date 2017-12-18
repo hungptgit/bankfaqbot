@@ -26,11 +26,14 @@ class Services {
         'method': 'getAllLocation',
         'params': {
           'locationType': null,
-          'keyword':null
+          'keyword': null
         }
       })
       .then(function(callResponse) {
-        console.log(callResponse);
+        console.log(callResponse.data); // response data as json
+        //console.log(callResponse.body); // response body
+        //console.log(callResponse.header); //response header
+        //console.log(callResponse);
       })
       .catch(function(err) {
         console.log("Got an error making SOAP call: ", err);
