@@ -5,5 +5,5 @@
   "VERIFY_TOKEN": "ma_xac_minh_cua_ban",
    "APP_SECRET": "d941eb0f3fd80a11d121d23702998378" 
 	},
-	"MONGO_URI": "mongodb://admin:Ab123456@ds119044.mlab.com:19044/vtbbot"
+	"MONGO_URI": "mongodb://admin:Ab123456@ds119044.mlab.com:19044/vtbbot",	"SOAP_WSDL_URL":"https://webdemo.vietinbank.vn/mobile/info/services"
 }

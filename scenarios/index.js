@@ -27,6 +27,10 @@ const loca = new Location();
 const Model = require('../model');
 const model = new Model();
 
+const Services = require('../services');
+const services = new Services();
+
+
 class Scenario {
   constructor(f) {
     console.log('Scenario starting...');
@@ -45,7 +49,6 @@ class Scenario {
 
         switch (postback.payload) {
           case 'GET_STARTED_PAYLOAD':
-
             f.getProfile(sender)
               .then(profile => {
                 const {
@@ -58,7 +61,6 @@ class Scenario {
                 console.log('getProfile err: ' + error);
                 f.txt(sender, 'Xin chào bạn ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
               });
-
 
             register.showRegisterFinbot(sender, f);
             break;
@@ -173,7 +175,6 @@ class Scenario {
                   let confirmMsg = 'Bạn muốn chuyển ' + sotien + '  tới ' + taikhoanthuhuong + ' tại ' + bankCode + '. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP';
                   let confirmUrl = 'http://hungpt.handcraft.com/xfer.html?fbid=' + sender + '&amt=' + sotien + '&benAc=' + taikhoanthuhuong + '&benBank=' + bankCode;
                   xfer.showConfirm(sender, f, confirmMsg, confirmUrl);
-
                 }
                 break;
               case 'thanhtoanhoadon':
@@ -453,6 +454,8 @@ class Scenario {
       let locLong = coord.long;
 
       f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
+      
+      services.location(sender,locLat,locLong,f);
     }
   }
 }
