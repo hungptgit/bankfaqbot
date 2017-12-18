@@ -77,7 +77,8 @@ class Scenario {
             pay.showPayType(sender, f);
             break;
           case 'menu:PAY_WARTER':
-            f.txt(sender, 'Chuyển tới trang thông tin tỷ giá lãi suất');
+            f.txt(sender, 'Đang lấy về thông tin tỷ giá lãi suất mới nhất');
+            services.depInterest(sender, f);
             break;
           case 'menu:NEWS_PAYLOAD':
             news.news(sender, f);
@@ -187,10 +188,10 @@ class Scenario {
                 let newsType = entities.newsType ? entities.newsType[0].value : 'undefined';
 
                 switch (true) {
-                  case (newsType.value == 'san pham dich vu' || newsType.value == 'san pham' || newsType.value == 'dich vu'):
+                  case (newsType.value === 'san pham dich vu' || newsType.value === 'san pham' || newsType.value === 'dich vu'):
                     news.newsSP(sender, f);
                     break;
-                  case (newsType.value == 'khuyen mai'):
+                  case (newsType.value === 'khuyen mai'):
                     news.newsKM(sender, f);
                     break;
                   default:
@@ -296,7 +297,6 @@ class Scenario {
                       f.txt(sender, ' ^_^ ');
                       break;
                   }
-
                 }
 
                 break;

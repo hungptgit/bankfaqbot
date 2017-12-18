@@ -14,6 +14,9 @@ var clientOptions = {
 
 var soapClient = easysoap.createClient(clientParams, clientOptions);
 
+const Location = require('../model/location.js');
+const locationModel = new Location();
+
 class Services {
   constructor() {
     console.log('Services starting...');
@@ -25,9 +28,34 @@ class Services {
     soapClient.call({
         'method': 'getAllLocation',
         'params': {
-          'locationType': null,
+          'locationType': locType,
           'keyword': null
         }
+      })
+      .then(function(callResponse) {
+        //console.log(JSON.stringify(callResponse.data)); // response data as json
+        //console.log(callResponse.body); // response body
+        //console.log(callResponse.header); //response header
+        //console.log(callResponse);
+        for(var returnData in callResponse.data){
+            console.log(returnData + ": "+ callResponse.data['return']);
+          /*  
+          locationModel.add(address, latitude, longitude, latlng, locationId, locationName, locationType);
+          */
+        }
+        
+      
+      })
+      .catch(function(err) {
+        console.log("Got an error making SOAP call: ", err);
+      });
+
+  }
+  
+  depInterest(sender,f) {
+    console.log('depInterest service call, get interests ...');
+    soapClient.call({
+        'method': 'getDepInterests'
       })
       .then(function(callResponse) {
         console.log(JSON.stringify(callResponse.data)); // response data as json
