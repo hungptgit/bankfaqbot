@@ -55,7 +55,9 @@ class Services {
   depInterest(sender,f) {
     console.log('depInterest service call, get interests ...');
     soapClient.call({
-        'method': 'getDepInterests'
+        'method': 'getDepInterests',
+        'params': {
+        }
       })
       .then(function(callResponse) {
         console.log(JSON.stringify(callResponse.data)); // response data as json
