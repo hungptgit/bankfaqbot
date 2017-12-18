@@ -21,10 +21,11 @@ class Services {
   }
 
   location(sender, locLat, locLong, f) {
+    console.log('location service call...');
     soapClient.call({
         'method': 'getAllLocation',
         'params': {
-          'getAllLocation': null,
+          'locationType': null,
           'keyword':null
         }
       })
