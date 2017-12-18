@@ -30,7 +30,7 @@ class Services {
         }
       })
       .then(function(callResponse) {
-        console.log(callResponse.data); // response data as json
+        console.log(JSON.stringify(callResponse.data)); // response data as json
         //console.log(callResponse.body); // response body
         //console.log(callResponse.header); //response header
         //console.log(callResponse);
