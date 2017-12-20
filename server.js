@@ -2,6 +2,7 @@
 // create an API server
 const config = require('./config');
 const Restify = require('restify');
+const contextMap = require('bot-context');
 const server = Restify.createServer({
 	name: 'VTBMessenger'
 });
@@ -45,31 +46,88 @@ agenda.on('ready', () => {
 				postback,
 				message
 			} = msg;
-			
+
 			console.log('----> msg : ' + JSON.stringify(msg));
-			
+
+			let ctx = contextMap.getOrCreate(sender);
+			if (!ctx.isSet()) {
+				init(sender); // initialize the actions. 
+			}
+
+			ctx.match(message, function(err, match, contextCb) {
+				if (!err) contextCb(sender, match);
+			});
+
+
 			if (postback && postback.payload) {
 				scen.processPostback(sender, postback, f);
-			}
-			else if (message && message.text && !message.quick_reply){
+			} else if (message && message.text && !message.quick_reply) {
 				scen.processMessage(sender, message, f, wit);
-			}
-			else if (message && message.quick_reply) {
+			} else if (message && message.quick_reply) {
 				scen.processQuickreply(sender, message, f);
-			}
-			else if (message && message.attachments) {
+			} else if (message && message.attachments) {
 				scen.processAttachment(sender, message, f);
-			}
-			else {
-				
+			} else {
+
 			}
 		});
-		
+
 		return next();
 	});
 
 	agenda.start();
 });
+
+
+function init(userId) {
+	let ctx = contextMap.getOrCreate(userId);
+	ctx.set(
+		/.*/, // The base matcher to match anything. 
+		(match) => getPizzaType(userId));
+}
+
+function getPizzaType(userId) {
+	let ctx = contextMap.getOrCreate(userId);
+	ctx.set(
+		/(chicken|cheese|veggie)/,
+		(match) => getDeliveryAddress(userId, match)
+	);
+	sendMessage(userId, "What kind of pizza do you want ?");
+}
+
+function getDeliveryAddress(userId, pizzaType) {
+	let address = 'Sai Gon';
+	let ctx = contextMap.getOrCreate(userId);
+
+	if (address) {
+		ctx.set(/(yes|no)/, (response) => {
+			if (response === 'yes') {
+				//userDataService.clearAddress(userId);
+				getDeliveryAddress(userId, pizzaType);
+			} else {
+				end(userId, pizzaType, address);
+			}
+		});
+		sendMessage(userId, 'Would you like to change your address ?');
+		return;
+	}
+
+	ctx.set(
+		//validateAddressUsingGoogleAPI, // Can use some async API method 
+		/(Sai Gon|Ha Noi)/,
+		(address) => end(userId, pizzaType, address)
+	); // Note that pizzaType is now a closure variable. 
+	sendMessage(userId, `Please enter the delivery Address.`);
+}
+
+function end(userId, pizzaType, address) {
+	sendMessage(userId, 'Thank you, a ${pizzaType} pizza, will be' +
+		+'delivered to ${address} in 30 mins.');
+}
+
+function sendMessage(userId, message) {
+	f.txt(userId, message);
+}
 
 // Persistent Menu
 /*

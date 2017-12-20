@@ -21,6 +21,8 @@
     "easysoap":"1.0.6",
     "underscore":"1.8.3",
     "xmldoc":"1.1.0",
-    "wsdlrdr":"0.3.9"
+    "wsdlrdr":"0.3.9",
+    "bot-context":"0.2.6",
+    "log4js":"2.4.1"
   }
 }
