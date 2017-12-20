@@ -45,8 +45,8 @@ class FBeamer {
 					let hmac = crypto.createHmac('sha1', this.APP_SECRET);
 					let ourSignature = `sha1=${hmac.update(JSON.stringify(req.body)).digest('hex')}`;
 
-					console.log(' >>>>> ourSignature: ' + ourSignature);
-					console.log(' >>>>> signature: ' + signature);
+					//console.log(' >>>>> ourSignature: ' + ourSignature);
+					//console.log(' >>>>> signature: ' + signature);
 
 					let bufferA = Buffer.from(ourSignature, 'utf8');
 					//let bufferB = Buffer.from(signature, 'utf8');
@@ -139,7 +139,7 @@ class FBeamer {
 		// Extract the body of the POST request
 		let data = req.body;
 		//console.log('>>>>> req: ' + req);
-		console.log('>>>>> incoming: ' + JSON.stringify(data));
+		//console.log('>>>>> incoming: ' + JSON.stringify(data));
 
 		if (data.object === 'page') {
 			// Iterate through the page entry Array
