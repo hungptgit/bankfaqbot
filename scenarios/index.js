@@ -146,8 +146,8 @@ class Scenario {
 
         console.log('messageTxt:' + messageTxt);
         
-        startXferContext(sender,messageTxt,f);
-        return;
+        //startXferContext(sender,messageTxt,f);
+        //return;
         
         // Wit's Message API
         wit.message(messageTxt)
@@ -472,7 +472,8 @@ class Scenario {
 
 function startXferContext(sender, message, f) {
      let ctx = contextMap.getOrCreate(sender);
-			if (!ctx.isSet()) {
+			
+      if (!ctx.isSet()) {
 				init(sender,f); // initialize the actions. 
 			}
 
@@ -485,7 +486,7 @@ function startXferContext(sender, message, f) {
     let ctx = contextMap.getOrCreate(userId);
     ctx.set(
       /.*/, // The base matcher to match anything. 
-      (match) => getPizzaType(userId,f)
+      (match) => this.getPizzaType(userId,f)
     );
   }
 
@@ -493,7 +494,7 @@ function startXferContext(sender, message, f) {
     let ctx = contextMap.getOrCreate(userId);
     ctx.set(
       /(chicken|cheese|veggie)/,
-      (match) => getDeliveryAddress(userId, match, f)
+      (match) => this.getDeliveryAddress(userId, match, f)
     );
     f.txt(userId, "What kind of pizza do you want ?");
   }
@@ -519,14 +520,13 @@ function startXferContext(sender, message, f) {
     ctx.set(
       //validateAddressUsingGoogleAPI, // Can use some async API method 
       /.*/,
-      (address) => end(userId, pizzaType, address, f)
+      (address) => this.end(userId, pizzaType, address, f)
     ); // Note that pizzaType is now a closure variable. 
     f.txt(userId, `Please enter the delivery Address.`);
   }
 
   function end(userId, pizzaType, address, f) {
-    f.txt(userId, 'Thank you, a ${pizzaType} pizza, will be' +
-      +'delivered to ${address} in 30 mins.');
+    f.txt(userId, 'Thank you, a '+ pizzaType + ' pizza, will be' + 'delivered to ' + address + ' in 30 mins.');
   }
 
 module.exports = Scenario;

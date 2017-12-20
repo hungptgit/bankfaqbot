@@ -23,6 +23,7 @@
     "xmldoc":"1.1.0",
     "wsdlrdr":"0.3.9",
     "bot-context":"0.2.6",
-    "log4js":"2.4.1"
+    "log4js":"2.4.1",
+    "fuzzy": "0.1.3"
   }
 }
