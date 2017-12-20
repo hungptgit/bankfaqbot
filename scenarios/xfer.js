@@ -65,8 +65,9 @@ class XFer {
   }
 
   getDeliveryAddress(userId, pizzaType,f) {
-    let address = 'Sai Gon';
     let ctx = contextMap.getOrCreate(userId);
+    /*    
+    let address = 'Sai Gon';
 
     if (address) {
       ctx.set(/(yes|no)/, (response) => {
@@ -80,11 +81,11 @@ class XFer {
       f.txt(userId, 'Would you like to change your address ?');
       return;
     }
-
+    */
     ctx.set(
       //validateAddressUsingGoogleAPI, // Can use some async API method 
-      /(Sai Gon|Ha Noi)/,
-      (address) => this.end(userId, pizzaType, address)
+      /.*/,
+      (address) => this.end(userId, pizzaType, address, f)
     ); // Note that pizzaType is now a closure variable. 
     f.txt(userId, `Please enter the delivery Address.`);
   }
