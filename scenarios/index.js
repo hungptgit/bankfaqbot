@@ -473,7 +473,7 @@ class Scenario {
 function startXferContext(sender, message, f) {
      let ctx = contextMap.getOrCreate(sender);
 			if (!ctx.isSet()) {
-				this.init(sender,f); // initialize the actions. 
+				init(sender,f); // initialize the actions. 
 			}
 
 			ctx.match(message, function(err, match, contextCb) {
@@ -485,7 +485,7 @@ function startXferContext(sender, message, f) {
     let ctx = contextMap.getOrCreate(userId);
     ctx.set(
       /.*/, // The base matcher to match anything. 
-      (match) => this.getPizzaType(userId,f)
+      (match) => getPizzaType(userId,f)
     );
   }
 
@@ -493,7 +493,7 @@ function startXferContext(sender, message, f) {
     let ctx = contextMap.getOrCreate(userId);
     ctx.set(
       /(chicken|cheese|veggie)/,
-      (match) => this.getDeliveryAddress(userId, match, f)
+      (match) => getDeliveryAddress(userId, match, f)
     );
     f.txt(userId, "What kind of pizza do you want ?");
   }
@@ -519,7 +519,7 @@ function startXferContext(sender, message, f) {
     ctx.set(
       //validateAddressUsingGoogleAPI, // Can use some async API method 
       /.*/,
-      (address) => this.end(userId, pizzaType, address, f)
+      (address) => end(userId, pizzaType, address, f)
     ); // Note that pizzaType is now a closure variable. 
     f.txt(userId, `Please enter the delivery Address.`);
   }
