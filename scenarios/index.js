@@ -30,6 +30,8 @@ const model = new Model();
 const Services = require('../services');
 const services = new Services();
 
+const contextMap = require('bot-context');
+
 
 class Scenario {
   constructor(f) {
@@ -144,7 +146,7 @@ class Scenario {
 
         console.log('messageTxt:' + messageTxt);
         
-        xfer.startXferContext(sender,messageTxt,f);
+        startXferContext(sender,messageTxt,f);
         return;
         
         // Wit's Message API
@@ -467,5 +469,64 @@ class Scenario {
     }
   }
 }
+
+function startXferContext(sender, message, f) {
+     let ctx = contextMap.getOrCreate(sender);
+			if (!ctx.isSet()) {
+				this.init(sender,f); // initialize the actions. 
+			}
+
+			ctx.match(message, function(err, match, contextCb) {
+				if (!err) contextCb(sender, match);
+			});
+  }
+  
+  function init(userId,f) {
+    let ctx = contextMap.getOrCreate(userId);
+    ctx.set(
+      /.*/, // The base matcher to match anything. 
+      (match) => this.getPizzaType(userId,f)
+    );
+  }
+
+  function getPizzaType(userId,f) {
+    let ctx = contextMap.getOrCreate(userId);
+    ctx.set(
+      /(chicken|cheese|veggie)/,
+      (match) => this.getDeliveryAddress(userId, match, f)
+    );
+    f.txt(userId, "What kind of pizza do you want ?");
+  }
+
+  function getDeliveryAddress(userId, pizzaType,f) {
+    let ctx = contextMap.getOrCreate(userId);
+    /*    
+    let address = 'Sai Gon';
+
+    if (address) {
+      ctx.set(/(yes|no)/, (response) => {
+        if (response === 'yes') {
+          //userDataService.clearAddress(userId);
+          this.getDeliveryAddress(userId, pizzaType);
+        } else {
+          this.end(userId, pizzaType, address);
+        }
+      });
+      f.txt(userId, 'Would you like to change your address ?');
+      return;
+    }
+    */
+    ctx.set(
+      //validateAddressUsingGoogleAPI, // Can use some async API method 
+      /.*/,
+      (address) => this.end(userId, pizzaType, address, f)
+    ); // Note that pizzaType is now a closure variable. 
+    f.txt(userId, `Please enter the delivery Address.`);
+  }
+
+  function end(userId, pizzaType, address, f) {
+    f.txt(userId, 'Thank you, a ${pizzaType} pizza, will be' +
+      +'delivered to ${address} in 30 mins.');
+  }
 
 module.exports = Scenario;
