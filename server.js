@@ -49,17 +49,14 @@ agenda.on('ready', () => {
 
 			console.log('----> msg : ' + JSON.stringify(msg));
 
-			
-
-
 			if (postback && postback.payload) {
-				scen.processPostback(sender, postback, f, contextMap);
+				scen.processPostback(sender, postback, f);
 			} else if (message && message.text && !message.quick_reply) {
-				scen.processMessage(sender, message, f, wit, contextMap);
+				scen.processMessage(sender, message, f, wit);
 			} else if (message && message.quick_reply) {
-				scen.processQuickreply(sender, message, f, contextMap);
+				scen.processQuickreply(sender, message, f);
 			} else if (message && message.attachments) {
-				scen.processAttachment(sender, message, f, contextMap);
+				scen.processAttachment(sender, message, f);
 			} else {
 
 			}
