@@ -144,6 +144,9 @@ class Scenario {
 
         console.log('messageTxt:' + messageTxt);
         
+        xfer.startXferContext(sender,messageTxt,f);
+        return;
+        
         // Wit's Message API
         wit.message(messageTxt)
           .then(({
@@ -163,7 +166,7 @@ class Scenario {
                 account.acctInfo(sender, f);
                 break;
               case 'chuyenkhoan':
-                xfer.startXferContext(sender,messageTxt,f);
+                //xfer.startXferContext(sender,messageTxt,f);
                 /*
                 let bankCode = entities.bankCode ? entities.bankCode[0].value : 'VietinBank';
                 let sotien = entities.number ? entities.number[0].value : 'undefined';
