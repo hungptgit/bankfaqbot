@@ -37,7 +37,7 @@ class Scenario {
     //model.findAll('1');
   }
 
-  processPostback(sender, postback, f) {
+  processPostback(sender, postback, f, contextMap) {
     return new Promise((resolve, reject) => {
       let buttons = '';
       let text = '';
@@ -132,7 +132,7 @@ class Scenario {
     });
   }
 
-  processMessage(sender, message, f, wit) {
+  processMessage(sender, message, f, wit, contextMap) {
     return new Promise((resolve, reject) => {
       let buttons = '';
       let text = '';
@@ -163,6 +163,8 @@ class Scenario {
                 account.acctInfo(sender, f);
                 break;
               case 'chuyenkhoan':
+                xfer.startXferContext(sender,messageTxt,f);
+                /*
                 let bankCode = entities.bankCode ? entities.bankCode[0].value : 'VietinBank';
                 let sotien = entities.number ? entities.number[0].value : 'undefined';
                 let taikhoanthuhuong = entities.number ? entities.number[1].value : 'undefined';
@@ -176,7 +178,9 @@ class Scenario {
                   let confirmMsg = 'Bạn muốn chuyển ' + sotien + '  tới ' + taikhoanthuhuong + ' tại ' + bankCode + '. Nhấn Xác thực để chuyển bạn đến trang xác thực OTP';
                   let confirmUrl = 'http://hungpt.handcraft.com/xfer.html?fbid=' + sender + '&amt=' + sotien + '&benAc=' + taikhoanthuhuong + '&benBank=' + bankCode;
                   xfer.showConfirm(sender, f, confirmMsg, confirmUrl);
+                  
                 }
+                */
                 break;
               case 'thanhtoanhoadon':
                 pay.showHelp(sender, f);
@@ -386,7 +390,7 @@ class Scenario {
     });
   }
 
-  processQuickreply(sender, message, f, agenda) {
+  processQuickreply(sender, message, f, agenda, contextMap) {
     console.log('processQuickreply WIT resp :');
     let buttons = '';
     let text = '';
@@ -440,7 +444,7 @@ class Scenario {
     }
   }
 
-  processAttachment(sender, message, f) {
+  processAttachment(sender, message, f, contextMap) {
     console.log('processAttachment ');
     let buttons = '';
     let text = '';
