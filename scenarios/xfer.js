@@ -38,6 +38,4 @@ class XFer {
 
 }
 
- 
-
 module.exports = XFer;
