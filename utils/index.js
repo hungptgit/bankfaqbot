@@ -1,6 +1,7 @@
 'use strict';
 var moment = require('moment');
 var https = require('https');
+var enc = require('encoder.js');
 
 function isvalidateInput(str) {
     var pattern = /^\w+[a-z A-Z_]+?\@[0-9]{1,2}\:[0-9]{1,2}\w[to][0-9]{1,2}:[0-9]{1,2}$/;
@@ -42,10 +43,16 @@ const firstEntity = (entities, name) => {
     entities[name][0];
 }
 
+const htmlDecode = (dataEncoded) => {
+  return enc.htmlDecode(dataEncoded);
+}
+
+
 module.exports = {
   isvalidateInput,
   getFormattedTime,
   getFormattedDay,
   fetchEntity,
-  firstEntity
+  firstEntity,
+  htmlDecode
 }

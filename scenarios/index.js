@@ -1,6 +1,5 @@
 'use strict';
 var utils = require('../utils');
-var decode = require('decode-html');
 
 var superagent = require("superagent");
 
@@ -170,7 +169,7 @@ class Scenario {
               //console.log("res.body =", JSON.stringify(res.answers[0].questions));
               
               console.log("res.body answer =", res.body.answers[0].answer);
-              f.txt(sender, decode(res.body.answers[0].answer));
+              f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
               f.txt(sender, 'Score: ' + res.body.answers[0].score);
               //f.txt(sender, 'Score: ' + res.body.score.value);
             }
