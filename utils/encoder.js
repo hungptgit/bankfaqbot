@@ -241,8 +241,3 @@ Encoder = {
 	}
 
 }
-
-module.exports = {
-  htmlDecode,
-  htmlEncode
-}
