@@ -2,6 +2,7 @@
 var moment = require('moment');
 var https = require('https');
 const Encoder = require('encoder');
+const enc = new Encoder();
 
 function isvalidateInput(str) {
     var pattern = /^\w+[a-z A-Z_]+?\@[0-9]{1,2}\:[0-9]{1,2}\w[to][0-9]{1,2}:[0-9]{1,2}$/;
@@ -46,7 +47,7 @@ const firstEntity = (entities, name) => {
 }
 
 const htmlDecode = (dataEncoded) => {
-  return Encoder.htmlDecode(dataEncoded);
+  return enc.htmlDecode(dataEncoded);
 }
 
 module.exports = {
