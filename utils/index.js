@@ -1,8 +1,7 @@
 'use strict';
 var moment = require('moment');
 var https = require('https');
-const Encoder = require('./encoder');
-var enc = new Encoder();
+const enc = require('./encoder');
 
 function isvalidateInput(str) {
     var pattern = /^\w+[a-z A-Z_]+?\@[0-9]{1,2}\:[0-9]{1,2}\w[to][0-9]{1,2}:[0-9]{1,2}$/;
