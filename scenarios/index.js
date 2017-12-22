@@ -151,21 +151,22 @@ class Scenario {
         let messageTxt = message.text;
 
         console.log('messageTxt:' + messageTxt);
-
+        /*
         superagent
           .post('https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/a498e73c-5985-42f2-8722-64cc001439a8/generateAnswer')
           .send({
             question: messageTxt
           })
           .set('Ocp-Apim-Subscription-Key', 'b29bac3af90b48ccb02ad5d3bc4e26bd')
-          .set('Content-Type', 'application/json; charset=UTF-16')
+          .set('Content-Type', 'application/json; charset=UTF-8')
           .end(function(err, res) {
             if (err || !res.ok) {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
             } else {
+              res.header('')
               console.log("res.header =", res.header);
               console.log("res.body =", res.body);
-              
+              console.log("res.body =", JSON.stringify(res.answers[0].questions));
               f.txt(sender, res.body.answers[0].answer);
               f.txt(sender, 'Score: ' + res.body.answers[0].score);
               //f.txt(sender, 'Score: ' + res.body.score.value);
@@ -173,7 +174,7 @@ class Scenario {
           });
 
         return;
-        
+        */
         // Wit's Message API
         wit.message(messageTxt)
           .then(({
