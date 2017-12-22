@@ -167,6 +167,7 @@ class Scenario {
               console.log("res.body =", res.body);
               
               f.txt(sender, res.body.answers[0].answer);
+              f.txt(sender, 'Score: ' + res.body.answers[0].score);
               //f.txt(sender, 'Score: ' + res.body.score.value);
             }
           });
