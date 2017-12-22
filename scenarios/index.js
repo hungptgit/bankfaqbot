@@ -158,7 +158,7 @@ class Scenario {
             question: messageTxt
           })
           .set('Ocp-Apim-Subscription-Key', 'b29bac3af90b48ccb02ad5d3bc4e26bd')
-          .set('Content-Type', 'application/json')
+          .set('Content-Type', 'application/json; charset=UTF-8')
           .end(function(err, res) {
             if (err || !res.ok) {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
