@@ -151,7 +151,7 @@ class Scenario {
         let messageTxt = message.text;
 
         console.log('messageTxt:' + messageTxt);
-        /*
+        
         superagent
           .post('https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/a498e73c-5985-42f2-8722-64cc001439a8/generateAnswer')
           .send({
@@ -163,7 +163,6 @@ class Scenario {
             if (err || !res.ok) {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
             } else {
-              res.header('')
               console.log("res.header =", res.header);
               console.log("res.body =", res.body);
               console.log("res.body =", JSON.stringify(res.answers[0].questions));
