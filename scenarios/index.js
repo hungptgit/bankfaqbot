@@ -163,6 +163,7 @@ class Scenario {
             if (err || !res.ok) {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
             } else {
+              console.log("res.body =", res.body.header);
               console.log("res.body =", res.body);
               
               f.txt(sender, res.body.answers[0].answer);
