@@ -174,7 +174,7 @@ class Scenario {
           });
 
         return;
-        */
+        
         // Wit's Message API
         wit.message(messageTxt)
           .then(({
