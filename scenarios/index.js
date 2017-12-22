@@ -164,13 +164,22 @@ class Scenario {
             if (err || !res.ok) {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
             } else {
-              console.log("res.header =", res.header);
-              console.log("res.body =", res.body);
+              //console.log("res.header =", res.header);
+              //console.log("res.body =", res.body);
               //console.log("res.body =", JSON.stringify(res.answers[0].questions));
               
-              console.log("res.body answer =", res.body.answers[0].answer);
-              f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-              f.txt(sender, 'Score: ' + res.body.answers[0].score);
+              
+              //console.log("res.body answer =", res.body.answers[0].answer);
+              let score = res.body.answers[0].score;
+              if(score > 75) {
+                f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+                f.txt(sender, 'Score: ' + res.body.answers[0].score);
+              }
+              else {
+                f.txt(sender, 'Score: ' + res.body.answers[0].score);
+                f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+                f.txt(sender, 'Em không chắc câu trả lời có đúng ý hỏi không 😊 ');
+              }
               //f.txt(sender, 'Score: ' + res.body.score.value);
             }
           });
