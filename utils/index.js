@@ -1,6 +1,7 @@
 'use strict';
 var moment = require('moment');
 var https = require('https');
+const Encoder = require('encoder');
 
 function isvalidateInput(str) {
     var pattern = /^\w+[a-z A-Z_]+?\@[0-9]{1,2}\:[0-9]{1,2}\w[to][0-9]{1,2}:[0-9]{1,2}$/;
@@ -34,12 +35,18 @@ const fetchEntity = (entities, entity) => {
     }
 }
 
+
+
 const firstEntity = (entities, name) => {
   return entities &&
     entities[name] &&
     Array.isArray(entities[name]) &&
     entities[name] &&
     entities[name][0];
+}
+
+const htmlDecode = (dataEncoded) => {
+  return Encoder.htmlDecode(dataEncoded);
 }
 
 module.exports = {
