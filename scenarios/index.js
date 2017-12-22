@@ -175,10 +175,14 @@ class Scenario {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Score: ' + res.body.answers[0].score);
               }
-              else {
+              else if(score <= 75 && score > 60) {
                 f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Em không chắc câu trả lời có đúng ý hỏi không 😊 ');
+              }
+              else {
+                f.txt(sender, 'Xin lỗi, em sẽ ghi nhận câu hỏi và xin trả lời sau ạ 😊 ');
+                f.txt(sender, 'Score: ' + res.body.answers[0].score);
               }
               //f.txt(sender, 'Score: ' + res.body.score.value);
             }
