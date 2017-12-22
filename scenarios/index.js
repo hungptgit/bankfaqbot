@@ -165,7 +165,7 @@ class Scenario {
             } else {
               console.log("res.header =", res.header);
               console.log("res.body =", res.body);
-              console.log("res.body =", JSON.stringify(res.answers[0].questions));
+              //console.log("res.body =", JSON.stringify(res.answers[0].questions));
               f.txt(sender, res.body.answers[0].answer);
               f.txt(sender, 'Score: ' + res.body.answers[0].score);
               //f.txt(sender, 'Score: ' + res.body.score.value);
