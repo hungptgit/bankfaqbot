@@ -1,7 +1,7 @@
 'use strict';
 var moment = require('moment');
 var https = require('https');
-const Encoder = require('encoder');
+const Encoder = require('encoder.js');
 const enc = new Encoder();
 
 function isvalidateInput(str) {
