@@ -182,6 +182,7 @@ class Scenario {
               }
               else {
                 f.txt(sender, 'Xin lỗi, em sẽ ghi nhận câu hỏi và xin trả lời sau ạ 😊 ');
+                console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Score: ' + res.body.answers[0].score);
               }
               //f.txt(sender, 'Score: ' + res.body.score.value);
