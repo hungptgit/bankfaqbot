@@ -209,9 +209,9 @@ class Scenario {
                         let bankCode = entities.bankCode ? entities.bankCode[0].value : 'VietinBank';
                         let sotien = entities.number ? entities.number[0].value : 'undefined';
                         let taikhoanthuhuong = entities.number ? entities.number[1].value : 'undefined';
-                        console.log(' >>>>>> bankCode: ' + bankCode);
-                        console.log(' >>>>>> sotien: ' + sotien);
-                        console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
+                        //console.log(' >>>>>> bankCode: ' + bankCode);
+                        //console.log(' >>>>>> sotien: ' + sotien);
+                        //console.log(' >>>>>> taikhoanthuhuong: ' + taikhoanthuhuong);
 
                         if (sotien == 'undefined' || taikhoanthuhuong == 'undefined') {
                           xfer.showHelp(sender, f);
@@ -280,11 +280,11 @@ class Scenario {
                                 timezone
                               } = profile;
                               console.log('getProfile: ' + first_name);
-                              f.txt(sender, greetings.value + ' ' + first_name + '. Tôi có thể giúp gì được cho bạn?');
+                              f.txt(sender, greetings.value + ' ' + first_name + '. Em có thể giúp gì được ạ?');
                             })
                             .catch(error => {
                               console.log('getProfile err: ' + error);
-                              f.txt(sender, greetings.value + '. Tôi có thể giúp gì được cho bạn?');
+                              f.txt(sender, greetings.value + '. Em có thể giúp gì được ạ?');
                             });
 
                         } else if (bye) {
@@ -323,7 +323,7 @@ class Scenario {
                         let emoTerm = entities.emoTerm ? entities.emoTerm[0].metadata : 'undefined';
 
                         if (emoTerm == 'undefined') {
-                          f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
+                          f.txt(sender, 'Cảm ơn đã sử dụng dịch vụ của VietinBank ^_^ ');
                         } else {
                           switch (emoTerm) {
                             case 'xinh':
@@ -510,7 +510,5 @@ class Scenario {
     }
   }
 }
-
-module.exports = Scenario;}
 
 module.exports = Scenario;
