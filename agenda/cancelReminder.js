@@ -1,5 +1,6 @@
 'use strict';
 const ObjectID = require('mongodb').ObjectID;
+
 module.exports = (agenda, f) => {
   return agenda.define('cancelReminder', job => {
     const {fbid, id} = job.attrs.data;

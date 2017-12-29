@@ -46,6 +46,10 @@ server.get('/', (req, res, next) => {
 	return next();
 });
 
+agenda.define('job trigger', function(job, done) {
+	console.log('----> job trigger');
+});
+
 agenda.on('ready', () => {
 	// Handle incoming
 	server.post('/', (req, res, next) => {
@@ -56,9 +60,8 @@ agenda.on('ready', () => {
 				message
 			} = msg;
 			
-			var greeting = res.__('Hello');
-			console.log('----> greeting : ' + greeting);
-			console.log('----> msg : ' + JSON.stringify(msg));
+			//var greeting = res.__('Hello');
+			console.log('----> incomming msg : ' + JSON.stringify(msg));
 
 			if (postback && postback.payload) {
 				scen.processPostback(sender, postback, f);
@@ -75,7 +78,9 @@ agenda.on('ready', () => {
 
 		return next();
 	});
-
+	
+	agenda.every('*/10 * * * *', 'job trigger');
+	
 	agenda.start();
 });
 

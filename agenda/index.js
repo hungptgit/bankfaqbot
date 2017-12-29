@@ -7,7 +7,6 @@ const agenda = new Agenda({
   }
 });
 
-
 const createReminder = require('./createReminder');
 const showReminders = require('./showReminders');
 const cancelReminder = require('./cancelReminder');

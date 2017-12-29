@@ -1,5 +1,6 @@
 'use strict';
 const {fetchEntity} = require('../utils');
+
 const createReminder = (session, agenda) => {
   return ({sessionId, context, entities}) => {
     return new Promise((resolve, reject) => {
