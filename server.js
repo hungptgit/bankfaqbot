@@ -2,10 +2,20 @@
 // create an API server
 const config = require('./config');
 const Restify = require('restify');
+const i18n = require('i18n');
+// minimal config
+i18n.configure({
+  locales: ['en', 'vi'],
+  directory: __dirname + '/locales'
+});
 
 const server = Restify.createServer({
 	name: 'VTBMessenger'
 });
+// enable i18n in restify
+server.use(i18n.init);
+
+
 const PORT = process.env.PORT || 3000;
 // FBeamer
 const FBeamer = require('./fbeamer');
@@ -46,7 +56,9 @@ agenda.on('ready', () => {
 				postback,
 				message
 			} = msg;
-
+			
+			var greeting = res.__('Hello');
+			console.log('----> greeting : ' + greeting);
 			console.log('----> msg : ' + JSON.stringify(msg));
 
 			if (postback && postback.payload) {

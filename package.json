@@ -21,6 +21,7 @@
     "underscore":"1.8.3",
     "xmldoc":"1.1.0",
     "wsdlrdr":"0.3.9",
-    "superagent": "^3.3.0"
+    "superagent": "^3.3.0",
+    "i18n": "^0.8.3"
   }
 }

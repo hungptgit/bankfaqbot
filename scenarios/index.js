@@ -172,7 +172,6 @@ class Scenario {
               //console.log("res.body =", res.body);
               //console.log("res.body =", JSON.stringify(res.answers[0].questions));
 
-
               //console.log("res.body answer =", res.body.answers[0].answer);
               let score = res.body.answers[0].score;
               if (score > 75) {
@@ -197,7 +196,7 @@ class Scenario {
                     if (!intent) {
                       // use app data, or a previous context to decide how to 
                       console.log('Not found intent');
-                      f.txt(sender, 'Xin lỗi chúng tôi chưa hiểu yêu cầu của bạn. Chúng tôi sẽ ghi nhận và trả lời bạn sau.');
+                      f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ.');
                       return;
                     }
 
@@ -491,7 +490,7 @@ class Scenario {
   }
 
   processAttachment(sender, message, f, contextMap) {
-    console.log('processAttachment ');
+    //console.log('processAttachment ');
     let buttons = '';
     let text = '';
     let data = '';
