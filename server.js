@@ -15,7 +15,6 @@ const server = Restify.createServer({
 // enable i18n in restify
 server.use(i18n.init);
 
-
 const PORT = process.env.PORT || 3000;
 // FBeamer
 const FBeamer = require('./fbeamer');
