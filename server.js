@@ -79,7 +79,7 @@ agenda.on('ready', () => {
 		return next();
 	});
 	
-	agenda.every('*/10 * * * *', 'job trigger');
+	agenda.processEvery('1 minutes', 'job trigger');
 	
 	agenda.start();
 });
