@@ -105,6 +105,12 @@ class Scenario {
           case 'menu:LOCATION_PAYLOAD':
             loca.showLocation(sender, f);
             break;
+          case 'menu:XRATE_PAYLOAD':
+            news.exchangeRate(sender, f);
+            break;
+          case 'menu:IRATE_PAYLOAD':
+            news.interestRate(sender, f);
+            break;    
           case 'NEWS_BOT':
             news.news(sender, f);
             break;

@@ -243,13 +243,33 @@ class News {
               {
                 title: "Tin khuyến mại",
                 image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
-                subtitle: "Xem các tin khuyến mại hot của VietinBank",
+                subtitle: "Xem thông tin tỷ giá",
                 buttons: [{
                   type: "postback",
                   title: "Xem",
                   payload: "menu:NEWS_PAYLOAD"
                 }]
-              }
+              },
+              {
+                title: "Xem tỷ giá",
+                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                subtitle: "Xem các tin khuyến mại hot của VietinBank",
+                buttons: [{
+                  type: "postback",
+                  title: "Xem",
+                  payload: "menu:XRATE_PAYLOAD"
+                }]
+              },
+              {
+                title: "Xem lãi xuất",
+                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                subtitle: "Xem các tin khuyến mại hot của VietinBank",
+                buttons: [{
+                  type: "postback",
+                  title: "Xem",
+                  payload: "menu:IRATE_PAYLOAD"
+                }]
+              }         
             ]
           }
         }
@@ -260,6 +280,16 @@ class News {
     f.sendNews(obj)
       .catch(error => console.log('news: ' + error));
   }
+  
+  exchangeRate(sender, f) {
+    f.txt(sender, 'Thông tin tỷ giá mới nhất \n EUR	Euro	01/01/2018	27.002,12 đ\n JPY	Yên Nhật	01/01/2018	200,87 đ\n GBP	Bảng Anh	01/01/2018	30.398,07 đ\n CHF	Franc Thuỵ Sĩ	01/01/2018	22.992,27 đ\n AUD	Đô la Úc	01/01/2018	17.639,70 đ');
+  }
+  
+  interestRate(sender, f) {
+    f.txt(sender, 'Thông tin tỷ giá mới nhất \n 1M	1 tháng	4,5%\n 2M	2 tháng	4,8%\n 6M	6 tháng	5,2%\n 12M	12 tháng	6,8%');
+  }
+  
+  
 }
 
 module.exports = News;
