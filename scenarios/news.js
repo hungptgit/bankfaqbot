@@ -220,6 +220,7 @@ class News {
   }
   
   menu(id, f) {
+
     let obj = {
       recipient: {
         id: id
@@ -231,30 +232,22 @@ class News {
             template_type: "generic",
             elements: [{
                 title: "Tìm ATM gần nhất",
-                image_url: "http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
-                subtitle: "",
+                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                subtitle: "Tìm kiếm các cây ATM gần vị trí bạn nhất",
                 buttons: [{
-                  type: "web_url",
-                  url: "http://www.vietinbank.vn/vn/tin-tuc/Hoan-15-cho-chu-the-tin-dung-quoc-te-VietinBank-tai-Lotte-Mart-20170829154910.html",
-                  title: "Xem chi tiết"
-                }, {
-                  type: "web_url",
-                  title: "Đăng ký mở thẻ",
+                  type: "postback",
+                  title: "Tìm",
                   payload: "menu:LOCATION_PAYLOAD"
                 }]
               },
               {
-                title: "Thông tin khuyến mại",
-                image_url: "https://thebank.vn/uploads/2014/03/Vietinbank-tuyen-dung.jpg",
-                subtitle: "",
+                title: "Tin khuyến mại",
+                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                subtitle: "Xem các tin khuyến mại hot của VietinBank",
                 buttons: [{
-                  type: "web_url",
-                  url: "https://www.vietinbank.vn/vn/tin-tuc/VietinBank-tuyen-dung-gan-300-nhan-su-cho-chi-nhanh-20170807233640.html",
-                  title: "Xem chi tiết"
-                }, {
                   type: "postback",
-                  title: "Đăng ký nhận tin",
-                  payload: "NEWS_BOT"
+                  title: "Xem",
+                  payload: "NEWS_PAYLOAD"
                 }]
               }
             ]
@@ -262,12 +255,6 @@ class News {
         }
       }
     }
-
-    console.log('--> news data: ' + JSON.stringify(obj));
-
-    f.sendNews(obj)
-      .catch(error => console.log('news: ' + error));
-  }
 }
 
 module.exports = News;
