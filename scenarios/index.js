@@ -137,7 +137,8 @@ class Scenario {
             card.showQACreditCard(sender, f);
             break;
           default:
-            f.txt(sender, 'Ban hay lua chon tinh nang can dung. Choice showing');
+            f.txt(sender, 'Chúng tôi có thể trợ giúp được gì cho bạn? Vui lòng tham khảo menu bên dưới hoặc gõ nội dung bạn cần hỗ trợ');
+            news.menu(sender,f);
             break;
         }
       }
@@ -196,7 +197,8 @@ class Scenario {
                     if (!intent) {
                       // use app data, or a previous context to decide how to 
                       console.log('Not found intent');
-                      f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ.');
+                      f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+                      news.menu(sender,f);
                       return;
                     }
 
@@ -473,13 +475,14 @@ class Scenario {
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 11h hàng ngày.');
           break;
         case 'NEWS_8h30':
+          /*
           let task = 'NEWS_8h30';
           agenda.now('createReminder', {
             sender,
             datetime: context.datetime,
             task: task
           });
-
+          */
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 8h30 hàng ngày.');
           break;
         default:
@@ -505,7 +508,7 @@ class Scenario {
 
       f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
 
-      services.location(sender, locLat, locLong, locType, f);
+      //services.location(sender, locLat, locLong, locType, f);
     }
   }
 }

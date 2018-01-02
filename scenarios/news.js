@@ -218,6 +218,70 @@ class News {
     f.sendNews(obj)
       .catch(error => console.log('news: ' + error));
   }
+  
+  menu(id, f) {
+    let obj = {
+      recipient: {
+        id: id
+      },
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [{
+                title: "Tìm ATM gần nhất",
+                image_url: "http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
+                subtitle: "",
+                default_action: {
+                  type: "web_url",
+                  url: ""
+                  //messenger_extensions: true,
+                  //webview_height_ratio: "tall",
+                  //fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
+                },
+                buttons: [{
+                  type: "web_url",
+                  url: "http://www.vietinbank.vn/vn/tin-tuc/Hoan-15-cho-chu-the-tin-dung-quoc-te-VietinBank-tai-Lotte-Mart-20170829154910.html",
+                  title: "Xem chi tiết"
+                }, {
+                  type: "web_url",
+                  title: "Tìm",
+                  payload: "menu:LOCATION_PAYLOAD"
+                }]
+              },
+              {
+                title: "Tin khuyến mại",
+                image_url: "http://cafefcdn.com/thumb_w/650/2017/vtb-1482312845555-1491215019360.jpg",
+                subtitle: "",
+                default_action: {
+                  type: "web_url",
+                  url: ""
+                  //messenger_extensions: true,
+                  //webview_height_ratio: "tall",
+                  //fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
+                },
+                buttons: [{
+                  type: "web_url",
+                  url: "http://www.vietinbank.vn/vn/tin-tuc/Hoan-15-cho-chu-the-tin-dung-quoc-te-VietinBank-tai-Lotte-Mart-20170829154910.html",
+                  title: "Xem chi tiết"
+                }, {
+                  type: "web_url",
+                  title: "Xem",
+                  payload: "menu:LOCATION_PAYLOAD"
+                }]
+              }
+            ]
+          }
+        }
+      }
+    }
+
+    console.log('--> news data: ' + JSON.stringify(obj));
+
+    f.sendNews(obj)
+      .catch(error => console.log('news: ' + error));
+  }
 }
 
 module.exports = News;

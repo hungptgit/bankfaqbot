@@ -6,7 +6,7 @@ class Account {
   }
 
   miniStatement(sender, f) {
-    f.txt(sender, 'Danh sách 5 giao dịch gần nhất của tài khoản 1010*****312323 TRAN SON TUNG \n 03/05/17 22:01 +5,000,000 CHUYEN LUONG \n 03/05/17 22:01 -5,000,000 TIET KIEM \n 03/05/17 22:01 -3,242,000 CHUYEN VO \n 03/05/17 22:01 -15,034,000 THANH TOAN EVN');
+    f.txt(sender, 'Danh sách 5 giao dịch gần nhất của tài khoản 1010*****3123 NGUYEN VAN A \n 03/05/17 22:01 +5,000,000 CHUYEN LUONG \n 03/05/17 22:01 -5,000,000 TIET KIEM \n 03/05/17 22:01 -3,242,000 CHUYEN VO \n 03/05/17 22:01 -15,034,000 THANH TOAN EVN');
   }
 
   acctInfo(id, f) {
@@ -21,7 +21,7 @@ class Account {
           payload: {
             template_type: "generic",
             elements: [{
-                title: "DDA: 1010*****312323 TRAN SON TUNG",
+                title: "DDA: 1010*****3123 NGUYEN VAN A",
                 image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
                 subtitle: "Trạng thái: Active. \nSố dư khả dụng: 3,123,567 đ \n ",
                 buttons: [{
@@ -39,7 +39,7 @@ class Account {
                 }]
               },
               {
-                title: "DDA: 1010*****312556 TRAN SON TUNG",
+                title: "DDA: 1010*****3123 NGUYEN VAN A",
                 image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
                 subtitle: "Trạng thái: Closed. \nSố dư khả dụng: 0 đ \n ",
                 buttons: [{
