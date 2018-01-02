@@ -247,7 +247,7 @@ class News {
                 buttons: [{
                   type: "postback",
                   title: "Xem",
-                  payload: "NEWS_PAYLOAD"
+                  payload: "menu:NEWS_PAYLOAD"
                 }]
               }
             ]
