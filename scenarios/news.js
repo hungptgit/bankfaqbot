@@ -218,7 +218,7 @@ class News {
     f.sendNews(obj)
       .catch(error => console.log('news: ' + error));
   }
-  
+
   menu(id, f) {
 
     let obj = {
@@ -255,6 +255,7 @@ class News {
         }
       }
     }
+  }
 }
 
 module.exports = News;
