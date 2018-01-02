@@ -298,10 +298,12 @@ class Scenario {
                                 timezone
                               } = profile;
                               f.txt(sender, bye.value + ' ' + first_name + ' :) ');
+                              news.menu(sender,f);
                             })
                             .catch(error => {
                               console.log('getProfile err: ' + error);
                               f.txt(sender, bye.value + ' ❤️');
+                              news.menu(sender,f);
                             });
 
                         } else if (who) {

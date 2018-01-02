@@ -255,6 +255,10 @@ class News {
         }
       }
     }
+    console.log('--> show recommend: ' + JSON.stringify(obj));
+
+    f.sendNews(obj)
+      .catch(error => console.log('news: ' + error));
   }
 }
 
