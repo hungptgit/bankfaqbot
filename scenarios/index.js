@@ -282,10 +282,12 @@ class Scenario {
                               } = profile;
                               console.log('getProfile: ' + first_name);
                               f.txt(sender, greetings.value + ' ' + first_name + '. Em có thể giúp gì được ạ?');
+                              news.menu(sender,f);
                             })
                             .catch(error => {
                               console.log('getProfile err: ' + error);
                               f.txt(sender, greetings.value + '. Em có thể giúp gì được ạ?');
+                              news.menu(sender,f);
                             });
 
                         } else if (bye) {
