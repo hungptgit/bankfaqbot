@@ -232,7 +232,7 @@ class News {
             template_type: "generic",
             elements: [{
                 title: "Tìm ATM gần nhất",
-                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                image_url: "https://image.flaticon.com/icons/svg/138/138287.svg",
                 subtitle: "Tìm kiếm các cây ATM gần vị trí bạn nhất",
                 buttons: [{
                   type: "postback",
@@ -242,7 +242,7 @@ class News {
               },
               {
                 title: "Tin khuyến mại",
-                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                image_url: "https://image.flaticon.com/icons/svg/138/138304.svg",
                 subtitle: "Xem thông tin tỷ giá",
                 buttons: [{
                   type: "postback",
@@ -252,7 +252,7 @@ class News {
               },
               {
                 title: "Xem tỷ giá",
-                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                image_url: "https://image.flaticon.com/icons/svg/138/138324.svg",
                 subtitle: "Xem các tin khuyến mại hot của VietinBank",
                 buttons: [{
                   type: "postback",
@@ -262,7 +262,7 @@ class News {
               },
               {
                 title: "Xem lãi xuất",
-                image_url: "https://thebank.vn/uploads/posts/228/thebank.vn-tienichvuottroicuatheatmvietinbankpepartner-1408694398.jpg",
+                image_url: "https://image.flaticon.com/icons/svg/138/138283.svg",
                 subtitle: "Xem các tin khuyến mại hot của VietinBank",
                 buttons: [{
                   type: "postback",
