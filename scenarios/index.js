@@ -93,8 +93,8 @@ class Scenario {
           case 'menu:PAY_WARTER':
             f.txt(sender, 'Đang lấy về thông tin tỷ giá lãi suất mới nhất');
             //services.depInterest(sender, f);
-            news.exchangeRate(sender,f);
-            news.interestRate(sender,f);
+            news.exchangeRate(sender, f);
+            news.interestRate(sender, f);
             break;
           case 'menu:NEWS_PAYLOAD':
             news.news(sender, f);
@@ -113,7 +113,7 @@ class Scenario {
             break;
           case 'menu:IRATE_PAYLOAD':
             news.interestRate(sender, f);
-            break;    
+            break;
           case 'NEWS_BOT':
             news.showRegisterNews(sender, f);
             break;
@@ -146,7 +146,7 @@ class Scenario {
             break;
           default:
             f.txt(sender, 'Chúng tôi có thể trợ giúp được gì cho bạn? Vui lòng tham khảo menu bên dưới hoặc gõ nội dung bạn cần hỗ trợ');
-            news.menu(sender,f);
+            news.menu(sender, f);
             break;
         }
       }
@@ -206,7 +206,7 @@ class Scenario {
                       // use app data, or a previous context to decide how to 
                       console.log('Not found intent');
                       f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
-                      news.menu(sender,f);
+                      news.menu(sender, f);
                       return;
                     }
 
@@ -290,12 +290,12 @@ class Scenario {
                               } = profile;
                               console.log('getProfile: ' + first_name);
                               f.txt(sender, greetings.value + ' ' + first_name + '. Em có thể giúp gì được ạ?');
-                              news.menu(sender,f);
+                              news.menu(sender, f);
                             })
                             .catch(error => {
                               console.log('getProfile err: ' + error);
                               f.txt(sender, greetings.value + '. Em có thể giúp gì được ạ?');
-                              news.menu(sender,f);
+                              news.menu(sender, f);
                             });
 
                         } else if (bye) {
@@ -306,12 +306,12 @@ class Scenario {
                                 timezone
                               } = profile;
                               f.txt(sender, bye.value + ' ' + first_name + ' :) ');
-                              news.menu(sender,f);
+                              news.menu(sender, f);
                             })
                             .catch(error => {
                               console.log('getProfile err: ' + error);
                               f.txt(sender, bye.value + ' ❤️');
-                              news.menu(sender,f);
+                              news.menu(sender, f);
                             });
 
                         } else if (who) {
@@ -488,9 +488,12 @@ class Scenario {
           break;
         case 'NEWS_7h30':
           let task = 'NEWS_7h30';
-          
-          agenda.createReminder(agenda,f);
-      
+          try {
+            agenda.createReminder(agenda, f);
+          } catch (error) {
+            console.log(error);
+          }
+
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 7h30 hàng ngày.');
           break;
         default:
