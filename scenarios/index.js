@@ -486,12 +486,6 @@ class Scenario {
           break;
         case 'NEWS_7h30':
           let task = 'NEWS_7h30';
-          
-          agenda.now('createReminder', {
-            sender,
-            datetime: context.datetime,
-            task: task
-          });
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 7h30 hàng ngày.');
           break;
         default:
