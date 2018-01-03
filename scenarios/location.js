@@ -13,7 +13,7 @@ class Location {
       buttons = [{
         content_type: "location"
       }];
-      text = 'Bạn muốn tìm các phòng giao dịch ở quanh khu vực nào';
+      text = 'Hãy gửi vị trí bạn muốn tìm các địa điểm giao dịch gần nhất của VietinBank';
 
       f.quick(sender, {
         text,

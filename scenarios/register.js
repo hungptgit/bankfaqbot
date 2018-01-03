@@ -21,12 +21,12 @@ class Register {
           {
             type: 'web_url',
             title: 'iPay',
-            url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
+            url: 'https://ebanking.vietinbank.vn/register/'
           },
           {
             type: 'postback',
             title: 'eFAST',
-            payload: 'REG_EFAST'
+            url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
           }
         ]
       }
