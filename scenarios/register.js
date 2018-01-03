@@ -24,7 +24,7 @@ class Register {
             url: 'https://ebanking.vietinbank.vn/register/'
           },
           {
-            type: 'postback',
+            type: 'web_url',
             title: 'eFAST',
             url: 'https://www.vietinbank.vn/web/home/vn/product/dang-ky-truc-tuyen.html'
           }
