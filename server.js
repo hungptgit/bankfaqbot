@@ -82,7 +82,7 @@ agenda.on('ready', () => {
 		return next();
 	});
 	
-	agenda.processEvery('0/5 * * * *', 'job trigger');
+	//agenda.processEvery('0/5 * * * *', 'job trigger');
 	
 	agenda.start();
 	console.log('----> agenda started');

@@ -1,5 +1,6 @@
 'use strict';
 var utils = require('../utils');
+//var agenda = require('../agenda');
 
 var superagent = require("superagent");
 
@@ -91,7 +92,9 @@ class Scenario {
             break;
           case 'menu:PAY_WARTER':
             f.txt(sender, 'Đang lấy về thông tin tỷ giá lãi suất mới nhất');
-            services.depInterest(sender, f);
+            //services.depInterest(sender, f);
+            news.exchangeRate(sender,f);
+            news.interestRate(sender,f);
             break;
           case 'menu:NEWS_PAYLOAD':
             news.news(sender, f);
@@ -117,7 +120,6 @@ class Scenario {
           case 'REG_EFAST':
             f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
             break;
-
           case 'QA_CARD_EPARTNER_ISSUE':
             f.txt(sender, 'Anh/chị vui lòng mang theo CMTND đến bất kỳ CN/PGD của Vietinbank để được hỗ trợ phát hành thẻ ATM Epartner. Anh/chị sẽ nhận được thẻ sau 05-07 ngày làm việc ạ.');
             card.showQAEpartner(sender, f);
@@ -448,13 +450,13 @@ class Scenario {
   }
 
   processQuickreply(sender, message, f, agenda) {
-    console.log('processQuickreply WIT resp :');
+    //console.log('processQuickreply WIT resp :');
     let buttons = '';
     let text = '';
     let data = '';
     if (message && message.quick_reply) {
       let quickReply = message.quick_reply;
-      console.log('quickReply: ' + JSON.stringify(message.quick_reply));
+      //console.log('quickReply: ' + JSON.stringify(message.quick_reply));
 
       switch (quickReply.payload) {
         case 'PAY_MOBILE':
@@ -486,6 +488,9 @@ class Scenario {
           break;
         case 'NEWS_7h30':
           let task = 'NEWS_7h30';
+          
+          agenda.createReminder(agenda,f);
+      
           f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 7h30 hàng ngày.');
           break;
         default:
