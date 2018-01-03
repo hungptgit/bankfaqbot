@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 const FBeamer = require('./fbeamer');
 const f = new FBeamer(config.FB);
 
+
 server.use(Restify.jsonp());
 server.use(Restify.bodyParser());
 server.use((req, res, next) => f.verifySignature(req, res, next));
@@ -29,6 +30,8 @@ const agenda = require('./agenda')(f);
 // Scenarios
 const Scenario = require('./scenarios');
 const scen = new Scenario(f);
+const actions = require('./actions')(scen, f, agenda);
+
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
@@ -68,7 +71,7 @@ agenda.on('ready', () => {
 			} else if (message && message.text && !message.quick_reply) {
 				scen.processMessage(sender, message, f, wit);
 			} else if (message && message.quick_reply) {
-				scen.processQuickreply(sender, message, f);
+				scen.processQuickreply(sender, message, f, agenda);
 			} else if (message && message.attachments) {
 				scen.processAttachment(sender, message, f);
 			} else {
@@ -79,7 +82,7 @@ agenda.on('ready', () => {
 		return next();
 	});
 	
-	agenda.processEvery('*/2 * * * *', 'job trigger');
+	agenda.processEvery('0/5 * * * *', 'job trigger');
 	
 	agenda.start();
 	console.log('----> agenda started');

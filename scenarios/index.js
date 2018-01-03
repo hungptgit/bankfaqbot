@@ -50,7 +50,7 @@ class Scenario {
     //model.findAll('1');
   }
 
-  processPostback(sender, postback, f, contextMap) {
+  processPostback(sender, postback, f) {
     return new Promise((resolve, reject) => {
       let buttons = '';
       let text = '';
@@ -112,7 +112,7 @@ class Scenario {
             news.interestRate(sender, f);
             break;    
           case 'NEWS_BOT':
-            news.news(sender, f);
+            news.showRegisterNews(sender, f);
             break;
           case 'REG_EFAST':
             f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
@@ -152,7 +152,7 @@ class Scenario {
     });
   }
 
-  processMessage(sender, message, f, wit, contextMap) {
+  processMessage(sender, message, f, wit) {
     return new Promise((resolve, reject) => {
       let buttons = '';
       let text = '';
@@ -447,7 +447,7 @@ class Scenario {
     });
   }
 
-  processQuickreply(sender, message, f, agenda, contextMap) {
+  processQuickreply(sender, message, f, agenda) {
     console.log('processQuickreply WIT resp :');
     let buttons = '';
     let text = '';
@@ -478,22 +478,21 @@ class Scenario {
         case 'SAVE_12M':
           f.txt(sender, 'Lãi suất gửi tiết kiệm 12 tháng tại VietinBank hiện đang là 6,8%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 12 tháng theo cú pháp: GTK12 <So tien> \n VD: gtk12 1000000');
           break;
-        case 'NEWS_16h30':
-          f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 16h30 hàng ngày.');
+        case 'NEWS_21h30':
+          f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 21h30 hàng ngày.');
           break;
-        case 'NEWS_11h':
-          f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 11h hàng ngày.');
+        case 'NEWS_12h':
+          f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 12h hàng ngày.');
           break;
-        case 'NEWS_8h30':
-          /*
-          let task = 'NEWS_8h30';
+        case 'NEWS_7h30':
+          let task = 'NEWS_7h30';
+          
           agenda.now('createReminder', {
             sender,
             datetime: context.datetime,
             task: task
           });
-          */
-          f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 8h30 hàng ngày.');
+          f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 7h30 hàng ngày.');
           break;
         default:
           f.txt(sender, 'Data collected: ' + JSON.stringify(quickReply));
@@ -502,7 +501,7 @@ class Scenario {
     }
   }
 
-  processAttachment(sender, message, f, contextMap) {
+  processAttachment(sender, message, f) {
     //console.log('processAttachment ');
     let buttons = '';
     let text = '';

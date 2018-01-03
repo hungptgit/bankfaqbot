@@ -289,6 +289,42 @@ class News {
     f.txt(sender, 'Thông tin tỷ giá mới nhất \n 1M	1 tháng	4,5%\n 2M	2 tháng	4,8%\n 6M	6 tháng	5,2%\n 12M	12 tháng	6,8%');
   }
   
+  showRegisterNews(sender, f) {
+    let buttons = '';
+    let text = '';
+    let data = '';
+    console.log('showRegisterNews');
+
+    try {
+      buttons = [{
+          content_type: "text",
+          title: "21h30",
+          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          payload: "NEWS_21h30"
+        },
+        {
+          content_type: "text",
+          title: "12h",
+          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          payload: "NEWS_12h"
+        },
+        {
+          content_type: "text",
+          title: "7h30",
+          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          payload: "NEWS_7h30"
+        }
+      ];
+      text = 'Bạn muốn đăng ký nhận thông tin định kỳ từ VietinBank?';
+
+      f.quick(sender, {
+        text,
+        buttons
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
   
 }
 

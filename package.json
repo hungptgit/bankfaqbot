@@ -16,7 +16,7 @@
     "restify": "4.1.1",
     "xregexp": "3.1.1",
     "node-wit": "4.1.0",
-    "agenda": "0.8.1",
+    "agenda": "1.0.3",
     "easysoap":"1.0.6",
     "underscore":"1.8.3",
     "xmldoc":"1.1.0",
