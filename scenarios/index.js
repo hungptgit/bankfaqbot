@@ -185,7 +185,7 @@ class Scenario {
               let score = res.body.answers[0].score;
               if (score > 75) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-                f.txt(sender, 'Score: ' + res.body.answers[0].score);
+                //f.txt(sender, 'Score: ' + res.body.answers[0].score);
               } else if (score <= 75 && score > 50) {
                 f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
@@ -489,7 +489,7 @@ class Scenario {
         case 'NEWS_7h30':
           let task = 'NEWS_7h30';
           try {
-            agenda.createReminder(agenda, f);
+            //agenda.createReminder(agenda, f);
           } catch (error) {
             console.log(error);
           }
