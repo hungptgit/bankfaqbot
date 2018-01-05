@@ -299,13 +299,13 @@ class News {
       buttons = [{
           content_type: "text",
           title: "21h30",
-          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
           payload: "NEWS_21h30"
         },
         {
           content_type: "text",
           title: "12h",
-          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
           payload: "NEWS_12h"
         },
         {

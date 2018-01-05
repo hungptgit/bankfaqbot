@@ -86,9 +86,6 @@ agenda.on('ready', () => {
 	console.log('----> agenda started');
 });
 
-
-
-
 // Persistent Menu
 /*
 f.showPersistent(
