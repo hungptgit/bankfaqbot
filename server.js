@@ -20,7 +20,6 @@ const PORT = process.env.PORT || 3000;
 const FBeamer = require('./fbeamer');
 const f = new FBeamer(config.FB);
 
-
 server.use(Restify.jsonp());
 server.use(Restify.bodyParser());
 server.use((req, res, next) => f.verifySignature(req, res, next));
@@ -31,7 +30,6 @@ const agenda = require('./agenda')(f);
 const Scenario = require('./scenarios');
 const scen = new Scenario(f);
 const actions = require('./actions')(scen, f, agenda);
-
 
 // Wit.ai
 const Wit = require('node-wit').Wit;
