@@ -330,12 +330,12 @@ class Scenario {
                                 id
                               } = profile;
                               console.log('getProfile: ' + name);
-                              f.txt(sender, greetings.value + ' ' + name + '. Em có thể giúp gì được ạ?');
+                              f.txt(sender, 'Xin chào ' + name + '! Em có thể giúp gì được ạ?');
                               //news.menu(sender, f);
                             })
                             .catch(error => {
                               console.log('getProfile err: ' + error);
-                              f.txt(sender, greetings.value + '. Em có thể giúp gì được ạ?');
+                              f.txt(sender, 'Xin chào! Em có thể giúp gì được ạ?');
                               //news.menu(sender, f);
                             });
 
