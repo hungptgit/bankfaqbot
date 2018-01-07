@@ -10,7 +10,7 @@ i18n.configure({
 });
 
 const server = Restify.createServer({
-	name: 'VTBMessenger'
+	name: 'VietinBankFAQChatBot'
 });
 // enable i18n in restify
 server.use(i18n.init);
