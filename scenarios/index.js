@@ -276,6 +276,9 @@ class Scenario {
                       case 'tranovay':
                         f.txt(sender, 'Bạn muốn trả nợ khoản vay');
                         break;
+                      case 'goodbye':
+                        f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
+                        break;
                       case 'xinchao':
                         let who = utils.firstEntity(entities, 'who');
                         let greetings = utils.firstEntity(entities, 'greetings');
