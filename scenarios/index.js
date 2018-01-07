@@ -308,6 +308,8 @@ class Scenario {
                                 first_name,
                                 timezone
                               } = profile;
+                              console.log('getProfile: ' + first_name);
+                              
                               f.txt(sender, bye.value + ' ' + first_name + ' :) ');
                               //news.menu(sender, f);
                             })
