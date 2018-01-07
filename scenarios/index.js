@@ -288,11 +288,11 @@ class Scenario {
                           f.getProfile(sender)
                             .then(profile => {
                               const {
-                                first_name,
-                                timezone
+                                name,
+                                id
                               } = profile;
-                              console.log('getProfile: ' + first_name);
-                              f.txt(sender, greetings.value + ' ' + first_name + '. Em có thể giúp gì được ạ?');
+                              console.log('getProfile: ' + name);
+                              f.txt(sender, greetings.value + ' ' + name + '. Em có thể giúp gì được ạ?');
                               //news.menu(sender, f);
                             })
                             .catch(error => {
