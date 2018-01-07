@@ -107,6 +107,7 @@ class FBeamer {
 				if (!error && response.statusCode === 200) {
 					resolve(JSON.parse(body));
 				} else {
+					console.log('getProfile:'+id+'>>>'+JSON.stringify(error));
 					reject(error);
 				}
 			});
