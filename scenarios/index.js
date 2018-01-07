@@ -186,7 +186,7 @@ class Scenario {
               if (score > 75) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
-              } else if (score <= 75 && score > 50) {
+              } else if (score <= 75 && score > 65) {
                 f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Em không chắc câu trả lời có đúng ý hỏi không 😊 ');
@@ -348,10 +348,10 @@ class Scenario {
                               f.txt(sender, 'Thật vậy ạ, hihi. Cảm ơn ạ 😝');
                               break;
                             case 'thongminh':
-                              f.txt(sender, 'Bạn quá khen rùi 😊 ');
+                              f.txt(sender, 'Dạ quá khen rùi ạ 😊 ');
                               break;
                             case 'gioioi':
-                              f.txt(sender, 'Xin lỗi vì đã làm bạn không vui 😇 ');
+                              f.txt(sender, 'Xin lỗi vì đã làm anh chị không vui 😇 ');
                               break;
                             case 'toite':
                               f.txt(sender, '😔');
