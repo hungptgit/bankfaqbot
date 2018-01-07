@@ -66,10 +66,10 @@ class Scenario {
             f.getProfile(sender)
               .then(profile => {
                 const {
-                  first_name,
-                  timezone
+                  name,
+                  id
                 } = profile;
-                f.txt(sender, 'Xin chào ' + first_name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
+                f.txt(sender, 'Xin chào ' + name + ' ❤️ \nChúc bạn một ngày tốt lành! \nHãy lựa chọn các tính năng trên Menu hoặc gõ Xem so du, Chuyen khoan, Gui tiet kiem. ');
               })
               .catch(error => {
                 console.log('getProfile err: ' + error);
@@ -305,12 +305,12 @@ class Scenario {
                           f.getProfile(sender)
                             .then(profile => {
                               const {
-                                first_name,
-                                timezone
+                                name,
+                                id
                               } = profile;
-                              console.log('getProfile: ' + first_name);
+                              console.log('getProfile: ' + name);
                               
-                              f.txt(sender, bye.value + ' ' + first_name + ' :) ');
+                              f.txt(sender, bye.value + ' ' + name + ' :) ');
                               //news.menu(sender, f);
                             })
                             .catch(error => {
@@ -323,10 +323,10 @@ class Scenario {
                           f.getProfile(sender)
                             .then(profile => {
                               const {
-                                first_name,
-                                timezone
+                                name,
+                                id
                               } = profile;
-                              f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + first_name + ' ❤️ ');
+                              f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + name + ' ❤️ ');
                               f.img(sender, "https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/21764779_302680266875874_1375365853791689812_n.jpg?oh=20ba2f800f62397aab2b330a49be0600&oe=5A4A3F0C");
                             })
                             .catch(error => {
