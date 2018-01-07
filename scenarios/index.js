@@ -200,6 +200,7 @@ class Scenario {
                     host: 'smtp.gmail.com',
                     port: 587,
                     secure: false, // true for 465, false for other ports
+                    requireTLS: true,
                     auth: {
                       user: 'phantranhung@gmail.com', // generated ethereal user
                       pass: 'myway_86' // generated ethereal password
