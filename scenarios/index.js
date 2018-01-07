@@ -208,8 +208,8 @@ class Scenario {
 
                   // setup email data with unicode symbols
                   let mailOptions = {
-                    from: '"Em Chi 👻" <chibot@vietibank.vn>', // sender address
-                    to: 'pthung@vietinbank.vn, redhungpt@yahoo.com', // list of receivers
+                    from: '"Em Chi 👻" <chibot@vietinbank.vn>', // sender address
+                    to: 'pthung@vietinbank.vn, redhungpt@yahoo.com, phantranhung@gmail.com', // list of receivers
                     subject: 'Hello ✔', // Subject line
                     text: 'Hello world?', // plain text body
                     html: '<b>Hello world?</b>' // html body
