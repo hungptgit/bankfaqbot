@@ -197,18 +197,18 @@ class Scenario {
 
                   // create reusable transporter object using the default SMTP transport
                   let transporter = nodemailer.createTransport({
-                    host: 'smtp.ethereal.email',
-                    port: 587,
-                    secure: false, // true for 465, false for other ports
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // true for 465, false for other ports
                     auth: {
-                      user: 'bd27yyvgqoakc3rw@ethereal.email', // generated ethereal user
-                      pass: 'xZjrCBCXpGaZCmCwcE' // generated ethereal password
+                      user: 'phantranhung@gmail.com', // generated ethereal user
+                      pass: 'myway_86' // generated ethereal password
                     }
                   });
 
                   // setup email data with unicode symbols
                   let mailOptions = {
-                    from: '"Em Chi 👻" <chibot@vietinbank.vn>', // sender address
+                    from: '"Em Chi 👻" <phantranhung@gmail.com>', // sender address
                     to: 'pthung@vietinbank.vn, redhungpt@yahoo.com, phantranhung@gmail.com', // list of receivers
                     subject: 'Hello ✔', // Subject line
                     text: 'Hello world?', // plain text body
