@@ -194,7 +194,7 @@ class Scenario {
               } else {
                 // Generate test SMTP service account from ethereal.email
                 // Only needed if you don't have a real mail account for testing
-                
+
                 nodemailer.createTestAccount((err, account) => {
 
                   // create reusable transporter object using the default SMTP transport
@@ -208,19 +208,19 @@ class Scenario {
                       pass: config.SMTP_PASS // generated ethereal password
                     }
                   });
-                  
+
                   let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
-                  
-                  let plaintTextContent = 'User says: '+messageTxt+'\n';
-                  plaintTextContent = plaintTextContent + 'Bot reply: '+utils.htmlDecode(res.body.answers[0].answer)+' \n';
-                  plaintTextContent = plaintTextContent + 'Score: '+res.body.answers[0].score+' \n';
+
+                  let plaintTextContent = 'User says: ' + messageTxt + '\n';
+                  plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
+                  plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
                   plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
-                  
-                  let htmlContent = '<b>User says: </b> '+messageTxt+' </b> &nbsp;';
-                  htmlContent = htmlContent + '<b>Bot reply: '+utils.htmlDecode(res.body.answers[0].answer)+' </b> &nbsp;';
-                  htmlContent = htmlContent + '<b>Score: '+res.body.answers[0].score+'</b>&nbsp;';
-                  htmlContent = htmlContent + '<b>Please retrain the bot to make higher score </b> &nbsp;';
-                  
+
+                  let htmlContent = '<b>User says: </b> ' + messageTxt + ' </br>';
+                  htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' </br>';
+                  htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' </br>';
+                  htmlContent = htmlContent + '<b>Please retrain the bot to make higher score </br>';
+
                   // setup email data with unicode symbols
                   let mailOptions = {
                     from: '"VietinBank FaQ ChatBot 👻" <vietinbankchatbot@gmail.com>', // sender address
@@ -229,11 +229,11 @@ class Scenario {
                     text: plaintTextContent, // plain text body
                     html: htmlContent // html body
                   };
-                  
+
                   console.log('Start sent from: %s', mailOptions.from);
                   // send mail with defined transport object
                   transporter.sendMail(mailOptions, (error, info) => {
-                    
+
                     if (error) {
                       return console.log(error);
                     }
@@ -245,7 +245,7 @@ class Scenario {
                     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                   });
                 });
-                
+
                 //f.txt(sender, 'Xin lỗi, em sẽ ghi nhận câu hỏi và xin trả lời sau ạ 😊 ');
                 console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 console.log('Score: ' + res.body.answers[0].score);
@@ -261,8 +261,7 @@ class Scenario {
                       if (score > 10) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                         return;
-                      }
-                      else {
+                      } else {
                         // use app data, or a previous context to decide how to 
                         console.log('Not found intent');
                         f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
