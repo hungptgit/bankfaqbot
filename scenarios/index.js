@@ -220,7 +220,6 @@ class Scenario {
                     if (typeof intent === "undefined") {
                       // sent mail to remind train bot
                       nodemailer.createTestAccount((err, account) => {
-
                         // create reusable transporter object using the default SMTP transport
                         let transporter = nodemailer.createTransport({
                           host: config.SMTP_SERVER,
