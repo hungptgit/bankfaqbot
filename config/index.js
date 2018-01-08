@@ -9,7 +9,12 @@ if(process.env.NODE_ENV === 'production') {
 			APP_SECRET: process.env.APP_SECRET
 		},
 		MONGO_URI: process.env.MONGO_URI,
-		SOAP_WSDL_URL: process.env.SOAP_WSDL_URL
+		SOAP_WSDL_URL: process.env.SOAP_WSDL_URL,
+		QnA_URI:process.env.QnA_URI,
+		QnA_KEY:process.env.QnA_KEY,
+		SMTP_SERVER:process.env.SMTP_SERVER,
+		SMTP_USER:process.env.SMTP_USER,
+		SMTP_PASS:process.env.SMTP_PASS
 	}
 } else {
 	module.exports = require('./development.json');

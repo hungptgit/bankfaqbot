@@ -1,8 +1,9 @@
 'use strict';
 var utils = require('../utils');
+var config = require('../config');
+var superagent = require("superagent");
 //var agenda = require('../agenda');
 const nodemailer = require('nodemailer');
-var superagent = require("superagent");
 
 const Saving = require('./saving');
 const saving = new Saving();
@@ -167,11 +168,11 @@ class Scenario {
         console.log('messageTxt:' + messageTxt);
 
         superagent
-          .post('https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/a498e73c-5985-42f2-8722-64cc001439a8/generateAnswer')
+          .post(config.QnA_URI)
           .send({
             question: messageTxt
           })
-          .set('Ocp-Apim-Subscription-Key', 'b29bac3af90b48ccb02ad5d3bc4e26bd')
+          .set('Ocp-Apim-Subscription-Key', config.QnA_KEY)
           .set('Content-Type', 'application/json; charset=UTF-8')
           .end(function(err, res) {
             if (err || !res.ok) {
@@ -187,7 +188,7 @@ class Scenario {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
               } else if (score <= 75 && score > 65) {
-                f.txt(sender, 'Score: ' + res.body.answers[0].score);
+                //f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Em không chắc câu trả lời có đúng ý hỏi không 😊 ');
               } else {
