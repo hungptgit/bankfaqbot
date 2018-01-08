@@ -253,7 +253,7 @@ class Scenario {
                         htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
                         htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
                         htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score +  '</td></tr>';
-                        htmlContent = htmlContent + '<tr><td><strong>Please retrain the bot to make higher score </strong> </td><td>' +''+ '</td></tr>';
+                        htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please retrain the bot to make higher score </td></tr>';
                         htmlContent = htmlContent + '</table>';
                         
                         // setup email data with unicode symbols
