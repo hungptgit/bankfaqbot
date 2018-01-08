@@ -216,10 +216,10 @@ class Scenario {
                   plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
                   plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
 
-                  let htmlContent = '<b>User says: </b> ' + messageTxt + ' <br>';
-                  htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br>';
-                  htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br>';
-                  htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br>';
+                  let htmlContent = '<b>User says: </b> ' + messageTxt + ' <br/>';
+                  htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
+                  htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
+                  htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
 
                   // setup email data with unicode symbols
                   let mailOptions = {
