@@ -240,11 +240,21 @@ class Scenario {
                         plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
                         plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
 
+                        /*
                         let htmlContent = '<b>' + senderName + ' said: </b> ' + messageTxt + ' <br/>';
                         htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
                         htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
                         htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
-
+                        */
+                        
+                        let htmlContent = htmlContent +  '<table rules="all" style="border-color: #666;" cellpadding="10">';
+                        htmlContent = htmlContent + "<tr style='background: #eee;'><td> </td><td></td></tr>";
+                        htmlContent = htmlContent + "<tr><td><strong>" + senderName + " said:</strong> </td><td>" + messageTxt +  "</td></tr>";
+                        htmlContent = htmlContent + "<tr><td><strong>Bot reply:</strong> </td><td>" + utils.htmlDecode(res.body.answers[0].answer) + "</td></tr>";
+                        htmlContent = htmlContent + "<tr><td><strong>Score:</strong> </td><td>" + res.body.answers[0].score +  "</td></tr>";
+                        htmlContent = htmlContent + "<tr><td><strong>Please retrain the bot to make higher score </strong> </td><td>" +''+ "</td></tr>";
+                        htmlContent = htmlContent + "</table>";
+                        
                         // setup email data with unicode symbols
                         let mailOptions = {
                           from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
