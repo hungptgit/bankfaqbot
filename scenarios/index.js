@@ -244,11 +244,17 @@ class Scenario {
                     console.log('WIT resp:' + JSON.stringify(entities));
                     let intent = utils.firstEntity(entities, 'intent');
                     if (!intent) {
-                      // use app data, or a previous context to decide how to 
-                      console.log('Not found intent');
-                      f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
-                      news.menu(sender, f);
-                      return;
+                      if (score > 10) {
+                        f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+                        return;
+                      }
+                      else {
+                        // use app data, or a previous context to decide how to 
+                        console.log('Not found intent');
+                        f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+                        news.menu(sender, f);
+                        return;
+                      }
                     }
 
                     switch (intent.value) {
