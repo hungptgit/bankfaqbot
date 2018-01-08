@@ -217,7 +217,7 @@ class Scenario {
                   }) => {
                     console.log('WIT resp:' + JSON.stringify(entities));
                     let intent = utils.firstEntity(entities, 'intent');
-                    if (!intent) {
+                    if (!intent.value) {
                       // sent mail to remind train bot
                       nodemailer.createTestAccount((err, account) => {
 
@@ -247,13 +247,14 @@ class Scenario {
                         htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
                         */
                         
-                        let htmlContent = htmlContent +  '<table rules="all" style="border-color: #666;" cellpadding="10">';
-                        htmlContent = htmlContent + "<tr style='background: #eee;'><td> </td><td></td></tr>";
-                        htmlContent = htmlContent + "<tr><td><strong>" + senderName + " said:</strong> </td><td>" + messageTxt +  "</td></tr>";
-                        htmlContent = htmlContent + "<tr><td><strong>Bot reply:</strong> </td><td>" + utils.htmlDecode(res.body.answers[0].answer) + "</td></tr>";
-                        htmlContent = htmlContent + "<tr><td><strong>Score:</strong> </td><td>" + res.body.answers[0].score +  "</td></tr>";
-                        htmlContent = htmlContent + "<tr><td><strong>Please retrain the bot to make higher score </strong> </td><td>" +''+ "</td></tr>";
-                        htmlContent = htmlContent + "</table>";
+                        let htmlContent = '';
+                        htmlContent = htmlContent +  '<table rules="all" style="border-color: #666;" cellpadding="10">';
+                        htmlContent = htmlContent + '<tr style=\'background: #eee;\'><td> </td><td></td></tr>';
+                        htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
+                        htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
+                        htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score +  '</td></tr>';
+                        htmlContent = htmlContent + '<tr><td><strong>Please retrain the bot to make higher score </strong> </td><td>' +''+ '</td></tr>';
+                        htmlContent = htmlContent + '</table>';
                         
                         // setup email data with unicode symbols
                         let mailOptions = {
