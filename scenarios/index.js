@@ -268,7 +268,6 @@ class Scenario {
                         console.log('Start sent from: %s', mailOptions.from);
                         // send mail with defined transport object
                         transporter.sendMail(mailOptions, (error, info) => {
-
                           if (error) {
                             return console.log(error);
                           }
