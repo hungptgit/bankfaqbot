@@ -194,24 +194,24 @@ class Scenario {
               } else {
                 // Generate test SMTP service account from ethereal.email
                 // Only needed if you don't have a real mail account for testing
-                /*
+                
                 nodemailer.createTestAccount((err, account) => {
 
                   // create reusable transporter object using the default SMTP transport
                   let transporter = nodemailer.createTransport({
-                    host: 'mail.vietinbank.vn',
+                    host: config.SMTP_SERVER,
                     port: 25,
                     secure: false, // true for 465, false for other ports
                     requireTLS: true,
                     auth: {
-                      user: 'pthung@vietinbank.vn', // generated ethereal user
-                      pass: 'timefly_68' // generated ethereal password
+                      user: config.SMTP_USER, // generated ethereal user
+                      pass: config.SMTP_PASS // generated ethereal password
                     }
                   });
 
                   // setup email data with unicode symbols
                   let mailOptions = {
-                    from: '"Em Chi 👻" <phantranhung@gmail.com>', // sender address
+                    from: '"Em Chi 👻" <ebc@vietinbank.vn>', // sender address
                     to: 'pthung@vietinbank.vn, redhungpt@yahoo.com, phantranhung@gmail.com', // list of receivers
                     subject: 'Hello ✔', // Subject line
                     text: 'Hello world?', // plain text body
@@ -231,7 +231,7 @@ class Scenario {
                     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                   });
                 });
-                */
+                
                 //f.txt(sender, 'Xin lỗi, em sẽ ghi nhận câu hỏi và xin trả lời sau ạ 😊 ');
                 console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 console.log('Score: ' + res.body.answers[0].score);
