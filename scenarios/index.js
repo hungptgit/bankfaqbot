@@ -202,7 +202,7 @@ class Scenario {
               if (score > 75) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
-              } else if (score <= 75 && score > 45) {
+              } else if (score <= 75 && score > 65) {
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Em không chắc câu trả lời có đúng ý hỏi không 😊 ');
@@ -278,8 +278,8 @@ class Scenario {
 
                         });
                       });
-                      // if not have wit intent matching then sent answer event if score < 50 but still > 30
-                      if (score > 30) {
+                      // if not have wit intent matching then sent answer event if score < 65 but still > 55
+                      if (score > 55) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                         return;
                       } else {
