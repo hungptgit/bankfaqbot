@@ -277,7 +277,7 @@ class Scenario {
                         });
                       });
                       // if not have wit intent matching then sent answer event if score < 65 but still > 55
-                      if (score > 55) {
+                      if (score > 40) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                         return;
                       } else {
