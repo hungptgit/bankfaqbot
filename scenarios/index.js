@@ -249,7 +249,7 @@ class Scenario {
                         
                         let htmlContent = '';
                         htmlContent = htmlContent +  '<table rules="all" style="border-color: #666;" cellpadding="10">';
-                        htmlContent = htmlContent + '<tr style=\'background: #eee;\'><td> </td><td></td></tr>';
+                        htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
                         htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
                         htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
                         htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score +  '</td></tr>';
@@ -404,7 +404,7 @@ class Scenario {
 
                         break;
                       case 'camon':
-                        model.question.add('2');
+                        //model.question.add('2');
                         f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
                         break;
                       case 'the':
