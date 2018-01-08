@@ -286,6 +286,7 @@ class Scenario {
                     }
 
                     switch (intent.value) {
+                      /*  
                       case 'truyvantaikhoan':
                         account.acctInfo(sender, f);
                         break;
@@ -351,6 +352,7 @@ class Scenario {
                       case 'tranovay':
                         f.txt(sender, 'Bạn muốn trả nợ khoản vay');
                         break;
+                      */  
                       case 'goodbye':
                         f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
                         break;
