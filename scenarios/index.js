@@ -210,7 +210,66 @@ class Scenario {
                 console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 console.log('Score: ' + res.body.answers[0].score);
                 console.log('Switch to wit.ai processing...');
-              
+
+                // sent mail to remind train bot
+                nodemailer.createTestAccount((err, account) => {
+                  // create reusable transporter object using the default SMTP transport
+                  let transporter = nodemailer.createTransport({
+                    host: config.SMTP_SERVER,
+                    port: 465,
+                    secure: true, // true for 465, false for other ports
+                    requireTLS: true,
+                    auth: {
+                      user: config.SMTP_USER, // generated ethereal user
+                      pass: config.SMTP_PASS // generated ethereal password
+                    }
+                  });
+
+                  let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
+
+                  let plaintTextContent = senderName + ' said: ' + messageTxt + '\n';
+                  plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
+                  plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
+                  plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
+
+                  /*
+                  let htmlContent = '<b>' + senderName + ' said: </b> ' + messageTxt + ' <br/>';
+                  htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
+                  htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
+                  htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
+                  */
+
+                  let htmlContent = '';
+                  htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
+                  htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
+                  htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
+                  htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
+                  htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score + '</td></tr>';
+                  htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please retrain the bot to make higher score </td></tr>';
+                  htmlContent = htmlContent + '</table>';
+
+                  // setup email data with unicode symbols
+                  let mailOptions = {
+                    from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
+                    to: config.QnA_ADMIN_MAIL, // list of receivers
+                    subject: mailSubject, // Subject line
+                    text: plaintTextContent, // plain text body
+                    html: htmlContent // html body
+                  };
+
+                  console.log('Start sent from: %s', mailOptions.from);
+                  // send mail with defined transport object
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      return console.log(error);
+                    }
+                    console.log('Message sent: %s', info.messageId);
+                    // Preview only available when sending through an Ethereal account
+                    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+                  });
+                });
+
                 wit.message(messageTxt)
                   .then(({
                     entities
@@ -218,64 +277,7 @@ class Scenario {
                     console.log('WIT resp:' + JSON.stringify(entities));
                     let intent = utils.firstEntity(entities, 'intent');
                     if (typeof intent === "undefined") {
-                      // sent mail to remind train bot
-                      nodemailer.createTestAccount((err, account) => {
-                        // create reusable transporter object using the default SMTP transport
-                        let transporter = nodemailer.createTransport({
-                          host: config.SMTP_SERVER,
-                          port: 465,
-                          secure: true, // true for 465, false for other ports
-                          requireTLS: true,
-                          auth: {
-                            user: config.SMTP_USER, // generated ethereal user
-                            pass: config.SMTP_PASS // generated ethereal password
-                          }
-                        });
 
-                        let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
-
-                        let plaintTextContent = senderName + ' said: ' + messageTxt + '\n';
-                        plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
-                        plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
-                        plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
-
-                        /*
-                        let htmlContent = '<b>' + senderName + ' said: </b> ' + messageTxt + ' <br/>';
-                        htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
-                        htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
-                        htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
-                        */
-                        
-                        let htmlContent = '';
-                        htmlContent = htmlContent +  '<table rules="all" style="border-color: #666;" cellpadding="10">';
-                        htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
-                        htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
-                        htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
-                        htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score +  '</td></tr>';
-                        htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please retrain the bot to make higher score </td></tr>';
-                        htmlContent = htmlContent + '</table>';
-                        
-                        // setup email data with unicode symbols
-                        let mailOptions = {
-                          from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
-                          to: config.QnA_ADMIN_MAIL, // list of receivers
-                          subject: mailSubject, // Subject line
-                          text: plaintTextContent, // plain text body
-                          html: htmlContent // html body
-                        };
-
-                        console.log('Start sent from: %s', mailOptions.from);
-                        // send mail with defined transport object
-                        transporter.sendMail(mailOptions, (error, info) => {
-                          if (error) {
-                            return console.log(error);
-                          }
-                          console.log('Message sent: %s', info.messageId);
-                          // Preview only available when sending through an Ethereal account
-                          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-                        });
-                      });
                       // if not have wit intent matching then sent answer event if score < 65 but still > 55
                       if (score > 20) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
