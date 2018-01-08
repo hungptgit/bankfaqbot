@@ -226,12 +226,12 @@ class Scenario {
 
                   let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
 
-                  let plaintTextContent = senderName+ ' says: ' + messageTxt + '\n';
+                  let plaintTextContent = senderName + ' says: ' + messageTxt + '\n';
                   plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
                   plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
                   plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
 
-                  let htmlContent = '<b>'+senderName+' says: </b> ' + messageTxt + ' <br/>';
+                  let htmlContent = '<b>' + senderName + ' says: </b> ' + messageTxt + ' <br/>';
                   htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
                   htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
                   htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
@@ -239,7 +239,7 @@ class Scenario {
                   // setup email data with unicode symbols
                   let mailOptions = {
                     from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
-                    to: 'pthung@vietinbank.vn, redhungpt@yahoo.com, phantranhung@gmail.com', // list of receivers
+                    to: config.QnA_ADMIN_MAIL, // list of receivers
                     subject: mailSubject, // Subject line
                     text: plaintTextContent, // plain text body
                     html: htmlContent // html body
@@ -360,54 +360,11 @@ class Scenario {
                         let bye = utils.firstEntity(entities, 'bye');
 
                         if (greetings) {
-                          f.getProfile(sender)
-                            .then(profile => {
-                              const {
-                                name,
-                                id
-                              } = profile;
-                              console.log('getProfile: ' + name);
-                              f.txt(sender, 'Xin chào ' + name + '! Em có thể giúp gì được ạ?');
-                              //news.menu(sender, f);
-                            })
-                            .catch(error => {
-                              console.log('getProfile err: ' + error);
-                              f.txt(sender, 'Xin chào! Em có thể giúp gì được ạ?');
-                              //news.menu(sender, f);
-                            });
-
+                          f.txt(sender, 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?');
                         } else if (bye) {
-                          f.getProfile(sender)
-                            .then(profile => {
-                              const {
-                                name,
-                                id
-                              } = profile;
-                              console.log('getProfile: ' + name);
-
-                              f.txt(sender, bye.value + ' ' + name + ' :) ');
-                              //news.menu(sender, f);
-                            })
-                            .catch(error => {
-                              console.log('getProfile err: ' + error);
-                              f.txt(sender, bye.value + ' ❤️');
-                              //news.menu(sender, f);
-                            });
-
+                          f.txt(sender, bye.value + ' ' + senderName + ' :) ');
                         } else if (who) {
-                          f.getProfile(sender)
-                            .then(profile => {
-                              const {
-                                name,
-                                id
-                              } = profile;
-                              f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + name + ' ❤️ ');
-                              f.img(sender, "https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/21764779_302680266875874_1375365853791689812_n.jpg?oh=20ba2f800f62397aab2b330a49be0600&oe=5A4A3F0C");
-                            })
-                            .catch(error => {
-                              f.txt(sender, 'Em là Chi, rất vui được phục vụ ❤️');
-                            });
-
+                          f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + senderName + ' ❤️ ');
                         } else {
                           f.txt(sender, ' ^_^ ');
                         }
