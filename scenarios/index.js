@@ -238,7 +238,7 @@ class Scenario {
 
                   // setup email data with unicode symbols
                   let mailOptions = {
-                    from: '"VietinBank FaQ ChatBot"', // sender address
+                    from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
                     to: config.QnA_ADMIN_MAIL, // list of receivers
                     subject: mailSubject, // Subject line
                     text: plaintTextContent, // plain text body
