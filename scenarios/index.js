@@ -166,6 +166,21 @@ class Scenario {
         let messageTxt = message.text;
 
         console.log('messageTxt:' + messageTxt);
+        var senderName = '';
+        f.getProfile(sender)
+          .then(profile => {
+            const {
+              name,
+              id
+            } = profile;
+            console.log('getProfile: ' + name);
+            senderName = name;
+            //news.menu(sender, f);
+          })
+          .catch(error => {
+            console.log('getProfile err: ' + error);
+            senderName = ' anh/chị';
+          });
 
         superagent
           .post(config.QnA_URI)
@@ -211,19 +226,19 @@ class Scenario {
 
                   let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
 
-                  let plaintTextContent = 'User says: ' + messageTxt + '\n';
+                  let plaintTextContent = senderName+ ' says: ' + messageTxt + '\n';
                   plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
                   plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
                   plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
 
-                  let htmlContent = '<b>User says: </b> ' + messageTxt + ' <br/>';
+                  let htmlContent = '<b>'+senderName+' says: </b> ' + messageTxt + ' <br/>';
                   htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
                   htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
                   htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
 
                   // setup email data with unicode symbols
                   let mailOptions = {
-                    from: '"VietinBank FaQ ChatBot 👻" <vietinbankchatbot@gmail.com>', // sender address
+                    from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
                     to: 'pthung@vietinbank.vn, redhungpt@yahoo.com, phantranhung@gmail.com', // list of receivers
                     subject: mailSubject, // Subject line
                     text: plaintTextContent, // plain text body
