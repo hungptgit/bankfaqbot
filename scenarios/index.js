@@ -202,7 +202,7 @@ class Scenario {
               if (score > 75) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
-              } else if (score <= 75 && score > 65) {
+              } else if (score <= 75 && score > 45) {
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Em không chắc câu trả lời có đúng ý hỏi không 😊 ');
