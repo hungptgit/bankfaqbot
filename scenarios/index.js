@@ -217,7 +217,7 @@ class Scenario {
                   }) => {
                     console.log('WIT resp:' + JSON.stringify(entities));
                     let intent = utils.firstEntity(entities, 'intent');
-                    if (!intent.value) {
+                    if (typeof intent === "undefined") {
                       // sent mail to remind train bot
                       nodemailer.createTestAccount((err, account) => {
 
