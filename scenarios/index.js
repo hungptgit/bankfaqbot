@@ -278,8 +278,8 @@ class Scenario {
 
                         });
                       });
-                      // if not have wit intent matching then sent answer event if score < 50
-                      if (score > 10) {
+                      // if not have wit intent matching then sent answer event if score < 50 but still > 30
+                      if (score > 30) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                         return;
                       } else {
