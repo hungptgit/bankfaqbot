@@ -198,7 +198,7 @@ class Scenario {
                 nodemailer.createTestAccount((err, account) => {
 
                   // create reusable transporter object using the default SMTP transport
-                  let transporter = nodemailer.createTransport('SMTP',{
+                  let transporter = nodemailer.createTransport({
                     host: config.SMTP_SERVER,
                     port: 465,
                     secure: true, // true for 465, false for other ports
