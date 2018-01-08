@@ -226,12 +226,12 @@ class Scenario {
 
                   let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
 
-                  let plaintTextContent = senderName + ' says: ' + messageTxt + '\n';
+                  let plaintTextContent = senderName + ' said: ' + messageTxt + '\n';
                   plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
                   plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
                   plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
 
-                  let htmlContent = '<b>' + senderName + ' says: </b> ' + messageTxt + ' <br/>';
+                  let htmlContent = '<b>' + senderName + ' said: </b> ' + messageTxt + ' <br/>';
                   htmlContent = htmlContent + '<b>Bot reply:</b>  ' + utils.htmlDecode(res.body.answers[0].answer) + ' <br/>';
                   htmlContent = htmlContent + '<b>Score:</b> ' + res.body.answers[0].score + ' <br/>';
                   htmlContent = htmlContent + '<b>Please retrain the bot to make higher score <br/>';
