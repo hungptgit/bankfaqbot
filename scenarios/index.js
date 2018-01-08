@@ -473,9 +473,10 @@ class Scenario {
                         //}
                         break;
                       default:
+                        f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ ^_^');
                         console.log(`?  ${intent.value}`);
-                        f.txt(sender, 'Okey! intent matching: ' + intent.value);
-                        f.txt(sender, 'Data collected: ' + JSON.stringify(entities));
+                        //f.txt(sender, 'Okey! intent matching: ' + intent.value);
+                        //f.txt(sender, 'Data collected: ' + JSON.stringify(entities));
                         break;
                     }
                   })
