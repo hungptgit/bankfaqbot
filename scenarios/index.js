@@ -200,9 +200,9 @@ class Scenario {
                   // create reusable transporter object using the default SMTP transport
                   let transporter = nodemailer.createTransport('SMTP',{
                     host: config.SMTP_SERVER,
-                    port: 25,
-                    secure: false, // true for 465, false for other ports
-                    requireTLS: false,
+                    port: 465,
+                    secure: true, // true for 465, false for other ports
+                    requireTLS: true,
                     auth: {
                       user: config.SMTP_USER, // generated ethereal user
                       pass: config.SMTP_PASS // generated ethereal password
