@@ -208,14 +208,26 @@ class Scenario {
                       pass: config.SMTP_PASS // generated ethereal password
                     }
                   });
-
+                  
+                  let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
+                  
+                  let plaintTextContent = 'User says: '+messageTxt+'\n';
+                  plaintTextContent = plaintTextContent + 'Bot reply: '+utils.htmlDecode(res.body.answers[0].answer)+' \n';
+                  plaintTextContent = plaintTextContent + 'Score: '+res.body.answers[0].score+' \n';
+                  plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
+                  
+                  let htmlContent = '<b>User says: </b> '+messageTxt+' </b> &nbsp;';
+                  htmlContent = htmlContent + '<b>Bot reply: '+utils.htmlDecode(res.body.answers[0].answer)+' </b> &nbsp;';
+                  htmlContent = htmlContent + '<b>Score: '+res.body.answers[0].score+'</b>&nbsp;';
+                  htmlContent = htmlContent + '<b>Please retrain the bot to make higher score </b> &nbsp;';
+                  
                   // setup email data with unicode symbols
                   let mailOptions = {
-                    from: '"Em Chi 👻" <vietinbankchatbot@gmail.com>', // sender address
+                    from: '"VietinBank FaQ ChatBot 👻" <vietinbankchatbot@gmail.com>', // sender address
                     to: 'pthung@vietinbank.vn, redhungpt@yahoo.com, phantranhung@gmail.com', // list of receivers
-                    subject: 'Hello ✔', // Subject line
-                    text: 'Hello world?', // plain text body
-                    html: '<b>Hello world?</b>' // html body
+                    subject: mailSubject, // Subject line
+                    text: plaintTextContent, // plain text body
+                    html: htmlContent // html body
                   };
                   
                   console.log('Start sent from: %s', mailOptions.from);
