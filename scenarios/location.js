@@ -63,7 +63,7 @@ class Location {
                 template_type: "generic",
                 elements: [{
                     title: "87 Trần Hưng Đạo",
-                    image_url: "https://maps.gstatic.com/mapfiles/place_api/icons/atm-71.png",
+                    image_url: "http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg",
                     subtitle: "87 Trần Hưng Đạo",
                     default_action: {
                       type: "web_url",
@@ -80,7 +80,7 @@ class Location {
                   },
                   {
                     title: "ATM Vietinbank - Haphaco - Hiệu Thuốc 8-3",
-                    image_url: "https://maps.gstatic.com/mapfiles/place_api/icons/atm-71.png",
+                    image_url: "http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg",
                     subtitle: "5, Phố Cửa Nam, Phường Cửa Nam, Quận Hoàn Kiếm, Cửa Nam",
                     default_action: {
                       type: "web_url",
