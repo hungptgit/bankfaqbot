@@ -27,7 +27,7 @@ class Location {
   getAtmLocation(sender, lat, long, f) {
     var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
     var location = lat + ',' + long;
-    var radius = 3000;
+    var radius = 500;
     var sensor = false;
     var types = "atm";
     var keyword = "VietinBank";
