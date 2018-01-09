@@ -311,7 +311,7 @@ class News {
         {
           content_type: "text",
           title: "7h30",
-          image_url: "http://www.freeiconspng.com/uploads/dollar-sign-icon-png-22.png",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
           payload: "NEWS_7h30"
         }
       ];
