@@ -128,7 +128,7 @@ class Location {
               type: "web_url",
               url: gmapUrl,
               title: "Chỉ dẫn"
-            })
+            }]
           });
 
         }
