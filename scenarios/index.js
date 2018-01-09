@@ -202,7 +202,7 @@ class Scenario {
               if (score > 75) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
-              } else if (score <= 75 && score > 25) {
+              } else if (score <= 75 && score > 50) {
                 //f.txt(sender, 'Score: ' + res.body.answers[0].score);
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
@@ -279,7 +279,7 @@ class Scenario {
                     if (typeof intent === "undefined") {
 
                       // if not have wit intent matching then sent answer event if score < 65 but still > 55
-                      if (score > 20) {
+                      if (score > 40) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                         return;
                       } else {
