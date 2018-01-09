@@ -45,13 +45,66 @@ class Location {
       response.on('end', function() {
         var places = JSON.parse(body);
         var locations = places.results;
-        
+
         var displayIndex = 3;
-        if(displayIndex > locations.length) {
+        if (displayIndex > locations.length) {
           displayIndex = locations.length;
         }
+
+
+        let obj = {
+          recipient: {
+            id: sender
+          },
+          message: {
+            attachment: {
+              type: "template",
+              payload: {
+                template_type: "generic",
+                elements: [{
+                    title: "87 Trần Hưng Đạo",
+                    image_url: "https://maps.gstatic.com/mapfiles/place_api/icons/atm-71.png",
+                    subtitle: "87 Trần Hưng Đạo",
+                    default_action: {
+                      type: "web_url",
+                      url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
+                      //messenger_extensions: true,
+                      //webview_height_ratio: "tall",
+                      //fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
+                    },
+                    buttons: [{
+                      type: "web_url",
+                      url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
+                      title: "Chỉ dẫn"
+                    }]
+                  },
+                  {
+                    title: "ATM Vietinbank - Haphaco - Hiệu Thuốc 8-3",
+                    image_url: "https://maps.gstatic.com/mapfiles/place_api/icons/atm-71.png",
+                    subtitle: "5, Phố Cửa Nam, Phường Cửa Nam, Quận Hoàn Kiếm, Cửa Nam",
+                    default_action: {
+                      type: "web_url",
+                      url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
+                      //messenger_extensions: true,
+                      //webview_height_ratio: "tall",
+                      //fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                    },
+                    buttons: [{
+                      type: "web_url",
+                      url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
+                      title: "Chỉ dẫn"
+                    }]
+                  }
+                ]
+              }
+            }
+          }
+        }
         
-        for (var i=0; i<displayIndex; i++) {
+        f.sendNews(obj)
+      .catch(error => console.log('news: ' + error));
+        
+        for (var i = 0; i < displayIndex; i++) {
           var randLoc = locations[i];
           console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(randLoc));
         }
