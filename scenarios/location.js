@@ -45,9 +45,16 @@ class Location {
       response.on('end', function() {
         var places = JSON.parse(body);
         var locations = places.results;
-        //var randLoc = locations[Math.floor(Math.random() * locations.length)];
-        console.log('getAtmLocation: ' + JSON.stringify(places));
         
+        var displayIndex = 3;
+        if(displayIndex > locations.length) {
+          displayIndex = locations.length;
+        }
+        
+        for (var i=0; i<displayIndex; i++) {
+          var randLoc = locations[i];
+          console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(randLoc));
+        }
         return locations;
       });
     }).on('error', function(e) {
