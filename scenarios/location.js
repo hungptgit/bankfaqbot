@@ -46,66 +46,12 @@ class Location {
         var places = JSON.parse(body);
         var locations = places.results;
 
-        var displayIndex = 3;
+        var displayIndex = 5;
         if (displayIndex > locations.length) {
           displayIndex = locations.length;
         }
 
         var arrayLocationDisplay = [];
-        /*
-        var arrayLocationDisplay = [{
-            title: "Vietinbank atm",
-            image_url: "http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg",
-            subtitle: "87 Trần Hưng Đạo",
-            default_action: {
-              type: "web_url",
-              url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
-              //messenger_extensions: true,
-              //webview_height_ratio: "tall",
-              //fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
-            },
-            buttons: [{
-              type: "web_url",
-              url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
-              title: "Chỉ dẫn"
-            }]
-          },
-          {
-            title: "87 Trần Hưng Đạo",
-            image_url: "http://www.worldeasyguides.com/wp-content/uploads/2012/11/Map-of-Hanoi.jpg",
-            subtitle: "87 Trần Hưng Đạo",
-            default_action: {
-              type: "web_url",
-              url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
-              //messenger_extensions: true,
-              //webview_height_ratio: "tall",
-              //fallback_url: "https://ebanking.vietinbank.vn/rcas/portal/web/retail/bflogin"
-            },
-            buttons: [{
-              type: "web_url",
-              url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
-              title: "Chỉ dẫn"
-            }]
-          },
-          {
-            title: "ATM Vietinbank - Haphaco - Hiệu Thuốc 8-3",
-            image_url: "http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg",
-            subtitle: "5, Phố Cửa Nam, Phường Cửa Nam, Quận Hoàn Kiếm, Cửa Nam",
-            default_action: {
-              type: "web_url",
-              url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
-              //messenger_extensions: true,
-              //webview_height_ratio: "tall",
-              //fallback_url: "https://peterssendreceiveapp.ngrok.io/"
-            },
-            buttons: [{
-              type: "web_url",
-              url: "https://www.google.com/maps/dir/21.0320622,105.8398501/21.0277644,105.8341598",
-              title: "Chỉ dẫn"
-            }]
-          }
-        ];
-        */
         
         for (var i = 0; i < displayIndex; i++) {
           var displayLoc = locations[i];
