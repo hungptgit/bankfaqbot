@@ -27,13 +27,13 @@ class Location {
   getAtmLocation(sender, lat, long, f) {
     var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
     var location = lat + ',' + long;
-    var radius = 16000;
+    var radius = 3000;
     var sensor = false;
     var types = "atm";
     var keyword = "VietinBank";
 
     var https = require('https');
-    var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + "key=" + key + "&location=" + location + "&radius=" + radius + "&sensor=" + sensor + "&types=" + types + "&keyword=" + keyword;
+    var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + "key=" + key + "&rankby=distance&location=" + location + "&radius=" + radius + "&sensor=" + sensor + "&types=" + types + "&keyword=" + keyword;
     console.log(url);
 
     https.get(url, function(response) {
