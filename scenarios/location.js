@@ -33,7 +33,7 @@ class Location {
     var keyword = "VietinBank";
 
     var https = require('https');
-    var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + "key=" + key + "&rankby=distance&location=" + location + "&radius=" + radius + "&sensor=" + sensor + "&types=" + types + "&keyword=" + keyword;
+    var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + "key=" + key + "&location=" + location + "&radius=" + radius + "&sensor=" + sensor + "&types=" + types + "&keyword=" + keyword;
     console.log(url);
 
     https.get(url, function(response) {
