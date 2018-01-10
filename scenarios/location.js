@@ -27,7 +27,7 @@ class Location {
   getAtmLocation(sender, lat, long, f) {
     var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
     var location = lat + ',' + long;
-    var radius = 500;
+    var radius = 1000;
     var sensor = false;
     var types = "atm";
     var keyword = "VietinBank";
@@ -55,10 +55,10 @@ class Location {
         
         for (var i = 0; i < displayIndex; i++) {
           var displayLoc = locations[i];
-          console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
+          //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + location + "/" + targetLoc;
-          var imgUrl = gmapUrl;//"http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg";
+          var imgUrl = "http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg";
           arrayLocationDisplay.push({
             title: displayLoc.name,
             image_url: imgUrl,
