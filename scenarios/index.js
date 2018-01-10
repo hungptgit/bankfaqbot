@@ -361,6 +361,7 @@ class Scenario {
                       */
                       case 'goodbye':
                         f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
+                        f.media(sender,'1953683091313068');
                         break;
                       case 'xinchao':
                         let who = utils.firstEntity(entities, 'who');
