@@ -1,5 +1,6 @@
 'use strict';
 // create an API server
+require('newrelic');
 const config = require('./config');
 const Restify = require('restify');
 const i18n = require('i18n');
