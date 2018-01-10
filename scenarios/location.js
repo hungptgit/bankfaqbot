@@ -58,7 +58,7 @@ class Location {
           //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + location + "/" + targetLoc;
-          var imgUrl = "http://www.vietnamhotels.biz/littlehanoihostel2/Little-Hanoi-Hostel-2-Google-Map.jpg";
+          var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
           arrayLocationDisplay.push({
             title: displayLoc.name,
             image_url: imgUrl,
