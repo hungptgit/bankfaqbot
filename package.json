@@ -23,6 +23,8 @@
     "wsdlrdr":"0.3.9",
     "superagent": "^3.3.0",
     "i18n": "^0.8.3",
-    "nodemailer":"^4.4.1"
+    "nodemailer":"^4.4.1",
+    "mysql":"^2.15.0",
+    "newrelic":"^2.5.0"
   }
 }

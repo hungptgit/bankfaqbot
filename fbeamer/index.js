@@ -270,6 +270,32 @@ class FBeamer {
 		this.sendMessage(obj)
 			.catch(error => console.log('img: ' + error));
 	}
+	
+	// Send an image|video attachment message
+	media(id, attachmentId) {
+		let obj = {
+			recipient: {
+				id
+			},
+			message: {
+				attachment: {
+					type: 'template',
+					payload: {
+						template_type: 'media',
+						elements: [
+							{
+								 media_type: '<image|video>',
+								 attachment_id: attachmentId
+							}
+					 ]
+					}
+				}
+			}
+		}
+
+		this.sendMessage(obj)
+			.catch(error => console.log('media: ' + error));
+	}
 
 	// A button
 	btn(id, data) {
