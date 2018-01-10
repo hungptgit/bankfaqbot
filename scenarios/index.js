@@ -371,6 +371,7 @@ class Scenario {
                           f.txt(sender, 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?');
                         } else if (bye) {
                           f.txt(sender, bye.value + ' ' + senderName + ' :) ');
+                          f.media(sender,'1953683091313068');
                         } else if (who) {
                           f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + senderName + ' ❤️ ');
                         } else {
