@@ -47,37 +47,6 @@ const htmlDecode = (dataEncoded) => {
   return enc.htmlDecode(dataEncoded);
 }
 
-function getATMLoc(lat,long){
-  var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
-  var location = lat+','+long;
-  var radius = 16000;
-  var sensor = false;
-  var types = "atm";
-  var keyword = "vietinbank";
-
-  var https = require('https');
-  var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + "key=" + key + "&location=" + location + "&radius=" + radius + "&sensor=" + sensor + "&types=" + types + "&keyword=" + keyword;
-  console.log(url);
-  
-  https.get(url, function(response) {
-    var body ='';
-    response.on('data', function(chunk) {
-      body += chunk;
-    });
-
-    response.on('end', function() {
-      var places = JSON.parse(body);
-      var locations = places.results;
-      //var randLoc = locations[Math.floor(Math.random() * locations.length)];
-      
-      return locations;
-    });
-  }).on('error', function(e) {
-    console.log("Got error: " + e.message);
-    return;
-  });
-}
-
 module.exports = {
   isvalidateInput,
   getFormattedTime,
