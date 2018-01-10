@@ -383,7 +383,8 @@ class Scenario {
                         let emoTerm = entities.emoTerm ? entities.emoTerm[0].metadata : 'undefined';
 
                         if (emoTerm == 'undefined') {
-                          f.txt(sender, 'Cảm ơn đã sử dụng dịch vụ của VietinBank ^_^ ');
+                          f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+                          news.menu(sender, f);
                         } else {
                           switch (emoTerm) {
                             case 'xinh':
@@ -416,7 +417,8 @@ class Scenario {
 
                         //if (issueTerm == 'undefined') {
                         if (issueType == 'undefined') {
-                          f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
+                          f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+                          news.menu(sender, f);
                         } else {
                           if (issueFee != 'undefined') {
                             switch (issueType) {
