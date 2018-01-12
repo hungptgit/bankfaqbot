@@ -246,9 +246,11 @@ class Scenario {
                         return;
                       } else if (score <= 65 && score > 10) {
                         //let answer1 = res.body.answers[0].answer;
-                        let question1 = utils.htmlDecode(res.body.answers[0].questions);
+                        console.log(JSON.stringify(res.body.answers[0].questions[0]));
+                        let question1 = utils.htmlDecode(res.body.answers[0].questions[0].value);
                         //let answer2 = res.body.answers[1].answer;
-                        let question2 = utils.htmlDecode(res.body.answers[1].questions);
+                        console.log(JSON.stringify(res.body.answers[1].questions[0]));
+                        let question2 = utils.htmlDecode(res.body.answers[1].questions[0].value);
 
                         let recommendQuestion = 'Ý của anh/chị là: \n';
                         recommendQuestion = recommendQuestion + 'Câu 1: ' + question1 + ' \n';
