@@ -176,9 +176,9 @@ class Scenario {
                 f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
               } else {
                 //let answer1 = res.body.answers[0].answer;
-                let question1 = utils.htmlDecode(res.body.answers[0].questions[0].value);
+                let question1 = utils.htmlDecode(res.body.answers[0].questions);
                 //let answer2 = res.body.answers[1].answer;
-                let question2 = utils.htmlDecode(res.body.answers[1].questions[0].value);
+                let question2 = utils.htmlDecode(res.body.answers[1].questions);
                   
                 let recommendQuestion = 'Ý của anh/chị là: \n';
                 recommendQuestion = recommendQuestion + 'Câu 1: ' +  question1 + ' \n';
@@ -212,7 +212,9 @@ class Scenario {
                 } catch (e) {
                   console.log(e);
                 }
-
+                
+                return;
+                
                 console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 console.log('Score: ' + res.body.answers[0].score);
                 console.log('Switch to wit.ai processing...');
