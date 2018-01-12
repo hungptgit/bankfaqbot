@@ -28,10 +28,10 @@ const card = new Card();
 
 const Location = require('./location');
 const loca = new Location();
-
+/*
 const Model = require('../model');
 const model = new Model();
-
+*/
 const Services = require('../services');
 const services = new Services();
 
@@ -278,7 +278,7 @@ class Scenario {
                             buttons
                           });
                         } catch (e) {
-                          console.log(e);
+                          console.log(JSON.stringify(e));
                         }
                         return;
                       } else {
