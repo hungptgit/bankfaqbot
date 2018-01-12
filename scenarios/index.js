@@ -249,16 +249,16 @@ class Scenario {
                         //let answer2 = res.body.answers[1].answer;
                         //console.log('QnA q2: ' + JSON.stringify(res.body.answers[1].questions[0]));
                         let question2 = utils.htmlDecode(res.body.answers[1].questions[0]);
-
-                        let recommendQuestion = 'Ý của anh/chị là: \n';
-                        recommendQuestion = recommendQuestion + 'Câu 1: ' + question1 + ' \n';
-                        recommendQuestion = recommendQuestion + 'Câu 2: ' + question2 + ' \n';
-                        recommendQuestion = recommendQuestion + 'Nếu chưa đúng ý bạn, vui lòng đặt câu hỏi khác';
+                        let buttons = '';
+                        
+                        let text = 'Ý của anh/chị là: \n';
+                        text = text + 'Câu 1: ' + question1 + ' \n';
+                        text = text + 'Câu 2: ' + question2 + ' \n';
+                        text = text + 'Nếu chưa đúng ý anh/chị, vui lòng đặt câu hỏi khác';
 
                         //f.quick();
                         try {
-                          let buttons = '';
-                        
+                          
                           buttons = [{
                               content_type: "text",
                               title: "Câu 1",
@@ -272,9 +272,8 @@ class Scenario {
                               payload: 'QnA_re: ' + question2
                             }
                           ];
-                        
                           f.quick(sender, {
-                            recommendQuestion,
+                            text,
                             buttons
                           });
                         } catch (e) {
