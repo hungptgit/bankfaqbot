@@ -175,8 +175,6 @@ class Scenario {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
               } else {
-
-
                 console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 console.log('Score: ' + res.body.answers[0].score);
                 console.log('Switch to wit.ai processing...');
@@ -246,11 +244,11 @@ class Scenario {
                         return;
                       } else if (score <= 65 && score > 10) {
                         //let answer1 = res.body.answers[0].answer;
-                        console.log(JSON.stringify(res.body.answers[0].questions[0]));
-                        let question1 = utils.htmlDecode(res.body.answers[0].questions[0].value);
+                        //console.log('QnA q1: ' + JSON.stringify(res.body.answers[0].questions[0]));
+                        let question1 = utils.htmlDecode(res.body.answers[0].questions[0]);
                         //let answer2 = res.body.answers[1].answer;
-                        console.log(JSON.stringify(res.body.answers[1].questions[0]));
-                        let question2 = utils.htmlDecode(res.body.answers[1].questions[0].value);
+                        //console.log('QnA q2: ' + JSON.stringify(res.body.answers[1].questions[0]));
+                        let question2 = utils.htmlDecode(res.body.answers[1].questions[0]);
 
                         let recommendQuestion = 'Ý của anh/chị là: \n';
                         recommendQuestion = recommendQuestion + 'Câu 1: ' + question1 + ' \n';
