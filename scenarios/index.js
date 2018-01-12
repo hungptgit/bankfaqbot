@@ -258,31 +258,29 @@ class Scenario {
                         //f.quick();
                         try {
                           let buttons = '';
-                          let text = '';
-
+                        
                           buttons = [{
                               content_type: "text",
                               title: "Câu 1",
                               image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                              payload: "QnA_recommend: " + question1
+                              payload: 'QnA_re: ' + question1
                             },
                             {
                               content_type: "text",
                               title: "Câu 2",
                               image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                              payload: "QnA_recommend: " + question2
+                              payload: 'QnA_re: ' + question2
                             }
                           ];
-                          text = recommendQuestion;
-
+                        
                           f.quick(sender, {
-                            text,
+                            recommendQuestion,
                             buttons
                           });
                         } catch (e) {
                           console.log(e);
                         }
-
+                        return;
                       } else {
                         // use app data, or a previous context to decide how to 
                         console.log('Not found intent');
@@ -370,8 +368,8 @@ class Scenario {
 
     if (message && message.quick_reply) {
       let quickReply = message.quick_reply;
-      if (quickReply.payload.includes('QnA_recommend: ')) {
-        let messageTxt = quickReply.payload.replace('QnA_recommend: ', '');
+      if (quickReply.payload.includes('QnA_re: ')) {
+        let messageTxt = quickReply.payload.replace('QnA_re: ', '');
         superagent
           .post(config.QnA_URI)
           .send({
