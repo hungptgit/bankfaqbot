@@ -169,52 +169,14 @@ class Scenario {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
             } else {
               let score = res.body.answers[0].score;
-              if (score > 75) {
+              if (score > 85) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-              } else if (score <= 75 && score > 60) {
+              } else if (score <= 85 && score > 75) {
                 f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                 f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
               } else {
-                //let answer1 = res.body.answers[0].answer;
-                let question1 = utils.htmlDecode(res.body.answers[0].questions);
-                //let answer2 = res.body.answers[1].answer;
-                let question2 = utils.htmlDecode(res.body.answers[1].questions);
-                  
-                let recommendQuestion = 'Ý của anh/chị là: \n';
-                recommendQuestion = recommendQuestion + 'Câu 1: ' +  question1 + ' \n';
-                recommendQuestion = recommendQuestion + 'Câu 2: ' +  question2 + ' \n';
-                recommendQuestion = recommendQuestion + 'Nếu chưa đúng ý bạn, vui lòng đặt câu hỏi khác';
-                
-                //f.quick();
-                try {
-                  let buttons = '';
-                  let text = '';
-                  
-                  buttons = [{
-                      content_type: "text",
-                      title: "Câu 1",
-                      image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                      payload: "QnA_recommend: " + question1
-                    },
-                    {
-                      content_type: "text",
-                      title: "Câu 2",
-                      image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                      payload: "QnA_recommend: " + question2
-                    }
-                  ];
-                  text = recommendQuestion;
 
-                  f.quick(sender, {
-                    text,
-                    buttons
-                  });
-                } catch (e) {
-                  console.log(e);
-                }
-                
-                return;
-                
+
                 console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
                 console.log('Score: ' + res.body.answers[0].score);
                 console.log('Switch to wit.ai processing...');
@@ -278,11 +240,49 @@ class Scenario {
                     console.log('WIT resp:' + JSON.stringify(entities));
                     let intent = utils.firstEntity(entities, 'intent');
                     if (typeof intent === "undefined") {
-
                       // if not have wit intent matching then sent answer event if score < 65 but still > 55
-                      if (score > 50) {
+                      if (score > 65) {
                         f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
                         return;
+                      } else if (score <= 65 && score > 10) {
+                        //let answer1 = res.body.answers[0].answer;
+                        let question1 = utils.htmlDecode(res.body.answers[0].questions);
+                        //let answer2 = res.body.answers[1].answer;
+                        let question2 = utils.htmlDecode(res.body.answers[1].questions);
+
+                        let recommendQuestion = 'Ý của anh/chị là: \n';
+                        recommendQuestion = recommendQuestion + 'Câu 1: ' + question1 + ' \n';
+                        recommendQuestion = recommendQuestion + 'Câu 2: ' + question2 + ' \n';
+                        recommendQuestion = recommendQuestion + 'Nếu chưa đúng ý bạn, vui lòng đặt câu hỏi khác';
+
+                        //f.quick();
+                        try {
+                          let buttons = '';
+                          let text = '';
+
+                          buttons = [{
+                              content_type: "text",
+                              title: "Câu 1",
+                              image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                              payload: "QnA_recommend: " + question1
+                            },
+                            {
+                              content_type: "text",
+                              title: "Câu 2",
+                              image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                              payload: "QnA_recommend: " + question2
+                            }
+                          ];
+                          text = recommendQuestion;
+
+                          f.quick(sender, {
+                            text,
+                            buttons
+                          });
+                        } catch (e) {
+                          console.log(e);
+                        }
+
                       } else {
                         // use app data, or a previous context to decide how to 
                         console.log('Not found intent');
@@ -367,11 +367,11 @@ class Scenario {
     let buttons = '';
     let text = '';
     let data = '';
-    
+
     if (message && message.quick_reply) {
       let quickReply = message.quick_reply;
-      if(quickReply.payload.includes('QnA_recommend: ')) {
-        let messageTxt = quickReply.payload.replace('QnA_recommend: ','');
+      if (quickReply.payload.includes('QnA_recommend: ')) {
+        let messageTxt = quickReply.payload.replace('QnA_recommend: ', '');
         superagent
           .post(config.QnA_URI)
           .send({
@@ -383,12 +383,10 @@ class Scenario {
             if (err || !res.ok) {
               f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
             } else {
-              f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));    
+              f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
             }
-          }
-        );
-      }
-      else {
+          });
+      } else {
         switch (quickReply.payload) {
           case 'SAVE_3M':
             f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 3 tháng theo cú pháp: GTK3 <So tien> \n VD: gtk3 1000000');
