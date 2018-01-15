@@ -391,11 +391,14 @@ class Scenario {
                 break;
               case 'atm_location':
                 let locationText = utils.firstEntity(entities, 'location').value;
-                locationText = utils.htmlEncode(locationText);
                 console.log('locationText: ' + locationText);
+
                 if (locationText !== 'undefined') {
-                  loca.getAtmLocationByText(sender, locationText, f);
-                  //loca.showLocation(sender, f);
+                  if (locationText.includes('gần nhất') || locationText.includes('gần đây') || locationText.includes('gần')) {
+                    loca.showLocation(sender, f);
+                  } else {
+                    loca.getAtmLocationByText(sender, utils.htmlEncode(locationText), f);
+                  }
                 } else {
                   loca.showLocation(sender, f);
                 }
