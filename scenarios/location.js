@@ -113,9 +113,9 @@ class Location {
   getAtmLocationByText(sender, locationText, f) {
     var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
     var types = "atm";
-
+    
     var https = require('https');
-    var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query=" + locationText + "&types=" + types + "&language=vi";
+    var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query=ATM+VietinBank+" + locationText + "&types=" + types + "&language=vi";
     console.log(url);
 
     https.get(url, function(response) {
