@@ -397,7 +397,7 @@ class Scenario {
                   if (messageTxt.includes('gần nhất') || messageTxt.includes('gần đây') || messageTxt.includes('gần tôi')) {
                     loca.showLocation(sender, f);
                   } else {
-                    let locationTextQuery = utils.htmlEncode(locationText);
+                    let locationTextQuery = encodeURI(locationText); //utils.htmlEncode(locationText);
                     //let locationTextNoSign = utils.khongdau(locationText);
                     console.log('locationTextQuery: ' + locationTextQuery);
                     //console.log('locationTextNoSign: ' + locationTextNoSign);
