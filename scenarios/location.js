@@ -63,7 +63,7 @@ class Location {
           arrayLocationDisplay.push({
             title: displayLoc.name,
             image_url: imgUrl,
-            subtitle: displayLoc.formatted_address,
+            subtitle: displayLoc.vincity,
             default_action: {
               type: "web_url",
               url: gmapUrl,
