@@ -397,7 +397,8 @@ class Scenario {
                   if (locationText.includes('gần nhất') || locationText.includes('gần đây') || locationText.includes('gần tôi')) {
                     loca.showLocation(sender, f);
                   } else {
-                    loca.getAtmLocationByText(sender, utils.htmlEncode(locationText), f);
+                    let locationTextQuery = utils.htmlEncode(locationText);
+                    loca.getAtmLocationByText(sender, locationTextQuery, f);
                   }
                 } else {
                   loca.showLocation(sender, f);
