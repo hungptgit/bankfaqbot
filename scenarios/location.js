@@ -59,6 +59,7 @@ class Location {
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + location + "/" + targetLoc;
           var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
+          
           arrayLocationDisplay.push({
             title: displayLoc.name,
             image_url: imgUrl,
@@ -79,24 +80,27 @@ class Location {
 
         }
 
-        var obj = {
-          recipient: {
-            id: sender
-          },
-          message: {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: arrayLocationDisplay
+        if (arrayLocationDisplay.length > 0) {
+          var obj = {
+            recipient: {
+              id: sender
+            },
+            message: {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: arrayLocationDisplay
+                }
               }
             }
           }
+
+          f.sendNews(obj)
+            .catch(error => console.log('news: ' + error));
+        } else {
+          f.txt(sender, 'Không tìm thấy địa điểm nào phù hợp với yêu cầu của anh/chị');
         }
-
-        f.sendNews(obj)
-          .catch(error => console.log('news: ' + error));
-
 
         return locations;
       });
@@ -136,8 +140,8 @@ class Location {
           //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + targetLoc;
-          var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
-
+          var imgUrl = locations[i].photos[0].getUrl({'maxWidth' : 35,'maxHeight' : 35});//"https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
+         
           //if (displayLoc.name.toLowerCase.includes('vietinbank')) {
             arrayLocationDisplay.push({
               title: displayLoc.name,
