@@ -316,7 +316,8 @@ class Scenario {
 
                 if (greetings) {
                   f.txt(sender, 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?');
-                  news.menu(sender, f);
+                  //news.menu(sender, f);
+                  news.menuQuick(sender,f);
                 } else if (bye) {
                   f.txt(sender, bye.value + ' ' + senderName + ' :) ');
                 } else if (who) {
@@ -405,6 +406,18 @@ class Scenario {
         }
       } else {
         switch (quickReply.payload) {
+          case 'MQ_HOT_NEWS':
+            news.news(sender, f);
+            break;
+          case 'MQ_ATM_LOCATION':
+            loca.showLocation(sender, f);
+            break;
+          case 'MQ_XRATE':
+            news.exchangeRate(sender, f);
+            break;
+          case 'MQ_IRATE':
+            news.interestRate(sender, f);
+            break;
           case 'SAVE_3M':
             f.txt(sender, 'Lãi suất gửi tiết kiệm 3 tháng tại VietinBank hiện đang là 4,3%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 3 tháng theo cú pháp: GTK3 <So tien> \n VD: gtk3 1000000');
             break;

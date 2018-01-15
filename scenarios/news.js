@@ -326,6 +326,50 @@ class News {
     }
   }
   
+  
+  menuQuick(sender, f) {
+    let buttons = '';
+    let text = '';
+    let data = '';
+    console.log('menuQuick');
+
+    try {
+      buttons = [{
+          content_type: "text",
+          title: "Tìm ATM",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
+          payload: "MQ_ATM_LOCATION"
+        },
+        {
+          content_type: "text",
+          title: "Tin ngân hàng",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
+          payload: "MQ_HOT_NEWS"
+        },
+        {
+          content_type: "text",
+          title: "Tỷ giá",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
+          payload: "MQ_XRATE"
+        },
+        {
+          content_type: "text",
+          title: "Lãi xuất",
+          image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
+          payload: "MQ_IRATE"
+        }
+      ];
+      text = 'Anh/chị có thể lựa chọn thêm theo menu dưới đây';
+
+      f.quick(sender, {
+        text,
+        buttons
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
 }
 
 module.exports = News;
