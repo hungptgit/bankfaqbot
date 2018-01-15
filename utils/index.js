@@ -2,7 +2,6 @@
 var moment = require('moment');
 var https = require('https');
 var enc = require('./encoder');
-var kd = require('./khongdau');
 
 function isvalidateInput(str) {
     var pattern = /^\w+[a-z A-Z_]+?\@[0-9]{1,2}\:[0-9]{1,2}\w[to][0-9]{1,2}:[0-9]{1,2}$/;
@@ -52,11 +51,6 @@ const htmlEncode = (dataEncoded) => {
   return enc.htmlEncode(dataEncoded,false);
 }
 
-const khongdau = (dataEncoded) => {
-  return kd.KhongDau(dataEncoded,'chuyen');
-}
-
-
 module.exports = {
   isvalidateInput,
   getFormattedTime,
@@ -64,6 +58,5 @@ module.exports = {
   fetchEntity,
   firstEntity,
   htmlDecode,
-  htmlEncode,
-  khongdau
+  htmlEncode
 }
