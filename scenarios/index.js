@@ -145,10 +145,12 @@ class Scenario {
           f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
         } else {
           let score = res.body.answers[0].score;
+          let answer = utils.htmlDecode(res.body.answers[0].answer);
+          // matching score
           if (score > 85) {
-            f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+            f.txt(sender, answer);
           } else if (score <= 85 && score > 75) {
-            f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+            f.txt(sender, answer);
             f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
           } else if (score <= 75 && score > 30) {
             //let answer1 = res.body.answers[0].answer;
@@ -196,14 +198,18 @@ class Scenario {
             }
             return;
           } else {
-            console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
-            console.log('Score: ' + res.body.answers[0].score);
+            let answer = utils.htmlDecode(res.body.answers[0].answer);
+            let score = res.body.answers[0].score;
+            
+            console.log('Answer: ', answer);
+            console.log('Score: ' + score);
 
             f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
             news.menu(sender, f);
-            // sent mail to remind train bot
-            this.sendNotifyMail(senderName, messageTxt, utils.htmlDecode(res.body.answers[0].answer), res.body.answers[0].score);
 
+            // sent mail to remind train bot
+            this.sendNotifyMail(senderName, messageTxt, answer, score);
+            return;
           }
         }
       });
