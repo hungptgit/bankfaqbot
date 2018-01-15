@@ -79,32 +79,11 @@ class Scenario {
 
             register.showRegisterFinbot(sender, f);
             break;
-          case 'menu:INQ_BALANCE_PAYLOAD':
-            account.acctInfo(sender, f);
-            break;
-          case 'menu:XFER_PAYLOAD':
-            f.txt(sender, 'Bạn hãy gõ Lệnh chuyển tiền theo cú pháp: Chuyen <So tien> toi <So tai khoan> tai <Ma ngan hang> \n VD: chuyen 1000000 toi 462879758937 tai VCB');
-            break;
           case 'menu:REG_PAYLOAD':
             register.showRegister(sender, f);
             break;
-          case 'menu:PAY_ELECTRIC':
-            pay.showPayType(sender, f);
-            break;
-          case 'menu:PAY_WARTER':
-            f.txt(sender, 'Đang lấy về thông tin tỷ giá lãi suất mới nhất');
-            //services.depInterest(sender, f);
-            news.exchangeRate(sender, f);
-            news.interestRate(sender, f);
-            break;
           case 'menu:NEWS_PAYLOAD':
             news.news(sender, f);
-            break;
-          case 'menu:MNSTMT_PAYLOAD':
-            account.miniStatement(sender, f);
-            break;
-          case 'menu:SAVING_PAYLOAD':
-            saving.showPeriod(sender, f);
             break;
           case 'menu:LOCATION_PAYLOAD':
             loca.showLocation(sender, f);
@@ -117,9 +96,6 @@ class Scenario {
             break;
           case 'NEWS_BOT':
             news.showRegisterNews(sender, f);
-            break;
-          case 'REG_EFAST':
-            f.txt(sender, 'Chuyển tới trang đăng ký dịch vụ cho KHDN');
             break;
           default:
             f.txt(sender, 'Chúng tôi có thể trợ giúp được gì cho bạn? Vui lòng tham khảo menu bên dưới hoặc gõ nội dung bạn cần hỗ trợ');
@@ -363,7 +339,8 @@ class Scenario {
               case 'goodbye':
                 f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
                 break;
-              case 'xinchao':
+              case 'welcome':
+                /*
                 let who = utils.firstEntity(entities, 'who');
                 let greetings = utils.firstEntity(entities, 'greetings');
                 let bye = utils.firstEntity(entities, 'bye');
@@ -379,6 +356,8 @@ class Scenario {
                 } else {
                   f.txt(sender, ' ^_^ ');
                 }
+                */
+                news.menuQuick(sender, senderName, f);
                 break;
               case 'camthan':
                 let emoTerm = entities.emoTerm ? entities.emoTerm[0].metadata : 'undefined';
@@ -407,7 +386,7 @@ class Scenario {
                 }
 
                 break;
-              case 'camon':
+              case 'thank':
                 f.txt(sender, 'Cảm ơn anh/chị đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               default:
@@ -423,7 +402,7 @@ class Scenario {
           })
           .catch(error => {
             console.log(error);
-            f.txt(sender, "Hệ thống phản hồi chậm, xin bạn chờ trong giây lát.");
+            f.txt(sender, "Hệ thống phản hồi chậm, xin anh/chị chờ trong giây lát.");
           });
       }
     });
@@ -534,13 +513,6 @@ class Scenario {
             f.txt(sender, 'Lãi suất gửi tiết kiệm 12 tháng tại VietinBank hiện đang là 6,8%.\nBạn hãy gõ Lệnh Gửi tiết kiệm 12 tháng theo cú pháp: GTK12 <So tien> \n VD: gtk12 1000000');
             break;
           case 'NEWS_7h30':
-            let task = 'NEWS_7h30';
-            try {
-              //agenda.createReminder(agenda, f);
-            } catch (error) {
-              console.log(error);
-            }
-
             f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 7h30 hàng ngày.');
             break;
           default:
