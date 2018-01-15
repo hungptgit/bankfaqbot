@@ -250,7 +250,7 @@ class Scenario {
                         //console.log('QnA q2: ' + JSON.stringify(res.body.answers[1].questions[0]));
                         let question2 = utils.htmlDecode(res.body.answers[1].questions[0]);
                         let buttons = '';
-                        
+
                         let text = 'Ý của anh/chị là: \n';
                         text = text + 'Câu 1: ' + question1 + ' \n';
                         text = text + 'Câu 2: ' + question2 + ' \n';
@@ -258,7 +258,7 @@ class Scenario {
 
                         //f.quick();
                         try {
-                          
+
                           buttons = [{
                               content_type: "text",
                               title: "Câu 1",
@@ -270,7 +270,14 @@ class Scenario {
                               title: "Câu 2",
                               image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
                               payload: 'QnA_re: ' + question2
+                            },
+                            {
+                              content_type: "text",
+                              title: "Không đúng",
+                              image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                              payload: 'QnA_cusQ: ' + messageTxt
                             }
+
                           ];
                           f.quick(sender, {
                             text,
@@ -300,6 +307,7 @@ class Scenario {
 
                         if (greetings) {
                           f.txt(sender, 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?');
+                          news.menu(sender, f);
                         } else if (bye) {
                           f.txt(sender, bye.value + ' ' + senderName + ' :) ');
                         } else if (who) {
@@ -367,7 +375,8 @@ class Scenario {
 
     if (message && message.quick_reply) {
       let quickReply = message.quick_reply;
-      if (quickReply.payload.includes('QnA_re: ')) {
+      if (quickReply.payload.includes('QnA_re: ') || quickReply.payload.includes('QnA_cusQ: ')) {
+        if(quickReply.payload.includes('QnA_re: ')) {
         let messageTxt = quickReply.payload.replace('QnA_re: ', '');
         superagent
           .post(config.QnA_URI)
@@ -383,6 +392,11 @@ class Scenario {
               f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
             }
           });
+         }
+        else {
+          let messageTxt = quickReply.payload.replace('QnA_cusQ: ', '');
+          f.txt('Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau ạ :) ');
+        }
       } else {
         switch (quickReply.payload) {
           case 'SAVE_3M':
