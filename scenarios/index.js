@@ -201,8 +201,16 @@ class Scenario {
              
             f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
             news.menu(sender, f);
-
             // sent mail to remind train bot
+            this.sendNotifyMail(senderName, messageTxt,  utils.htmlDecode(res.body.answers[0].answer), res.body.answers[0].score);
+            
+          }
+        }
+      });
+  }
+  
+  sendNotifyMail(senderName, messageTxt, answer, score) {
+     // sent mail to remind train bot
             nodemailer.createTestAccount((err, account) => {
               // create reusable transporter object using the default SMTP transport
               let transporter = nodemailer.createTransport({
@@ -219,16 +227,16 @@ class Scenario {
               let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
 
               let plaintTextContent = senderName + ' said: ' + messageTxt + '\n';
-              plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
-              plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
+              plaintTextContent = plaintTextContent + 'Bot reply: ' + answer + ' \n';
+              plaintTextContent = plaintTextContent + 'Score: ' + score + ' \n';
               plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
 
               let htmlContent = '';
               htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
               htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
               htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score + '</td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + answer + '</td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + score + '</td></tr>';
               htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please retrain the bot to make higher score </td></tr>';
               htmlContent = htmlContent + '</table>';
 
@@ -253,11 +261,8 @@ class Scenario {
 
               });
             });
-          }
-        }
-      });
   }
-
+  
   processMessage(sender, message, f, wit) {
     return new Promise((resolve, reject) => {
       let buttons = '';
