@@ -391,6 +391,7 @@ class Scenario {
                 break;
               case 'atm_location':
                 let locationText = utils.firstEntity(entities, 'location').value;
+                locationText = utils.htmlEncode(locationText);
                 console.log('locationText: ' + locationText);
                 if (locationText !== 'undefined') {
                   loca.getAtmLocationByText(sender, locationText, f);

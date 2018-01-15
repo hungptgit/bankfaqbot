@@ -47,11 +47,17 @@ const htmlDecode = (dataEncoded) => {
   return enc.htmlDecode(dataEncoded);
 }
 
+const htmlEncode = (dataEncoded) => {
+  return enc.htmlEncode(dataEncoded,false);
+}
+
+
 module.exports = {
   isvalidateInput,
   getFormattedTime,
   getFormattedDay,
   fetchEntity,
   firstEntity,
-  htmlDecode
+  htmlDecode,
+  htmlEncode
 }
