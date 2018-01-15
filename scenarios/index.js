@@ -482,8 +482,7 @@ class Scenario {
               htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
               htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
               htmlContent = htmlContent + '<tr><td><strong>Human said:</strong> </td><td>' + messageTxt + '</td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>None</td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>0</td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>Bot recommend other questions but:</strong> </td><td>No question on QnA database matching with their choice</td></tr>';
               htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please update QnA database to train bot</td></tr>';
               htmlContent = htmlContent + '</table>';
 
