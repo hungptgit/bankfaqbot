@@ -140,7 +140,7 @@ class Location {
           //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + targetLoc;
-          var imgUrl = locations[i].photos[0].getUrl({'maxWidth' : 35,'maxHeight' : 35});//"https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
+          var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
          
           //if (displayLoc.name.toLowerCase.includes('vietinbank')) {
             arrayLocationDisplay.push({

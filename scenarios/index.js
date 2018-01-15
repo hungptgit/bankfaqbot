@@ -439,8 +439,8 @@ class Scenario {
       let coord = message.attachments[0].payload.coordinates;
       let locLat = coord.lat;
       let locLong = coord.long;
-      //loca.getAtmLocation(sender, locLat, locLong, f);
-      loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
+      loca.getAtmLocation(sender, locLat, locLong, f);
+      //loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
       //f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
 
       //services.location(sender, locLat, locLong, locType, f);
