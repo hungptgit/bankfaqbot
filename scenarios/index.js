@@ -131,6 +131,131 @@ class Scenario {
     });
   }
 
+  queryQnAMaker(sender, senderName, messageTxt, f) {
+    superagent
+      .post(config.QnA_URI)
+      .send({
+        question: messageTxt,
+        top: 3
+      })
+      .set('Ocp-Apim-Subscription-Key', config.QnA_KEY)
+      .set('Content-Type', 'application/json; charset=UTF-8')
+      .end(function(err, res) {
+        if (err || !res.ok) {
+          f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
+        } else {
+          let score = res.body.answers[0].score;
+          if (score > 85) {
+            f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+          } else if (score <= 85 && score > 75) {
+            f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+            f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
+          } else if (score <= 75 && score > 30) {
+            //let answer1 = res.body.answers[0].answer;
+            //console.log('QnA q1: ' + JSON.stringify(res.body.answers[0].questions[0]));
+            let question1 = utils.htmlDecode(res.body.answers[0].questions[0]);
+            //let answer2 = res.body.answers[1].answer;
+            //console.log('QnA q2: ' + JSON.stringify(res.body.answers[1].questions[0]));
+            let question2 = utils.htmlDecode(res.body.answers[1].questions[0]);
+            let buttons = '';
+
+            let text = 'Ý của anh/chị là: \n';
+            text = text + 'Câu 1: ' + question1 + ' \n';
+            text = text + 'Câu 2: ' + question2 + ' \n';
+            text = text + 'Nếu chưa đúng ý anh/chị, vui lòng đặt câu hỏi khác';
+
+            //f.quick();
+            try {
+
+              buttons = [{
+                  content_type: "text",
+                  title: "Câu 1",
+                  image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                  payload: 'QnA_re: ' + question1
+                },
+                {
+                  content_type: "text",
+                  title: "Câu 2",
+                  image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                  payload: 'QnA_re: ' + question2
+                },
+                {
+                  content_type: "text",
+                  title: "Không đúng",
+                  image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                  payload: 'QnA_cusQ: ' + messageTxt
+                }
+
+              ];
+              f.quick(sender, {
+                text,
+                buttons
+              });
+            } catch (e) {
+              console.log(JSON.stringify(e));
+            }
+            return;
+          } else {
+            console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
+            console.log('Score: ' + res.body.answers[0].score);
+            console.log('Switch to wit.ai processing...');
+
+            // sent mail to remind train bot
+            nodemailer.createTestAccount((err, account) => {
+              // create reusable transporter object using the default SMTP transport
+              let transporter = nodemailer.createTransport({
+                host: config.SMTP_SERVER,
+                port: 465,
+                secure: true, // true for 465, false for other ports
+                requireTLS: true,
+                auth: {
+                  user: config.SMTP_USER, // generated ethereal user
+                  pass: config.SMTP_PASS // generated ethereal password
+                }
+              });
+
+              let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
+
+              let plaintTextContent = senderName + ' said: ' + messageTxt + '\n';
+              plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
+              plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
+              plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
+
+              let htmlContent = '';
+              htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
+              htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score + '</td></tr>';
+              htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please retrain the bot to make higher score </td></tr>';
+              htmlContent = htmlContent + '</table>';
+
+              // setup email data with unicode symbols
+              let mailOptions = {
+                from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
+                to: config.QnA_ADMIN_MAIL, // list of receivers
+                subject: mailSubject, // Subject line
+                text: plaintTextContent, // plain text body
+                html: htmlContent // html body
+              };
+
+              console.log('Start sent from: %s', mailOptions.from);
+              // send mail with defined transport object
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+              });
+            });
+          }
+        }
+      });
+  }
+
   processMessage(sender, message, f, wit) {
     return new Promise((resolve, reject) => {
       let buttons = '';
@@ -156,213 +281,88 @@ class Scenario {
             senderName = ' anh/chị';
           });
 
-        superagent
-          .post(config.QnA_URI)
-          .send({
-            question: messageTxt,
-            top: 3
-          })
-          .set('Ocp-Apim-Subscription-Key', config.QnA_KEY)
-          .set('Content-Type', 'application/json; charset=UTF-8')
-          .end(function(err, res) {
-            if (err || !res.ok) {
-              f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
-            } else {
-              let score = res.body.answers[0].score;
-              if (score > 85) {
-                f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-              } else if (score <= 85 && score > 75) {
-                f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-                f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
-              } else {
-                console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
-                console.log('Score: ' + res.body.answers[0].score);
-                console.log('Switch to wit.ai processing...');
-
-                // sent mail to remind train bot
-                nodemailer.createTestAccount((err, account) => {
-                  // create reusable transporter object using the default SMTP transport
-                  let transporter = nodemailer.createTransport({
-                    host: config.SMTP_SERVER,
-                    port: 465,
-                    secure: true, // true for 465, false for other ports
-                    requireTLS: true,
-                    auth: {
-                      user: config.SMTP_USER, // generated ethereal user
-                      pass: config.SMTP_PASS // generated ethereal password
-                    }
-                  });
-
-                  let mailSubject = 'VietinBank ChatBot: ' + messageTxt;
-
-                  let plaintTextContent = senderName + ' said: ' + messageTxt + '\n';
-                  plaintTextContent = plaintTextContent + 'Bot reply: ' + utils.htmlDecode(res.body.answers[0].answer) + ' \n';
-                  plaintTextContent = plaintTextContent + 'Score: ' + res.body.answers[0].score + ' \n';
-                  plaintTextContent = plaintTextContent + 'Please retrain the bot to make higher score \n';
-
-                  let htmlContent = '';
-                  htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
-                  htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
-                  htmlContent = htmlContent + '<tr><td><strong>' + senderName + ' said:</strong> </td><td>' + messageTxt + '</td></tr>';
-                  htmlContent = htmlContent + '<tr><td><strong>Bot reply:</strong> </td><td>' + utils.htmlDecode(res.body.answers[0].answer) + '</td></tr>';
-                  htmlContent = htmlContent + '<tr><td><strong>Score:</strong> </td><td>' + res.body.answers[0].score + '</td></tr>';
-                  htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please retrain the bot to make higher score </td></tr>';
-                  htmlContent = htmlContent + '</table>';
-
-                  // setup email data with unicode symbols
-                  let mailOptions = {
-                    from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
-                    to: config.QnA_ADMIN_MAIL, // list of receivers
-                    subject: mailSubject, // Subject line
-                    text: plaintTextContent, // plain text body
-                    html: htmlContent // html body
-                  };
-
-                  console.log('Start sent from: %s', mailOptions.from);
-                  // send mail with defined transport object
-                  transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                      return console.log(error);
-                    }
-                    console.log('Message sent: %s', info.messageId);
-                    // Preview only available when sending through an Ethereal account
-                    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-                  });
-                });
-
-                wit.message(messageTxt)
-                  .then(({
-                    entities
-                  }) => {
-                    console.log('WIT resp:' + JSON.stringify(entities));
-                    let intent = utils.firstEntity(entities, 'intent');
-                    if (typeof intent === "undefined") {
-                      // if not have wit intent matching then sent answer event if score < 65 but still > 55
-                      if (score > 65) {
-                        f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-                        return;
-                      } else if (score <= 65 && score > 10) {
-                        //let answer1 = res.body.answers[0].answer;
-                        //console.log('QnA q1: ' + JSON.stringify(res.body.answers[0].questions[0]));
-                        let question1 = utils.htmlDecode(res.body.answers[0].questions[0]);
-                        //let answer2 = res.body.answers[1].answer;
-                        //console.log('QnA q2: ' + JSON.stringify(res.body.answers[1].questions[0]));
-                        let question2 = utils.htmlDecode(res.body.answers[1].questions[0]);
-                        let buttons = '';
-
-                        let text = 'Ý của anh/chị là: \n';
-                        text = text + 'Câu 1: ' + question1 + ' \n';
-                        text = text + 'Câu 2: ' + question2 + ' \n';
-                        text = text + 'Nếu chưa đúng ý anh/chị, vui lòng đặt câu hỏi khác';
-
-                        //f.quick();
-                        try {
-
-                          buttons = [{
-                              content_type: "text",
-                              title: "Câu 1",
-                              image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                              payload: 'QnA_re: ' + question1
-                            },
-                            {
-                              content_type: "text",
-                              title: "Câu 2",
-                              image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                              payload: 'QnA_re: ' + question2
-                            },
-                            {
-                              content_type: "text",
-                              title: "Không đúng",
-                              image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
-                              payload: 'QnA_cusQ: ' + messageTxt
-                            }
-
-                          ];
-                          f.quick(sender, {
-                            text,
-                            buttons
-                          });
-                        } catch (e) {
-                          console.log(JSON.stringify(e));
-                        }
-                        return;
-                      } else {
-                        // use app data, or a previous context to decide how to 
-                        console.log('Not found intent');
-                        f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
-                        news.menu(sender, f);
-                        return;
-                      }
-                    }
-
-                    switch (intent.value) {
-                      case 'goodbye':
-                        f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
-                        break;
-                      case 'xinchao':
-                        let who = utils.firstEntity(entities, 'who');
-                        let greetings = utils.firstEntity(entities, 'greetings');
-                        let bye = utils.firstEntity(entities, 'bye');
-
-                        if (greetings) {
-                          f.txt(sender, 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?');
-                          news.menu(sender, f);
-                        } else if (bye) {
-                          f.txt(sender, bye.value + ' ' + senderName + ' :) ');
-                        } else if (who) {
-                          f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + senderName + ' ❤️ ');
-                        } else {
-                          f.txt(sender, ' ^_^ ');
-                        }
-                        break;
-                      case 'camthan':
-                        let emoTerm = entities.emoTerm ? entities.emoTerm[0].metadata : 'undefined';
-
-                        if (emoTerm == 'undefined') {
-                          f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
-                          news.menu(sender, f);
-                        } else {
-                          switch (emoTerm) {
-                            case 'xinh':
-                              f.txt(sender, 'Thật vậy ạ, hihi. Cảm ơn ạ 😝');
-                              break;
-                            case 'thongminh':
-                              f.txt(sender, 'Dạ quá khen rùi ạ 😊 ');
-                              break;
-                            case 'gioioi':
-                              f.txt(sender, 'Xin lỗi vì đã làm anh chị không vui 😇 ');
-                              break;
-                            case 'toite':
-                              f.txt(sender, '😔');
-                              break;
-                            default:
-                              f.txt(sender, ' ^_^ ');
-                              break;
-                          }
-                        }
-
-                        break;
-                      case 'camon':
-                        f.txt(sender, 'Cảm ơn anh/chị đã sử dụng dịch vụ của VietinBank ^_^ ');
-                        break;
-                      default:
-                        f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ ^_^');
-                        console.log(`?  ${intent.value}`);
-                        //f.txt(sender, 'Okey! intent matching: ' + intent.value);
-                        //f.txt(sender, 'Data collected: ' + JSON.stringify(entities));
-                        break;
-                    }
-                  })
-                  .catch(error => {
-                    console.log(error);
-                    f.txt(sender, "Hệ thống phản hồi chậm, xin bạn chờ trong giây lát.");
-                  });
-              }
-              //f.txt(sender, 'Score: ' + res.body.score.value);
+        wit.message(messageTxt)
+          .then(({
+            entities
+          }) => {
+            console.log('WIT resp:' + JSON.stringify(entities));
+            let intent = utils.firstEntity(entities, 'intent');
+            if (typeof intent === "undefined") {
+              this.queryQnAMaker(sender, senderName, messageTxt, f);
+              // use app data, or a previous context to decide how to 
+              /*
+              console.log('Not found intent');
+              f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+              news.menu(sender, f);
+              */
+              return;
             }
-          });
 
+            switch (intent.value) {
+              case 'goodbye':
+                f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
+                break;
+              case 'xinchao':
+                let who = utils.firstEntity(entities, 'who');
+                let greetings = utils.firstEntity(entities, 'greetings');
+                let bye = utils.firstEntity(entities, 'bye');
+
+                if (greetings) {
+                  f.txt(sender, 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?');
+                  news.menu(sender, f);
+                } else if (bye) {
+                  f.txt(sender, bye.value + ' ' + senderName + ' :) ');
+                } else if (who) {
+                  f.txt(sender, 'Em là Chi, rất vui được phục vụ ' + ' ' + senderName + ' ❤️ ');
+                } else {
+                  f.txt(sender, ' ^_^ ');
+                }
+                break;
+              case 'camthan':
+                let emoTerm = entities.emoTerm ? entities.emoTerm[0].metadata : 'undefined';
+
+                if (emoTerm == 'undefined') {
+                  f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+                  news.menu(sender, f);
+                } else {
+                  switch (emoTerm) {
+                    case 'xinh':
+                      f.txt(sender, 'Thật vậy ạ, hihi. Cảm ơn ạ 😝');
+                      break;
+                    case 'thongminh':
+                      f.txt(sender, 'Dạ quá khen rùi ạ 😊 ');
+                      break;
+                    case 'gioioi':
+                      f.txt(sender, 'Xin lỗi vì đã làm anh chị không vui 😇 ');
+                      break;
+                    case 'toite':
+                      f.txt(sender, '😔');
+                      break;
+                    default:
+                      f.txt(sender, ' ^_^ ');
+                      break;
+                  }
+                }
+
+                break;
+              case 'camon':
+                f.txt(sender, 'Cảm ơn anh/chị đã sử dụng dịch vụ của VietinBank ^_^ ');
+                break;
+              default:
+                this.queryQnAMaker(sender, senderName, messageTxt, f);
+                /*
+                f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ ^_^');
+                console.log(`?  ${intent.value}`);
+                */
+                //f.txt(sender, 'Okey! intent matching: ' + intent.value);
+                //f.txt(sender, 'Data collected: ' + JSON.stringify(entities));
+                break;
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            f.txt(sender, "Hệ thống phản hồi chậm, xin bạn chờ trong giây lát.");
+          });
       }
     });
   }
@@ -376,24 +376,23 @@ class Scenario {
     if (message && message.quick_reply) {
       let quickReply = message.quick_reply;
       if (quickReply.payload.includes('QnA_re: ') || quickReply.payload.includes('QnA_cusQ: ')) {
-        if(quickReply.payload.includes('QnA_re: ')) {
-        let messageTxt = quickReply.payload.replace('QnA_re: ', '');
-        superagent
-          .post(config.QnA_URI)
-          .send({
-            question: messageTxt
-          })
-          .set('Ocp-Apim-Subscription-Key', config.QnA_KEY)
-          .set('Content-Type', 'application/json; charset=UTF-8')
-          .end(function(err, res) {
-            if (err || !res.ok) {
-              f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
-            } else {
-              f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
-            }
-          });
-         }
-        else {
+        if (quickReply.payload.includes('QnA_re: ')) {
+          let messageTxt = quickReply.payload.replace('QnA_re: ', '');
+          superagent
+            .post(config.QnA_URI)
+            .send({
+              question: messageTxt
+            })
+            .set('Ocp-Apim-Subscription-Key', config.QnA_KEY)
+            .set('Content-Type', 'application/json; charset=UTF-8')
+            .end(function(err, res) {
+              if (err || !res.ok) {
+                f.txt(sender, "Oh no! error = " + err + ", " + JSON.stringify(res));
+              } else {
+                f.txt(sender, utils.htmlDecode(res.body.answers[0].answer));
+              }
+            });
+        } else {
           let messageTxt = quickReply.payload.replace('QnA_cusQ: ', '');
           f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau ạ :) ');
         }
