@@ -464,9 +464,9 @@ class Scenario {
           return;
         }else {
           let locationText = quickReply.payload.replace('ATM_LOC: ', '');
-          let locationTextQuery = utils.khongdau(locationText);//utils.htmlEncode(locationText);
-          console.log('locationTextQuery: ' + locationTextQuery);
-          loca.getAtmLocationByText(sender, locationTextQuery, f);
+          //let locationTextQuery = utils.khongdau(locationText);//utils.htmlEncode(locationText);
+          //console.log('locationTextQuery: ' + locationTextQuery);
+          loca.getAtmLocationByText(sender, locationText, f);
         }
         return;
       }
