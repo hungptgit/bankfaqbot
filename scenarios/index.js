@@ -395,7 +395,7 @@ class Scenario {
          }
         else {
           let messageTxt = quickReply.payload.replace('QnA_cusQ: ', '');
-          f.txt('Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau ạ :) ');
+          f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau ạ :) ');
         }
       } else {
         switch (quickReply.payload) {
