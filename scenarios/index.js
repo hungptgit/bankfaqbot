@@ -198,7 +198,9 @@ class Scenario {
           } else {
             console.log('Answer: ', utils.htmlDecode(res.body.answers[0].answer));
             console.log('Score: ' + res.body.answers[0].score);
-            console.log('Switch to wit.ai processing...');
+             
+            f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
+            news.menu(sender, f);
 
             // sent mail to remind train bot
             nodemailer.createTestAccount((err, account) => {
