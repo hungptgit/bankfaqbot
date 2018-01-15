@@ -354,7 +354,7 @@ class News {
         },
         {
           content_type: "text",
-          title: "Lãi xuất",
+          title: "Lãi suất",
           image_url: "http://www.freeiconspng.com/uploads/alarm-clock-icon--icon-search-engine-7.png",
           payload: "MQ_IRATE"
         }

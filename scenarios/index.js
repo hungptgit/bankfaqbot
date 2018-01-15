@@ -397,6 +397,11 @@ class Scenario {
                   if (messageTxt.includes('gần nhất') || messageTxt.includes('gần đây') || messageTxt.includes('gần tôi')) {
                     loca.showLocation(sender, f);
                   } else {
+                    let locationTextQuery = utils.htmlEncode(locationText);
+                    console.log('locationTextQuery: ' + locationTextQuery);
+                    loca.getAtmLocationByText(sender, locationTextQuery, f);
+
+                    /*
                     let buttons = '';
 
                     let text = 'Ý của anh/chị là tìm ATM ở địa điểm: \n';
@@ -424,8 +429,8 @@ class Scenario {
                     } catch (e) {
                       console.log(JSON.stringify(e));
                     }
-
-
+                    */  
+                    
                   }
                 } else {
                   loca.showLocation(sender, f);
@@ -464,7 +469,7 @@ class Scenario {
           return;
         }else {
           let locationText = quickReply.payload.replace('ATM_LOC: ', '');
-          let locationTextQuery = utils.khongdau(locationText);//utils.htmlEncode(locationText);
+          let locationTextQuery = utils.htmlEncode(locationText);
           console.log('locationTextQuery: ' + locationTextQuery);
           loca.getAtmLocationByText(sender, locationTextQuery, f);
         }
