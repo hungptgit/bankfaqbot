@@ -232,7 +232,7 @@ class Scenario {
         }
       });
   }
-  
+
   /*
   sendNotifyMail(senderName, messageTxt, answer, score) {
     try {
@@ -292,7 +292,7 @@ class Scenario {
     }
   }
   */
-  
+
   processMessage(sender, message, f, wit) {
     return new Promise((resolve, reject) => {
       let buttons = '';
@@ -389,6 +389,15 @@ class Scenario {
               case 'thank':
                 f.txt(sender, 'Cảm ơn anh/chị đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
+              case 'atm_location':
+                let locationText = utils.firstEntity(entities, 'location');
+                if (locationText !== 'undefined') {
+                  loca.getAtmLocationByText(sender, locationText, f);
+                } else {
+                  loca.showLocation(sender, f);
+                }
+                //f.txt(sender, 'Cảm ơn anh chị, chúc anh chị một ngày tốt lành :) ');
+                break;
               default:
                 this.queryQnAMaker(sender, senderName, messageTxt, f);
                 /*
@@ -436,58 +445,58 @@ class Scenario {
         } else {
           let messageTxt = quickReply.payload.replace('QnA_cusQ: ', '');
           f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau ạ :) ');
-          
+
           // sent mail to remind train bot
-            nodemailer.createTestAccount((err, account) => {
-              // create reusable transporter object using the default SMTP transport
-              let transporter = nodemailer.createTransport({
-                host: config.SMTP_SERVER,
-                port: 465,
-                secure: true, // true for 465, false for other ports
-                requireTLS: true,
-                auth: {
-                  user: config.SMTP_USER, // generated ethereal user
-                  pass: config.SMTP_PASS // generated ethereal password
-                }
-              });
-
-              let mailSubject = 'VietinBank ChatBot: Question need answer >>> ' + messageTxt;
-              let plaintTextContent = 'Human said: ' + messageTxt + '\n';
-              plaintTextContent = plaintTextContent + 'Bot reply:  \n';
-              plaintTextContent = plaintTextContent + 'Score: 0 \n';
-              plaintTextContent = plaintTextContent + 'Please update QnA database to train bot \n';
-              
-              let htmlContent = '';
-              htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
-              htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Human said:</strong> </td><td>' + messageTxt + '</td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Bot recommend other questions but:</strong> </td><td>No question on QnA database matching with their choice</td></tr>';
-              htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please update QnA database to train bot</td></tr>';
-              htmlContent = htmlContent + '</table>';
-
-              // setup email data with unicode symbols
-              let mailOptions = {
-                from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
-                to: config.QnA_ADMIN_MAIL, // list of receivers
-                subject: mailSubject, // Subject line
-                text: plaintTextContent, // plain text body
-                html: htmlContent // html body
-              };
-
-              console.log('Start sent from: %s', mailOptions.from);
-              // send mail with defined transport object
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  return console.log(error);
-                }
-                console.log('Message sent: %s', info.messageId);
-                // Preview only available when sending through an Ethereal account
-                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-              });
+          nodemailer.createTestAccount((err, account) => {
+            // create reusable transporter object using the default SMTP transport
+            let transporter = nodemailer.createTransport({
+              host: config.SMTP_SERVER,
+              port: 465,
+              secure: true, // true for 465, false for other ports
+              requireTLS: true,
+              auth: {
+                user: config.SMTP_USER, // generated ethereal user
+                pass: config.SMTP_PASS // generated ethereal password
+              }
             });
-            return;
-          
+
+            let mailSubject = 'VietinBank ChatBot: Question need answer >>> ' + messageTxt;
+            let plaintTextContent = 'Human said: ' + messageTxt + '\n';
+            plaintTextContent = plaintTextContent + 'Bot reply:  \n';
+            plaintTextContent = plaintTextContent + 'Score: 0 \n';
+            plaintTextContent = plaintTextContent + 'Please update QnA database to train bot \n';
+
+            let htmlContent = '';
+            htmlContent = htmlContent + '<table rules="all" style="border-color: #666;" cellpadding="10">';
+            htmlContent = htmlContent + '<tr style=\'background: #ffa73c;\'><td> </td><td></td></tr>';
+            htmlContent = htmlContent + '<tr><td><strong>Human said:</strong> </td><td>' + messageTxt + '</td></tr>';
+            htmlContent = htmlContent + '<tr><td><strong>Bot recommend other questions but:</strong> </td><td>No question on QnA database matching with their choice</td></tr>';
+            htmlContent = htmlContent + '<tr><td><strong>Note:</strong> </td><td>Please update QnA database to train bot</td></tr>';
+            htmlContent = htmlContent + '</table>';
+
+            // setup email data with unicode symbols
+            let mailOptions = {
+              from: '"VietinBank FaQ ChatBot" <vietinbankchatbot@gmail.com>', // sender address
+              to: config.QnA_ADMIN_MAIL, // list of receivers
+              subject: mailSubject, // Subject line
+              text: plaintTextContent, // plain text body
+              html: htmlContent // html body
+            };
+
+            console.log('Start sent from: %s', mailOptions.from);
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log('Message sent: %s', info.messageId);
+              // Preview only available when sending through an Ethereal account
+              console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+            });
+          });
+          return;
+
         }
       } else {
         switch (quickReply.payload) {
