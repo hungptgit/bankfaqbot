@@ -146,18 +146,19 @@ class Scenario {
         } else {
           let score = res.body.answers[0].score;
           let answer = utils.htmlDecode(res.body.answers[0].answer);
+          console.log('Answer: ', answer);
+          console.log('Score: ' + score);
+
           // matching score
           if (score > 85) {
             f.txt(sender, answer);
+            return;
           } else if (score <= 85 && score > 75) {
             f.txt(sender, answer);
             f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
+            return;
           } else if (score <= 75 && score > 30) {
-            //let answer1 = res.body.answers[0].answer;
-            //console.log('QnA q1: ' + JSON.stringify(res.body.answers[0].questions[0]));
             let question1 = utils.htmlDecode(res.body.answers[0].questions[0]);
-            //let answer2 = res.body.answers[1].answer;
-            //console.log('QnA q2: ' + JSON.stringify(res.body.answers[1].questions[0]));
             let question2 = utils.htmlDecode(res.body.answers[1].questions[0]);
             let buttons = '';
 
@@ -166,9 +167,7 @@ class Scenario {
             text = text + 'Câu 2: ' + question2 + ' \n';
             text = text + 'Nếu chưa đúng ý anh/chị, vui lòng đặt câu hỏi khác';
 
-            //f.quick();
             try {
-
               buttons = [{
                   content_type: "text",
                   title: "Câu 1",
@@ -198,12 +197,6 @@ class Scenario {
             }
             return;
           } else {
-            let answer = utils.htmlDecode(res.body.answers[0].answer);
-            let score = res.body.answers[0].score;
-            
-            console.log('Answer: ', answer);
-            console.log('Score: ' + score);
-
             f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ. Vui lòng tham khảo menu bên dưới hoặc gõ nội dung cần hỗ trợ rõ ràng hơn');
             news.menu(sender, f);
 
@@ -470,9 +463,7 @@ class Scenario {
       let locLong = coord.long;
       loca.getAtmLocation(sender, locLat, locLong, f);
       //loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
-      //f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
-
-      //services.location(sender, locLat, locLong, locType, f);
+      
     }
   }
 }
