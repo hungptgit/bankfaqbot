@@ -137,23 +137,26 @@ class Location {
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + targetLoc;
           var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
-          arrayLocationDisplay.push({
-            title: displayLoc.name,
-            image_url: imgUrl,
-            subtitle: displayLoc.vicinity,
-            default_action: {
-              type: "web_url",
-              url: gmapUrl,
-              //messenger_extensions: true,
-              //webview_height_ratio: "tall",
-              //fallback_url: "https://peterssendreceiveapp.ngrok.io/"
-            },
-            buttons: [{
-              type: "web_url",
-              url: gmapUrl,
-              title: "Chỉ dẫn"
-            }]
-          });
+          
+          if(displayLoc.name.toLowerCase.includes('vietinbank')) {
+            arrayLocationDisplay.push({
+              title: displayLoc.name,
+              image_url: imgUrl,
+              subtitle: displayLoc.vicinity,
+              default_action: {
+                type: "web_url",
+                url: gmapUrl,
+                //messenger_extensions: true,
+                //webview_height_ratio: "tall",
+                //fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+              },
+              buttons: [{
+                type: "web_url",
+                url: gmapUrl,
+                title: "Chỉ dẫn"
+              }]
+            });
+          }
 
         }
 
