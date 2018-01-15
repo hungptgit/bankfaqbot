@@ -97,7 +97,7 @@ class Location {
           }
 
           f.sendNews(obj)
-            .catch(error => console.log('news: ' + error));
+            .catch(error => console.log('getAtmLocation: ' + error));
         } else {
           f.txt(sender, 'Không tìm thấy địa điểm nào phù hợp với yêu cầu của anh/chị');
         }
@@ -105,7 +105,7 @@ class Location {
         return locations;
       });
     }).on('error', function(e) {
-      console.log("Got error: " + e.message);
+      console.log("getAtmLocation Got error: " + e.message);
       return;
     });
   }
@@ -181,14 +181,14 @@ class Location {
           }
 
           f.sendNews(obj)
-            .catch(error => console.log('news: ' + error));
+            .catch(error => console.log('getAtmLocationByText: ' + error));
         } else {
           f.txt(sender, 'Không tìm thấy địa điểm nào phù hợp với yêu cầu của anh/chị');
         }
         return locations;
       });
     }).on('error', function(e) {
-      console.log("Got error: " + e.message);
+      console.log("getAtmLocationByText Got error: " + e.message);
       return;
     });
   }
