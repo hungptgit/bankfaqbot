@@ -394,13 +394,13 @@ class Scenario {
                 console.log('locationText: ' + locationText);
 
                 if (locationText !== 'undefined') {
-                  if (locationText.includes('gần nhất') || locationText.includes('gần đây') || locationText.includes('gần tôi')) {
+                  if (messageTxt.includes('gần nhất') || messageTxt.includes('gần đây') || messageTxt.includes('gần tôi')) {
                     loca.showLocation(sender, f);
                   } else {
                     let buttons = '';
 
                     let text = 'Ý của anh/chị là tìm ATM ở địa điểm: \n';
-                    text = text + '' + locationText + ' \n';
+                    text = text + '[' + locationText + '] \n';
                     text = text + 'Nếu chưa đúng ý anh/chị, vui lòng đặt câu hỏi khác. VD: atm ở 187 nguyễn lương bằng, ATM gần tôi, ATM ở thành phố đà nẵng... ';
 
                     try {
