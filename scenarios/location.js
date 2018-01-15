@@ -138,7 +138,7 @@ class Location {
           var gmapUrl = "https://www.google.com/maps/dir/" + targetLoc;
           var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
 
-          if (displayLoc.name.toLowerCase.includes('vietinbank')) {
+          //if (displayLoc.name.toLowerCase.includes('vietinbank')) {
             arrayLocationDisplay.push({
               title: displayLoc.name,
               image_url: imgUrl,
@@ -156,7 +156,7 @@ class Location {
                 title: "Chỉ dẫn"
               }]
             });
-          }
+          //}
 
         }
 
