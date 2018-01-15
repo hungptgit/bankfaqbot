@@ -135,7 +135,7 @@ class Location {
           var displayLoc = locations[i];
           //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
-          var gmapUrl = "https://www.google.com/maps/dir/" + location + "/" + targetLoc;
+          var gmapUrl = "https://www.google.com/maps/dir/" + targetLoc;
           var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
           arrayLocationDisplay.push({
             title: displayLoc.name,
