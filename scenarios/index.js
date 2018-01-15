@@ -398,10 +398,10 @@ class Scenario {
                     loca.showLocation(sender, f);
                   } else {
                     let locationTextQuery = utils.htmlEncode(locationText);
-                    let locationTextNoSign = utils.khongdau(locationText);
+                    //let locationTextNoSign = utils.khongdau(locationText);
                     console.log('locationTextQuery: ' + locationTextQuery);
-                    console.log('locationTextNoSign: ' + locationTextNoSign);
-                    loca.getAtmLocationByText(sender, locationTextNoSign, f);
+                    //console.log('locationTextNoSign: ' + locationTextNoSign);
+                    loca.getAtmLocationByText(sender, locationTextQuery, f);
 
                     /*
                     let buttons = '';
