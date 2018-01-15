@@ -394,7 +394,7 @@ class Scenario {
                 console.log('locationText: ' + locationText);
 
                 if (locationText !== 'undefined') {
-                  if (locationText.includes('gần nhất') || locationText.includes('gần đây')) {
+                  if (locationText.includes('gần nhất') || locationText.includes('gần đây') || locationText.includes('gần tôi')) {
                     loca.showLocation(sender, f);
                   } else {
                     loca.getAtmLocationByText(sender, utils.htmlEncode(locationText), f);
