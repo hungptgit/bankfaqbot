@@ -344,7 +344,7 @@ class Scenario {
 
                         break;
                       case 'camon':
-                        f.txt(sender, 'Cảm ơn bạn đã sử dụng dịch vụ của VietinBank ^_^ ');
+                        f.txt(sender, 'Cảm ơn anh/chị đã sử dụng dịch vụ của VietinBank ^_^ ');
                         break;
                       default:
                         f.txt(sender, 'Xin lỗi em chưa hiểu yêu cầu. Em sẽ ghi nhận và trả lời sau ạ ^_^');
@@ -439,7 +439,8 @@ class Scenario {
       let coord = message.attachments[0].payload.coordinates;
       let locLat = coord.lat;
       let locLong = coord.long;
-      loca.getAtmLocation(sender, locLat, locLong, f);
+      //loca.getAtmLocation(sender, locLat, locLong, f);
+      loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
       //f.txt(sender, 'Bạn đang ở gần địa điểm ' + locTitle + '(lat: ' + locLat + ', long: ' + locLong + '), quanh bạn có các PGD sau của VietinBank: \n 🏦 123 Xã Đàn \n 🏦 15 Nam Đồng \n 🏦 19 Tây Sơn');
 
       //services.location(sender, locLat, locLong, locType, f);
