@@ -397,8 +397,35 @@ class Scenario {
                   if (locationText.includes('gần nhất') || locationText.includes('gần đây') || locationText.includes('gần tôi')) {
                     loca.showLocation(sender, f);
                   } else {
-                    let locationTextQuery = utils.htmlEncode(locationText);
-                    loca.getAtmLocationByText(sender, locationTextQuery, f);
+                    let buttons = '';
+
+                    let text = 'Ý của anh/chị là tìm ATM ở địa điểm: \n';
+                    text = text + '' + locationText + ' \n';
+                    text = text + 'Nếu chưa đúng ý anh/chị, vui lòng đặt câu hỏi khác. VD: atm ở 187 nguyễn lương bằng, ATM gần tôi, ATM ở thành phố đà nẵng... ';
+
+                    try {
+                      buttons = [{
+                          content_type: "text",
+                          title: "Tìm thôi",
+                          image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                          payload: 'ATM_LOC: ' + locationText
+                        },
+                        {
+                          content_type: "text",
+                          title: "Thử lại",
+                          image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                          payload: 'ATM_LOC: RETRY'
+                        }
+                      ];
+                      f.quick(sender, {
+                        text,
+                        buttons
+                      });
+                    } catch (e) {
+                      console.log(JSON.stringify(e));
+                    }
+
+
                   }
                 } else {
                   loca.showLocation(sender, f);
@@ -432,7 +459,17 @@ class Scenario {
 
     if (message && message.quick_reply) {
       let quickReply = message.quick_reply;
-      if (quickReply.payload.includes('QnA_re: ') || quickReply.payload.includes('QnA_cusQ: ')) {
+      if (quickReply.payload.includes('ATM_LOC: ') ) {
+        if (quickReply.payload.includes('ATM_LOC: RETRY')) {
+          return;
+        }else {
+          let locationText = quickReply.payload.replace('ATM_LOC: ', '');
+          let locationTextQuery = utils.htmlEncode(locationText);
+          loca.getAtmLocationByText(sender, locationTextQuery, f);
+        }
+        return;
+      }
+      else if (quickReply.payload.includes('QnA_re: ') || quickReply.payload.includes('QnA_cusQ: ')) {
         if (quickReply.payload.includes('QnA_re: ')) {
           let messageTxt = quickReply.payload.replace('QnA_re: ', '');
           superagent
