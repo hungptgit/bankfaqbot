@@ -390,7 +390,7 @@ class Scenario {
                 f.txt(sender, 'Cảm ơn anh/chị đã sử dụng dịch vụ của VietinBank ^_^ ');
                 break;
               case 'atm_location':
-                let locationText = utils.firstEntity(entities, 'location');
+                let locationText = utils.firstEntity(entities, 'location').value;
                 if (locationText !== 'undefined') {
                   loca.getAtmLocationByText(sender, locationText, f);
                 } else {
