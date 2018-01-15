@@ -391,8 +391,10 @@ class Scenario {
                 break;
               case 'atm_location':
                 let locationText = utils.firstEntity(entities, 'location').value;
+                
                 if (locationText !== 'undefined') {
-                  loca.getAtmLocationByText(sender, locationText, f);
+                  //loca.getAtmLocationByText(sender, locationText, f);
+                  loca.showLocation(sender, f);
                 } else {
                   loca.showLocation(sender, f);
                 }
