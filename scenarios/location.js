@@ -59,7 +59,7 @@ class Location {
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + location + "/" + targetLoc;
           var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
-          
+
           arrayLocationDisplay.push({
             title: displayLoc.name,
             image_url: imgUrl,
@@ -111,38 +111,39 @@ class Location {
   }
 
   getAtmLocationByText(sender, locationText, f) {
-    var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
-    var types = "atm";
-    
-    var https = require('https');
-    var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query=ATM+VietinBank+" + locationText + "&types=" + types + "&language=vi";
-    console.log(url);
+    try {
+      var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
+      var types = "atm";
 
-    https.get(url, function(response) {
-      var body = '';
-      response.on('data', function(chunk) {
-        body += chunk;
-      });
+      var https = require('https');
+      var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query=ATM+VietinBank+" + locationText + "&types=" + types + "&language=vi";
+      console.log(url);
 
-      response.on('end', function() {
-        var places = JSON.parse(body);
-        var locations = places.results;
+      https.get(url, function(response) {
+        var body = '';
+        response.on('data', function(chunk) {
+          body += chunk;
+        });
 
-        var displayIndex = 5;
-        if (displayIndex > locations.length) {
-          displayIndex = locations.length;
-        }
+        response.on('end', function() {
+          var places = JSON.parse(body);
+          var locations = places.results;
 
-        var arrayLocationDisplay = [];
+          var displayIndex = 5;
+          if (displayIndex > locations.length) {
+            displayIndex = locations.length;
+          }
 
-        for (var i = 0; i < displayIndex; i++) {
-          var displayLoc = locations[i];
-          //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
-          var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
-          var gmapUrl = "https://www.google.com/maps?q="+targetLoc+"&hl=es;z=14&amp;output=embed";
-          var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
-         
-          //if (displayLoc.name.toLowerCase.includes('vietinbank')) {
+          var arrayLocationDisplay = [];
+
+          for (var i = 0; i < displayIndex; i++) {
+            var displayLoc = locations[i];
+            //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
+            var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
+            var gmapUrl = "https://www.google.com/maps?q=" + targetLoc + "&hl=es;z=14&amp;output=embed";
+            var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
+
+            //if (displayLoc.name.toLowerCase.includes('vietinbank')) {
             arrayLocationDisplay.push({
               title: displayLoc.name,
               image_url: imgUrl,
@@ -160,37 +161,40 @@ class Location {
                 title: "Chỉ dẫn"
               }]
             });
-          //}
+            //}
 
-        }
+          }
 
-        if (arrayLocationDisplay.length > 0) {
-          var obj = {
-            recipient: {
-              id: sender
-            },
-            message: {
-              attachment: {
-                type: "template",
-                payload: {
-                  template_type: "generic",
-                  elements: arrayLocationDisplay
+          if (arrayLocationDisplay.length > 0) {
+            var obj = {
+              recipient: {
+                id: sender
+              },
+              message: {
+                attachment: {
+                  type: "template",
+                  payload: {
+                    template_type: "generic",
+                    elements: arrayLocationDisplay
+                  }
                 }
               }
             }
-          }
 
-          f.sendNews(obj)
-            .catch(error => console.log('getAtmLocationByText: ' + error));
-        } else {
-          f.txt(sender, 'Không tìm thấy địa điểm nào phù hợp với yêu cầu của anh/chị');
-        }
-        return locations;
+            f.sendNews(obj)
+              .catch(error => console.log('getAtmLocationByText: ' + error));
+          } else {
+            f.txt(sender, 'Không tìm thấy địa điểm nào phù hợp với yêu cầu của anh/chị');
+          }
+          return locations;
+        });
+      }).on('error', function(e) {
+        console.log("getAtmLocationByText Got error: " + e.message);
+        return;
       });
-    }).on('error', function(e) {
-      console.log("getAtmLocationByText Got error: " + e.message);
-      return;
-    });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 }
