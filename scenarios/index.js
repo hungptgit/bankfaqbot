@@ -464,7 +464,7 @@ class Scenario {
           return;
         }else {
           let locationText = quickReply.payload.replace('ATM_LOC: ', '');
-          let locationTextQuery = utils.htmlEncode(locationText);
+          let locationTextQuery = utils.khongdau(locationText);//utils.htmlEncode(locationText);
           loca.getAtmLocationByText(sender, locationTextQuery, f);
         }
         return;
