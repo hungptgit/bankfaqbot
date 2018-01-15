@@ -52,7 +52,7 @@ class Location {
         }
 
         var arrayLocationDisplay = [];
-        
+
         for (var i = 0; i < displayIndex; i++) {
           var displayLoc = locations[i];
           //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
@@ -105,13 +105,13 @@ class Location {
       return;
     });
   }
-  
+
   getAtmLocationByText(sender, locationText, f) {
     var key = 'AIzaSyApV3JtRmRTaLNo-sQOpy8t0regdrri7Sk';
     var types = "atm";
-    
+
     var https = require('https');
-    var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query=" + locationText + "&types=" + types  + "&language=vi";
+    var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query=" + locationText + "&types=" + types + "&language=vi";
     console.log(url);
 
     https.get(url, function(response) {
@@ -130,15 +130,15 @@ class Location {
         }
 
         var arrayLocationDisplay = [];
-        
+
         for (var i = 0; i < displayIndex; i++) {
           var displayLoc = locations[i];
           //console.log('getAtmLocation: ' + i + ' >>> ' + JSON.stringify(displayLoc));
           var targetLoc = displayLoc.geometry.location.lat + ',' + displayLoc.geometry.location.lng;
           var gmapUrl = "https://www.google.com/maps/dir/" + targetLoc;
           var imgUrl = "https://www.maketecheasier.com/assets/uploads/2017/07/google-maps-alternatives-featured.jpg";
-          
-          if(displayLoc.name.toLowerCase.includes('vietinbank')) {
+
+          if (displayLoc.name.toLowerCase.includes('vietinbank')) {
             arrayLocationDisplay.push({
               title: displayLoc.name,
               image_url: imgUrl,
@@ -160,25 +160,27 @@ class Location {
 
         }
 
-        var obj = {
-          recipient: {
-            id: sender
-          },
-          message: {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: arrayLocationDisplay
+        if (arrayLocationDisplay.length > 0) {
+          var obj = {
+            recipient: {
+              id: sender
+            },
+            message: {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: arrayLocationDisplay
+                }
               }
             }
           }
+
+          f.sendNews(obj)
+            .catch(error => console.log('news: ' + error));
+        } else {
+          f.txt(sender, 'Không tìm thấy địa điểm nào phù hợp với yêu cầu của anh/chị');
         }
-
-        f.sendNews(obj)
-          .catch(error => console.log('news: ' + error));
-
-
         return locations;
       });
     }).on('error', function(e) {
