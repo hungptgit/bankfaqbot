@@ -327,7 +327,7 @@ class News {
   }
   
   
-  menuQuick(sender, f) {
+  menuQuick(sender, senderName, f) {
     let buttons = '';
     let text = '';
     let data = '';
@@ -359,7 +359,7 @@ class News {
           payload: "MQ_IRATE"
         }
       ];
-      text = 'Anh/chị có thể lựa chọn thêm theo menu dưới đây';
+      text = 'Xin chào ' + senderName + '! Em có thể giúp gì được ạ?';
 
       f.quick(sender, {
         text,
