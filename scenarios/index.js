@@ -599,7 +599,9 @@ class Scenario {
 
     if (message && message.attachments) {
       console.log('message.attachments: ' + JSON.stringify(message.attachments));
-      if(message.attachments.type !=='image') {
+      let attactType = message.attachments[0].type;
+      console.log('message.attachments.type: ' + attactType);
+      if(attactType !=='image') {
         let locTitle = message.attachments[0].title;
         let coord = message.attachments[0].payload.coordinates;
         let locLat = coord.lat;
