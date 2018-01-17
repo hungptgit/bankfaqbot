@@ -576,6 +576,12 @@ class Scenario {
           case 'NEWS_7h30':
             f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 7h30 hàng ngày.');
             break;
+          case 'NEWS_21h30':
+            f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 21h30 hàng ngày.');
+            break;
+          case 'NEWS_11h30':
+            f.txt(sender, 'Bạn đã đăng ký nhận tin thành công. Tin tức mới nhất sẽ được gửi đến bạn lúc 11h30 hàng ngày.');
+            break;  
           default:
             f.txt(sender, 'Data collected: ' + JSON.stringify(quickReply));
             break;
@@ -593,14 +599,19 @@ class Scenario {
 
     if (message && message.attachments) {
       console.log('message.attachments: ' + JSON.stringify(message.attachments));
-      let locTitle = message.attachments[0].title;
-      let coord = message.attachments[0].payload.coordinates;
-      let locLat = coord.lat;
-      let locLong = coord.long;
-      loca.getAtmLocation(sender, locLat, locLong, f);
-      //loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
-
+      if(message.attachments.type !=='image') {
+        let locTitle = message.attachments[0].title;
+        let coord = message.attachments[0].payload.coordinates;
+        let locLat = coord.lat;
+        let locLong = coord.long;
+        loca.getAtmLocation(sender, locLat, locLong, f);
+        //loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
+      }
+      else {
+        f.txt(sender, " ^_^ ");
+      }
     }
+    
   }
 }
 
