@@ -601,13 +601,16 @@ class Scenario {
       console.log('message.attachments: ' + JSON.stringify(message.attachments));
       let attactType = message.attachments[0].type;
       console.log('message.attachments.type: ' + attactType);
-      if(attactType !=='image') {
+      
+      if(attactType ==='image') {
+        f.txt(sender, " ^_^ ");
+      }
+      else if(attactType === 'location') {
         let locTitle = message.attachments[0].title;
         let coord = message.attachments[0].payload.coordinates;
         let locLat = coord.lat;
         let locLong = coord.long;
         loca.getAtmLocation(sender, locLat, locLong, f);
-        //loca.getAtmLocationByText(sender, '108 Tran Hung Dao, Ha Noi', f);
       }
       else {
         f.txt(sender, " ^_^ ");
