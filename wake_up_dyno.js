@@ -4,14 +4,9 @@ var nodemailer = require('nodemailer');
 var http = require('http'); //importing http
 var config = require('./config');
 
-var options = {
-  host: 'vtbbankbot.herokuapp.com/',
-  port: 80,
-  path: '/wakeup'
-};
+console.log("====== WAKUP DYNO START");
 
-console.log("======WAKUP DYNO START");
-http.get(options, function(res) {
+http.get('http://vtbbankbot.herokuapp.com/wakeup', (res) => {
   // sent mail to remind wakeup bot
   nodemailer.createTestAccount((err, account) => {
     // create reusable transporter object using the default SMTP transport
@@ -62,7 +57,7 @@ http.get(options, function(res) {
   res.on('data', function(chunk) {
     try {
       // optional logging... disable after it's working
-      console.log("======WAKUP DYNO: HEROKU RESPONSE: " + chunk);
+      console.log("====== WAKUP DYNO: HEROKU RESPONSE: " + chunk);
     } catch (err) {
       console.log(err.message);
     }
