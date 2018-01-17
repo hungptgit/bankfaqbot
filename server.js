@@ -48,6 +48,12 @@ server.get('/', (req, res, next) => {
 	return next();
 });
 
+// Register the webhooks
+server.get('/wakeup', (req, res, next) => {
+	console.log("wakeup my dynos..." );
+	return next();
+});
+
 agenda.define('job trigger', function(job, done) {
 	console.log('----> job trigger');
 });
