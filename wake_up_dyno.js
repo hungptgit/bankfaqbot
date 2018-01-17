@@ -5,7 +5,7 @@ var http = require('http'); //importing http
 var options = {
   host: 'vtbbankbot.herokuapp.com/',
   port: 80,
-  path: '/'
+  path: '/wakeup'
 };
 console.log("======WAKUP DYNO START");
 http.get(options, function(res) {
