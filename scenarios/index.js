@@ -162,8 +162,8 @@ class Scenario {
                   image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
                   payload: 'QnA_cusQ: ' + messageTxt
                 }
-
               ];
+              
               f.quick(sender, {
                 text,
                 buttons
@@ -496,7 +496,7 @@ class Scenario {
             });
         } else {
           let messageTxt = quickReply.payload.replace('QnA_cusQ: ', '');
-          f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau ạ :) ');
+          f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau. \n Anh chị có thể gọi đến số 1900555588 hoặc hỏi cộng đồng WorkPlace VietinBank để được giải đáp :) ');
 
           // sent mail to remind train bot
           nodemailer.createTestAccount((err, account) => {
