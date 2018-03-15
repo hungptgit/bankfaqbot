@@ -131,7 +131,34 @@ class Scenario {
             return;
           } else if (score <= 85 && score > 75) {
             f.txt(sender, answer);
-            f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
+            //f.txt(sender, 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 ');
+            
+            let text = 'Câu trả lời có đúng ý hỏi của anh/chị không 😊 \n';
+            let buttons = '';
+            
+            try {
+              buttons = [{
+                  content_type: "text",
+                  title: "Có",
+                  image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                  payload: 'QnA_YES'
+                },
+                {
+                  content_type: "text",
+                  title: "Không",
+                  image_url: "http://www.freeiconspng.com/uploads/question-icon-23.png",
+                  payload: 'QnA_NO'
+                }
+              ];
+              
+              f.quick(sender, {
+                text,
+                buttons
+              });
+            } catch (e) {
+              console.log(JSON.stringify(e));
+            }
+            
             return;
           } else if (score <= 75 && score > 30) {
             let question1 = utils.htmlDecode(res.body.answers[0].questions[0]);
@@ -474,6 +501,15 @@ class Scenario {
           let locationTextQuery = utils.htmlEncode(locationText);
           console.log('locationTextQuery: ' + locationTextQuery);
           loca.getAtmLocationByText(sender, locationTextQuery, f);
+        }
+        return;
+      }
+      else if (quickReply.payload.includes('QnA_YES') || quickReply.payload.includes('QnA_NO')) {
+        if (quickReply.payload.includes('QnA_YES')) {
+          f.txt(sender, 'Rất vui đã giúp được anh chị, anh chị có thể đặt câu hỏi khác ạ :) ');          
+        }
+        else{
+          f.txt(sender, 'Câu hỏi đã được ghi nhận và xin phép trả lời anh/chị sau. \n Anh chị có thể gọi đến số 1900555588 hoặc hỏi cộng đồng WorkPlace VietinBank để được giải đáp :) ');          
         }
         return;
       }
