@@ -509,7 +509,7 @@ class Scenario {
           f.txt(sender, 'Rất vui đã giúp được anh chị, anh chị có thể đặt câu hỏi khác ạ :) ');          
         }
         else{
-          f.txt(sender, 'Câu hỏi đã được ghi nhận và xin phép trả lời anh/chị sau. \n Anh chị có thể gọi đến số 1900555588 hoặc hỏi cộng đồng WorkPlace VietinBank để được giải đáp :) ');          
+          f.txt(sender, 'Câu hỏi đã được ghi nhận và xin phép trả lời anh/chị sau. \n Anh chị có thể gọi đến số 1900558868 hoặc hỏi cộng đồng WorkPlace VietinBank để được giải đáp :) ');          
         }
         return;
       }
@@ -532,7 +532,7 @@ class Scenario {
             });
         } else {
           let messageTxt = quickReply.payload.replace('QnA_cusQ: ', '');
-          f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau. \n Anh chị có thể gọi đến số 1900555588 hoặc hỏi cộng đồng WorkPlace VietinBank để được giải đáp :) ');
+          f.txt(sender, 'Câu hỏi: " ' + messageTxt + ' " đã được ghi nhận và xin phép trả lời anh/chị sau. \n Anh chị có thể gọi đến số 1900558868 hoặc hỏi cộng đồng WorkPlace VietinBank để được giải đáp :) ');
 
           // sent mail to remind train bot
           nodemailer.createTestAccount((err, account) => {
