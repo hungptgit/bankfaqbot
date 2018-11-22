@@ -1,4 +1,4 @@
-'use strict';
+s'use strict';
 const request = require('request');
 const crypto = require('crypto');
 
@@ -18,7 +18,7 @@ class FBeamer {
 	}
 
 	registerHook(req, res) {
-		// If req.query.hub.mode is 'subscribe'
+		// If req.query.hub.mode is 'subscribe', test
 		// and if req.query.hub.verify_token is the same as this.VERIFY_TOKEN
 		// then send back an HTTP status 200 and req.query.hub.challenge
 		let {
